@@ -1,0 +1,338 @@
+.sciencePage {
+  padding-top: var(--navbar-height);
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  padding: var(--space-20) 0 var(--space-16);
+  background: linear-gradient(135deg, #0a2a1b 0%, #0f3d2b 50%, #134e2d 100%);
+  overflow: hidden;
+  color: white;
+  text-align: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 80%, rgba(34, 197, 94, 0.12) 0%, transparent 60%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+}
+
+.heroLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  background: rgba(34, 197, 94, 0.15);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--green-300);
+  margin-bottom: var(--space-6);
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: var(--space-5);
+}
+
+.heroAccent {
+  color: var(--green-400);
+}
+
+.heroDesc {
+  font-size: var(--text-lg);
+  color: var(--green-200);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Sections ── */
+.section {
+  padding: var(--space-16) 0;
+}
+
+.sectionAlt {
+  background: var(--color-bg-subtle);
+}
+
+.sectionCenter {
+  text-align: center;
+}
+
+.sectionLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: var(--space-4);
+}
+
+.sectionDesc {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  max-width: 640px;
+  line-height: 1.7;
+}
+
+.sectionDescCenter {
+  margin: 0 auto;
+}
+
+/* ── Layers Stack ── */
+.layersGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+  margin-top: var(--space-10);
+}
+
+.layersVisual {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.layer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5) var(--space-6);
+  border-left: 4px solid var(--color-primary);
+  background: var(--color-bg-card);
+  transition: var(--transition-all);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  margin-bottom: var(--space-3);
+}
+
+.layer:hover {
+  background: var(--green-50);
+  transform: translateX(4px);
+}
+
+.layerNum {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+}
+
+.layerInfo h4 {
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.layerInfo p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.layersSummary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.layersSummary p {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+/* ── Comparison Table ── */
+.comparisonTable {
+  width: 100%;
+  margin-top: var(--space-10);
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.comparisonTable thead th {
+  background: var(--green-50);
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+}
+
+.comparisonTable thead th:first-child {
+  color: var(--color-text-muted);
+}
+
+.comparisonTable tbody td {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.comparisonTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.comparisonTable tbody tr:hover {
+  background: var(--green-50);
+}
+
+.highlight {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.danger {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* ── Health Benefits ── */
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.benefitCard {
+  padding: var(--space-8) var(--space-6);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  transition: var(--transition-all);
+}
+
+.benefitCard:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.benefitIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--green-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  margin: 0 auto var(--space-4);
+}
+
+.benefitCard h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.benefitCard p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ── CTA ── */
+.ctaSection {
+  padding: var(--space-16) 0;
+  background: linear-gradient(135deg, var(--green-600) 0%, var(--green-800) 100%);
+  text-align: center;
+  color: white;
+}
+
+.ctaSection h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+}
+
+.ctaSection p {
+  font-size: var(--text-lg);
+  color: var(--green-200);
+  max-width: 530px;
+  margin: 0 auto var(--space-8);
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-8);
+  background: white;
+  color: var(--green-800);
+  font-size: var(--text-base);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: var(--transition-all);
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-xl);
+  color: var(--green-800);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .layersGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .benefitsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparisonTable {
+    font-size: 0.8rem;
+  }
+
+  .comparisonTable th,
+  .comparisonTable td {
+    padding: var(--space-3);
+  }
+}
