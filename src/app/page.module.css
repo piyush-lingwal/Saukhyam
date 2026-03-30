@@ -14,9 +14,19 @@
 .tickerTrack {
   display: flex;
   gap: var(--space-12);
-  animation: ticker 40s linear infinite;
+  animation: tickerScroll 30s linear infinite;
   width: max-content;
 }
+
+.ticker:hover .tickerTrack {
+  animation-play-state: paused;
+}
+
+@keyframes tickerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 
 .tickerItem {
   display: flex;
