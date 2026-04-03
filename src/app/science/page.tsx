@@ -2,174 +2,216 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { 
-  Microscope, Layers, ShieldAlert, HeartPulse, Stethoscope, 
-  FlaskConical, AlertTriangle, CheckCircle2, ShoppingBag, 
-  BookOpen, Dna, Activity, Search
+import {
+  Microscope, Layers, Droplets, Shield, Heart, Leaf,
+  ShoppingBag, Sparkles, Sun, Wind, ThermometerSun,
+  Ban, Recycle,
 } from 'lucide-react';
 import styles from './page.module.css';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
-const toxicFindings = [
-  { 
-    title: 'Endocrine Disruptors', 
-    desc: 'Phthalates, VOCs, and Dioxins are absorbed through highly permeable vaginal mucosal tissues.',
-    ref: 'BJOG (2024) / PLOS ONE' 
-  },
-  { 
-    title: 'Heavy Metal Load', 
-    desc: 'Arsenic, Lead, Cadmium, and Mercury found in popular brands across 7 countries, including India.',
-    ref: 'Env. Tech & Innovation (2024)' 
-  },
-  { 
-    title: 'Pesticide Residues', 
-    desc: 'Significant pesticide concentrations in mass-market pads linked to hormonal imbalances.',
-    ref: 'Kumar et al. (2024)' 
-  },
-  { 
-    title: 'Toluene & Microplastics', 
-    desc: 'Testing confirms Toluene presence and microplastic shedding in commercial disposable pads.',
-    ref: 'J. Hazardous Materials (2025)' 
-  }
+const padLayers = [
+  { num: 1, name: 'Top Layer — Soft Cotton', desc: '100% cotton surface for comfort and breathability' },
+  { num: 2, name: 'Absorbent Core — Banana Fiber', desc: 'Natural banana fiber with antimicrobial properties (3g–9g)' },
+  { num: 3, name: 'Moisture Barrier — PU Layer', desc: 'Polyurethane leak-proof layer prevents any seepage' },
+  { num: 4, name: 'Base Layer — Cotton Back', desc: 'Breathable cotton back with snap-button wings' },
 ];
 
-const researchLibrary = [
-  { journal: 'Environment International (2025)', topic: 'Chemical characterization (phthalates, parabens) in intimate care.' },
-  { journal: 'Journal of Hazardous Materials (2025)', topic: 'Safety assessment: Toluene, microplastics, and cytotoxicity.' },
-  { journal: 'BJOG: Int. J. of Obs & Gyn (2024)', topic: 'Systematic review of chemicals in menstrual products.' },
-  { journal: 'Environment International (2024)', topic: 'Tampons as a source of exposure to metal(loids) like Lead.' },
-  { journal: 'Int. J. of Gynaecology & Obstetrics (2024)', topic: 'Systematic review: BPA exposure and PCOS in humans.' },
-  { journal: 'Reproductive BioMedicine Online (2025)', topic: 'EDC mechanisms: BPA exposure and PCOS-like phenotypes.' }
+const comparisonData = [
+  { feature: 'Material', saukhyam: 'Banana Fiber + Cotton', disposable: 'Wood Pulp + Plastic + SAP Gel', status: 'good' },
+  { feature: 'Chemicals', saukhyam: 'Zero — 100% Chemical Free', disposable: 'Dioxins, Phthalates, VOCs, Chlorine', status: 'good' },
+  { feature: 'Lifespan', saukhyam: '2-3 Years (100+ cycles)', disposable: 'Single Use (4-8 hours)', status: 'good' },
+  { feature: 'Cost / Year', saukhyam: '₹200-400 / year', disposable: '₹2,400-4,000 / year', status: 'good' },
+  { feature: 'Waste Generated', saukhyam: '0 kg (biodegradable)', disposable: '125+ kg lifetime waste', status: 'good' },
+  { feature: 'Decomposition', saukhyam: '6 months (compostable)', disposable: '500-800 years', status: 'good' },
+  { feature: 'Skin Safety', saukhyam: 'Hypoallergenic, no irritation', disposable: 'Rashes, allergies, hormonal disruption', status: 'good' },
+  { feature: 'Absorbency', saukhyam: 'High (natural fiber wicking)', disposable: 'High (chemical SAP gel)', status: 'neutral' },
+];
+
+const healthBenefits = [
+  { icon: Heart, title: 'Reduced Period Pain', desc: 'Users report up to 60% reduction in cramps after switching. Banana fiber\'s therapeutic properties may help naturally.' },
+  { icon: Shield, title: 'No Chemical Exposure', desc: 'Zero dioxins, phthalates, or synthetic polymers touching your skin. 100% chemical-free every cycle.' },
+  { icon: Droplets, title: 'Better Skin Health', desc: 'Breathable cotton + natural fiber means no rashes, no itching, no dryness. Your skin can breathe.' },
+  { icon: Sun, title: 'Natural Disinfection', desc: 'Sunlight drying naturally kills 99.9% bacteria — no need for chemical sanitizers or UV sterilizers.' },
+  { icon: Wind, title: 'Breathable Design', desc: 'Natural materials allow air circulation, preventing the humid environment that causes infections with plastic pads.' },
+  { icon: Recycle, title: 'Planet Healing', desc: 'One woman switching saves 125+ kg of non-biodegradable waste. Each pad is fully compostable at end-of-life.' },
 ];
 
 export default function SciencePage() {
   return (
     <div className={styles.sciencePage}>
-      {/* ── Hero: Medical Validation ── */}
+      {/* ── Hero ── */}
       <section className={styles.hero}>
         <div className="container">
           <motion.div className={styles.heroContent} initial="hidden" animate="visible" variants={stagger}>
             <motion.div variants={fadeInUp} className={styles.heroLabel}>
-              <Stethoscope size={14} />
-              The Bio-Medical Case
+              <Microscope size={14} />
+              The Science
             </motion.div>
             <motion.h1 variants={fadeInUp} className={styles.heroTitle}>
-              Science Behind <span className={styles.heroAccent}>Hormonal Health</span>
+              Why <span className={styles.heroAccent}>Banana Fiber</span><br />
+              Changes Everything
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              Moving beyond sustainability to address the systemic chemical threat in menstrual care. 
-              Validated by 2025 peer-reviewed research.
+              India&apos;s first banana fiber absorbent technology — naturally antimicrobial, 
+              chemical free, and scientifically proven to be better for your body.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Section 1: The Hidden Crisis ── */}
+      {/* ── Pad Anatomy ── */}
       <section className={styles.section}>
         <div className="container">
-          <div className={styles.crisisGrid}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <span className={styles.sectionLabel}><AlertTriangle size={14} /> The Silent Threat</span>
-              <h2 className={styles.sectionTitle}>Toxins in Disposables</h2>
-              <p className={styles.sectionDesc}>
-                Recent research confirms that disposable pads contain hazardous compounds 
-                that bypass the skin barrier through mucosal absorption.
-              </p>
-              
-              <div className={styles.findingsList}>
-                {toxicFindings.map((item, i) => (
-                  <motion.div key={i} variants={fadeInUp} className={styles.findingItem}>
-                    <ShieldAlert className={styles.findingIcon} />
-                    <div>
-                      <h4>{item.title}</h4>
-                      <p>{item.desc} <span>— {item.ref}</span></p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className={styles.pcosCard}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
+              <Layers size={14} />
+              Pad Anatomy
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
+              What&apos;s Inside a Saukhyam Pad
+            </motion.h2>
+            <motion.p variants={fadeInUp} className={styles.sectionDesc}>
+              4 carefully engineered layers — each one natural, functional, and skin-safe.
+            </motion.p>
+          </motion.div>
+
+          <div className={styles.layersGrid}>
+            <motion.div
+              className={styles.layersVisual}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
+              variants={stagger}
             >
-              <HeartPulse size={40} className={styles.pcosIcon} />
-              <h3>The PCOS & Fertility Link</h3>
-              <p>
-                Clinical reviews show a direct correlation between Endocrine Disrupting Chemical (EDC) 
-                exposure and PCOS phenotypes, including ovarian dysfunction and irregular cycles.
-              </p>
-              <div className={styles.pcosBadge}>2025 Clinical Update</div>
+              {padLayers.map(layer => (
+                <motion.div key={layer.num} variants={fadeInUp} className={styles.layer}>
+                  <div className={styles.layerNum}>{layer.num}</div>
+                  <div className={styles.layerInfo}>
+                    <h4>{layer.name}</h4>
+                    <p>{layer.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.div
+              className={styles.layersSummary}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+            >
+              <motion.p variants={fadeInUp}>
+                <strong>The magic is in Layer 2</strong> — the banana fiber core. Unlike tree-based cellulose 
+                used in disposable pads (which requires deforestation and chemical processing), banana fiber 
+                is sourced from <strong>agricultural waste</strong>. Banana trees fruit only once, then are 
+                cut down — we transform that waste into powerful absorbent material.
+              </motion.p>
+              <motion.p variants={fadeInUp}>
+                Research shows banana fiber contains <strong>pathogenesis-related (PR) proteins</strong> — 
+                naturally occurring antimicrobial compounds. This means the absorbent core actively resists 
+                bacterial growth, making it inherently hygienic without any chemical treatment.
+              </motion.p>
+              <motion.p variants={fadeInUp}>
+                The <strong>PU (polyurethane) leak-proof layer</strong> is breathable yet impermeable, 
+                preventing leakage while allowing air flow. This dual action keeps you dry and comfortable 
+                while eliminating the &quot;greenhouse effect&quot; created by plastic-backed disposable pads.
+              </motion.p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── Section 2: Molecular Defense ── */}
+      {/* ── Comparison ── */}
       <section className={`${styles.section} ${styles.sectionAlt}`}>
         <div className="container">
-          <div className={styles.solutionGrid}>
-             <motion.div 
-              className={styles.moleculeVisual}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            >
-              <div className={styles.moleculeGraphic}>
-                <Dna size={80} />
-                <span>Naturally Antimicrobial</span>
-              </div>
-            </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
+              <Ban size={14} />
+              The Comparison
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
+              Saukhyam vs. Disposable Pads
+            </motion.h2>
+            <motion.p variants={fadeInUp} className={styles.sectionDesc}>
+              See how natural banana fiber compares to chemically-processed disposable pads.
+            </motion.p>
+          </motion.div>
 
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <span className={styles.sectionLabel}><FlaskConical size={14} /> The Molecular Solution</span>
-              <h2 className={styles.sectionTitle}>Banana Fiber Engineering</h2>
-              <p className={styles.sectionDesc}>
-                Our pads utilize the molecular structure of banana fiber, 
-                naturally rich in Pathogenesis-Related (PR) proteins.
-              </p>
-              <ul className={styles.benefitList}>
-                <li><strong>Zero EDC Exposure:</strong> 100% chemical-free, eliminating Phthalates and BPA risks.</li>
-                <li><strong>Heavy Metal Free:</strong> Sourcing ensures no Lead, Arsenic, or Mercury contamination.</li>
-                <li><strong>Natural Sterilization:</strong> Resists bacterial growth without chemical agents.</li>
-                <li><strong>Breathable Barrier:</strong> Prevents the "greenhouse effect" caused by plastic backings.</li>
-              </ul>
-            </motion.div>
-          </div>
+          <motion.table
+            className={styles.comparisonTable}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>🌿 Saukhyam Reusable</th>
+                <th>🚫 Disposable Pads</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonData.map(row => (
+                <tr key={row.feature}>
+                  <td><strong>{row.feature}</strong></td>
+                  <td className={styles.highlight}>{row.saukhyam}</td>
+                  <td className={styles.danger}>{row.disposable}</td>
+                </tr>
+              ))}
+            </tbody>
+          </motion.table>
         </div>
       </section>
 
-      {/* ── Section 3: Research Archive ── */}
+      {/* ── Health Benefits ── */}
       <section className={styles.section}>
         <div className="container">
-          <div className={styles.sectionCenter}>
-            <span className={styles.sectionLabel}><BookOpen size={14} /> Research Library</span>
-            <h2 className={styles.sectionTitle}>Peer-Reviewed Clinical Evidence</h2>
-            <p className={styles.sectionDescCenter}>
-              We provide transparency through data. These high-impact studies from 2024-2025 form the 
-              basis of our medical outreach.
-            </p>
-          </div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className={styles.sectionCenter}
+          >
+            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
+              <Sparkles size={14} />
+              Health Benefits
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
+              How Switching Heals Your Body
+            </motion.h2>
+            <motion.p variants={fadeInUp} className={`${styles.sectionDesc} ${styles.sectionDescCenter}`}>
+              Thousands of women report measurable health improvements after switching to Saukhyam.
+            </motion.p>
+          </motion.div>
 
-          <div className={styles.libraryGrid}>
-            {researchLibrary.map((paper, i) => (
-              <motion.div key={i} className={styles.paperCard} variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                <Activity size={18} className={styles.paperIcon} />
-                <div>
-                  <h5>{paper.journal}</h5>
-                  <p>{paper.topic}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            className={styles.benefitsGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            {healthBenefits.map(b => {
+              const Icon = b.icon;
+              return (
+                <motion.div key={b.title} variants={fadeInUp} className={styles.benefitCard}>
+                  <div className={styles.benefitIcon}><Icon size={24} /></div>
+                  <h3>{b.title}</h3>
+                  <p>{b.desc}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 
@@ -177,13 +219,16 @@ export default function SciencePage() {
       <section className={styles.ctaSection}>
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <h2>Heal Your Period Today</h2>
-            <p>
-              Remove daily toxic exposure and experience the healing power of banana fiber.
-            </p>
-            <Link href="/products" className={styles.ctaBtn}>
-              <ShoppingBag size={20} /> View Collection
-            </Link>
+            <motion.h2 variants={fadeInUp}>Ready to Make the Switch?</motion.h2>
+            <motion.p variants={fadeInUp}>
+              Experience the difference that chemical-free, banana fiber pads can make in your life.
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <Link href="/products" className={styles.ctaBtn}>
+                <ShoppingBag size={20} />
+                Shop Now
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
