@@ -7,10 +7,12 @@ import { motion } from 'framer-motion';
 import {
   ShoppingBag, Leaf, Star, ChevronRight, Minus, Plus,
   Truck, Shield, RefreshCw, CheckCircle2, Heart, Zap,
+  ShieldCheck, Wind,
 } from 'lucide-react';
 import { products, getProductBySlug } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import styles from './page.module.css';
+
 
 const categoryLabels: Record<string, string> = {
   starter: 'Starter Packs',

@@ -4,6 +4,76 @@
   min-height: 100vh;
 }
 
+/* ── Trust Bar ── */
+.trustBar {
+  background: var(--white);
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.trustGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.trustItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-xl);
+  transition: var(--transition-all);
+}
+
+.trustItem:hover {
+  background: var(--green-50);
+  transform: translateY(-2px);
+}
+
+.trustIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--green-600);
+  flex-shrink: 0;
+}
+
+.trustLabel {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  line-height: var(--leading-snug);
+}
+
+.trustSub {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .trustGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .trustGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+
 /* ── Hero Banner ── */
 .pageHero {
   background: linear-gradient(135deg, var(--green-50) 0%, var(--green-100) 50%, var(--green-50) 100%);
@@ -171,17 +241,18 @@
   aspect-ratio: 1 / 1;
   background: linear-gradient(135deg, var(--green-50) 0%, var(--green-100) 100%);
   overflow: hidden;
+  padding: var(--space-4);
 }
 
 .productImageWrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform var(--duration-slow) var(--ease-out);
 }
 
 .productCard:hover .productImageWrap img {
-  transform: scale(1.06);
+  transform: scale(1.03);
 }
 
 .productPlaceholder {

@@ -44,7 +44,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning>
         <CartProvider>
           <Navbar />
           <main>{children}</main>

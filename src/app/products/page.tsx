@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import {
   ShoppingBag, Leaf, Eye, Truck, Shield,
   RefreshCw, Heart, ChevronRight, PackageSearch,
+  ShieldCheck, Droplets, Wind,
 } from 'lucide-react';
 import { products, type Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
@@ -22,6 +23,13 @@ const categoryLabels: Record<Category, string> = {
   teen: 'Teen',
   value: 'Value Packs',
 };
+
+const trustItems = [
+  { icon: ShieldCheck, label: 'Leak Proof', sub: 'PU barrier layer' },
+  { icon: Heart,       label: 'Gentle on Skin', sub: '100% cotton surface' },
+  { icon: Leaf,        label: 'Chemical Free', sub: 'Natural banana fiber' },
+  { icon: Wind,        label: 'Dries Fast', sub: 'Breathable design' },
+];
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -80,9 +88,35 @@ export default function ProductsPage() {
         </div>
       </section>
 
+      {/* ── Trust Bar ── */}
+      <div className={styles.trustBar}>
+        <div className="container">
+          <motion.div
+            className={styles.trustGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {trustItems.map((item) => (
+              <motion.div key={item.label} variants={fadeInUp} className={styles.trustItem}>
+                <div className={styles.trustIcon}>
+                  <item.icon size={22} />
+                </div>
+                <div>
+                  <div className={styles.trustLabel}>{item.label}</div>
+                  <div className={styles.trustSub}>{item.sub}</div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
       {/* ── Main Content ── */}
       <div className="container">
         {/* Toolbar */}
+
         <div className={styles.toolbar}>
           <div className={styles.filterTabs}>
             {availableCategories.map(cat => (

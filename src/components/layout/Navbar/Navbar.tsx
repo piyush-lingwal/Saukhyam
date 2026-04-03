@@ -6,8 +6,8 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   ShoppingBag, Menu, X, ChevronDown, Search,
-  MapPin, Users, Trophy, Heart,
-  Building2, GraduationCap, Dumbbell,
+  Users, Trophy, Heart,
+  Building2, Sparkles, HandHeart, Globe,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import styles from './Navbar.module.css';
@@ -28,9 +28,9 @@ const navItems = [
     label: 'Programs',
     href: '/programs',
     children: [
-      { label: 'Satellite Centres', href: '/programs/satellite-centres', icon: MapPin },
-      { label: 'Buddy Program', href: '/programs/buddy-program', icon: GraduationCap },
-      { label: 'Sports Women', href: '/programs/sports-women', icon: Dumbbell },
+      { label: 'Heal', href: '/programs/heal', icon: Sparkles },
+      { label: 'Reach', href: '/programs/reach', icon: Globe },
+      { label: 'Care', href: '/programs/care', icon: HandHeart },
     ],
   },
   { label: 'FAQ', href: '/faq' },
@@ -127,7 +127,7 @@ export default function Navbar() {
             </button>
             <Link href="/products" className={styles.shopBtn}>
               <Heart size={16} />
-              Shop Now
+              Switch Now
             </Link>
             <button
               className={styles.menuBtn}
@@ -221,7 +221,7 @@ export default function Navbar() {
           onClick={() => setIsMobileOpen(false)}
         >
           <ShoppingBag size={20} />
-          Shop Now
+          Switch Now
         </Link>
       </div>
     </>

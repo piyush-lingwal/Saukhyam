@@ -2,20 +2,70 @@
    HOMEPAGE STYLES
    ═══════════════════════════════════════════════════ */
 
-/* ── Announcement Ticker ── */
+/* ══════════════════════════════════════════
+   ── Announcement Ticker (Premium) ──
+   ══════════════════════════════════════════ */
 .ticker {
-  background: linear-gradient(135deg, var(--green-800), var(--green-900));
-  color: var(--green-100);
-  padding: var(--space-2) 0;
+  background: linear-gradient(90deg, #052e16 0%, #14532d 30%, #166534 60%, #14532d 80%, #052e16 100%);
+  color: #bbf7d0;
+  padding: 0;
   overflow: hidden;
   position: relative;
+  border-top: 1px solid rgba(34, 197, 94, 0.18);
+  border-bottom: 1px solid rgba(34, 197, 94, 0.18);
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+/* Shimmer sweep */
+.ticker::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(134, 239, 172, 0.08) 40%,
+    rgba(134, 239, 172, 0.14) 50%,
+    rgba(134, 239, 172, 0.08) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: tickerShimmer 4s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Soft fade mask on both edges so items disappear cleanly */
+.ticker::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    #052e16 0%,
+    transparent 6%,
+    transparent 94%,
+    #052e16 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes tickerShimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 .tickerTrack {
   display: flex;
-  gap: var(--space-12);
-  animation: tickerScroll 30s linear infinite;
+  align-items: center;
+  gap: 0;
+  animation: tickerScroll 38s linear infinite;
   width: max-content;
+  position: relative;
+  z-index: 1;
 }
 
 .ticker:hover .tickerTrack {
@@ -27,23 +77,44 @@
   100% { transform: translateX(-50%); }
 }
 
-
 .tickerItem {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  font-size: var(--text-xs);
-  font-weight: 500;
+  gap: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
   white-space: nowrap;
-  letter-spacing: var(--tracking-wide);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #bbf7d0;
+  padding: 0 32px;
+  position: relative;
 }
 
+/* Leaf-shaped separator between items */
+.tickerItem::after {
+  content: '✦';
+  position: absolute;
+  right: -4px;
+  font-size: 0.55rem;
+  color: #4ade80;
+  opacity: 0.7;
+}
+
+/* Glowing animated dot */
 .tickerDot {
-  width: 5px;
-  height: 5px;
-  border-radius: var(--radius-full);
-  background: var(--green-400);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4ade80, #16a34a);
   flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.7);
+  animation: tickerDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes tickerDotPulse {
+  0%, 100% { transform: scale(1);   box-shadow: 0 0 6px  rgba(74, 222, 128, 0.7); }
+  50%       { transform: scale(1.4); box-shadow: 0 0 12px rgba(74, 222, 128, 1);   }
 }
 
 /* ── Hero ── */
@@ -101,6 +172,80 @@
   }
 }
 
+/* ── Hero Side Women Images ── */
+.heroSideLeft,
+.heroSideRight {
+  position: absolute;
+  bottom: 0;
+  z-index: 5;
+  pointer-events: none;
+  width: clamp(200px, 20vw, 320px);
+  max-height: 90%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.heroSideLeft {
+  left: 3vw;
+  /* Fade out toward the left edge so it blends into the background */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0,0,0,0.5) 20%,
+    black 50%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0,0,0,0.5) 20%,
+    black 50%
+  );
+  animation: heroSideFloat 5s ease-in-out infinite;
+}
+
+.heroSideRight {
+  right: 3vw;
+  /* Fade out toward the right edge */
+  -webkit-mask-image: linear-gradient(
+    to left,
+    transparent 0%,
+    rgba(0,0,0,0.5) 20%,
+    black 50%
+  );
+  mask-image: linear-gradient(
+    to left,
+    transparent 0%,
+    rgba(0,0,0,0.5) 20%,
+    black 50%
+  );
+  animation: heroSideFloat 5s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+.heroSideLeft img,
+.heroSideRight img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+  display: block;
+  filter: drop-shadow(0 8px 24px rgba(22, 163, 74, 0.12));
+}
+
+/* Gentle float so they feel alive */
+@keyframes heroSideFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* ── Hide side images on smaller screens ── */
+@media (max-width: 1100px) {
+  .heroSideLeft,
+  .heroSideRight {
+    display: none;
+  }
+}
+
 .heroContainer {
   position: relative;
   z-index: 10;
@@ -111,7 +256,7 @@
   align-items: center;
   text-align: center;
   gap: var(--space-4);
-  padding: calc(var(--navbar-height) + var(--space-8)) var(--space-4) var(--space-6);
+  padding: calc(var(--navbar-height) + var(--space-3)) var(--space-4) var(--space-6);
 }
 
 /* Headline — animated gradient like CareSakhi */
@@ -432,6 +577,7 @@
   margin-bottom: var(--space-2);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

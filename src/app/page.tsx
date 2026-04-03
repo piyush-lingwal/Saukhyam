@@ -87,6 +87,14 @@ export default function HomePage() {
           <div className={`${styles.heroGlow} ${styles.heroGlow2}`} />
         </div>
 
+        {/* Side women images — visible on wide screens only */}
+        <div className={styles.heroSideLeft} aria-hidden="true">
+          <img src="/hero-woman-left.png.png" alt="" />
+        </div>
+        <div className={styles.heroSideRight} aria-hidden="true">
+          <img src="/hero-woman-right.png.png" alt="" />
+        </div>
+
         <div className={`container ${styles.heroContainer}`}>
           {/* Headline */}
           <motion.h1
@@ -150,7 +158,7 @@ export default function HomePage() {
             transition={{ duration: 0.5, delay: 0.55 }}
           >
             <Link href="/products" className={styles.btnHeroPrimary}>
-              Shop Now
+              Switch Now
             </Link>
             <Link href="/science" className={styles.btnHeroSecondary}>
               Why Switch?
@@ -180,30 +188,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Trust Bar ── */}
-      <section className={styles.trustBar}>
-        <div className="container">
-          <motion.div
-            className={styles.trustGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={staggerContainer}
-          >
-            {trustItems.map((item) => (
-              <motion.div key={item.label} variants={fadeInUp} className={styles.trustItem}>
-                <div className={styles.trustIcon}>
-                  <item.icon size={24} />
-                </div>
-                <div>
-                  <div className={styles.trustLabel}>{item.label}</div>
-                  <div className={styles.trustSub}>{item.sub}</div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
 
       {/* ── Products ── */}
       <section className={styles.productsSection}>
