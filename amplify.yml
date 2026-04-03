@@ -11,9 +11,9 @@ frontend:
         - npm run build
     postBuild:
       commands:
-        # Copy static assets and public folder into the standalone output
         - cp -r .next/static .next/standalone/.next/static
         - cp -r public .next/standalone/public
+        - cp .next/required-server-files.json .next/standalone/.next/required-server-files.json
   artifacts:
     baseDirectory: .next/standalone
     files:
