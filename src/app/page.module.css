@@ -238,11 +238,48 @@
   50%       { transform: translateY(-10px); }
 }
 
-/* ── Hide side images on smaller screens ── */
+/* ── Responsive hero side images ── */
 @media (max-width: 1100px) {
   .heroSideLeft,
   .heroSideRight {
-    display: none;
+    width: clamp(110px, 15vw, 160px);
+    opacity: 0.6;
+  }
+  .heroSideLeft {
+    left: 0;
+  }
+  .heroSideRight {
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSideLeft,
+  .heroSideRight {
+    width: 100px;
+    opacity: 0.45;
+    max-height: 70%;
+  }
+  .heroSideLeft {
+    left: -10px;
+  }
+  .heroSideRight {
+    right: -10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSideLeft,
+  .heroSideRight {
+    width: 80px;
+    opacity: 0.35;
+    max-height: 60%;
+  }
+  .heroSideLeft {
+    left: -15px;
+  }
+  .heroSideRight {
+    right: -15px;
   }
 }
 
@@ -767,52 +804,191 @@
   font-weight: 500;
 }
 
-/* ── Testimonials ── */
+/* ── Testimonials — Animated Marquee ── */
 .testimonialsSection {
-  padding: var(--section-gap) 0;
+  padding: var(--section-gap) 0 var(--space-12);
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+  overflow: hidden;
 }
 
-.testimonialGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
+/* Edge fade masks */
+.testimonialMarqueeWrap {
+  position: relative;
+  margin-top: var(--space-6);
+}
+
+.testimonialMarqueeWrap::before,
+.testimonialMarqueeWrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.testimonialMarqueeWrap::before {
+  left: 0;
+  background: linear-gradient(to right, #f0fdf4, transparent);
+}
+
+.testimonialMarqueeWrap::after {
+  right: 0;
+  background: linear-gradient(to left, #ffffff, transparent);
+}
+
+.testimonialMarquee {
+  overflow: hidden;
+}
+
+.testimonialTrack {
+  display: flex;
+  gap: var(--space-5);
+  width: max-content;
+  animation: testimonialScroll 50s linear infinite;
+}
+
+.testimonialTrack:hover {
+  animation-play-state: paused;
+}
+
+.testimonialTrackReverse {
+  animation-direction: reverse;
+  animation-duration: 55s;
+}
+
+@keyframes testimonialScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .testimonialCard {
+  flex-shrink: 0;
+  width: 380px;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-xl);
-  padding: var(--space-8);
+  padding: var(--space-6);
   transition: var(--transition-all);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .testimonialCard:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(22, 163, 74, 0.12);
   border-color: var(--green-200);
+  transform: translateY(-4px);
+}
+
+.testimonialCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+  gap: var(--space-2);
+}
+
+.conditionBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* Condition color-coded badges */
+.condition_pcos {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.condition_cramps {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+.condition_irregular {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.condition_heavy-flow {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.condition_rashes {
+  background: #ffedd5;
+  color: #9a3412;
+}
+
+.condition_uti {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.condition_endometriosis {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.condition_general {
+  background: var(--green-50);
+  color: var(--green-700);
+}
+
+.durationBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  font-weight: 600;
+  background: var(--green-50);
+  color: var(--green-700);
+  border: 1px solid var(--green-200);
+  white-space: nowrap;
+}
+
+.testimonialStars {
+  display: flex;
+  gap: 2px;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
 }
 
 .testimonialQuote {
   font-size: var(--text-sm);
   line-height: var(--leading-relaxed);
   color: var(--color-text-secondary);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
   font-style: italic;
-  position: relative;
-  padding-left: var(--space-4);
-  border-left: 3px solid var(--green-200);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .testimonialAuthor {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-light);
 }
 
 .testimonialAvatar {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, var(--green-300), var(--green-500));
   display: flex;
@@ -833,13 +1009,6 @@
 .testimonialLocation {
   font-size: var(--text-xs);
   color: var(--color-text-muted);
-}
-
-.testimonialStars {
-  display: flex;
-  gap: 2px;
-  color: var(--gold);
-  margin-bottom: var(--space-4);
 }
 
 /* ── CTA Section ── */
@@ -910,8 +1079,8 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .testimonialGrid {
-    grid-template-columns: 1fr;
+  .testimonialCard {
+    width: 300px;
   }
 }
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MapPin, GraduationCap, Dumbbell, ArrowRight, Users, Globe } from 'lucide-react';
+import { MapPin, GraduationCap, Dumbbell, ArrowRight, Users, Globe, Sparkles } from 'lucide-react';
 import styles from './page.module.css';
 
 const fadeInUp = {
@@ -16,44 +16,44 @@ const stagger = {
 
 const programs = [
   {
-    slug: 'satellite-centres',
-    icon: MapPin,
-    title: 'Satellite Centres',
-    subtitle: '20+ States • 101 Villages',
+    slug: 'heal',
+    icon: Sparkles,
+    title: 'HEAL',
+    subtitle: 'Health, Environment, Active Living',
     description:
-      'Decentralized manufacturing and distribution centres across India, training rural women to handcraft Saukhyam pads locally. Each centre is a hub of livelihood, skill development, and menstrual health awareness.',
+      'Supporting girls and women facing menstrual disorders such as PCOS through lifestyle shifts, guidance, and reusable menstrual products. A holistic approach combining chemical-free pads with nutrition, movement, and stress management.',
     stats: [
-      { label: 'Active Centres', value: '25+' },
-      { label: 'States Covered', value: '20+' },
-      { label: 'Women Trained', value: '500+' },
+      { label: 'Healing Stories', value: '14+' },
+      { label: 'PCOS Improvements', value: '70%' },
+      { label: 'Pain Reduction', value: '85%' },
     ],
     color: 'green' as const,
   },
   {
-    slug: 'buddy-program',
-    icon: GraduationCap,
-    title: 'Buddy Program',
-    subtitle: 'Peer-to-Peer Mentoring',
+    slug: 'reach',
+    icon: Globe,
+    title: 'REACH',
+    subtitle: 'Rural Empowerment & Community Health',
     description:
-      'A peer education model where trained "Saukhyam Buddies" become local ambassadors for menstrual health. Each buddy conducts awareness workshops, supports first-time switchers, and builds a community of change.',
+      'Bringing safe, chemical-free menstrual hygiene to rural India through satellite centres. Training rural women to manufacture pads locally — creating livelihoods while transforming community health.',
     stats: [
-      { label: 'Active Buddies', value: '200+' },
-      { label: 'Workshops', value: '1,000+' },
-      { label: 'Women Reached', value: '50,000+' },
+      { label: 'Satellite Centres', value: '25+' },
+      { label: 'States Covered', value: '20+' },
+      { label: 'Villages Reached', value: '101' },
     ],
     color: 'teal' as const,
   },
   {
-    slug: 'sports-women',
-    icon: Dumbbell,
-    title: 'Sports Women Program',
-    subtitle: 'Athletic Performance • Zero Compromise',
+    slug: 'care',
+    icon: GraduationCap,
+    title: 'CARE',
+    subtitle: 'Campus Action for Reusable Essentials',
     description:
-      'A dedicated initiative supporting female athletes with high-performance reusable pads. Partnering with sports academies and coaches to ensure no girl misses training or competition because of her period.',
+      'Helping college campuses shift toward sustainable menstrual choices. Through workshops, ambassador programs, and trial kits, CARE builds a generation of environmentally conscious young women.',
     stats: [
-      { label: 'Athletes Supported', value: '1,000+' },
-      { label: 'Academies', value: '15+' },
-      { label: 'Sports Covered', value: '8+' },
+      { label: 'Campus Partners', value: '50+' },
+      { label: 'Students Reached', value: '10,000+' },
+      { label: 'Workshops', value: '200+' },
     ],
     color: 'amber' as const,
   },

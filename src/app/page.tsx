@@ -341,7 +341,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
+      {/* ── Testimonials — Animated Carousel ── */}
       <section className={styles.testimonialsSection}>
         <div className="container">
           <motion.div
@@ -352,40 +352,84 @@ export default function HomePage() {
             variants={fadeInUp}
           >
             <span className="section-badge">
-              <Star size={14} />
-              Testimonials
+              <Heart size={14} />
+              Real Stories, Real Healing
             </span>
-            <h2>What Our Users Say</h2>
-            <p>Hear from women who made the switch and never looked back.</p>
+            <h2>Verified Testimonials</h2>
+            <p>
+              Hear from {testimonials.length} women across India who experienced measurable health improvements after switching to Saukhyam.
+            </p>
           </motion.div>
+        </div>
 
-          <motion.div
-            className={styles.testimonialGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {testimonials.slice(0, 6).map((t) => (
-              <motion.div key={t.id} variants={fadeInUp} className={styles.testimonialCard}>
-                <div className={styles.testimonialStars}>
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star key={i} size={14} fill="currentColor" />
-                  ))}
-                </div>
-                <p className={styles.testimonialQuote}>&ldquo;{t.quote}&rdquo;</p>
-                <div className={styles.testimonialAuthor}>
-                  <div className={styles.testimonialAvatar}>
-                    {t.name.charAt(0)}
+        {/* Auto-scrolling testimonial track — Row 1 */}
+        <div className={styles.testimonialMarqueeWrap}>
+          <div className={styles.testimonialMarquee}>
+            <div className={styles.testimonialTrack}>
+              {[...testimonials.slice(0, 7), ...testimonials.slice(0, 7)].map((t, i) => (
+                <div key={`r1-${t.id}-${i}`} className={styles.testimonialCard}>
+                  <div className={styles.testimonialCardTop}>
+                    <span className={`${styles.conditionBadge} ${styles[`condition_${t.condition}`]}`}>
+                      {t.mainProblem}
+                    </span>
+                    <span className={styles.durationBadge}>
+                      {t.duration}
+                    </span>
                   </div>
-                  <div>
-                    <div className={styles.testimonialName}>{t.name}</div>
-                    <div className={styles.testimonialLocation}>{t.location}</div>
+                  <div className={styles.testimonialStars}>
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <Star key={j} size={12} fill="currentColor" />
+                    ))}
+                  </div>
+                  <p className={styles.testimonialQuote}>&ldquo;{t.quote}&rdquo;</p>
+                  <div className={styles.testimonialAuthor}>
+                    <div className={styles.testimonialAvatar}>
+                      {t.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className={styles.testimonialName}>{t.name}</div>
+                      <div className={styles.testimonialLocation}>{t.location}</div>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Auto-scrolling testimonial track — Row 2 (reverse direction) */}
+        <div className={styles.testimonialMarqueeWrap}>
+          <div className={styles.testimonialMarquee}>
+            <div className={`${styles.testimonialTrack} ${styles.testimonialTrackReverse}`}>
+              {[...testimonials.slice(7), ...testimonials.slice(7)].map((t, i) => (
+                <div key={`r2-${t.id}-${i}`} className={styles.testimonialCard}>
+                  <div className={styles.testimonialCardTop}>
+                    <span className={`${styles.conditionBadge} ${styles[`condition_${t.condition}`]}`}>
+                      {t.mainProblem}
+                    </span>
+                    <span className={styles.durationBadge}>
+                      {t.duration}
+                    </span>
+                  </div>
+                  <div className={styles.testimonialStars}>
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <Star key={j} size={12} fill="currentColor" />
+                    ))}
+                  </div>
+                  <p className={styles.testimonialQuote}>&ldquo;{t.quote}&rdquo;</p>
+                  <div className={styles.testimonialAuthor}>
+                    <div className={styles.testimonialAvatar}>
+                      {t.name.charAt(0)}
+                    </div>
+                    <div>
+                      <div className={styles.testimonialName}>{t.name}</div>
+                      <div className={styles.testimonialLocation}>{t.location}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

@@ -118,8 +118,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Mission & Vision ── */}
-      <section className={`${styles.section} ${styles.sectionAlt}`}>
+      {/* ── Vision & Mission ── */}
+      <section className={`${styles.section} ${styles.visionMissionSection}`}>
         <div className="container">
           <motion.div
             initial="hidden"
@@ -127,52 +127,86 @@ export default function AboutPage() {
             viewport={{ once: true }}
             variants={stagger}
           >
-            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
+            <motion.span variants={fadeInUp} className={styles.sectionLabelLight}>
               <Target size={14} />
-              Mission &amp; Vision
+              Purpose & Direction
             </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
+            <motion.h2 variants={fadeInUp} className={styles.sectionTitleLight}>
               What Drives Us
             </motion.h2>
           </motion.div>
 
-          <div className={styles.storyGrid}>
+          <div className={styles.vmGrid}>
+            {/* Vision Card */}
             <motion.div
-              className={styles.storyText}
-              initial="hidden"
-              whileInView="visible"
+              className={styles.vmCard}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              variants={stagger}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              <motion.p variants={fadeInUp}>
-                <strong>Our Mission:</strong> To make safe, chemical-free menstrual hygiene products 
-                accessible to every woman in India while creating sustainable livelihoods for 
-                rural women through skill development and employment.
-              </motion.p>
-              <motion.p variants={fadeInUp}>
-                <strong>Our Vision:</strong> A world where no woman compromises her health due to 
-                harmful chemicals in hygiene products, and where sustainable choices are the natural, 
-                affordable default — not a luxury.
-              </motion.p>
-              <motion.p variants={fadeInUp}>
-                We envision Saukhyam satellite centres in every state of India, each staffed by 
-                local women entrepreneurs, creating a nationwide network of sustainable menstrual 
-                hygiene and women&apos;s empowerment.
-              </motion.p>
+              <div className={styles.vmIconWrap}>
+                <Sparkles size={28} />
+              </div>
+              <div className={styles.vmLabel}>Our Vision</div>
+              <h3 className={styles.vmHeadline}>
+                Reusables providing a much more wholesome period experience are the first choice for menstruators everywhere
+              </h3>
+              <p className={styles.vmSub}>
+                A world where no woman compromises her health due to harmful chemicals in hygiene products, and where sustainable choices are the natural, affordable default.
+              </p>
+              <div className={styles.vmAccentLine} />
             </motion.div>
+
+            {/* Mission Card */}
             <motion.div
-              className={styles.storyImage}
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className={styles.vmCard}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
-              <img
-                src="https://saukhyampads.org/cdn/shop/files/5_01f142f9-1e34-44d2-93ce-bdd0ceca925d_2048x2048.png?v=1746945196"
-                alt="Saukhyam satellite centre"
-              />
+              <div className={`${styles.vmIconWrap} ${styles.vmIconMission}`}>
+                <Globe size={28} />
+              </div>
+              <div className={styles.vmLabel}>Our Mission</div>
+              <h3 className={styles.vmHeadline}>
+                Combat climate change, support zero-waste, empower women and transform lives
+              </h3>
+              <p className={styles.vmSub}>
+                All through our beautiful reusable menstrual pads — handcrafted by rural women 
+                using India&apos;s first banana fiber absorbent technology.
+              </p>
+              <div className={`${styles.vmAccentLine} ${styles.vmAccentMission}`} />
             </motion.div>
           </div>
+
+          {/* Mission pillars */}
+          <motion.div
+            className={styles.vmPillars}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            {[
+              { icon: Leaf, label: 'Zero Waste', desc: '100% biodegradable banana fiber & cotton' },
+              { icon: Heart, label: 'Women\'s Health', desc: 'Chemical-free, healing periods for all' },
+              { icon: Users, label: 'Empower Makers', desc: 'Rural women earning dignified livelihoods' },
+              { icon: Globe, label: 'Climate Action', desc: 'Eliminating 125+ kg of pad waste per woman' },
+            ].map((pillar) => {
+              const PillarIcon = pillar.icon;
+              return (
+                <motion.div key={pillar.label} variants={fadeInUp} className={styles.vmPillar}>
+                  <div className={styles.vmPillarIcon}>
+                    <PillarIcon size={20} />
+                  </div>
+                  <strong>{pillar.label}</strong>
+                  <span>{pillar.desc}</span>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </section>
 

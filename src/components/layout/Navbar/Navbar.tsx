@@ -28,9 +28,9 @@ const navItems = [
     label: 'Programs',
     href: '/programs',
     children: [
-      { label: 'Heal', href: '/programs/heal', icon: Sparkles },
-      { label: 'Reach', href: '/programs/reach', icon: Globe },
-      { label: 'Care', href: '/programs/care', icon: HandHeart },
+      { label: 'HEAL — Health, Environment, Active Living', href: '/programs/heal', icon: Sparkles },
+      { label: 'REACH — Rural Empowerment', href: '/programs/reach', icon: Globe },
+      { label: 'CARE — Campus Action', href: '/programs/care', icon: HandHeart },
     ],
   },
   { label: 'FAQ', href: '/faq' },
