@@ -29,10 +29,10 @@ const trustItems = [
 ];
 
 const impactStats = [
-  { icon: Users, number: '5,00,000+', label: 'Women Switched' },
-  { icon: TreePine, number: '29 Lakh kg', label: 'CO₂ Prevented' },
-  { icon: Recycle, number: '100+ kg', label: 'Waste Saved Per Person' },
-  { icon: Trophy, number: '12+', label: 'National Awards' },
+  { icon: Users, number: '30 Lakh+', label: 'Women/Girls Who Switched' },
+  { icon: TreePine, number: '17,400 T', label: 'CO₂e Prevented Annually' },
+  { icon: Heart, number: '300+', label: 'Livelihoods for Rural Women' },
+  { icon: Trophy, number: '20+', label: 'National & International Awards' },
 ];
 
 const reusablePoints = [
@@ -67,17 +67,6 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ── Announcement Ticker ── */}
-      <div className={styles.ticker}>
-        <div className={styles.tickerTrack}>
-          {[...tickerMessages, ...tickerMessages].map((msg, i) => (
-            <span key={i} className={styles.tickerItem}>
-              <span className={styles.tickerDot} />
-              {msg}
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* ── Hero Section ── */}
       <section className={styles.hero}>
@@ -112,14 +101,14 @@ export default function HomePage() {
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
+          {/* Subtitle — World's first */}
           <motion.p
             className={styles.heroSubtitle}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
           >
-            Sustainable • Chemical-Free • Empowering
+            The world&apos;s first reusable sanitary napkins<br />made from banana fiber.
           </motion.p>
 
           {/* Social proof pill */}
@@ -135,55 +124,22 @@ export default function HomePage() {
               <img src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=100" alt="" className={styles.heroPillImg} />
             </div>
             <Sparkles size={16} className={styles.heroPillSparkle} />
-            <span>Trusted by 5,00,000+ Women</span>
+            <span>5,00,000+ Women Healed</span>
           </motion.div>
-
-          {/* Description */}
-          <motion.p
-            className={styles.heroDesc}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-          >
-            India&apos;s first reusable pads made from banana fiber — handcrafted
-            by rural women, 100% chemical-free, and built to last 2–3 years.
-            Join the movement.
-          </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             className={styles.heroCTAs}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.55 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
           >
             <Link href="/products" className={styles.btnHeroPrimary}>
-              Switch Now
+              Start HEAL
             </Link>
             <Link href="/science" className={styles.btnHeroSecondary}>
-              Why Switch?
+              The HEAL Challenge
             </Link>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            className={styles.heroStats}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.65 }}
-          >
-            <div className={styles.heroStatItem}>
-              <span className={styles.heroStatValue}>5,00,000+</span>
-              <span className={styles.heroStatLabel}>Women Switched</span>
-            </div>
-            <div className={styles.heroStatItem}>
-              <span className={styles.heroStatValue}>12+</span>
-              <span className={styles.heroStatLabel}>Awards Won</span>
-            </div>
-            <div className={styles.heroStatItem}>
-              <span className={styles.heroStatValue}>3 Years</span>
-              <span className={styles.heroStatLabel}>Pad Lifespan</span>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -203,8 +159,9 @@ export default function HomePage() {
               <ShoppingBag size={14} />
               Our Products
             </span>
-            <h2>Handcrafted With Love</h2>
-            <p>Eco-friendly reusable pads made from banana fiber, lovingly stitched by rural women across India.</p>
+
+            <p className={styles.productsSectionTagline}>Sustainable • Chemical-Free • Empowering</p>
+
           </motion.div>
 
           <motion.div
@@ -245,6 +202,67 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Impact Counter (directly after Products) ── */}
+      <section className={styles.impactSection}>
+        <div className="container">
+          <motion.div
+            className="section-header"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <span className="section-badge" style={{ background: 'rgba(34,197,94,0.15)', color: 'var(--green-400)' }}>
+              <Heart size={14} />
+              Our Impact
+            </span>
+            <p style={{ color: 'var(--green-300)', fontSize: '1.25rem', fontWeight: '700', marginTop: 'var(--space-4)' }}>Real numbers. Real lives changed.</p>
+          </motion.div>
+
+          <motion.div
+            className={styles.impactGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {impactStats.map((stat) => (
+              <motion.div key={stat.label} variants={fadeInUp} className={styles.impactCard}>
+                <div className={styles.impactIcon}>
+                  <stat.icon size={28} />
+                </div>
+                <div className={styles.impactNumber}>{stat.number}</div>
+                <div className={styles.impactLabel}>{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Hero stats strip — moved from hero section */}
+          <motion.div
+            className={styles.impactHeroStats}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeInUp} className={styles.impactHeroStatItem}>
+              <span className={styles.impactHeroStatValue}>5,00,000+</span>
+              <span className={styles.impactHeroStatLabel}>Women Switched</span>
+            </motion.div>
+            <div className={styles.impactHeroStatDivider} />
+            <motion.div variants={fadeInUp} className={styles.impactHeroStatItem}>
+              <span className={styles.impactHeroStatValue}>20+</span>
+              <span className={styles.impactHeroStatLabel}>Awards Won</span>
+            </motion.div>
+            <div className={styles.impactHeroStatDivider} />
+            <motion.div variants={fadeInUp} className={styles.impactHeroStatItem}>
+              <span className={styles.impactHeroStatValue}>3 Years</span>
+              <span className={styles.impactHeroStatLabel}>Pad Lifespan</span>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── Why Switch ── */}
       <section className={styles.whySwitch}>
         <div className="container">
@@ -260,7 +278,7 @@ export default function HomePage() {
               The Difference
             </span>
             <h2>Reusable vs Disposable</h2>
-            <p>See why 5 lakh+ women have made the switch to Saukhyam.</p>
+            <p>See why 30 lakh+ users have made the switch to Saukhyam.</p>
           </motion.div>
 
           <motion.div
@@ -299,44 +317,6 @@ export default function HomePage() {
                 </div>
               ))}
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Impact Counter ── */}
-      <section className={styles.impactSection}>
-        <div className="container">
-          <motion.div
-            className="section-header"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <span className="section-badge" style={{ background: 'rgba(34,197,94,0.15)', color: 'var(--green-400)' }}>
-              <Heart size={14} />
-              Our Impact
-            </span>
-            <h2 style={{ color: 'var(--white)' }}>Making a Difference, One Pad at a Time</h2>
-            <p style={{ color: 'var(--green-300)' }}>Real numbers. Real impact. Real lives changed.</p>
-          </motion.div>
-
-          <motion.div
-            className={styles.impactGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {impactStats.map((stat) => (
-              <motion.div key={stat.label} variants={fadeInUp} className={styles.impactCard}>
-                <div className={styles.impactIcon}>
-                  <stat.icon size={28} />
-                </div>
-                <div className={styles.impactNumber}>{stat.number}</div>
-                <div className={styles.impactLabel}>{stat.label}</div>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
       </section>

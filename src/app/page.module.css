@@ -23,14 +23,12 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    100deg,
-    transparent 0%,
-    rgba(134, 239, 172, 0.08) 40%,
-    rgba(134, 239, 172, 0.14) 50%,
-    rgba(134, 239, 172, 0.08) 60%,
-    transparent 100%
-  );
+  background: linear-gradient(100deg,
+      transparent 0%,
+      rgba(134, 239, 172, 0.08) 40%,
+      rgba(134, 239, 172, 0.14) 50%,
+      rgba(134, 239, 172, 0.08) 60%,
+      transparent 100%);
   background-size: 200% 100%;
   animation: tickerShimmer 4s linear infinite;
   pointer-events: none;
@@ -42,20 +40,23 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    #052e16 0%,
-    transparent 6%,
-    transparent 94%,
-    #052e16 100%
-  );
+  background: linear-gradient(to right,
+      #052e16 0%,
+      transparent 6%,
+      transparent 94%,
+      #052e16 100%);
   pointer-events: none;
   z-index: 3;
 }
 
 @keyframes tickerShimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .tickerTrack {
@@ -73,8 +74,13 @@
 }
 
 @keyframes tickerScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .tickerItem {
@@ -113,8 +119,17 @@
 }
 
 @keyframes tickerDotPulse {
-  0%, 100% { transform: scale(1);   box-shadow: 0 0 6px  rgba(74, 222, 128, 0.7); }
-  50%       { transform: scale(1.4); box-shadow: 0 0 12px rgba(74, 222, 128, 1);   }
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.7);
+  }
+
+  50% {
+    transform: scale(1.4);
+    box-shadow: 0 0 12px rgba(74, 222, 128, 1);
+  }
 }
 
 /* ── Hero ── */
@@ -188,36 +203,28 @@
 .heroSideLeft {
   left: 3vw;
   /* Fade out toward the left edge so it blends into the background */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0,0,0,0.5) 20%,
-    black 50%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0,0,0,0.5) 20%,
-    black 50%
-  );
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.5) 20%,
+      black 50%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.5) 20%,
+      black 50%);
   animation: heroSideFloat 5s ease-in-out infinite;
 }
 
 .heroSideRight {
   right: 3vw;
   /* Fade out toward the right edge */
-  -webkit-mask-image: linear-gradient(
-    to left,
-    transparent 0%,
-    rgba(0,0,0,0.5) 20%,
-    black 50%
-  );
-  mask-image: linear-gradient(
-    to left,
-    transparent 0%,
-    rgba(0,0,0,0.5) 20%,
-    black 50%
-  );
+  -webkit-mask-image: linear-gradient(to left,
+      transparent 0%,
+      rgba(0, 0, 0, 0.5) 20%,
+      black 50%);
+  mask-image: linear-gradient(to left,
+      transparent 0%,
+      rgba(0, 0, 0, 0.5) 20%,
+      black 50%);
   animation: heroSideFloat 5s ease-in-out infinite;
   animation-delay: 2.5s;
 }
@@ -234,50 +241,66 @@
 
 /* Gentle float so they feel alive */
 @keyframes heroSideFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* ── Responsive hero side images ── */
 @media (max-width: 1100px) {
+
   .heroSideLeft,
   .heroSideRight {
     width: clamp(110px, 15vw, 160px);
     opacity: 0.6;
   }
+
   .heroSideLeft {
     left: 0;
   }
+
   .heroSideRight {
     right: 0;
   }
 }
 
 @media (max-width: 768px) {
+
   .heroSideLeft,
   .heroSideRight {
     width: 100px;
     opacity: 0.45;
     max-height: 70%;
   }
+
   .heroSideLeft {
     left: -10px;
   }
+
   .heroSideRight {
     right: -10px;
   }
 }
 
 @media (max-width: 480px) {
+
   .heroSideLeft,
   .heroSideRight {
     width: 80px;
     opacity: 0.35;
     max-height: 60%;
   }
+
   .heroSideLeft {
     left: -15px;
   }
+
   .heroSideRight {
     right: -15px;
   }
@@ -293,7 +316,7 @@
   align-items: center;
   text-align: center;
   gap: var(--space-4);
-  padding: calc(var(--navbar-height) + var(--space-3)) var(--space-4) var(--space-6);
+  padding: var(--space-6) var(--space-4) var(--space-6);
 }
 
 /* Headline — animated gradient like CareSakhi */
@@ -328,10 +351,12 @@
 
 /* Subtitle */
 .heroSubtitle {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   font-weight: 600;
   color: #374151;
   letter-spacing: 0.01em;
+  max-width: 32rem;
+  line-height: 1.4;
 }
 
 /* Social proof pill */
@@ -537,7 +562,23 @@
 
 /* ── Products Section ── */
 .productsSection {
-  padding: var(--section-gap) 0;
+  padding: clamp(2rem, 4vw, 3.5rem) 0;
+}
+
+/* Tagline — stacks below the badge, centered */
+.productsSectionTagline {
+  display: block;
+  width: fit-content;
+  margin: var(--space-3) auto 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--green-700);
+  background: var(--green-50);
+  border: 1px solid var(--green-200);
+  border-radius: var(--radius-full);
+  padding: 6px 20px;
 }
 
 .productGrid {
@@ -804,6 +845,74 @@
   font-weight: 500;
 }
 
+/* ── Pinned stat strip inside Impact (moved from hero) ── */
+.impactHeroStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: var(--space-12);
+  padding: var(--space-6) var(--space-8);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(134, 239, 172, 0.18);
+  border-radius: var(--radius-2xl);
+  backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+  row-gap: var(--space-4);
+}
+
+.impactHeroStatItem {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-3) var(--space-6);
+}
+
+.impactHeroStatValue {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.impactHeroStatLabel {
+  font-size: 0.8rem;
+  color: var(--green-300);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+
+.impactHeroStatDivider {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, transparent, rgba(134, 239, 172, 0.3), transparent);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+@media (max-width: 640px) {
+  .impactHeroStats {
+    gap: 0;
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .impactHeroStatDivider {
+    display: none;
+  }
+
+  .impactHeroStatItem {
+    min-width: 100px;
+    padding: var(--space-2) var(--space-4);
+  }
+}
+
 /* ── Testimonials — Animated Marquee ── */
 .testimonialsSection {
   padding: var(--section-gap) 0 var(--space-12);
@@ -859,8 +968,13 @@
 }
 
 @keyframes testimonialScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .testimonialCard {
