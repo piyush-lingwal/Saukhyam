@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import {
   ShoppingBag, Leaf, Eye, Truck, Shield,
   RefreshCw, Heart, ChevronRight, PackageSearch,
-  ShieldCheck, Droplets, Wind,
+  ShieldCheck, Droplets, Wind, Zap, CheckCircle2, XCircle, Users, Trophy,
 } from 'lucide-react';
 import { products, type Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
@@ -29,6 +29,24 @@ const trustItems = [
   { icon: Heart,       label: 'Gentle on Skin', sub: '100% cotton surface' },
   { icon: Leaf,        label: 'Chemical Free', sub: 'Natural banana fiber' },
   { icon: Wind,        label: 'Dries Fast', sub: 'Breathable design' },
+];
+
+const reusablePoints = [
+  '100% chemical free — no dioxins, phthalates, or bleach',
+  'Banana fiber with natural antimicrobial properties',
+  'Lasts 2-3 years with proper care',
+  'Saves ₹3,000+ per year vs disposables',
+  'Biodegradable — zero landfill waste',
+  'Handcrafted by empowered rural women',
+];
+
+const disposablePoints = [
+  'Contains dioxins, phthalates, and VOCs',
+  'Synthetic superabsorbent polymers next to skin',
+  'Single use — 12,000+ pads in a lifetime',
+  'Costs ₹3,000-5,000 per year recurring',
+  'Takes 500-800 years to decompose',
+  'Mass-produced in chemical factories',
 ];
 
 const fadeInUp = {
@@ -245,7 +263,89 @@ export default function ProductsPage() {
             <div className={styles.benefitSub}>Biodegradable Materials</div>
           </motion.div>
         </motion.div>
+
+        {/* ── Stats Strip ── */}
+        <motion.div
+          className={styles.statsStrip}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <motion.div variants={fadeInUp} className={styles.statItem}>
+            <span className={styles.statValue}>5,00,000+</span>
+            <span className={styles.statLabel}>Women Switched</span>
+          </motion.div>
+          <div className={styles.statDivider} />
+          <motion.div variants={fadeInUp} className={styles.statItem}>
+            <span className={styles.statValue}>20+</span>
+            <span className={styles.statLabel}>Awards Won</span>
+          </motion.div>
+          <div className={styles.statDivider} />
+          <motion.div variants={fadeInUp} className={styles.statItem}>
+            <span className={styles.statValue}>3 Years</span>
+            <span className={styles.statLabel}>Pad Lifespan</span>
+          </motion.div>
+        </motion.div>
       </div>
+
+      {/* ── Why Switch ── */}
+      <section className={styles.whySwitch}>
+        <div className="container">
+          <motion.div
+            className={styles.sectionHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <span className={styles.sectionBadge}>
+              <Zap size={14} />
+              The Difference
+            </span>
+            <h2 className={styles.sectionTitle}>Reusable vs Disposable</h2>
+            <p className={styles.sectionDesc}>See why 30 lakh+ users have made the switch to Saukhyam.</p>
+          </motion.div>
+
+          <motion.div
+            className={styles.comparisonGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.div variants={fadeInUp} className={`${styles.comparisonCard} ${styles.good}`}>
+              <div className={`${styles.comparisonCardTitle} ${styles.good}`}>
+                <Leaf size={22} />
+                Saukhyam Reusable
+              </div>
+              {reusablePoints.map((point, i) => (
+                <div key={i} className={styles.comparisonItem}>
+                  <CheckCircle2 size={18} className={styles.comparisonIcon} style={{ color: 'var(--green-500)' }} />
+                  {point}
+                </div>
+              ))}
+            </motion.div>
+
+            <div className={styles.comparisonVs}>
+              <div className={styles.vsCircle}>VS</div>
+            </div>
+
+            <motion.div variants={fadeInUp} className={`${styles.comparisonCard} ${styles.bad}`}>
+              <div className={`${styles.comparisonCardTitle} ${styles.bad}`}>
+                <XCircle size={22} />
+                Disposable Pads
+              </div>
+              {disposablePoints.map((point, i) => (
+                <div key={i} className={styles.comparisonItem}>
+                  <XCircle size={18} className={styles.comparisonIcon} style={{ color: 'var(--terracotta)' }} />
+                  {point}
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }

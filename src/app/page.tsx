@@ -6,6 +6,7 @@ import {
   Leaf, ShieldCheck, Droplets, Wind, Heart, ArrowRight,
   ShoppingBag, Users, TreePine, Recycle, Trophy,
   Star, CheckCircle2, XCircle, Sparkles, Zap,
+  GraduationCap, Globe, HandHeart,
 } from 'lucide-react';
 import { products } from '@/data/products';
 import { testimonials } from '@/data/content';
@@ -202,6 +203,156 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Amma & Programs Bento Grid ── */}
+      <section className={styles.bentoSection}>
+        <div className="container">
+          <motion.div
+            className="section-header"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <span className="section-badge">
+              <Heart size={14} />
+              Our Foundation
+            </span>
+            <h2 className={styles.bentoHeading}>
+              Rooted in <span className={styles.bentoHeadingAccent}>Compassion</span>,{' '}
+              Driven by <span className={styles.bentoHeadingAccent}>Impact</span>
+            </h2>
+          </motion.div>
+
+          {/* ── Amma Highlight — Full Width ── */}
+          <motion.div
+            className={styles.ammaHighlight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <div className={styles.ammaGlow} aria-hidden="true" />
+            <div className={styles.ammaImageCol}>
+              <div className={styles.ammaImageFrame}>
+                <img
+                  src="/amma.png"
+                  alt="Mata Amritanandamayi (Amma) — Spiritual leader and inspiration behind Saukhyam"
+                  className={styles.ammaImg}
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className={styles.ammaTextCol}>
+              <span className={styles.ammaLabel}>
+                <Sparkles size={14} />
+                Inspired by Amma
+              </span>
+              <h3 className={styles.ammaName}>Mata Amritanandamayi</h3>
+              <p className={styles.ammaDesc}>
+                Saukhyam was born from Amma&apos;s vision of a world where every woman has access to safe, chemical-free menstrual care — and where sustainability is not a luxury but a way of life.
+              </p>
+              <div className={styles.ammaQuoteBox}>
+                <span className={styles.ammaQuoteMark}>&ldquo;</span>
+                <p>When we take care of nature, nature takes care of us.</p>
+              </div>
+              <Link href="/about" className={styles.ammaLink}>
+                Read Our Story <ArrowRight size={16} />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* ── Programs — Equal 3-Column Grid ── */}
+          <motion.div
+            className={styles.programsRow}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {/* HEAL */}
+            <motion.a href="/programs/heal" variants={fadeInUp} className={`${styles.programCard} ${styles.programHeal}`}>
+              <div className={styles.programCardTopBar} />
+              <div className={styles.programIconWrap}>
+                <Sparkles size={26} />
+              </div>
+              <h3 className={styles.programTitle}>HEAL</h3>
+              <p className={styles.programSubtitle}>Health, Environment &amp; Active Living</p>
+              <p className={styles.programDesc}>
+                Supporting women facing PCOS &amp; period disorders through lifestyle shifts and chemical-free wellness.
+              </p>
+              <div className={styles.programStats}>
+                <div className={styles.programStat}>
+                  <span className={styles.programStatNum}>85%</span>
+                  <span className={styles.programStatTxt}>Pain Reduction</span>
+                </div>
+                <div className={styles.programStatDivider} />
+                <div className={styles.programStat}>
+                  <span className={styles.programStatNum}>70%</span>
+                  <span className={styles.programStatTxt}>PCOS Improvement</span>
+                </div>
+              </div>
+              <span className={styles.programLink}>
+                Learn More <ArrowRight size={15} />
+              </span>
+            </motion.a>
+
+            {/* REACH */}
+            <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.programCard} ${styles.programReach}`}>
+              <div className={styles.programCardTopBar} />
+              <div className={styles.programIconWrap}>
+                <Globe size={26} />
+              </div>
+              <h3 className={styles.programTitle}>REACH</h3>
+              <p className={styles.programSubtitle}>Rural Empowerment &amp; Community Health</p>
+              <p className={styles.programDesc}>
+                Bringing chemical-free menstrual hygiene to rural India through satellite centres and local manufacturing.
+              </p>
+              <div className={styles.programStats}>
+                <div className={styles.programStat}>
+                  <span className={styles.programStatNum}>101</span>
+                  <span className={styles.programStatTxt}>Villages</span>
+                </div>
+                <div className={styles.programStatDivider} />
+                <div className={styles.programStat}>
+                  <span className={styles.programStatNum}>20+</span>
+                  <span className={styles.programStatTxt}>States Covered</span>
+                </div>
+              </div>
+              <span className={styles.programLink}>
+                Learn More <ArrowRight size={15} />
+              </span>
+            </motion.a>
+
+            {/* CARE */}
+            <motion.a href="/programs/care" variants={fadeInUp} className={`${styles.programCard} ${styles.programCare}`}>
+              <div className={styles.programCardTopBar} />
+              <div className={styles.programIconWrap}>
+                <GraduationCap size={26} />
+              </div>
+              <h3 className={styles.programTitle}>CARE</h3>
+              <p className={styles.programSubtitle}>Campus Action for Reusable Essentials</p>
+              <p className={styles.programDesc}>
+                Empowering college campuses to shift toward sustainable menstrual choices through workshops and ambassador programs.
+              </p>
+              <div className={styles.programStats}>
+                <div className={styles.programStat}>
+                  <span className={styles.programStatNum}>50+</span>
+                  <span className={styles.programStatTxt}>Campuses</span>
+                </div>
+                <div className={styles.programStatDivider} />
+                <div className={styles.programStat}>
+                  <span className={styles.programStatNum}>10K+</span>
+                  <span className={styles.programStatTxt}>Students Reached</span>
+                </div>
+              </div>
+              <span className={styles.programLink}>
+                Learn More <ArrowRight size={15} />
+              </span>
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── Impact Counter (directly after Products) ── */}
       <section className={styles.impactSection}>
         <div className="container">
@@ -237,87 +388,6 @@ export default function HomePage() {
             ))}
           </motion.div>
 
-          {/* Hero stats strip — moved from hero section */}
-          <motion.div
-            className={styles.impactHeroStats}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeInUp} className={styles.impactHeroStatItem}>
-              <span className={styles.impactHeroStatValue}>5,00,000+</span>
-              <span className={styles.impactHeroStatLabel}>Women Switched</span>
-            </motion.div>
-            <div className={styles.impactHeroStatDivider} />
-            <motion.div variants={fadeInUp} className={styles.impactHeroStatItem}>
-              <span className={styles.impactHeroStatValue}>20+</span>
-              <span className={styles.impactHeroStatLabel}>Awards Won</span>
-            </motion.div>
-            <div className={styles.impactHeroStatDivider} />
-            <motion.div variants={fadeInUp} className={styles.impactHeroStatItem}>
-              <span className={styles.impactHeroStatValue}>3 Years</span>
-              <span className={styles.impactHeroStatLabel}>Pad Lifespan</span>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Why Switch ── */}
-      <section className={styles.whySwitch}>
-        <div className="container">
-          <motion.div
-            className="section-header"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <span className="section-badge">
-              <Zap size={14} />
-              The Difference
-            </span>
-            <h2>Reusable vs Disposable</h2>
-            <p>See why 30 lakh+ users have made the switch to Saukhyam.</p>
-          </motion.div>
-
-          <motion.div
-            className={styles.comparisonGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeInUp} className={`${styles.comparisonCard} ${styles.good}`}>
-              <div className={`${styles.comparisonCardTitle} ${styles.good}`}>
-                <Leaf size={22} />
-                Saukhyam Reusable
-              </div>
-              {reusablePoints.map((point, i) => (
-                <div key={i} className={styles.comparisonItem}>
-                  <CheckCircle2 size={18} className={styles.comparisonIcon} style={{ color: 'var(--green-500)' }} />
-                  {point}
-                </div>
-              ))}
-            </motion.div>
-
-            <div className={styles.comparisonVs}>
-              <div className={styles.vsCircle}>VS</div>
-            </div>
-
-            <motion.div variants={fadeInUp} className={`${styles.comparisonCard} ${styles.bad}`}>
-              <div className={`${styles.comparisonCardTitle} ${styles.bad}`}>
-                <XCircle size={22} />
-                Disposable Pads
-              </div>
-              {disposablePoints.map((point, i) => (
-                <div key={i} className={styles.comparisonItem}>
-                  <XCircle size={18} className={styles.comparisonIcon} style={{ color: 'var(--terracotta)' }} />
-                  {point}
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
         </div>
       </section>
 
@@ -331,14 +401,14 @@ export default function HomePage() {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <span className="section-badge">
-              <Heart size={14} />
-              Real Stories, Real Healing
-            </span>
-            <h2>Verified Testimonials</h2>
-            <p>
-              Hear from {testimonials.length} women across India who experienced measurable health improvements after switching to Saukhyam.
-            </p>
+            <h2 className={styles.testimonialMainHeading}>
+              <span className={styles.testimonialHeadingAccent}>Real Stories, </span>
+              <span className={styles.testimonialHeadingHighlight}>Real Healing</span>
+            </h2>
+            <Link href="/testimonials" className={styles.viewAllTestimonials}>
+              View All Stories
+              <ArrowRight size={16} />
+            </Link>
           </motion.div>
         </div>
 
@@ -347,7 +417,7 @@ export default function HomePage() {
           <div className={styles.testimonialMarquee}>
             <div className={styles.testimonialTrack}>
               {[...testimonials.slice(0, 7), ...testimonials.slice(0, 7)].map((t, i) => (
-                <div key={`r1-${t.id}-${i}`} className={styles.testimonialCard}>
+                <Link key={`r1-${t.id}-${i}`} href="/testimonials" className={styles.testimonialCard}>
                   <div className={styles.testimonialCardTop}>
                     <span className={`${styles.conditionBadge} ${styles[`condition_${t.condition}`]}`}>
                       {t.mainProblem}
@@ -371,7 +441,7 @@ export default function HomePage() {
                       <div className={styles.testimonialLocation}>{t.location}</div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -382,7 +452,7 @@ export default function HomePage() {
           <div className={styles.testimonialMarquee}>
             <div className={`${styles.testimonialTrack} ${styles.testimonialTrackReverse}`}>
               {[...testimonials.slice(7), ...testimonials.slice(7)].map((t, i) => (
-                <div key={`r2-${t.id}-${i}`} className={styles.testimonialCard}>
+                <Link key={`r2-${t.id}-${i}`} href="/testimonials" className={styles.testimonialCard}>
                   <div className={styles.testimonialCardTop}>
                     <span className={`${styles.conditionBadge} ${styles[`condition_${t.condition}`]}`}>
                       {t.mainProblem}
@@ -406,7 +476,7 @@ export default function HomePage() {
                       <div className={styles.testimonialLocation}>{t.location}</div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
