@@ -690,9 +690,9 @@
   border-color: var(--color-primary);
 }
 
-/* ═══════════════════════════════════════════════════
-   ── NEXT-GEN BENTO GRID ──
-   ═══════════════════════════════════════════════════ */
+/* =============================================
+   NEXT-GEN BENTO GRID — Split Card Layout
+   ============================================= */
 
 .bentoSection {
   position: relative;
@@ -725,7 +725,7 @@
 
 .bentoHeader {
   text-align: center;
-  margin-bottom: clamp(var(--space-8), 4vw, var(--space-12));
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
   position: relative;
   z-index: 1;
 }
@@ -733,19 +733,19 @@
 .bentoBadge {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-full);
+  border-radius: 100px;
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--green-300);
-  margin-bottom: var(--space-4);
+  color: #86efac;
+  margin-bottom: 1rem;
 }
 
 .bentoTitle {
@@ -754,7 +754,7 @@
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  color: var(--white);
+  color: #fff;
 }
 
 .bentoTitleAccent {
@@ -764,80 +764,75 @@
   background-clip: text;
 }
 
-/* ── Asymmetric Grid Layout ── */
+/* ── 4-col Asymmetric Grid ──
+   Row 1: Amma(2rows) | HEAL-Logo(sm) | HEAL-Info(wide)
+   Row 2: Amma        | REACH-Info    | REACH-Logo(sm)
+   Row 3: CARE-Logo   | CARE-Info(2)  | Stats
+   ─────────────────────────────────────────── */
 .bentoGrid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr 0.85fr;
-  grid-template-rows: auto auto;
-  gap: var(--space-4);
+  grid-template-columns: 1.3fr 0.7fr 1fr 0.7fr;
+  grid-template-rows: auto auto auto;
+  gap: 14px;
   position: relative;
   z-index: 1;
   grid-template-areas:
-    "amma heal  stats"
-    "amma reach care";
+    "amma  hlogo  hinfo  hinfo"
+    "amma  rinfo  rinfo  rlogo"
+    "clogo cinfo  cinfo  stats";
 }
 
-/* ── Shared Card — Glassmorphic ── */
+/* ── Shared card base ── */
 .bCard {
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: var(--space-6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s var(--ease-out);
+  transition: all 0.4s cubic-bezier(.4,0,.2,1);
   text-decoration: none;
-  color: var(--white);
+  color: #fff;
   display: flex;
   flex-direction: column;
 }
 
-.bCard::before {
+.bCard::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(255,255,255,0.06), transparent);
   opacity: 0;
-  transition: opacity 0.4s var(--ease-out);
+  transition: opacity 0.4s ease;
   pointer-events: none;
 }
 
 .bCard:hover {
-  transform: translateY(-4px);
-  border-color: rgba(134, 239, 172, 0.25);
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.25),
-    0 0 40px rgba(34, 197, 94, 0.08);
-  color: var(--white);
+  transform: translateY(-3px);
+  border-color: rgba(134, 239, 172, 0.2);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), 0 0 30px rgba(34, 197, 94, 0.06);
+  color: #fff;
 }
 
-.bCard:hover::before {
+.bCard:hover::after {
   opacity: 1;
 }
 
-/* ── Amma Card — Tall Left Column ── */
-.bCardAmma {
+/* ═════════════════════════════════════
+   AMMA — Large Photo Card (2 rows)
+   ═════════════════════════════════════ */
+.bAmma {
   grid-area: amma;
-  background: rgba(255, 255, 255, 0.05);
   padding: 0;
-  overflow: hidden;
-}
-
-.bAmmaInner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .bAmmaPhoto {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  flex: 1;
+  min-height: 220px;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .bAmmaImg {
@@ -845,10 +840,10 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  transition: transform 0.6s var(--ease-out);
+  transition: transform 0.6s ease;
 }
 
-.bCardAmma:hover .bAmmaImg {
+.bAmma:hover .bAmmaImg {
   transform: scale(1.04);
 }
 
@@ -858,201 +853,266 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60%;
+  height: 70%;
   background: linear-gradient(to top, rgba(5, 46, 22, 0.95), transparent);
   pointer-events: none;
 }
 
 .bAmmaBody {
-  padding: var(--space-5) var(--space-6) var(--space-6);
+  padding: 1.2rem 1.4rem 1.4rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  flex: 1;
+  gap: 0.35rem;
 }
 
 .bAmmaTag {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--green-400);
+  color: #4ade80;
 }
 
 .bAmmaName {
   font-family: var(--font-heading);
-  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
   font-weight: 800;
-  color: var(--white);
+  color: #fff;
   line-height: 1.15;
-  letter-spacing: -0.02em;
 }
 
 .bAmmaText {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.65);
-  line-height: 1.6;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
 }
 
 .bAmmaQuote {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-md);
-  border-left: 3px solid var(--green-500);
-  margin-top: var(--space-1);
+  gap: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border-left: 3px solid #22c55e;
+  margin-top: 0.25rem;
 }
 
 .bAmmaQM {
   font-family: Georgia, serif;
-  font-size: 2rem;
+  font-size: 1.6rem;
   line-height: 0.8;
-  color: var(--green-400);
+  color: #4ade80;
   flex-shrink: 0;
 }
 
 .bAmmaQuote p {
-  font-size: 0.82rem;
+  font-size: 0.75rem;
   font-style: italic;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.45;
   margin: 0;
 }
 
 .bAmmaLink {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  margin-top: auto;
-  padding-top: var(--space-3);
-  font-size: 0.82rem;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--green-400);
+  color: #4ade80;
   text-decoration: none;
-  transition: all 0.3s var(--ease-out);
+  transition: all 0.3s ease;
 }
 
 .bAmmaLink:hover {
-  color: var(--green-300);
-  gap: var(--space-3);
+  color: #86efac;
+  gap: 0.6rem;
 }
 
-/* ── Program Card Logos ── */
-.bCardLogo {
-  height: 40px;
-  margin-bottom: var(--space-3);
-  display: flex;
+/* ═════════════════════════════════════
+   LOGO CARDS — Small Square with Theme BG
+   ═════════════════════════════════════ */
+.bHealLogo,
+.bReachLogo,
+.bCareLogo {
   align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
-.bCardLogoImg {
-  height: 100%;
-  width: auto;
-  max-width: 140px;
+.bHealLogo {
+  grid-area: hlogo;
+  background: linear-gradient(145deg, rgba(219, 39, 119, 0.15), rgba(190, 24, 93, 0.08));
+  border-color: rgba(219, 39, 119, 0.15);
+}
+
+.bHealLogo::after {
+  background: linear-gradient(135deg, rgba(219, 39, 119, 0.1), transparent);
+}
+
+.bReachLogo {
+  grid-area: rlogo;
+  background: linear-gradient(145deg, rgba(20, 184, 166, 0.15), rgba(13, 148, 136, 0.08));
+  border-color: rgba(20, 184, 166, 0.15);
+}
+
+.bReachLogo::after {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), transparent);
+}
+
+.bCareLogo {
+  grid-area: clogo;
+  background: linear-gradient(145deg, rgba(147, 51, 234, 0.15), rgba(126, 34, 206, 0.08));
+  border-color: rgba(147, 51, 234, 0.15);
+}
+
+.bCareLogo::after {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), transparent);
+}
+
+.bLogoImage {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
-  opacity: 0.9;
-  transition: opacity 0.3s var(--ease-out);
+  opacity: 0.85;
+  transition: all 0.4s ease;
 }
 
-.bCard:hover .bCardLogoImg {
+.bCard:hover .bLogoImage {
   opacity: 1;
+  transform: scale(1.08);
 }
 
-.bCardSub {
+/* ═════════════════════════════════════
+   INFO CARDS — Wider content cards
+   ═════════════════════════════════════ */
+.bHealInfo,
+.bReachInfo,
+.bCareInfo {
+  padding: 1.4rem 1.6rem;
+  justify-content: center;
+}
+
+.bHealInfo {
+  grid-area: hinfo;
+  border-left: 3px solid rgba(219, 39, 119, 0.4);
+}
+
+.bHealInfo::after {
+  background: linear-gradient(135deg, rgba(219, 39, 119, 0.04), transparent);
+}
+
+.bReachInfo {
+  grid-area: rinfo;
+  border-left: 3px solid rgba(20, 184, 166, 0.4);
+}
+
+.bReachInfo::after {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.04), transparent);
+}
+
+.bCareInfo {
+  grid-area: cinfo;
+  border-left: 3px solid rgba(147, 51, 234, 0.4);
+}
+
+.bCareInfo::after {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.04), transparent);
+}
+
+.bInfoSub {
   font-size: 0.65rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: rgba(134, 239, 172, 0.55);
-  margin-bottom: var(--space-3);
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 0.5rem;
 }
 
-.bCardDesc {
+.bHealInfo .bInfoSub { color: rgba(244, 114, 182, 0.7); }
+.bReachInfo .bInfoSub { color: rgba(94, 234, 212, 0.7); }
+.bCareInfo .bInfoSub { color: rgba(192, 132, 252, 0.7); }
+
+.bInfoDesc {
   font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.55);
-  line-height: 1.55;
-  flex: 1;
+  line-height: 1.5;
 }
 
-.bCardMetrics {
+.bInfoMetrics {
   display: flex;
-  gap: var(--space-5);
-  padding-top: var(--space-4);
-  margin-top: var(--space-4);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 2rem;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.bMetric {
+.bInfoMetric {
   display: flex;
   flex-direction: column;
   gap: 1px;
 }
 
-.bMetricNum {
+.bInfoNum {
   font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
   font-weight: 800;
-  color: var(--green-400);
   line-height: 1;
 }
 
-.bMetricLabel {
-  font-size: 0.6rem;
+.bHealInfo .bInfoNum { color: #f472b6; }
+.bReachInfo .bInfoNum { color: #5eead4; }
+.bCareInfo .bInfoNum { color: #c084fc; }
+
+.bInfoLabel {
+  font-size: 0.58rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.35);
 }
 
-.bCardArrow {
+.bInfoArrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: rgba(134, 239, 172, 0.1);
-  color: var(--green-400);
-  margin-top: var(--space-4);
-  transition: all 0.3s var(--ease-out);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 1rem;
+  transition: all 0.3s ease;
   align-self: flex-start;
 }
 
-.bCard:hover .bCardArrow {
-  background: rgba(134, 239, 172, 0.2);
+.bCard:hover .bInfoArrow {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
   transform: translateX(4px);
 }
 
-.bCardHeal  { grid-area: heal; }
-.bCardReach { grid-area: reach; }
-.bCardCare  { grid-area: care; }
-
-/* ── Impact Stats Mini-Card ── */
-.bCardStats {
+/* ═════════════════════════════════════
+   IMPACT STATS CARD
+   ═════════════════════════════════════ */
+.bStats {
   grid-area: stats;
-  background: linear-gradient(145deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.1));
-  border-color: rgba(34, 197, 94, 0.18);
-  display: flex;
-  flex-direction: column;
+  background: linear-gradient(145deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.08));
+  border-color: rgba(34, 197, 94, 0.15);
+  align-items: center;
   justify-content: center;
-  align-items: center;
   text-align: center;
-  gap: var(--space-4);
-}
-
-.bStatsContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  gap: 0.3rem;
+  padding: 1.5rem;
 }
 
 .bStatsNum {
   font-family: var(--font-heading);
-  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-size: clamp(2.4rem, 4.5vw, 3.2rem);
   font-weight: 800;
   background: linear-gradient(135deg, #86efac, #4ade80);
   -webkit-background-clip: text;
@@ -1062,75 +1122,38 @@
 }
 
 .bStatsLabel {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.45);
 }
 
-.bStatsAvatars {
-  display: flex;
-  align-items: center;
-}
-
-.bAvatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  margin-left: -6px;
-  border: 2px solid rgba(5, 46, 22, 0.6);
-}
-
-.bAvatar:first-child {
-  margin-left: 0;
-}
-
-.bAvatarMore {
-  font-size: 0.6rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.4);
-  margin-left: var(--space-2);
-  white-space: nowrap;
-}
-
-/* ── Bento Responsive ── */
+/* ═════════════════════════════════════
+   RESPONSIVE
+   ═════════════════════════════════════ */
 @media (max-width: 1024px) {
   .bentoGrid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "amma  amma"
-      "heal  stats"
-      "reach care";
-  }
-
-  .bAmmaPhoto {
-    aspect-ratio: 16 / 7;
+      "hlogo hinfo"
+      "rinfo rlogo"
+      "clogo cinfo"
+      "stats stats";
   }
 }
 
 @media (max-width: 768px) {
   .bentoGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
     grid-template-areas:
-      "amma"
-      "heal"
-      "reach"
-      "care"
-      "stats";
-    gap: var(--space-3);
-  }
-
-  .bAmmaPhoto {
-    aspect-ratio: 4 / 3;
-  }
-
-  .bCard {
-    padding: var(--space-5);
+      "amma  amma"
+      "hlogo hinfo"
+      "rinfo rlogo"
+      "clogo cinfo"
+      "stats stats";
   }
 
   .bentoSection {
@@ -1139,14 +1162,36 @@
 }
 
 @media (max-width: 480px) {
-  .bAmmaBody {
-    padding: var(--space-4);
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "amma"
+      "hlogo"
+      "hinfo"
+      "rlogo"
+      "rinfo"
+      "clogo"
+      "cinfo"
+      "stats";
   }
 
-  .bCardMetrics {
-    gap: var(--space-3);
+  .bAmmaBody {
+    padding: 1rem;
   }
+
+  .bHealInfo,
+  .bReachInfo,
+  .bCareInfo {
+    border-left: none;
+    border-top: 3px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .bHealInfo { border-top-color: rgba(219, 39, 119, 0.4); }
+  .bReachInfo { border-top-color: rgba(20, 184, 166, 0.4); }
+  .bCareInfo { border-top-color: rgba(147, 51, 234, 0.4); }
 }
+
+
 
 
 
