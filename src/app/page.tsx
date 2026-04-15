@@ -203,150 +203,148 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Amma & Programs Bento Grid ── */}
+      {/* ── Amma & Programs — Next-Gen Bento Grid ── */}
       <section className={styles.bentoSection}>
+        {/* Decorative background blobs */}
+        <div className={styles.bentoBlobA} aria-hidden="true" />
+        <div className={styles.bentoBlobB} aria-hidden="true" />
+
         <div className="container">
           <motion.div
-            className="section-header"
+            className={styles.bentoHeader}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <span className="section-badge">
+            <span className={styles.bentoBadge}>
               <Heart size={14} />
-              Our Foundation
+              Our Foundation &amp; Programs
             </span>
-            <h2 className={styles.bentoHeading}>
-              Rooted in <span className={styles.bentoHeadingAccent}>Compassion</span>,{' '}
-              Driven by <span className={styles.bentoHeadingAccent}>Impact</span>
+            <h2 className={styles.bentoTitle}>
+              Compassion That Creates <span className={styles.bentoTitleAccent}>Change</span>
             </h2>
           </motion.div>
 
-          {/* ── Amma Highlight — Full Width ── */}
           <motion.div
-            className={styles.ammaHighlight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <div className={styles.ammaGlow} aria-hidden="true" />
-            <div className={styles.ammaImageCol}>
-              <div className={styles.ammaImageFrame}>
-                <img
-                  src="/amma.png"
-                  alt="Mata Amritanandamayi (Amma) — Spiritual leader and inspiration behind Saukhyam"
-                  className={styles.ammaImg}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-            <div className={styles.ammaTextCol}>
-              <span className={styles.ammaLabel}>
-                <Sparkles size={14} />
-                Inspired by Amma
-              </span>
-              <h3 className={styles.ammaName}>Mata Amritanandamayi</h3>
-              <p className={styles.ammaDesc}>
-                Saukhyam was born from Amma&apos;s vision of a world where every woman has access to safe, chemical-free menstrual care — and where sustainability is not a luxury but a way of life.
-              </p>
-              <div className={styles.ammaQuoteBox}>
-                <span className={styles.ammaQuoteMark}>&ldquo;</span>
-                <p>When we take care of nature, nature takes care of us.</p>
-              </div>
-              <Link href="/about" className={styles.ammaLink}>
-                Read Our Story <ArrowRight size={16} />
-              </Link>
-            </div>
-          </motion.div>
-
-          {/* ── Programs — Equal 3-Column Grid ── */}
-          <motion.div
-            className={styles.programsRow}
+            className={styles.bentoGrid}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {/* HEAL */}
-            <motion.a href="/programs/heal" variants={fadeInUp} className={`${styles.programCard} ${styles.programHeal}`}>
-              <div className={styles.programCardTopBar} />
-              <div className={styles.programIconWrap}>
-                <Sparkles size={26} />
+            {/* ── Card: Amma (spans 2 rows, left) ── */}
+            <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bCardAmma}`}>
+              <div className={styles.bAmmaInner}>
+                <div className={styles.bAmmaPhoto}>
+                  <img
+                    src="/amma.png"
+                    alt="Mata Amritanandamayi (Amma)"
+                    className={styles.bAmmaImg}
+                    loading="lazy"
+                  />
+                </div>
+                <div className={styles.bAmmaBody}>
+                  <span className={styles.bAmmaTag}>Inspired by Amma</span>
+                  <h3 className={styles.bAmmaName}>Mata Amritanandamayi</h3>
+                  <p className={styles.bAmmaText}>
+                    Saukhyam was born from Amma&apos;s vision — safe, chemical-free menstrual care for every woman, where sustainability is a way of life.
+                  </p>
+                  <div className={styles.bAmmaQuote}>
+                    <span className={styles.bAmmaQM}>&ldquo;</span>
+                    <p>When we take care of nature, nature takes care of us.</p>
+                  </div>
+                  <Link href="/about" className={styles.bAmmaLink}>
+                    Read Our Story <ArrowRight size={15} />
+                  </Link>
+                </div>
               </div>
-              <h3 className={styles.programTitle}>HEAL</h3>
-              <p className={styles.programSubtitle}>Health, Environment &amp; Active Living</p>
-              <p className={styles.programDesc}>
-                Supporting women facing PCOS &amp; period disorders through lifestyle shifts and chemical-free wellness.
+            </motion.div>
+
+            {/* ── Card: HEAL ── */}
+            <motion.a href="/programs/heal" variants={fadeInUp} className={`${styles.bCard} ${styles.bCardHeal}`}>
+              <div className={styles.bCardLogo}>
+                <img src="/HealLogo/HEAL logo RGB_Horizontal.png" alt="HEAL Program" className={styles.bCardLogoImg} />
+              </div>
+              <p className={styles.bCardSub}>Health, Environment &amp; Active Living</p>
+              <p className={styles.bCardDesc}>
+                Supporting women facing PCOS &amp; period disorders through holistic wellness and chemical-free pads.
               </p>
-              <div className={styles.programStats}>
-                <div className={styles.programStat}>
-                  <span className={styles.programStatNum}>85%</span>
-                  <span className={styles.programStatTxt}>Pain Reduction</span>
+              <div className={styles.bCardMetrics}>
+                <div className={styles.bMetric}>
+                  <span className={styles.bMetricNum}>85%</span>
+                  <span className={styles.bMetricLabel}>Pain Reduction</span>
                 </div>
-                <div className={styles.programStatDivider} />
-                <div className={styles.programStat}>
-                  <span className={styles.programStatNum}>70%</span>
-                  <span className={styles.programStatTxt}>PCOS Improvement</span>
+                <div className={styles.bMetric}>
+                  <span className={styles.bMetricNum}>70%</span>
+                  <span className={styles.bMetricLabel}>PCOS Improvement</span>
                 </div>
               </div>
-              <span className={styles.programLink}>
-                Learn More <ArrowRight size={15} />
+              <span className={styles.bCardArrow}>
+                <ArrowRight size={18} />
               </span>
             </motion.a>
 
-            {/* REACH */}
-            <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.programCard} ${styles.programReach}`}>
-              <div className={styles.programCardTopBar} />
-              <div className={styles.programIconWrap}>
-                <Globe size={26} />
+            {/* ── Card: Impact Stats (small) ── */}
+            <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bCardStats}`}>
+              <div className={styles.bStatsContent}>
+                <span className={styles.bStatsNum}>5L+</span>
+                <span className={styles.bStatsLabel}>Women Empowered</span>
               </div>
-              <h3 className={styles.programTitle}>REACH</h3>
-              <p className={styles.programSubtitle}>Rural Empowerment &amp; Community Health</p>
-              <p className={styles.programDesc}>
+              <div className={styles.bStatsAvatars}>
+                <div className={styles.bAvatar} style={{ background: '#bbf7d0' }}>👩</div>
+                <div className={styles.bAvatar} style={{ background: '#a7f3d0' }}>👩‍🦱</div>
+                <div className={styles.bAvatar} style={{ background: '#6ee7b7' }}>👧</div>
+                <div className={styles.bAvatar} style={{ background: '#34d399' }}>🧕</div>
+                <span className={styles.bAvatarMore}>+4,99,996</span>
+              </div>
+            </motion.div>
+
+            {/* ── Card: REACH ── */}
+            <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bCardReach}`}>
+              <div className={styles.bCardLogo}>
+                <img src="/ReachLogo/HEAL logo RGB_Horizontal.png" alt="REACH Program" className={styles.bCardLogoImg} />
+              </div>
+              <p className={styles.bCardSub}>Rural Empowerment &amp; Community Health</p>
+              <p className={styles.bCardDesc}>
                 Bringing chemical-free menstrual hygiene to rural India through satellite centres and local manufacturing.
               </p>
-              <div className={styles.programStats}>
-                <div className={styles.programStat}>
-                  <span className={styles.programStatNum}>101</span>
-                  <span className={styles.programStatTxt}>Villages</span>
+              <div className={styles.bCardMetrics}>
+                <div className={styles.bMetric}>
+                  <span className={styles.bMetricNum}>101</span>
+                  <span className={styles.bMetricLabel}>Villages</span>
                 </div>
-                <div className={styles.programStatDivider} />
-                <div className={styles.programStat}>
-                  <span className={styles.programStatNum}>20+</span>
-                  <span className={styles.programStatTxt}>States Covered</span>
+                <div className={styles.bMetric}>
+                  <span className={styles.bMetricNum}>20+</span>
+                  <span className={styles.bMetricLabel}>States</span>
                 </div>
               </div>
-              <span className={styles.programLink}>
-                Learn More <ArrowRight size={15} />
+              <span className={styles.bCardArrow}>
+                <ArrowRight size={18} />
               </span>
             </motion.a>
 
-            {/* CARE */}
-            <motion.a href="/programs/care" variants={fadeInUp} className={`${styles.programCard} ${styles.programCare}`}>
-              <div className={styles.programCardTopBar} />
-              <div className={styles.programIconWrap}>
-                <GraduationCap size={26} />
+            {/* ── Card: CARE ── */}
+            <motion.a href="/programs/care" variants={fadeInUp} className={`${styles.bCard} ${styles.bCardCare}`}>
+              <div className={styles.bCardLogo}>
+                <img src="/CareLogo/CARE logo_Horizontal.png" alt="CARE Program" className={styles.bCardLogoImg} />
               </div>
-              <h3 className={styles.programTitle}>CARE</h3>
-              <p className={styles.programSubtitle}>Campus Action for Reusable Essentials</p>
-              <p className={styles.programDesc}>
-                Empowering college campuses to shift toward sustainable menstrual choices through workshops and ambassador programs.
+              <p className={styles.bCardSub}>Campus Action for Reusable Essentials</p>
+              <p className={styles.bCardDesc}>
+                Empowering campuses to shift toward sustainable menstrual choices through workshops and ambassador programs.
               </p>
-              <div className={styles.programStats}>
-                <div className={styles.programStat}>
-                  <span className={styles.programStatNum}>50+</span>
-                  <span className={styles.programStatTxt}>Campuses</span>
+              <div className={styles.bCardMetrics}>
+                <div className={styles.bMetric}>
+                  <span className={styles.bMetricNum}>50+</span>
+                  <span className={styles.bMetricLabel}>Campuses</span>
                 </div>
-                <div className={styles.programStatDivider} />
-                <div className={styles.programStat}>
-                  <span className={styles.programStatNum}>10K+</span>
-                  <span className={styles.programStatTxt}>Students Reached</span>
+                <div className={styles.bMetric}>
+                  <span className={styles.bMetricNum}>10K+</span>
+                  <span className={styles.bMetricLabel}>Students</span>
                 </div>
               </div>
-              <span className={styles.programLink}>
-                Learn More <ArrowRight size={15} />
+              <span className={styles.bCardArrow}>
+                <ArrowRight size={18} />
               </span>
             </motion.a>
           </motion.div>

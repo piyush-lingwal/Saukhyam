@@ -691,480 +691,468 @@
 }
 
 /* ═══════════════════════════════════════════════════
-   ── Amma & Programs — Redesigned ──
+   ── NEXT-GEN BENTO GRID ──
    ═══════════════════════════════════════════════════ */
 
 .bentoSection {
-  padding: var(--section-gap) 0;
-  background: var(--green-50);
   position: relative;
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: linear-gradient(165deg, #052e16 0%, #14532d 30%, #166534 60%, #15803d 100%);
   overflow: hidden;
 }
 
-.bentoHeading {
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  color: var(--color-text);
+.bentoBlobA {
+  position: absolute;
+  top: -10%;
+  right: -8%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.15), transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bentoBlobB {
+  position: absolute;
+  bottom: -15%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12), transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bentoHeader {
+  text-align: center;
+  margin-bottom: clamp(var(--space-8), 4vw, var(--space-12));
+  position: relative;
+  z-index: 1;
+}
+
+.bentoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green-300);
   margin-bottom: var(--space-4);
 }
 
-.bentoHeadingAccent {
-  background: linear-gradient(135deg, var(--green-600), var(--green-500));
+.bentoTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+
+.bentoTitleAccent {
+  background: linear-gradient(135deg, #86efac, #4ade80, #22c55e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* ═══════════════════════════════════════════════════
-   ── Amma Highlight — Full Width Featured Card ──
-   ═══════════════════════════════════════════════════ */
-.ammaHighlight {
-  position: relative;
+/* ── Asymmetric Grid Layout ── */
+.bentoGrid {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: clamp(var(--space-8), 4vw, var(--space-16));
-  align-items: center;
-  padding: clamp(var(--space-8), 4vw, var(--space-12));
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a33 100%);
-  border-radius: var(--radius-2xl);
-  border: 1px solid rgba(202, 138, 4, 0.12);
-  box-shadow:
-    0 4px 24px rgba(202, 138, 4, 0.06),
-    0 1px 3px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
-  margin-bottom: var(--space-6);
-  transition: box-shadow 0.4s var(--ease-out);
-}
-
-.ammaHighlight:hover {
-  box-shadow:
-    0 12px 40px rgba(202, 138, 4, 0.1),
-    0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-/* Decorative golden glow */
-.ammaGlow {
-  position: absolute;
-  top: 50%;
-  left: 8%;
-  transform: translate(-50%, -50%);
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(251, 191, 36, 0.18), transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.ammaImageCol {
+  grid-template-columns: 1.15fr 1fr 0.85fr;
+  grid-template-rows: auto auto;
+  gap: var(--space-4);
   position: relative;
   z-index: 1;
+  grid-template-areas:
+    "amma heal  stats"
+    "amma reach care";
 }
 
-.ammaImageFrame {
-  width: clamp(180px, 20vw, 260px);
-  height: clamp(180px, 20vw, 260px);
-  border-radius: var(--radius-2xl);
+/* ── Shared Card — Glassmorphic ── */
+.bCard {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: var(--space-6);
+  position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(254, 243, 199, 0.3));
+  transition: all 0.4s var(--ease-out);
+  text-decoration: none;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+}
+
+.bCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), transparent);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  pointer-events: none;
+}
+
+.bCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(134, 239, 172, 0.25);
   box-shadow:
-    0 8px 32px rgba(202, 138, 4, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.6);
-  transition: transform 0.5s var(--ease-out);
+    0 20px 60px rgba(0, 0, 0, 0.25),
+    0 0 40px rgba(34, 197, 94, 0.08);
+  color: var(--white);
 }
 
-.ammaHighlight:hover .ammaImageFrame {
-  transform: scale(1.02);
+.bCard:hover::before {
+  opacity: 1;
 }
 
-.ammaImg {
+/* ── Amma Card — Tall Left Column ── */
+.bCardAmma {
+  grid-area: amma;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0;
+  overflow: hidden;
+}
+
+.bAmmaInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bAmmaPhoto {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.bAmmaImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
+  transition: transform 0.6s var(--ease-out);
 }
 
-.ammaTextCol {
-  position: relative;
-  z-index: 1;
+.bCardAmma:hover .bAmmaImg {
+  transform: scale(1.04);
+}
+
+.bAmmaPhoto::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(5, 46, 22, 0.95), transparent);
+  pointer-events: none;
+}
+
+.bAmmaBody {
+  padding: var(--space-5) var(--space-6) var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  flex: 1;
 }
 
-.ammaLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-size: 0.72rem;
+.bAmmaTag {
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--gold);
+  color: var(--green-400);
 }
 
-.ammaName {
+.bAmmaName {
   font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
   font-weight: 800;
-  color: var(--gray-900);
+  color: var(--white);
   line-height: 1.15;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
 }
 
-.ammaDesc {
-  font-size: var(--text-base);
-  color: var(--gray-600);
-  line-height: var(--leading-relaxed);
-  max-width: 520px;
+.bAmmaText {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
 }
 
-.ammaQuoteBox {
+.bAmmaQuote {
   display: flex;
   align-items: flex-start;
   gap: var(--space-2);
-  padding: var(--space-4) var(--space-5);
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(202, 138, 4, 0.12);
+  padding: var(--space-3) var(--space-4);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--green-500);
   margin-top: var(--space-1);
 }
 
-.ammaQuoteMark {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 2.8rem;
+.bAmmaQM {
+  font-family: Georgia, serif;
+  font-size: 2rem;
   line-height: 0.8;
-  color: var(--gold);
+  color: var(--green-400);
   flex-shrink: 0;
 }
 
-.ammaQuoteBox p {
-  font-size: var(--text-sm);
+.bAmmaQuote p {
+  font-size: 0.82rem;
   font-style: italic;
-  color: var(--gray-700);
-  font-weight: 500;
-  line-height: var(--leading-normal);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
   margin: 0;
 }
 
-.ammaLink {
+.bAmmaLink {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin-top: var(--space-2);
-  font-size: var(--text-sm);
+  margin-top: auto;
+  padding-top: var(--space-3);
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--gold);
+  color: var(--green-400);
   text-decoration: none;
   transition: all 0.3s var(--ease-out);
 }
 
-.ammaLink:hover {
-  color: #a16207;
+.bAmmaLink:hover {
+  color: var(--green-300);
   gap: var(--space-3);
 }
 
-/* ═══════════════════════════════════════════════════
-   ── Programs Row — Equal 3-Column Grid ──
-   ═══════════════════════════════════════════════════ */
-.programsRow {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-5);
-}
-
-/* ── Program Card Base ── */
-.programCard {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-8) var(--space-6);
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--color-border-light);
-  text-decoration: none;
-  color: var(--color-text);
-  overflow: hidden;
-  transition: all 0.4s var(--ease-out);
-}
-
-.programCard:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
-  border-color: transparent;
-  color: var(--color-text);
-}
-
-/* Colored top accent bar */
-.programCardTopBar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  transition: height 0.3s var(--ease-out);
-}
-
-.programCard:hover .programCardTopBar {
-  height: 5px;
-}
-
-/* Icon circle */
-.programIconWrap {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-lg);
+/* ── Program Card Logos ── */
+.bCardLogo {
+  height: 40px;
+  margin-bottom: var(--space-3);
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: var(--space-5);
-  transition: transform 0.3s var(--ease-spring);
 }
 
-.programCard:hover .programIconWrap {
-  transform: scale(1.08) rotate(-2deg);
+.bCardLogoImg {
+  height: 100%;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  transition: opacity 0.3s var(--ease-out);
 }
 
-/* Typography */
-.programTitle {
-  font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 2.2vw, 1.75rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin-bottom: var(--space-2);
+.bCard:hover .bCardLogoImg {
+  opacity: 1;
 }
 
-.programSubtitle {
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-text-muted);
-  line-height: 1.5;
-  margin-bottom: var(--space-4);
-}
-
-.programDesc {
-  font-size: var(--text-sm);
-  color: var(--color-text-secondary);
-  line-height: var(--leading-relaxed);
-  flex: 1;
-}
-
-/* Stats row */
-.programStats {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  padding-top: var(--space-5);
-  margin-top: var(--space-5);
-  border-top: 1px solid var(--color-border-light);
-}
-
-.programStat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.programStatNum {
-  font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 2vw, 1.75rem);
-  font-weight: 800;
-  line-height: 1;
-}
-
-.programStatTxt {
+.bCardSub {
   font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--color-text-muted);
+  color: rgba(134, 239, 172, 0.55);
+  margin-bottom: var(--space-3);
 }
 
-.programStatDivider {
-  width: 1px;
-  height: 36px;
-  background: var(--color-border);
-  flex-shrink: 0;
+.bCardDesc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.55;
+  flex: 1;
 }
 
-/* Learn more link */
-.programLink {
+.bCardMetrics {
+  display: flex;
+  gap: var(--space-5);
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bMetric {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.bMetricNum {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 800;
+  color: var(--green-400);
+  line-height: 1;
+}
+
+.bMetricLabel {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.bCardArrow {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-5);
-  font-size: var(--text-sm);
-  font-weight: 600;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(134, 239, 172, 0.1);
+  color: var(--green-400);
+  margin-top: var(--space-4);
   transition: all 0.3s var(--ease-out);
+  align-self: flex-start;
 }
 
-.programCard:hover .programLink {
-  gap: var(--space-3);
+.bCard:hover .bCardArrow {
+  background: rgba(134, 239, 172, 0.2);
+  transform: translateX(4px);
 }
 
-/* ═══════════════════════════════════════════════════
-   ── HEAL — Emerald Green Accent ──
-   ═══════════════════════════════════════════════════ */
-.programHeal .programCardTopBar {
-  background: linear-gradient(90deg, var(--green-400), var(--green-600));
+.bCardHeal  { grid-area: heal; }
+.bCardReach { grid-area: reach; }
+.bCardCare  { grid-area: care; }
+
+/* ── Impact Stats Mini-Card ── */
+.bCardStats {
+  grid-area: stats;
+  background: linear-gradient(145deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.1));
+  border-color: rgba(34, 197, 94, 0.18);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
 }
 
-.programHeal .programIconWrap {
-  background: var(--green-50);
-  color: var(--green-600);
+.bStatsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 
-.programHeal .programTitle {
-  color: var(--green-800);
+.bStatsNum {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #86efac, #4ade80);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
 }
 
-.programHeal .programStatNum {
-  color: var(--green-600);
+.bStatsLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.programHeal .programLink {
-  color: var(--green-600);
+.bStatsAvatars {
+  display: flex;
+  align-items: center;
 }
 
-.programHeal:hover {
-  border-color: var(--green-200);
+.bAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  margin-left: -6px;
+  border: 2px solid rgba(5, 46, 22, 0.6);
 }
 
-/* ═══════════════════════════════════════════════════
-   ── REACH — Teal Accent ──
-   ═══════════════════════════════════════════════════ */
-.programReach .programCardTopBar {
-  background: linear-gradient(90deg, #2dd4bf, #0d9488);
+.bAvatar:first-child {
+  margin-left: 0;
 }
 
-.programReach .programIconWrap {
-  background: #f0fdfa;
-  color: #0d9488;
+.bAvatarMore {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  margin-left: var(--space-2);
+  white-space: nowrap;
 }
 
-.programReach .programTitle {
-  color: #134e4a;
-}
-
-.programReach .programStatNum {
-  color: #0d9488;
-}
-
-.programReach .programLink {
-  color: #0d9488;
-}
-
-.programReach:hover {
-  border-color: #99f6e4;
-}
-
-/* ═══════════════════════════════════════════════════
-   ── CARE — Warm Amber Accent ──
-   ═══════════════════════════════════════════════════ */
-.programCare .programCardTopBar {
-  background: linear-gradient(90deg, #fbbf24, #d97706);
-}
-
-.programCare .programIconWrap {
-  background: #fffbeb;
-  color: #d97706;
-}
-
-.programCare .programTitle {
-  color: #78350f;
-}
-
-.programCare .programStatNum {
-  color: #d97706;
-}
-
-.programCare .programLink {
-  color: #d97706;
-}
-
-.programCare:hover {
-  border-color: #fde68a;
-}
-
-/* ═══════════════════════════════════════════════════
-   ── Responsive ──
-   ═══════════════════════════════════════════════════ */
-
+/* ── Bento Responsive ── */
 @media (max-width: 1024px) {
-  .programsRow {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-4);
+  .bentoGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "amma  amma"
+      "heal  stats"
+      "reach care";
   }
 
-  .ammaHighlight {
-    gap: var(--space-6);
-    padding: var(--space-8);
+  .bAmmaPhoto {
+    aspect-ratio: 16 / 7;
   }
 }
 
 @media (max-width: 768px) {
-  .ammaHighlight {
+  .bentoGrid {
     grid-template-columns: 1fr;
-    text-align: center;
-    padding: var(--space-8) var(--space-6);
-    gap: var(--space-5);
+    grid-template-areas:
+      "amma"
+      "heal"
+      "reach"
+      "care"
+      "stats";
+    gap: var(--space-3);
   }
 
-  .ammaImageCol {
-    display: flex;
-    justify-content: center;
+  .bAmmaPhoto {
+    aspect-ratio: 4 / 3;
   }
 
-  .ammaImageFrame {
-    width: 180px;
-    height: 180px;
+  .bCard {
+    padding: var(--space-5);
   }
 
-  .ammaTextCol {
-    align-items: center;
-  }
-
-  .ammaDesc {
-    text-align: center;
-  }
-
-  .ammaQuoteBox {
-    text-align: left;
-  }
-
-  .programsRow {
-    grid-template-columns: 1fr;
-    gap: var(--space-4);
-  }
-
-  .programCard {
-    padding: var(--space-6);
+  .bentoSection {
+    padding: clamp(3rem, 6vw, 5rem) 0;
   }
 }
 
 @media (max-width: 480px) {
-  .ammaImageFrame {
-    width: 150px;
-    height: 150px;
+  .bAmmaBody {
+    padding: var(--space-4);
   }
 
-  .ammaName {
-    font-size: 1.4rem;
-  }
-
-  .ammaHighlight {
-    padding: var(--space-6) var(--space-4);
+  .bCardMetrics {
+    gap: var(--space-3);
   }
 }
+
+
+
+
+
+
 
 
 /* ── Why Switch ── */
