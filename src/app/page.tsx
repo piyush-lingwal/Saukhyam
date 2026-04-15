@@ -1,12 +1,14 @@
 'use client';
 
+import { useRef } from 'react';
+
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   Leaf, ShieldCheck, Droplets, Wind, Heart, ArrowRight,
   ShoppingBag, Users, TreePine, Recycle, Trophy,
   Star, CheckCircle2, XCircle, Sparkles, Zap,
-  GraduationCap, Globe, HandHeart,
+  GraduationCap, Globe, HandHeart, ChevronLeft, ChevronRight, Clock
 } from 'lucide-react';
 import { products } from '@/data/products';
 import { testimonials } from '@/data/content';
@@ -65,6 +67,15 @@ const staggerContainer = {
 
 export default function HomePage() {
   const { addItem } = useCart();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollTestimonials = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const scrollWidth = window.innerWidth > 768 ? 400 : 300;
+      const amount = direction === 'left' ? -scrollWidth : scrollWidth;
+      scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -277,36 +288,7 @@ export default function HomePage() {
               <span className={styles.bInfoArrow}><ArrowRight size={16} /></span>
             </motion.a>
 
-            {/* REACH Info Card (wider, flipped position) */}
-            <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachInfo}`}>
-              <p className={styles.bInfoSub}>Rural Empowerment &amp; Community Health</p>
-              <p className={styles.bInfoDesc}>
-                Bringing chemical-free menstrual hygiene to rural India through satellite centres and local manufacturing.
-              </p>
-              <div className={styles.bInfoMetrics}>
-                <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>101</span>
-                  <span className={styles.bInfoLabel}>Villages</span>
-                </div>
-                <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>20+</span>
-                  <span className={styles.bInfoLabel}>States</span>
-                </div>
-              </div>
-              <span className={styles.bInfoArrow}><ArrowRight size={16} /></span>
-            </motion.a>
-
-            {/* REACH Logo Card (small square) */}
-            <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachLogo}`}>
-              <img src="/ReachLogo/HEAL logo RGB_Vertical.png" alt="REACH" className={styles.bLogoImage} />
-            </motion.a>
-
-            {/* CARE Logo Card (small square) */}
-            <motion.a href="/programs/care" variants={fadeInUp} className={`${styles.bCard} ${styles.bCareLogo}`}>
-              <img src="/CareLogo/CARE logo_Vertical.png" alt="CARE" className={styles.bLogoImage} />
-            </motion.a>
-
-            {/* CARE Info Card (wider) */}
+            {/* CARE Info Card (Row 2, flipped) */}
             <motion.a href="/programs/care" variants={fadeInUp} className={`${styles.bCard} ${styles.bCareInfo}`}>
               <p className={styles.bInfoSub}>Campus Action for Reusable Essentials</p>
               <p className={styles.bInfoDesc}>
@@ -320,6 +302,35 @@ export default function HomePage() {
                 <div className={styles.bInfoMetric}>
                   <span className={styles.bInfoNum}>10K+</span>
                   <span className={styles.bInfoLabel}>Students</span>
+                </div>
+              </div>
+              <span className={styles.bInfoArrow}><ArrowRight size={16} /></span>
+            </motion.a>
+
+            {/* CARE Logo Card (small square) */}
+            <motion.a href="/programs/care" variants={fadeInUp} className={`${styles.bCard} ${styles.bCareLogo}`}>
+              <img src="/CareLogo/CARE logo_Vertical.png" alt="CARE" className={styles.bLogoImage} />
+            </motion.a>
+
+            {/* REACH Logo Card (small square) */}
+            <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachLogo}`}>
+              <img src="/ReachLogo/HEAL logo RGB_Vertical.png" alt="REACH" className={styles.bLogoImage} />
+            </motion.a>
+
+            {/* REACH Info Card (Row 3) */}
+            <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachInfo}`}>
+              <p className={styles.bInfoSub}>Rural Empowerment &amp; Community Health</p>
+              <p className={styles.bInfoDesc}>
+                Bringing chemical-free menstrual hygiene to rural India through satellite centres and local manufacturing.
+              </p>
+              <div className={styles.bInfoMetrics}>
+                <div className={styles.bInfoMetric}>
+                  <span className={styles.bInfoNum}>101</span>
+                  <span className={styles.bInfoLabel}>Villages</span>
+                </div>
+                <div className={styles.bInfoMetric}>
+                  <span className={styles.bInfoNum}>20+</span>
+                  <span className={styles.bInfoLabel}>States</span>
                 </div>
               </div>
               <span className={styles.bInfoArrow}><ArrowRight size={16} /></span>
@@ -344,11 +355,11 @@ export default function HomePage() {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <span className="section-badge" style={{ background: 'rgba(34,197,94,0.15)', color: 'var(--green-400)' }}>
+            <span className="section-badge" style={{ background: 'rgba(22,101,52,0.1)', color: 'var(--green-700)' }}>
               <Heart size={14} />
               Our Impact
             </span>
-            <p style={{ color: 'var(--green-300)', fontSize: '1.25rem', fontWeight: '700', marginTop: 'var(--space-4)' }}>Real numbers. Real lives changed.</p>
+            <p style={{ color: 'var(--green-700)', fontSize: '1.25rem', fontWeight: '700', marginTop: 'var(--space-4)' }}>Real numbers. Real lives changed.</p>
           </motion.div>
 
           <motion.div
@@ -393,18 +404,27 @@ export default function HomePage() {
           </motion.div>
         </div>
 
-        {/* Auto-scrolling testimonial track — Row 1 */}
-        <div className={styles.testimonialMarqueeWrap}>
-          <div className={styles.testimonialMarquee}>
+        {/* Simple Testimonial Slider */}
+        <div className={styles.testimonialSliderWrap}>
+          <button 
+            className={`${styles.sliderBtn} ${styles.sliderBtnLeft}`}
+            onClick={() => scrollTestimonials('left')}
+            aria-label="Previous testimonials"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <div className={styles.testimonialSliderContainer} ref={scrollRef}>
             <div className={styles.testimonialTrack}>
-              {[...testimonials.slice(0, 7), ...testimonials.slice(0, 7)].map((t, i) => (
-                <Link key={`r1-${t.id}-${i}`} href="/testimonials" className={styles.testimonialCard}>
+              {testimonials.map((t, i) => (
+                <Link key={`slide-${t.id}-${i}`} href="/testimonials" className={styles.testimonialCard}>
                   <div className={styles.testimonialCardTop}>
                     <span className={`${styles.conditionBadge} ${styles[`condition_${t.condition}`]}`}>
                       {t.mainProblem}
                     </span>
                     <span className={styles.durationBadge}>
-                      {t.duration}
+                      <Clock size={12} className={styles.durationIcon} />
+                      Used: {t.duration}
                     </span>
                   </div>
                   <div className={styles.testimonialStars}>
@@ -426,41 +446,14 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-        </div>
 
-        {/* Auto-scrolling testimonial track — Row 2 (reverse direction) */}
-        <div className={styles.testimonialMarqueeWrap}>
-          <div className={styles.testimonialMarquee}>
-            <div className={`${styles.testimonialTrack} ${styles.testimonialTrackReverse}`}>
-              {[...testimonials.slice(7), ...testimonials.slice(7)].map((t, i) => (
-                <Link key={`r2-${t.id}-${i}`} href="/testimonials" className={styles.testimonialCard}>
-                  <div className={styles.testimonialCardTop}>
-                    <span className={`${styles.conditionBadge} ${styles[`condition_${t.condition}`]}`}>
-                      {t.mainProblem}
-                    </span>
-                    <span className={styles.durationBadge}>
-                      {t.duration}
-                    </span>
-                  </div>
-                  <div className={styles.testimonialStars}>
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star key={j} size={12} fill="currentColor" />
-                    ))}
-                  </div>
-                  <p className={styles.testimonialQuote}>&ldquo;{t.quote}&rdquo;</p>
-                  <div className={styles.testimonialAuthor}>
-                    <div className={styles.testimonialAvatar}>
-                      {t.name.charAt(0)}
-                    </div>
-                    <div>
-                      <div className={styles.testimonialName}>{t.name}</div>
-                      <div className={styles.testimonialLocation}>{t.location}</div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+          <button 
+            className={`${styles.sliderBtn} ${styles.sliderBtnRight}`}
+            onClick={() => scrollTestimonials('right')}
+            aria-label="Next testimonials"
+          >
+            <ChevronRight size={24} />
+          </button>
         </div>
       </section>
 
