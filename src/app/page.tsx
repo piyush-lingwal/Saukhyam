@@ -336,10 +336,13 @@ export default function HomePage() {
               <span className={styles.bInfoArrow}><ArrowRight size={16} /></span>
             </motion.a>
 
-            {/* Impact Stats Card */}
-            <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bStats}`}>
-              <span className={styles.bStatsNum}>5L+</span>
-              <span className={styles.bStatsLabel}>Women Empowered</span>
+            {/* Community Photo Card */}
+            <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bCommunity}`}>
+              <img src="/bentogrid_photo.jpeg" alt="Saukhyam community — women empowered across rural India" className={styles.bCommunityImg} loading="lazy" />
+              <div className={styles.bCommunityOverlay}>
+                <span className={styles.bCommunityNum}>5L+</span>
+                <span className={styles.bCommunityLabel}>Women Empowered</span>
+              </div>
             </motion.div>
           </motion.div>
         </div>

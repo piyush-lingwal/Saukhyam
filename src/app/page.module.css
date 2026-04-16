@@ -697,7 +697,7 @@
 .bentoSection {
   position: relative;
   padding: clamp(4rem, 8vw, 7rem) 0;
-  background: linear-gradient(165deg, #052e16 0%, #14532d 30%, #166534 60%, #15803d 100%);
+  background: linear-gradient(150deg, #011a0c 0%, #052e16 25%, #0a3d20 55%, #0f4d28 80%, #0d3d20 100%);
   overflow: hidden;
 }
 
@@ -705,9 +705,9 @@
   position: absolute;
   top: -10%;
   right: -8%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(34, 197, 94, 0.15), transparent 65%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.12), transparent 65%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -716,9 +716,9 @@
   position: absolute;
   bottom: -15%;
   left: -5%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.12), transparent 65%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(219, 39, 119, 0.06), transparent 65%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -779,16 +779,16 @@
   grid-template-areas:
     "amma  hlogo  hinfo  hinfo"
     "amma  cinfo  cinfo  clogo"
-    "rlogo rinfo  rinfo  stats";
+    "stats rlogo  rinfo  rinfo";
 }
 
 /* ── Shared card base ── */
 .bCard {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(.4,0,.2,1);
@@ -809,9 +809,8 @@
 }
 
 .bCard:hover {
-  transform: translateY(-3px);
-  border-color: rgba(134, 239, 172, 0.2);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), 0 0 30px rgba(34, 197, 94, 0.06);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
   color: #fff;
 }
 
@@ -944,32 +943,50 @@
 
 .bHealLogo {
   grid-area: hlogo;
-  background: linear-gradient(145deg, rgba(219, 39, 119, 0.15), rgba(190, 24, 93, 0.08));
-  border-color: rgba(219, 39, 119, 0.15);
+  background: #ffffff;
+  border-color: rgba(244, 63, 94, 0.25);
+  box-shadow: inset 0 0 30px rgba(244, 63, 94, 0.05);
+}
+
+.bHealLogo:hover {
+  border-color: rgba(244, 63, 94, 0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(244, 63, 94, 0.15);
 }
 
 .bHealLogo::after {
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.1), transparent);
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.12), transparent);
 }
 
 .bReachLogo {
   grid-area: rlogo;
-  background: linear-gradient(145deg, rgba(20, 184, 166, 0.15), rgba(13, 148, 136, 0.08));
-  border-color: rgba(20, 184, 166, 0.15);
+  background: #ffffff;
+  border-color: rgba(20, 184, 166, 0.25);
+  box-shadow: inset 0 0 30px rgba(20, 184, 166, 0.05);
+}
+
+.bReachLogo:hover {
+  border-color: rgba(20, 184, 166, 0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(20, 184, 166, 0.15);
 }
 
 .bReachLogo::after {
-  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), transparent);
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.12), transparent);
 }
 
 .bCareLogo {
   grid-area: clogo;
-  background: linear-gradient(145deg, rgba(147, 51, 234, 0.15), rgba(126, 34, 206, 0.08));
-  border-color: rgba(147, 51, 234, 0.15);
+  background: #ffffff;
+  border-color: rgba(167, 93, 255, 0.25);
+  box-shadow: inset 0 0 30px rgba(167, 93, 255, 0.05);
+}
+
+.bCareLogo:hover {
+  border-color: rgba(167, 93, 255, 0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(167, 93, 255, 0.15);
 }
 
 .bCareLogo::after {
-  background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), transparent);
+  background: linear-gradient(135deg, rgba(167, 93, 255, 0.12), transparent);
 }
 
 .bLogoImage {
@@ -992,143 +1009,228 @@
 .bHealInfo,
 .bReachInfo,
 .bCareInfo {
-  padding: 1.4rem 1.6rem;
+  padding: 1.6rem 1.8rem;
   justify-content: center;
+  gap: 0.1rem;
 }
 
+/* ── HEAL — Rose/Crimson ── */
 .bHealInfo {
   grid-area: hinfo;
-  border-left: 3px solid rgba(219, 39, 119, 0.5);
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.08), rgba(255, 255, 255, 0.04));
+  border-left: 3px solid #fb7185;
+  background: linear-gradient(145deg,
+    rgba(244, 63, 94, 0.22) 0%,
+    rgba(190, 24, 93, 0.12) 50%,
+    rgba(10, 10, 20, 0.1) 100%
+  );
+  box-shadow: inset 0 0 60px rgba(244, 63, 94, 0.06);
+}
+
+.bHealInfo:hover {
+  border-left-color: #fb7185;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35), inset 0 0 60px rgba(244,63,94,0.1), -6px 0 24px rgba(244,63,94,0.18);
 }
 
 .bHealInfo::after {
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.06), transparent);
+  background: radial-gradient(ellipse at top left, rgba(244, 63, 94, 0.1), transparent 70%);
 }
 
+/* ── REACH — Emerald Teal ── */
 .bReachInfo {
   grid-area: rinfo;
-  border-left: 3px solid rgba(20, 184, 166, 0.5);
-  background: linear-gradient(135deg, rgba(20, 184, 166, 0.08), rgba(255, 255, 255, 0.04));
+  border-right: 3px solid #2dd4bf;
+  background: linear-gradient(225deg,
+    rgba(20, 184, 166, 0.22) 0%,
+    rgba(16, 185, 129, 0.12) 50%,
+    rgba(10, 10, 20, 0.1) 100%
+  );
+  box-shadow: inset 0 0 60px rgba(20, 184, 166, 0.06);
+}
+
+.bReachInfo:hover {
+  border-right-color: #2dd4bf;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35), inset 0 0 60px rgba(20,184,166,0.1), 6px 0 24px rgba(20,184,166,0.18);
 }
 
 .bReachInfo::after {
-  background: linear-gradient(135deg, rgba(20, 184, 166, 0.06), transparent);
+  background: radial-gradient(ellipse at top right, rgba(20, 184, 166, 0.1), transparent 70%);
 }
 
+/* ── CARE — Deep Violet ── */
 .bCareInfo {
   grid-area: cinfo;
-  border-left: 3px solid rgba(147, 51, 234, 0.5);
-  background: linear-gradient(135deg, rgba(147, 51, 234, 0.08), rgba(255, 255, 255, 0.04));
+  border-left: 3px solid #c084fc;
+  background: linear-gradient(145deg,
+    rgba(167, 93, 255, 0.22) 0%,
+    rgba(124, 58, 237, 0.12) 50%,
+    rgba(10, 10, 20, 0.1) 100%
+  );
+  box-shadow: inset 0 0 60px rgba(167, 93, 255, 0.06);
+}
+
+.bCareInfo:hover {
+  border-left-color: #c084fc;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35), inset 0 0 60px rgba(167,93,255,0.1), -6px 0 24px rgba(167,93,255,0.18);
 }
 
 .bCareInfo::after {
-  background: linear-gradient(135deg, rgba(147, 51, 234, 0.06), transparent);
+  background: radial-gradient(ellipse at top left, rgba(167, 93, 255, 0.1), transparent 70%);
 }
 
+/* ── Shared sub-label ── */
 .bInfoSub {
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.62rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.bHealInfo .bInfoSub { color: rgba(244, 114, 182, 0.7); }
-.bReachInfo .bInfoSub { color: rgba(94, 234, 212, 0.7); }
-.bCareInfo .bInfoSub { color: rgba(192, 132, 252, 0.7); }
+/* Each sub-label styled with a colored pill */
+.bHealInfo .bInfoSub {
+  color: #fb7185;
+}
+
+.bReachInfo .bInfoSub {
+  color: #2dd4bf;
+}
+
+.bCareInfo .bInfoSub {
+  color: #c084fc;
+}
+
+/* ── Program name heading ── */
+.bInfoName {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+  color: #fff;
+}
 
 .bInfoDesc {
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.5;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
 }
 
 .bInfoMetrics {
   display: flex;
-  gap: 2rem;
-  margin-top: 1rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 1.5rem;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
 }
+
+.bHealInfo .bInfoMetrics  { border-top: 1px solid rgba(244, 63, 94, 0.25); }
+.bReachInfo .bInfoMetrics { border-top: 1px solid rgba(20, 184, 166, 0.25); }
+.bCareInfo .bInfoMetrics  { border-top: 1px solid rgba(167, 93, 255, 0.25); }
 
 .bInfoMetric {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 3px;
 }
 
 .bInfoNum {
   font-family: var(--font-heading);
-  font-size: clamp(1.3rem, 2vw, 1.6rem);
-  font-weight: 800;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  font-weight: 900;
   line-height: 1;
 }
 
-.bHealInfo .bInfoNum { color: #f472b6; }
-.bReachInfo .bInfoNum { color: #5eead4; }
-.bCareInfo .bInfoNum { color: #c084fc; }
+.bHealInfo .bInfoNum  { color: #fb7185; text-shadow: 0 0 24px rgba(244,63,94,0.5); }
+.bReachInfo .bInfoNum { color: #2dd4bf; text-shadow: 0 0 24px rgba(20,184,166,0.5); }
+.bCareInfo .bInfoNum  { color: #c084fc; text-shadow: 0 0 24px rgba(167,93,255,0.5); }
 
 .bInfoLabel {
   font-size: 0.58rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.07em;
 }
+
+.bHealInfo .bInfoLabel  { color: rgba(251, 113, 133, 0.6); }
+.bReachInfo .bInfoLabel { color: rgba(45, 212, 191, 0.6); }
+.bCareInfo .bInfoLabel  { color: rgba(192, 132, 252, 0.6); }
 
 .bInfoArrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 255, 255, 0.4);
   margin-top: 1rem;
   transition: all 0.3s ease;
   align-self: flex-start;
 }
 
-.bCard:hover .bInfoArrow {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  transform: translateX(4px);
-}
+.bHealInfo  .bInfoArrow { background: rgba(244, 63, 94, 0.12);  border: 1px solid rgba(244, 63,  94, 0.3);  color: #fb7185; }
+.bReachInfo .bInfoArrow { background: rgba(20, 184, 166, 0.12); border: 1px solid rgba(20, 184, 166, 0.3); color: #2dd4bf; }
+.bCareInfo  .bInfoArrow { background: rgba(167, 93, 255, 0.12); border: 1px solid rgba(167, 93, 255, 0.3); color: #c084fc; }
+
+.bHealInfo:hover  .bInfoArrow { background: rgba(244, 63, 94, 0.25);  border-color: #fb7185;  color: #fff; transform: translateX(5px); }
+.bReachInfo:hover .bInfoArrow { background: rgba(20, 184, 166, 0.25); border-color: #2dd4bf; color: #fff; transform: translateX(5px); }
+.bCareInfo:hover  .bInfoArrow { background: rgba(167, 93, 255, 0.25); border-color: #c084fc; color: #fff; transform: translateX(5px); }
 
 /* ═════════════════════════════════════
-   IMPACT STATS CARD
+   COMMUNITY PHOTO CARD
    ═════════════════════════════════════ */
-.bStats {
+.bCommunity {
   grid-area: stats;
-  background: linear-gradient(145deg, rgba(34, 197, 94, 0.18), rgba(16, 185, 129, 0.08));
-  border-color: rgba(34, 197, 94, 0.15);
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 0.3rem;
-  padding: 1.5rem;
+  padding: 0;
+  border-color: rgba(255,255,255,0.1);
+  overflow: hidden;
 }
 
-.bStatsNum {
+.bCommunityImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.6s ease;
+  display: block;
+}
+
+.bCommunity:hover .bCommunityImg {
+  transform: scale(1.06);
+}
+
+.bCommunityOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2rem 1.2rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bCommunityNum {
   font-family: var(--font-heading);
-  font-size: clamp(2.4rem, 4.5vw, 3.2rem);
-  font-weight: 800;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 900;
   background: linear-gradient(135deg, #86efac, #4ade80);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1;
+  text-shadow: none;
 }
 
-.bStatsLabel {
-  font-size: 0.68rem;
-  font-weight: 600;
+.bCommunityLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* ═════════════════════════════════════
@@ -1172,9 +1274,9 @@
       "hinfo"
       "clogo"
       "cinfo"
-      "rlogo"
+      "stats"
       "rinfo"
-      "stats";
+      "rlogo";
   }
 
   .bAmmaBody {

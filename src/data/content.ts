@@ -362,6 +362,10 @@ export interface BlogPost {
   date: string;
   readTime: string;
   category: 'community' | 'science' | 'sustainability' | 'stories';
+  author: string;
+  authorRole: string;
+  tags: string[];
+  featured?: boolean;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -369,27 +373,35 @@ export const blogPosts: BlogPost[] = [
     id: 'b1', slug: 'breaking-taboos-sonbhadra',
     title: 'Breaking Taboos in Sonbhadra',
     titleHi: 'सोनभद्र में वर्जनाओं को तोड़ना',
-    excerpt: 'How our team brought menstrual awareness to one of India\'s most remote tribal communities.',
+    excerpt: 'How our team brought menstrual awareness to one of India\'s most remote tribal communities — and what they taught us in return.',
     excerptHi: 'कैसे हमारी टीम ने भारत के सबसे दूरदराज आदिवासी समुदायों में मासिक धर्म जागरूकता लाई।',
-    image: 'https://saukhyampads.org/cdn/shop/articles/sonbhadra.jpg',
-    date: '2024-08-15', readTime: '5 min', category: 'community',
+    image: '/Blog_Images/1.webp',
+    date: '2024-08-15', readTime: '5 min read', category: 'community',
+    author: 'Priya Sharma', authorRole: 'Community Lead',
+    tags: ['Rural Outreach', 'Awareness', 'Tribal India'],
+    featured: true,
   },
   {
     id: 'b2', slug: 'winds-of-change-kanyakumari',
     title: 'Winds of Change in Kanyakumari',
     titleHi: 'कन्याकुमारी में बदलाव की हवा',
-    excerpt: 'A fishing village at the tip of India embraces sustainable menstrual practices.',
+    excerpt: 'A fishing village at the tip of India embraces sustainable menstrual practices — one pad at a time.',
     excerptHi: 'भारत के अंतिम छोर पर एक मछली पकड़ने वाला गांव टिकाऊ मासिक धर्म प्रथाओं को अपनाता है।',
-    image: 'https://saukhyampads.org/cdn/shop/articles/kanyakumari.jpg',
-    date: '2024-07-20', readTime: '4 min', category: 'community',
+    image: '/Blog_Images/IMG_8023_1024x1024.webp',
+    date: '2024-07-20', readTime: '4 min read', category: 'community',
+    author: 'Meena Pillai', authorRole: 'Program Coordinator',
+    tags: ['REACH', 'Stories', 'Kanyakumari'],
   },
   {
     id: 'b3', slug: 'my-saukhyam-journey',
     title: 'My Saukhyam Journey',
     titleHi: 'मेरी सौख्यम यात्रा',
-    excerpt: 'A personal story of switching from disposables and never looking back.',
+    excerpt: 'A personal story of switching from disposables and never looking back. The journey from skeptic to ambassador.',
     excerptHi: 'डिस्पोजेबल से स्विच करने और कभी पीछे न मुड़ने की एक व्यक्तिगत कहानी।',
-    image: 'https://saukhyampads.org/cdn/shop/articles/journey.jpg',
-    date: '2024-06-10', readTime: '6 min', category: 'stories',
+    image: '/Blog_Images/IMG_1232_1_1024x1024.webp',
+    date: '2024-06-10', readTime: '6 min read', category: 'stories',
+    author: 'Anjali Rao', authorRole: 'Brand Ambassador',
+    tags: ['Personal Story', 'HEAL', 'Switch'],
   },
 ];
+
