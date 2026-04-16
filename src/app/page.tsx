@@ -273,16 +273,24 @@ export default function HomePage() {
             <motion.a href="/programs/heal" variants={fadeInUp} className={`${styles.bCard} ${styles.bHealInfo}`}>
               <p className={styles.bInfoSub}>Health, Environment &amp; Active Living</p>
               <p className={styles.bInfoDesc}>
-                Supporting women with PCOS &amp; period disorders through holistic wellness and chemical-free care.
+                Healing period problems (yes, PCOS too!) with comfy reusable pads that promote healthier cycles
               </p>
               <div className={styles.bInfoMetrics}>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>85%</span>
+                  <span className={styles.bInfoNum}>77%</span>
                   <span className={styles.bInfoLabel}>Pain Reduction</span>
                 </div>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>70%</span>
-                  <span className={styles.bInfoLabel}>PCOS Improvement</span>
+                  <span className={styles.bInfoNum}>81%</span>
+                  <span className={styles.bInfoLabel}>Cycle Regularity Improvement</span>
+                </div>
+                <div className={styles.bInfoMetric}>
+                  <span className={styles.bInfoNum}>92%</span>
+                  <span className={styles.bInfoLabel}>Users Continued Beyond 6 Months</span>
+                </div>
+                <div className={styles.bInfoMetric}>
+                  <span className={styles.bInfoNum}>74%</span>
+                  <span className={styles.bInfoLabel}>Complete Shift in 3 Months</span>
                 </div>
               </div>
               <span className={styles.bInfoArrow}><ArrowRight size={16} /></span>
@@ -292,15 +300,19 @@ export default function HomePage() {
             <motion.a href="/programs/care" variants={fadeInUp} className={`${styles.bCard} ${styles.bCareInfo}`}>
               <p className={styles.bInfoSub}>Campus Action for Reusable Essentials</p>
               <p className={styles.bInfoDesc}>
-                Empowering campuses to shift toward sustainable menstrual choices through workshops and ambassador programs.
+                Just 200 students switching can help a college campus reduce 1&nbsp;tonne of CO₂ emissions every year
               </p>
               <div className={styles.bInfoMetrics}>
                 <div className={styles.bInfoMetric}>
                   <span className={styles.bInfoNum}>50+</span>
-                  <span className={styles.bInfoLabel}>Campuses</span>
+                  <span className={styles.bInfoLabel}>College Campuses</span>
                 </div>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>10K+</span>
+                  <span className={styles.bInfoNum}>1.5K</span>
+                  <span className={styles.bInfoLabel}>CARE Ambassadors</span>
+                </div>
+                <div className={styles.bInfoMetric}>
+                  <span className={styles.bInfoNum}>10K</span>
                   <span className={styles.bInfoLabel}>Students</span>
                 </div>
               </div>
@@ -319,9 +331,9 @@ export default function HomePage() {
 
             {/* REACH Info Card (Row 3) */}
             <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachInfo}`}>
-              <p className={styles.bInfoSub}>Rural Empowerment &amp; Community Health</p>
+              <p className={styles.bInfoSub}>Rural Empowerment and<br />Community&nbsp;Health</p>
               <p className={styles.bInfoDesc}>
-                Bringing chemical-free menstrual hygiene to rural India through satellite centres and local manufacturing.
+                Bringing chemical-free menstrual hygiene to rural India through satellite centres and local manufacturing
               </p>
               <div className={styles.bInfoMetrics}>
                 <div className={styles.bInfoMetric}>
@@ -340,7 +352,7 @@ export default function HomePage() {
             <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bCommunity}`}>
               <img src="/bentogrid_photo.jpeg" alt="Saukhyam community — women empowered across rural India" className={styles.bCommunityImg} loading="lazy" />
               <div className={styles.bCommunityOverlay}>
-                <span className={styles.bCommunityNum}>5L+</span>
+                <span className={styles.bCommunityNum}>30L+</span>
                 <span className={styles.bCommunityLabel}>Women Empowered</span>
               </div>
             </motion.div>
