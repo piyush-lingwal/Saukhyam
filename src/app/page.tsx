@@ -305,11 +305,11 @@ export default function HomePage() {
               <div className={styles.bInfoMetrics}>
                 <div className={styles.bInfoMetric}>
                   <span className={styles.bInfoNum}>50+</span>
-                  <span className={styles.bInfoLabel}>College Campuses</span>
+                  <span className={styles.bInfoLabel}>Campuses</span>
                 </div>
                 <div className={styles.bInfoMetric}>
                   <span className={styles.bInfoNum}>1.5K</span>
-                  <span className={styles.bInfoLabel}>CARE Ambassadors</span>
+                  <span className={styles.bInfoLabel}>Ambassadors</span>
                 </div>
                 <div className={styles.bInfoMetric}>
                   <span className={styles.bInfoNum}>10K</span>
@@ -333,16 +333,24 @@ export default function HomePage() {
             <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachInfo}`}>
               <p className={styles.bInfoSub}>Rural Empowerment and<br />Community&nbsp;Health</p>
               <p className={styles.bInfoDesc}>
-                Bringing chemical-free menstrual hygiene to rural India through satellite centres and local manufacturing
+                The future of period care — made by women, for women, in Saukhyam&rsquo;s rural production centres
               </p>
               <div className={styles.bInfoMetrics}>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>101</span>
+                  <span className={styles.bInfoNum}>4137</span>
                   <span className={styles.bInfoLabel}>Villages</span>
                 </div>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>20+</span>
+                  <span className={styles.bInfoNum}>10</span>
                   <span className={styles.bInfoLabel}>States</span>
+                </div>
+                <div className={styles.bInfoMetric}>
+                  <span className={styles.bInfoNum}>30L+</span>
+                  <span className={styles.bInfoLabel}>Women &amp; Girls Empowered</span>
+                </div>
+                <div className={styles.bInfoMetric}>
+                  <span className={styles.bInfoNum}>300+</span>
+                  <span className={styles.bInfoLabel}>Rural Livelihoods Enabled</span>
                 </div>
               </div>
               <span className={styles.bInfoArrow}><ArrowRight size={16} /></span>

@@ -1120,13 +1120,15 @@
 .bReachInfo .bInfoMetrics { border-top: 1px solid rgba(13, 148, 136, 0.18); }
 .bCareInfo .bInfoMetrics  { border-top: 1px solid rgba(220, 20, 100, 0.18); }
 
-/* HEAL has 4 KPIs — reflow into a 2×2 grid */
-.bHealInfo .bInfoMetrics {
+/* HEAL & REACH have 4 KPIs — reflow into a 2×2 grid */
+.bHealInfo .bInfoMetrics,
+.bReachInfo .bInfoMetrics {
   flex-wrap: wrap;
   gap: 1rem 1.5rem;
 }
 
-.bHealInfo .bInfoMetric {
+.bHealInfo .bInfoMetric,
+.bReachInfo .bInfoMetric {
   flex: 1 1 calc(50% - 0.75rem);
   min-width: 120px;
 }
