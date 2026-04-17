@@ -196,16 +196,19 @@ export default function HomePage() {
                   </div>
                 </Link>
                 <div className={styles.productInfo}>
-                  <Link href={`/products/${product.slug}`}>
-                    <h3 className={styles.productName}>{product.name}</h3>
-                  </Link>
-                  <div className={styles.productPrice}>₹{product.price}</div>
+                  <div className={styles.productText}>
+                    <Link href={`/products/${product.slug}`}>
+                      <h3 className={styles.productName}>{product.name}</h3>
+                    </Link>
+                    <div className={styles.productPrice}>₹{product.price}</div>
+                  </div>
                   <button
                     className={styles.addToCartBtn}
                     onClick={() => addItem(product)}
+                    aria-label={`Add ${product.name} to cart`}
                   >
                     <ShoppingBag size={16} />
-                    Add to Cart
+                    <span className={styles.addToCartLabel}>Add</span>
                   </button>
                 </div>
               </motion.div>
@@ -388,7 +391,7 @@ export default function HomePage() {
                 <ArrowRight size={16} />
               </Link>
               <a
-                href="https://g.page/r/YOUR_GOOGLE_PLACE_ID/review"
+                href="https://meet.google.com/cnv-cwgz-zcv"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.googleReviewBtn}
@@ -424,11 +427,11 @@ export default function HomePage() {
                     <span className={`${styles.conditionBadge} ${styles[`condition_${t.condition}`]}`}>
                       {t.mainProblem}
                     </span>
-                  </div>
-                  <div className={styles.testimonialStars}>
-                    {Array.from({ length: t.rating }).map((_, j) => (
-                      <Star key={j} size={12} fill="currentColor" />
-                    ))}
+                    <div className={styles.testimonialStars}>
+                      {Array.from({ length: t.rating }).map((_, j) => (
+                        <Star key={j} size={12} fill="currentColor" />
+                      ))}
+                    </div>
                   </div>
                   <p className={styles.testimonialQuote}>&ldquo;{t.quote}&rdquo;</p>
                   <div className={styles.testimonialAuthor}>

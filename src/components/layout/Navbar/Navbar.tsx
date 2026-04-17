@@ -6,8 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   ShoppingBag, Menu, X, ChevronDown, Search,
-  Users, Trophy, Heart,
-  Building2, Sparkles, HandHeart, Globe,
+  Users, Heart,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import styles from './Navbar.module.css';
@@ -16,23 +15,7 @@ const navItems = [
   { label: 'Our Story', href: '/about' },
   { label: 'Products', href: '/products' },
   { label: 'Science', href: '/science' },
-  {
-    label: 'Impact',
-    href: '/impact',
-    children: [
-      { label: 'Awards & Recognition', href: '/impact', icon: Trophy },
-      { label: 'Press & Media', href: '/impact#press', icon: Building2 },
-    ],
-  },
-  {
-    label: 'Programs',
-    href: '/programs',
-    children: [
-      { label: 'HEAL — Health, Environment, Active Living', href: '/programs/heal', icon: Sparkles },
-      { label: 'REACH — Rural Empowerment', href: '/programs/reach', icon: Globe },
-      { label: 'CARE — Campus Action', href: '/programs/care', icon: HandHeart },
-    ],
-  },
+  { label: 'Awards', href: '/impact' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Blog', href: '/blog' },
 ];
