@@ -8,7 +8,7 @@ import {
   Leaf, ShieldCheck, Droplets, Wind, Heart, ArrowRight,
   ShoppingBag, Users, TreePine, Recycle, Trophy,
   Star, CheckCircle2, XCircle, Sparkles, Zap,
-  GraduationCap, Globe, HandHeart, ChevronLeft, ChevronRight, Clock
+  GraduationCap, Globe, HandHeart, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { products } from '@/data/products';
 import { testimonials } from '@/data/content';
@@ -34,7 +34,7 @@ const trustItems = [
 const impactStats = [
   { icon: Users, number: '30 Lakh+', label: 'Women/Girls Who Switched' },
   { icon: TreePine, number: '17,400 T', label: 'CO₂e Prevented Annually' },
-  { icon: Heart, number: '300+', label: 'Livelihoods for Rural Women' },
+  { icon: Heart, number: '280+', label: 'Livelihoods for Rural Women' },
   { icon: Trophy, number: '20+', label: 'National & International Awards' },
 ];
 
@@ -172,7 +172,7 @@ export default function HomePage() {
               Our Products
             </span>
 
-            <p className={styles.productsSectionTagline}>Sustainable • Chemical-Free • Empowering</p>
+            <p className={styles.productsSectionTagline}>Sustainable • Toxin-Free</p>
 
           </motion.div>
 
@@ -229,7 +229,7 @@ export default function HomePage() {
           >
             <span className={styles.bentoBadge}>
               <Heart size={14} />
-              Our Foundation &amp; Programs
+              Our Foundational Programs
             </span>
             <h2 className={styles.bentoTitle}>
               Compassion That Creates <span className={styles.bentoTitleAccent}>Change</span>
@@ -252,7 +252,7 @@ export default function HomePage() {
                 <span className={styles.bAmmaTag}>Inspired by Amma</span>
                 <h3 className={styles.bAmmaName}>Mata Amritanandamayi</h3>
                 <p className={styles.bAmmaText}>
-                  Saukhyam was born from Amma&apos;s vision — safe, chemical-free menstrual care for every woman.
+                  Saukhyam was born from Amma&apos;s vision - safe, non-polluting, toxin-free menstrual care for every menstruator.
                 </p>
                 <div className={styles.bAmmaQuote}>
                   <span className={styles.bAmmaQM}>&ldquo;</span>
@@ -304,15 +304,15 @@ export default function HomePage() {
               </p>
               <div className={styles.bInfoMetrics}>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>50+</span>
+                  <span className={styles.bInfoNum}>52</span>
                   <span className={styles.bInfoLabel}>Campuses</span>
                 </div>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>1.5K</span>
+                  <span className={styles.bInfoNum}>1.3K</span>
                   <span className={styles.bInfoLabel}>Ambassadors</span>
                 </div>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>10K</span>
+                  <span className={styles.bInfoNum}>11.7K</span>
                   <span className={styles.bInfoLabel}>Students</span>
                 </div>
               </div>
@@ -333,7 +333,7 @@ export default function HomePage() {
             <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachInfo}`}>
               <p className={styles.bInfoSub}>Rural Empowerment and<br />Community&nbsp;Health</p>
               <p className={styles.bInfoDesc}>
-                The future of period care — made by women, for women, in Saukhyam&rsquo;s rural production centres
+                The future of period care - made by women, for women, in Saukhyam&rsquo;s rural production centres
               </p>
               <div className={styles.bInfoMetrics}>
                 <div className={styles.bInfoMetric}>
@@ -341,7 +341,7 @@ export default function HomePage() {
                   <span className={styles.bInfoLabel}>Villages</span>
                 </div>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>10</span>
+                  <span className={styles.bInfoNum}>11</span>
                   <span className={styles.bInfoLabel}>States</span>
                 </div>
                 <div className={styles.bInfoMetric}>
@@ -349,7 +349,7 @@ export default function HomePage() {
                   <span className={styles.bInfoLabel}>Women &amp; Girls Empowered</span>
                 </div>
                 <div className={styles.bInfoMetric}>
-                  <span className={styles.bInfoNum}>300+</span>
+                  <span className={styles.bInfoNum}>280+</span>
                   <span className={styles.bInfoLabel}>Rural Livelihoods Enabled</span>
                 </div>
               </div>
@@ -361,48 +361,10 @@ export default function HomePage() {
               <img src="/bentogrid_photo.jpeg" alt="Saukhyam community — women empowered across rural India" className={styles.bCommunityImg} loading="lazy" />
               <div className={styles.bCommunityOverlay}>
                 <span className={styles.bCommunityNum}>30L+</span>
-                <span className={styles.bCommunityLabel}>Women Empowered</span>
+                <span className={styles.bCommunityLabel}>Women &amp; Girls Empowered</span>
               </div>
             </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── Impact Counter (directly after Products) ── */}
-      <section className={styles.impactSection}>
-        <div className="container">
-          <motion.div
-            className="section-header"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <span className="section-badge" style={{ background: 'rgba(22,101,52,0.1)', color: 'var(--green-700)' }}>
-              <Heart size={14} />
-              Our Impact
-            </span>
-            <p style={{ color: 'var(--green-700)', fontSize: '1.25rem', fontWeight: '700', marginTop: 'var(--space-4)' }}>Real numbers. Real lives changed.</p>
-          </motion.div>
-
-          <motion.div
-            className={styles.impactGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {impactStats.map((stat) => (
-              <motion.div key={stat.label} variants={fadeInUp} className={styles.impactCard}>
-                <div className={styles.impactIcon}>
-                  <stat.icon size={28} />
-                </div>
-                <div className={styles.impactNumber}>{stat.number}</div>
-                <div className={styles.impactLabel}>{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-
         </div>
       </section>
 
@@ -420,10 +382,27 @@ export default function HomePage() {
               <span className={styles.testimonialHeadingAccent}>Real Stories, </span>
               <span className={styles.testimonialHeadingHighlight}>Real Healing</span>
             </h2>
-            <Link href="/testimonials" className={styles.viewAllTestimonials}>
-              View All Stories
-              <ArrowRight size={16} />
-            </Link>
+            <div className={styles.testimonialCtas}>
+              <Link href="/testimonials" className={styles.viewAllTestimonials}>
+                View All Stories
+                <ArrowRight size={16} />
+              </Link>
+              <a
+                href="https://g.page/r/YOUR_GOOGLE_PLACE_ID/review"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.googleReviewBtn}
+                aria-label="Leave a review on Google"
+              >
+                <svg className={styles.googleReviewIcon} viewBox="0 0 48 48" aria-hidden="true">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
+                Leave a Google Review
+              </a>
+            </div>
           </motion.div>
         </div>
 
@@ -445,10 +424,6 @@ export default function HomePage() {
                     <span className={`${styles.conditionBadge} ${styles[`condition_${t.condition}`]}`}>
                       {t.mainProblem}
                     </span>
-                    <span className={styles.durationBadge}>
-                      <Clock size={12} className={styles.durationIcon} />
-                      Used: {t.duration}
-                    </span>
                   </div>
                   <div className={styles.testimonialStars}>
                     {Array.from({ length: t.rating }).map((_, j) => (
@@ -458,7 +433,11 @@ export default function HomePage() {
                   <p className={styles.testimonialQuote}>&ldquo;{t.quote}&rdquo;</p>
                   <div className={styles.testimonialAuthor}>
                     <div className={styles.testimonialAvatar}>
-                      {t.name.charAt(0)}
+                      {t.avatar ? (
+                        <img src={t.avatar} alt={t.name} className={styles.testimonialAvatarImg} loading="lazy" />
+                      ) : (
+                        t.name.charAt(0)
+                      )}
                     </div>
                     <div>
                       <div className={styles.testimonialName}>{t.name}</div>
@@ -477,6 +456,43 @@ export default function HomePage() {
           >
             <ChevronRight size={24} />
           </button>
+        </div>
+      </section>
+
+      {/* ── Impact Counter (after Testimonials) ── */}
+      <section className={styles.impactSection}>
+        <div className="container">
+          <motion.div
+            className="section-header"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <span className="section-badge" style={{ background: 'rgba(22,101,52,0.1)', color: 'var(--green-700)' }}>
+              <Heart size={14} />
+              Our Impact
+            </span>
+          </motion.div>
+
+          <motion.div
+            className={styles.impactGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            {impactStats.map((stat) => (
+              <motion.div key={stat.label} variants={fadeInUp} className={styles.impactCard}>
+                <div className={styles.impactIcon}>
+                  <stat.icon size={28} />
+                </div>
+                <div className={styles.impactNumber}>{stat.number}</div>
+                <div className={styles.impactLabel}>{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+
         </div>
       </section>
 
