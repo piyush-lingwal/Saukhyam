@@ -4,10 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import {
-  ShoppingBag, Menu, X, ChevronDown, Search,
-  Users, Heart,
-} from 'lucide-react';
+import { ShoppingBag, Menu, X, Search, Heart } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import styles from './Navbar.module.css';
 
@@ -23,7 +20,6 @@ const navItems = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
   const pathname = usePathname();
   const { totalItems, openCart } = useCart();
 
@@ -33,12 +29,10 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -64,37 +58,15 @@ export default function Navbar() {
 
           {/* Desktop Nav Links */}
           <div className={styles.navLinks}>
-            {navItems.map((item) =>
-              item.children ? (
-                <div key={item.label} className={styles.dropdown}>
-                  <Link
-                    href={item.href}
-                    className={`${styles.navLink} ${styles.dropdownTrigger} ${isActive(item.href) ? styles.active : ''}`}
-                  >
-                    {item.label}
-                    <ChevronDown className={styles.dropdownIcon} />
-                  </Link>
-                  <div className={styles.dropdownMenu}>
-                    {item.children.map((child) => (
-                      <Link key={child.href} href={child.href} className={styles.dropdownItem}>
-                        <div className={styles.dropdownItemIcon}>
-                          <child.icon size={16} />
-                        </div>
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`${styles.navLink} ${isActive(item.href) ? styles.active : ''}`}
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
+            {navItems.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`${styles.navLink} ${isActive(item.href) ? styles.active : ''}`}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
 
           {/* Right Actions */}
@@ -151,51 +123,14 @@ export default function Navbar() {
         </div>
 
         {navItems.map((item) => (
-          <div key={item.label}>
-            {item.children ? (
-              <>
-                <button
-                  className={styles.mobileNavLink}
-                  onClick={() => setExpandedMobile(
-                    expandedMobile === item.label ? null : item.label
-                  )}
-                  style={{ width: '100%', justifyContent: 'space-between' }}
-                >
-                  {item.label}
-                  <ChevronDown
-                    size={18}
-                    style={{
-                      transform: expandedMobile === item.label ? 'rotate(180deg)' : 'none',
-                      transition: 'transform 0.2s',
-                    }}
-                  />
-                </button>
-                {expandedMobile === item.label && (
-                  <div className={styles.mobileSubLinks}>
-                    {item.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className={styles.mobileSubLink}
-                        onClick={() => setIsMobileOpen(false)}
-                      >
-                        <child.icon size={16} />
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </>
-            ) : (
-              <Link
-                href={item.href}
-                className={styles.mobileNavLink}
-                onClick={() => setIsMobileOpen(false)}
-              >
-                {item.label}
-              </Link>
-            )}
-          </div>
+          <Link
+            key={item.label}
+            href={item.href}
+            className={styles.mobileNavLink}
+            onClick={() => setIsMobileOpen(false)}
+          >
+            {item.label}
+          </Link>
         ))}
 
         <Link
