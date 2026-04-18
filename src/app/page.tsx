@@ -38,6 +38,14 @@ const impactStats = [
   { icon: Trophy, number: '20+', label: 'National & International Awards' },
 ];
 
+const pressLogos = [
+  '1..webp', '2..webp', '5..webp', '6..webp', '7..webp',
+  '11..webp', '12..webp', '13..webp', '17..webp', '19..webp',
+  '23..webp', '25..webp', '26..webp', '27..webp', '30..webp',
+  '32..webp', '35..webp', '36..webp', '37..webp', '39..webp',
+  '42..webp', '44..webp', '45..webp',
+];
+
 const reusablePoints = [
   '100% chemical free — no dioxins, phthalates, or bleach',
   'Banana fiber with natural antimicrobial properties',
@@ -371,6 +379,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Press & Media Marquee ── */}
+      <section className={styles.pressSection} aria-labelledby="press-heading">
+        <div className="container">
+          <motion.div
+            className={styles.pressHeaderWrap}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <h2 id="press-heading" className={styles.pressHeading}>
+              <span className={styles.pressHeadingLine} aria-hidden="true" />
+              <span className={styles.pressHeadingText}>Press &amp; Media</span>
+              <span className={styles.pressHeadingLine} aria-hidden="true" />
+            </h2>
+          </motion.div>
+        </div>
+
+        <div
+          className={styles.pressMarquee}
+          role="region"
+          aria-label="Scrolling gallery of press and media logos that have featured Saukhyam"
+        >
+          <div className={styles.pressTrack} aria-hidden="false">
+            {[...pressLogos, ...pressLogos].map((logo, idx) => (
+              <div key={`${logo}-${idx}`} className={styles.pressItem}>
+                <img
+                  src={`/Press_And_Media/${logo}`}
+                  alt=""
+                  className={styles.pressLogo}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Testimonials — Animated Carousel ── */}
       <section className={styles.testimonialsSection}>
         <div className="container">
@@ -391,7 +438,7 @@ export default function HomePage() {
                 <ArrowRight size={16} />
               </Link>
               <a
-                href="https://meet.google.com/cnv-cwgz-zcv"
+                href="https://g.co/kgs/2if6XD"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.googleReviewBtn}
