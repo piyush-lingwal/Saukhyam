@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -8,7 +8,8 @@ import {
   Leaf, ShieldCheck, Droplets, Wind, Heart, ArrowRight,
   ShoppingBag, Users, TreePine, Recycle, Trophy,
   Star, CheckCircle2, XCircle, Sparkles, Zap,
-  GraduationCap, Globe, HandHeart, ChevronLeft, ChevronRight
+  GraduationCap, Globe, HandHeart, ChevronLeft, ChevronRight,
+  Check, Eye
 } from 'lucide-react';
 import { products } from '@/data/products';
 import { testimonials } from '@/data/content';
@@ -76,6 +77,8 @@ const staggerContainer = {
 export default function HomePage() {
   const { addItem } = useCart();
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [recentlyAdded, setRecentlyAdded] = useState<Record<string, boolean>>({});
+  const [wishlist, setWishlist] = useState<Record<string, boolean>>({});
 
   const scrollTestimonials = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -83,6 +86,20 @@ export default function HomePage() {
       const amount = direction === 'left' ? -scrollWidth : scrollWidth;
       scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
     }
+  };
+
+  const handleAddToCart = (product: typeof products[number]) => {
+    addItem(product);
+    setRecentlyAdded((prev) => ({ ...prev, [product.id]: true }));
+    window.setTimeout(() => {
+      setRecentlyAdded((prev) => ({ ...prev, [product.id]: false }));
+    }, 1500);
+  };
+
+  const toggleWishlist = (e: React.MouseEvent, productId: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setWishlist((prev) => ({ ...prev, [productId]: !prev[productId] }));
   };
 
   return (
@@ -167,61 +184,118 @@ export default function HomePage() {
 
       {/* ── Products ── */}
       <section className={styles.productsSection}>
+        <div className={styles.productsAmbientGlow} aria-hidden="true" />
+        <div className={styles.productsAmbientGlowSecondary} aria-hidden="true" />
+        <div className={styles.productsMesh} aria-hidden="true" />
         <div className="container">
           <motion.div
-            className="section-header"
+            className={`${styles.productsHeader} section-header`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <span className="section-badge">
-              <ShoppingBag size={14} />
-              Our Products
-            </span>
+            <div className={styles.productsHeaderPanel}>
+              <span className="section-badge">
+                <ShoppingBag size={14} />
+                Our Products
+              </span>
 
-            <p className={styles.productsSectionTagline}>Sustainable • Toxin-Free</p>
-
+              <p className={styles.productsSectionTagline}>Sustainable • Toxin-Free</p>
+            </div>
           </motion.div>
 
-          <motion.div
-            className={styles.productGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            {products.slice(0, 8).map((product) => (
-              <motion.div key={product.id} variants={fadeInUp} className={styles.productCard}>
-                {product.badge && <span className={styles.productBadge}>{product.badge}</span>}
-                <Link href={`/products/${product.slug}`}>
-                  <div className={styles.productImageWrap}>
-                    {product.images[0] ? (
-                      <img src={product.images[0]} alt={product.name} loading="lazy" />
-                    ) : (
-                      <Leaf size={48} className={styles.productPlaceholder} />
-                    )}
-                  </div>
-                </Link>
-                <div className={styles.productInfo}>
-                  <div className={styles.productText}>
-                    <Link href={`/products/${product.slug}`}>
-                      <h3 className={styles.productName}>{product.name}</h3>
-                    </Link>
-                    <div className={styles.productPrice}>₹{product.price}</div>
-                  </div>
-                  <button
-                    className={styles.addToCartBtn}
-                    onClick={() => addItem(product)}
-                    aria-label={`Add ${product.name} to cart`}
+          <div className={styles.productsShowcase}>
+            <motion.div
+              className={styles.productGrid}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+            >
+              {products.slice(0, 8).map((product) => {
+                const isAdded = !!recentlyAdded[product.id];
+                const isWished = !!wishlist[product.id];
+
+                return (
+                  <motion.article
+                    key={product.id}
+                    variants={fadeInUp}
+                    className={styles.productCard}
                   >
-                    <ShoppingBag size={16} />
-                    <span className={styles.addToCartLabel}>Add</span>
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                    <div className={styles.productCardAura} aria-hidden="true" />
+
+                    <Link href={`/products/${product.slug}`} className={styles.productStageLink}>
+                      <div className={styles.productImageWrap}>
+                        <div className={styles.productImageHalo} aria-hidden="true" />
+                        {product.images[0] ? (
+                          <img src={product.images[0]} alt={product.name} loading="lazy" />
+                        ) : (
+                          <Leaf size={48} className={styles.productPlaceholder} />
+                        )}
+
+                        {product.features && product.features.length > 0 && (
+                          <div className={styles.featuresPeek} aria-hidden="true">
+                            {product.features.slice(0, 2).map((feature) => (
+                              <span key={feature} className={styles.featureChip}>{feature}</span>
+                            ))}
+                          </div>
+                        )}
+
+                      </div>
+                    </Link>
+
+                    <div className={styles.productInfo}>
+                      <div className={styles.productText}>
+                        <div className={styles.productTitleRow}>
+                          <Link href={`/products/${product.slug}`} className={styles.productNameLink}>
+                            <h3 className={styles.productName}>{product.name}</h3>
+                          </Link>
+                          <button
+                            type="button"
+                            className={`${styles.wishlistBtn} ${isWished ? styles.wishlistActive : ''}`}
+                            onClick={(e) => toggleWishlist(e, product.id)}
+                            aria-label={isWished ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
+                            aria-pressed={isWished}
+                          >
+                            <Heart
+                              size={16}
+                              strokeWidth={2}
+                              fill={isWished ? '#dc1464' : 'none'}
+                            />
+                          </button>
+                        </div>
+                        {product.badge && <span className={styles.productBadge}>{product.badge}</span>}
+                      </div>
+                      <div className={styles.productActionRow}>
+                        <div className={styles.productPriceWrap}>
+                          <div className={styles.productPrice}>₹{product.price}</div>
+                        </div>
+                        <button
+                          className={`${styles.addToCartBtn} ${isAdded ? styles.addToCartAdded : ''}`}
+                          onClick={() => handleAddToCart(product)}
+                          aria-label={`Add ${product.name} to cart`}
+                          disabled={isAdded}
+                        >
+                          {isAdded ? (
+                            <>
+                              <Check size={16} />
+                              <span className={styles.addToCartLabel}>Added</span>
+                            </>
+                          ) : (
+                            <>
+                              <ShoppingBag size={16} />
+                              <span className={styles.addToCartLabel}>Add to Cart</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </motion.div>
+          </div>
         </div>
       </section>
 
