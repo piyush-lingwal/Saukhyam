@@ -346,7 +346,7 @@ export const teamMembers: TeamMember[] = [
     name: 'Anju Bist',
     role: 'Managing Director',
     roleHi: 'प्रबंध निदेशक',
-    image: 'https://saukhyampads.org/cdn/shop/files/anju-bist.jpg',
+    image: '/anju-bist.png',
     bio: 'Recognized by NITI Aayog among 75 Women Transforming India. Pad-woman of India, leading the mission to make reusable pads accessible to all.',
   },
 ];
