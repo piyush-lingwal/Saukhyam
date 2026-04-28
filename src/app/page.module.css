@@ -191,18 +191,17 @@
 .heroSideLeft,
 .heroSideRight {
   position: absolute;
+  top: 0;
   bottom: 0;
   z-index: 5;
   pointer-events: none;
-  width: clamp(200px, 20vw, 320px);
-  max-height: 90%;
-  display: flex;
-  align-items: flex-end;
+  width: clamp(300px, 32vw, 520px);
+  overflow: hidden;
+  display: block;
 }
 
 .heroSideLeft {
-  left: 3vw;
-  /* Fade out toward the left edge so it blends into the background */
+  left: 0;
   -webkit-mask-image: linear-gradient(to right,
       transparent 0%,
       rgba(0, 0, 0, 0.5) 20%,
@@ -215,8 +214,7 @@
 }
 
 .heroSideRight {
-  right: 3vw;
-  /* Fade out toward the right edge */
+  right: 0;
   -webkit-mask-image: linear-gradient(to left,
       transparent 0%,
       rgba(0, 0, 0, 0.5) 20%,
@@ -233,10 +231,19 @@
 .heroSideRight img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: bottom;
+  object-fit: cover;
+  object-position: top center;
   display: block;
-  filter: drop-shadow(0 8px 24px rgba(22, 163, 74, 0.12));
+  filter: drop-shadow(0 8px 24px rgba(22, 163, 74, 0.15));
+  transform-origin: top center;
+}
+
+.heroSideLeft img {
+  transform: scale(1.6) translateY(-17%) translateX(6%);
+}
+
+.heroSideRight img {
+  transform: scale(1.05) translateY(6%);
 }
 
 /* Gentle float so they feel alive */
@@ -257,16 +264,8 @@
 
   .heroSideLeft,
   .heroSideRight {
-    width: clamp(110px, 15vw, 160px);
-    opacity: 0.6;
-  }
-
-  .heroSideLeft {
-    left: 0;
-  }
-
-  .heroSideRight {
-    right: 0;
+    width: clamp(200px, 24vw, 320px);
+    opacity: 0.75;
   }
 }
 
@@ -274,17 +273,8 @@
 
   .heroSideLeft,
   .heroSideRight {
-    width: 100px;
-    opacity: 0.45;
-    max-height: 70%;
-  }
-
-  .heroSideLeft {
-    left: -10px;
-  }
-
-  .heroSideRight {
-    right: -10px;
+    width: clamp(130px, 22vw, 200px);
+    opacity: 0.5;
   }
 }
 
@@ -292,17 +282,8 @@
 
   .heroSideLeft,
   .heroSideRight {
-    width: 80px;
-    opacity: 0.35;
-    max-height: 60%;
-  }
-
-  .heroSideLeft {
-    left: -15px;
-  }
-
-  .heroSideRight {
-    right: -15px;
+    width: 110px;
+    opacity: 0.4;
   }
 }
 
