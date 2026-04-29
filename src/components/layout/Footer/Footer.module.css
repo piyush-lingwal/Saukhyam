@@ -170,6 +170,62 @@
   color: var(--green-100);
 }
 
+/* ══════════════════════════════════════════════════
+   HEAL PAGE THEME — activated by [data-page-theme="heal"] on <html>
+   Colors: #E8185A (hot pink) · #7B1A6E (deep purple) · #4D1A58 (dark plum)
+   ══════════════════════════════════════════════════ */
+
+:global([data-page-theme="heal"]) .footer {
+  background: #4D1A58;
+  color: rgba(251, 207, 232, 0.8);
+}
+
+:global([data-page-theme="heal"]) .footer::before {
+  background: linear-gradient(90deg, #E8185A, #7B1A6E, #E8185A);
+}
+
+:global([data-page-theme="heal"]) .brandTagline,
+:global([data-page-theme="heal"]) .brandDesc {
+  color: rgba(251, 207, 232, 0.65);
+}
+
+:global([data-page-theme="heal"]) .socialLink {
+  color: rgba(251, 207, 232, 0.6);
+}
+:global([data-page-theme="heal"]) .socialLink:hover {
+  background: #E8185A;
+  color: white;
+}
+
+:global([data-page-theme="heal"]) .footerCol h4 {
+  color: #FBCFE8;
+}
+
+:global([data-page-theme="heal"]) .footerLink {
+  color: rgba(251, 207, 232, 0.6);
+}
+:global([data-page-theme="heal"]) .footerLink:hover {
+  color: #FBCFE8;
+}
+
+:global([data-page-theme="heal"]) .contactItem {
+  color: rgba(251, 207, 232, 0.6);
+}
+:global([data-page-theme="heal"]) .contactItem:hover {
+  color: #FBCFE8;
+}
+
+:global([data-page-theme="heal"]) .copyright {
+  color: rgba(251, 207, 232, 0.38);
+}
+
+:global([data-page-theme="heal"]) .legalLink {
+  color: rgba(251, 207, 232, 0.38);
+}
+:global([data-page-theme="heal"]) .legalLink:hover {
+  color: rgba(251, 207, 232, 0.7);
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .footerTop {
