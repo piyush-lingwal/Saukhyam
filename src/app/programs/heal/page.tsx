@@ -6,24 +6,24 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import {
-  TbHeartbeat,        // hero stat — pain reduction
-  TbCalendarStats,    // hero stat — cycle regularity
-  TbStars,            // hero stat — continued beyond 6 months
-  TbShieldCheck,      // hero stat / refund guarantee
-  TbLeaf,             // challenge card 1 — switch to reusables
-  TbCalendarTime,     // challenge card 2 — 6 months
-  TbCertificate,      // challenge card 3 — money-back
-  TbFlask,            // science section badge
-  TbAlertTriangle,    // PCOS alert
-  TbClipboardList,    // refund step 1 — enroll
-  TbArrowBack,        // refund step 2 — return pads
-  TbAward,            // refund step 3 — full refund
-  TbCircleCheck,      // story condition badge
-  TbSparkles,         // story outcome
-  TbQuestionMark,     // FAQ badge
-  TbBolt,             // challenge section badge
-  TbChevronLeft,
-  TbChevronRight,
+  TbHeartbeat,
+  TbCalendarStats,
+  TbStars,
+  TbShieldCheck,
+  TbLeaf,
+  TbCalendarTime,
+  TbCertificate,
+  TbFlask,
+  TbAlertTriangle,
+  TbClipboardList,
+  TbArrowBack,
+  TbAward,
+  TbCircleCheck,
+  TbSparkles,
+  TbQuestionMark,
+  TbBolt,
+  TbCheck,
+  TbArrowRight,
 } from 'react-icons/tb';
 import styles from '../program.module.css';
 import heal from './heal.module.css';
@@ -200,7 +200,6 @@ const faqItems = [
 export default function HealPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const toggleFaq = (idx: number) => setOpenFaq(openFaq === idx ? null : idx);
-  const [challengeStepIdx, setChallengeStepIdx] = useState(0);
 
   // Activate HEAL brand theme on <html> so Navbar & Footer update automatically.
   // Cleaned up when user navigates away.
@@ -285,216 +284,383 @@ export default function HealPage() {
       </section>
 
 
-      {/* ── 3. The Challenge Explained ── */}
+      {/* ── 3. How It Works — Immersive Vertical Journey ── */}
       <section className={heal.challengeSection}>
+        {/* Ambient background blobs */}
+        <div className={heal.challengeBlobA} aria-hidden="true" />
+        <div className={heal.challengeBlobB} aria-hidden="true" />
+
         <div className="container">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
           >
-            <motion.div variants={fadeInUp} className="section-header">
-              <div className={heal.sectionBadge}><TbBolt size={14} /> How It Works</div>
-              <h2 className={styles.sectionTitle}>The HEAL Challenge in 3 Steps</h2>
-              <p className={styles.sectionDesc}>
+            {/* ── Section Header ── */}
+            <motion.div variants={fadeInUp} className={heal.journeyHeader}>
+              <div className={heal.sectionBadge}>
+                <TbBolt size={14} />
+                How It Works
+              </div>
+              <h2 className={heal.journeyTitle}>
+                The HEAL Challenge
+                <span className={heal.journeyTitleAccent}> in 3 Steps</span>
+              </h2>
+              <p className={heal.journeySubtitle}>
                 One of the most powerful interventions in women&apos;s health — and the simplest.
                 No pills. No procedures. No side effects.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={heal.howItWorks}>
-              <div className={heal.howItWorksRail} role="tablist" aria-label="HEAL Challenge steps">
-                {challengeCards.map((card, idx) => {
-                  const isActive = challengeStepIdx === idx;
-                  const Icon = card.icon;
-                  return (
-                    <button
-                      key={card.title}
-                      type="button"
-                      role="tab"
-                      id={`heal-challenge-tab-${idx}`}
-                      aria-selected={isActive}
-                      aria-controls="heal-challenge-panel"
-                      tabIndex={0}
-                      className={`${heal.howItWorksTab} ${isActive ? heal.howItWorksTabActive : ''}`}
-                      onClick={() => setChallengeStepIdx(idx)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                          e.preventDefault();
-                          setChallengeStepIdx(Math.min(challengeCards.length - 1, idx + 1));
-                        }
-                        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                          e.preventDefault();
-                          setChallengeStepIdx(Math.max(0, idx - 1));
-                        }
-                        if (e.key === 'Home') {
-                          e.preventDefault();
-                          setChallengeStepIdx(0);
-                        }
-                        if (e.key === 'End') {
-                          e.preventDefault();
-                          setChallengeStepIdx(challengeCards.length - 1);
-                        }
-                      }}
-                    >
-                      <span className={heal.howItWorksTabNum} aria-hidden>
-                        {idx + 1}
-                      </span>
-                      <span className={heal.howItWorksTabIcon}>
-                        <Icon size={22} />
-                      </span>
-                      <span className={heal.howItWorksTabTitle}>{card.title}</span>
-                      <span className={heal.howItWorksTabStep}>{card.step}</span>
-                    </button>
-                  );
-                })}
-              </div>
+            {/* ── Vertical Journey Cards ── */}
+            <div className={heal.journeyTrack}>
 
-              <div
-                className={heal.howItWorksProgress}
-                role="progressbar"
-                aria-valuenow={challengeStepIdx + 1}
-                aria-valuemin={1}
-                aria-valuemax={challengeCards.length}
-                aria-label="Challenge step progress"
+              {/* ── Step 1 ── */}
+              <motion.div
+                variants={fadeInUp}
+                className={`${heal.journeyCard} ${heal.journeyCardStep1}`}
               >
-                <div
-                  className={heal.howItWorksProgressFill}
-                  style={{
-                    transform: `scaleX(${(challengeStepIdx + 1) / challengeCards.length})`,
-                  }}
-                />
+                {/* Left accent strip with step number */}
+                <div className={heal.journeyAccent}>
+                  <span className={heal.journeyStepBadge}>Step 1</span>
+                  <span className={heal.journeyBigNum}>01</span>
+                  <div className={heal.journeyIconCircle}>
+                    <TbLeaf size={26} />
+                  </div>
+                </div>
+
+                {/* Right content pane */}
+                <div className={heal.journeyContent}>
+                  <h3 className={heal.journeyCardTitle}>Make the Switch</h3>
+                  <p className={heal.journeyCardDesc}>
+                    Stop using disposable sanitary napkins. Make a 100% shift to Saukhyam reusable pads.
+                    If you cannot switch immediately, follow the 2-3-4 formula to transition gradually
+                    over 3 months.
+                  </p>
+
+                  {/* Key insight chip */}
+                  <div className={heal.journeyInsight}>
+                    <TbCheck size={15} className={heal.journeyInsightIcon} />
+                    <span>Remove the #1 overlooked source of hormonal disruption</span>
+                  </div>
+
+                  {/* Inline mini-stat */}
+                  <div className={heal.journeyMiniStats}>
+                    <div className={heal.journeyMiniStat}>
+                      <span className={heal.journeyMiniNum}>100%</span>
+                      <span className={heal.journeyMiniLabel}>Chemical-free switch</span>
+                    </div>
+                    <div className={heal.journeyMiniDivider} />
+                    <div className={heal.journeyMiniStat}>
+                      <span className={heal.journeyMiniNum}>2-3-4</span>
+                      <span className={heal.journeyMiniLabel}>Gradual formula available</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* ── Connector ── */}
+              <div className={heal.journeyConnector} aria-hidden="true">
+                <div className={heal.journeyConnectorLine} />
+                <div className={heal.journeyConnectorDot} />
+                <div className={heal.journeyConnectorLine} />
               </div>
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={challengeStepIdx}
-                  id="heal-challenge-panel"
-                  role="tabpanel"
-                  aria-labelledby={`heal-challenge-tab-${challengeStepIdx}`}
-                  className={heal.howItWorksPanel}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {(() => {
-                    const card = challengeCards[challengeStepIdx];
-                    const PanelIcon = card.icon;
-                    return (
-                      <>
-                        <div className={heal.howItWorksPanelIcon}>
-                          <PanelIcon size={32} />
-                        </div>
-                        <h3 className={heal.howItWorksPanelHeading}>{card.title}</h3>
-                        <p className={heal.howItWorksPanelDesc}>{card.desc}</p>
-                      </>
-                    );
-                  })()}
-                </motion.div>
-              </AnimatePresence>
+              {/* ── Step 2 ── */}
+              <motion.div
+                variants={fadeInUp}
+                className={`${heal.journeyCard} ${heal.journeyCardStep2}`}
+              >
+                {/* Left accent strip */}
+                <div className={heal.journeyAccent}>
+                  <span className={heal.journeyStepBadge}>Step 2</span>
+                  <span className={heal.journeyBigNum}>02</span>
+                  <div className={heal.journeyIconCircle}>
+                    <TbCalendarTime size={26} />
+                  </div>
+                </div>
 
-              <div className={heal.howItWorksPager}>
-                <button
-                  type="button"
-                  className={heal.howItWorksPagerBtn}
-                  aria-label="Previous step"
-                  disabled={challengeStepIdx === 0}
-                  onClick={() => setChallengeStepIdx((i) => Math.max(0, i - 1))}
-                >
-                  <TbChevronLeft size={20} />
-                  Previous
-                </button>
-                <span className={heal.howItWorksPagerMeta}>
-                  Step {challengeStepIdx + 1} of {challengeCards.length}
-                </span>
-                <button
-                  type="button"
-                  className={heal.howItWorksPagerBtn}
-                  aria-label="Next step"
-                  disabled={challengeStepIdx >= challengeCards.length - 1}
-                  onClick={() =>
-                    setChallengeStepIdx((i) =>
-                      Math.min(challengeCards.length - 1, i + 1),
-                    )}
-                >
-                  Next
-                  <TbChevronRight size={20} />
-                </button>
+                {/* Right content pane */}
+                <div className={heal.journeyContent}>
+                  <h3 className={heal.journeyCardTitle}>6 Months. That&apos;s All.</h3>
+                  <p className={heal.journeyCardDesc}>
+                    Give your body a full 6 months — either a 3-month gradual transition followed by
+                    3 months of complete reusable use, or the full 6 months using Saukhyam exclusively.
+                  </p>
+
+                  <div className={heal.journeyInsight}>
+                    <TbCheck size={15} className={heal.journeyInsightIcon} />
+                    <span>Your body needs uninterrupted time to self-correct</span>
+                  </div>
+
+                  {/* Timeline pill row */}
+                  <div className={heal.journeyTimeline}>
+                    <div className={heal.journeyTimelinePill}>
+                      <span className={heal.journeyTimelineNum}>3</span>
+                      <span>months transition</span>
+                    </div>
+                    <TbArrowRight size={16} className={heal.journeyTimelineArrow} />
+                    <div className={heal.journeyTimelinePill}>
+                      <span className={heal.journeyTimelineNum}>3</span>
+                      <span>months complete use</span>
+                    </div>
+                    <TbArrowRight size={16} className={heal.journeyTimelineArrow} />
+                    <div className={`${heal.journeyTimelinePill} ${heal.journeyTimelinePillFinal}`}>
+                      <span>✦ Healing</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* ── Connector ── */}
+              <div className={heal.journeyConnector} aria-hidden="true">
+                <div className={heal.journeyConnectorLine} />
+                <div className={heal.journeyConnectorDot} />
+                <div className={heal.journeyConnectorLine} />
+              </div>
+
+              {/* ── Step 3 ── */}
+              <motion.div
+                variants={fadeInUp}
+                className={`${heal.journeyCard} ${heal.journeyCardStep3}`}
+              >
+                {/* Left accent strip */}
+                <div className={heal.journeyAccent}>
+                  <span className={heal.journeyStepBadge}>Step 3</span>
+                  <span className={heal.journeyBigNum}>03</span>
+                  <div className={heal.journeyIconCircle}>
+                    <TbCertificate size={26} />
+                  </div>
+                </div>
+
+                {/* Right content pane */}
+                <div className={heal.journeyContent}>
+                  <h3 className={heal.journeyCardTitle}>Money Back. No Questions.</h3>
+                  <p className={heal.journeyCardDesc}>
+                    If your period problems have not reduced or improved — not even a little —
+                    return your pads, even used, and we will refund your money completely.
+                    No questions asked.
+                  </p>
+
+                  <div className={heal.journeyInsight}>
+                    <TbCheck size={15} className={heal.journeyInsightIcon} />
+                    <span>Zero refund claims in 2+ years of the HEAL Challenge</span>
+                  </div>
+
+                  <div className={heal.journeyMiniStats}>
+                    <div className={heal.journeyMiniStat}>
+                      <span className={heal.journeyMiniNum}>0</span>
+                      <span className={heal.journeyMiniLabel}>Refund claims ever</span>
+                    </div>
+                    <div className={heal.journeyMiniDivider} />
+                    <div className={heal.journeyMiniStat}>
+                      <span className={heal.journeyMiniNum}>100%</span>
+                      <span className={heal.journeyMiniLabel}>Money-back if no results</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+            </div>{/* end journeyTrack */}
+
+            {/* ── Saukhyam Promise — Gold Trust Block ── */}
+            <motion.div variants={fadeInUp} className={heal.promiseBanner}>
+              <div className={heal.promiseBannerGlowLeft} aria-hidden="true" />
+              <div className={heal.promiseBannerGlowRight} aria-hidden="true" />
+              <div className={heal.promiseBannerInner}>
+                <div className={heal.promiseBannerLeft}>
+                  <div className={heal.promiseBannerShield}>
+                    <TbShieldCheck size={38} />
+                  </div>
+                  <div>
+                    <div className={heal.promiseBannerEyebrow}>The Saukhyam Promise</div>
+                    <h3 className={heal.promiseBannerTitle}>
+                      Never had to honour<br />a refund. Not once.
+                    </h3>
+                  </div>
+                </div>
+                <div className={heal.promiseBannerDivider} />
+                <div className={heal.promiseBannerRight}>
+                  <div className={heal.promiseStats}>
+                    <div className={heal.promiseStat}>
+                      <span className={heal.promiseStatNum}>2+</span>
+                      <span className={heal.promiseStatLabel}>Years running</span>
+                    </div>
+                    <div className={heal.promiseStatDot} />
+                    <div className={heal.promiseStat}>
+                      <span className={heal.promiseStatNum}>0</span>
+                      <span className={heal.promiseStatLabel}>Refund claims</span>
+                    </div>
+                    <div className={heal.promiseStatDot} />
+                    <div className={heal.promiseStat}>
+                      <span className={heal.promiseStatNum}>100%</span>
+                      <span className={heal.promiseStatLabel}>Money-back guarantee</span>
+                    </div>
+                  </div>
+                  <p className={heal.promiseBannerDesc}>
+                    Thousands of women. PCOS, irregular cycles, heavy bleeding, severe cramps,
+                    endometriosis. Not a single refund claimed in 2+ years.
+                    The guarantee is real — we just haven&apos;t needed it yet.
+                  </p>
+                  <Link href="/products" className={heal.promiseBannerCta}>
+                    <TbLeaf size={18} />
+                    Start the HEAL Challenge
+                    <TbArrowRight size={18} />
+                  </Link>
+                </div>
               </div>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={heal.challengePromise}>
-              <div className={heal.challengePromiseIcon}>
-                <TbShieldCheck size={36} />
-              </div>
-              <div className={heal.challengePromiseBody}>
-                <h3>The Saukhyam Promise</h3>
-                <p>
-                  We have been running this challenge for over 2 years. In that time, not a single
-                  person has reached out to claim a refund. We believe in this challenge because
-                  we have seen it work — across PCOS, irregular cycles, heavy bleeding, severe cramps,
-                  and even endometriosis. The guarantee is real. We just haven&apos;t had to honour it yet.
-                </p>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* ── 4. Why It Works — Science ── */}
       <section className={heal.scienceSection}>
+        {/* Background texture layer */}
+        <div className={heal.scienceBg} aria-hidden="true" />
+
         <div className="container">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
           >
-            <motion.div variants={fadeInUp} className="section-header">
-              <div className={heal.sectionBadge}><TbFlask size={14} /> The Science</div>
-              <h2 className={styles.sectionTitle}>Why Switching Heals</h2>
-              <p className={styles.sectionDesc}>
+            {/* ── Header ── */}
+            <motion.div variants={fadeInUp} className={heal.scienceHeader}>
+              <div className={heal.scienceBadge}>
+                <TbFlask size={14} />
+                The Science
+              </div>
+              <h2 className={heal.scienceTitle}>Why Switching Heals</h2>
+              <p className={heal.scienceSubtitle}>
                 PCOS is a silent pandemic affecting 6 crore Indian women. One of its most
                 overlooked triggers is the daily exposure to hormone-disrupting chemicals
                 through disposable pads. Here is the chain:
               </p>
             </motion.div>
 
-            <motion.div variants={stagger} className={styles.stepsGrid}>
-              {scienceSteps.map((item) => (
-                <motion.div key={item.step} variants={fadeInUp} className={styles.stepCard}>
-                  <span className={styles.stepNumber}>{item.step}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.desc}</p>
-                </motion.div>
-              ))}
+            {/* ── Science Bento Grid ── */}
+            <motion.div variants={stagger} className={heal.scienceBento}>
+
+              {/* Card 01 — Chemicals (wide) */}
+              <motion.div variants={fadeInUp} className={`${heal.scienceBentoCard} ${heal.scienceBentoCardA}`}>
+                <span className={heal.scienceBentoWatermark}>01</span>
+                <div className={heal.scienceBentoInner}>
+                  <div className={heal.scienceBentoTag}>The Source</div>
+                  <h3 className={heal.scienceBentoTitle}>Chemicals in Disposable Pads</h3>
+                  <p className={heal.scienceBentoDesc}>
+                    Conventional disposable pads contain dioxins, phthalates, VOCs, superabsorbent
+                    polymers, fragrances, and synthetic bleaching residues — all confirmed or suspected
+                    endocrine disruptors. Found in every tested brand.
+                  </p>
+                  <div className={heal.scienceChips}>
+                    {['Dioxins', 'Phthalates', 'VOCs', 'Fragrances', 'Bleach residues'].map(c => (
+                      <span key={c} className={heal.scienceChip}>{c}</span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 02 — Bloodstream (tall) */}
+              <motion.div variants={fadeInUp} className={`${heal.scienceBentoCard} ${heal.scienceBentoCardB}`}>
+                <span className={heal.scienceBentoWatermark}>02</span>
+                <div className={heal.scienceBentoInner}>
+                  <div className={heal.scienceBentoTag}>The Route</div>
+                  <h3 className={heal.scienceBentoTitle}>Direct Bloodstream Entry</h3>
+                  <p className={heal.scienceBentoDesc}>
+                    Vaginal tissue is highly vascular. Unlike food, chemicals here bypass
+                    the liver&apos;s first-pass metabolism and enter the bloodstream directly.
+                  </p>
+                  <div className={heal.scienceStatPill}>
+                    <span className={heal.scienceStatPillNum}>4–6</span>
+                    <span>days every cycle, month after month, for decades</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 03 — Hormonal Disruption (tall) */}
+              <motion.div variants={fadeInUp} className={`${heal.scienceBentoCard} ${heal.scienceBentoCardC}`}>
+                <span className={heal.scienceBentoWatermark}>03</span>
+                <div className={heal.scienceBentoInner}>
+                  <div className={heal.scienceBentoTag}>The Damage</div>
+                  <h3 className={heal.scienceBentoTitle}>Hormonal Disruption</h3>
+                  <p className={heal.scienceBentoDesc}>
+                    Endocrine disruptors mimic estrogen and interfere with the HPO axis —
+                    the body&apos;s core hormonal regulator.
+                  </p>
+                  <div className={heal.scienceChips}>
+                    {['PCOS', 'Irregular cycles', 'Heavy bleeding', 'Severe cramps', 'Fertility'].map(c => (
+                      <span key={c} className={`${heal.scienceChip} ${heal.scienceChipWarning}`}>{c}</span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Card 04 — Remove Source. Heal. (wide) */}
+              <motion.div variants={fadeInUp} className={`${heal.scienceBentoCard} ${heal.scienceBentoCardD}`}>
+                <span className={heal.scienceBentoWatermark}>04</span>
+                <div className={heal.scienceBentoInner}>
+                  <div className={heal.scienceBentoTag}>The Resolution</div>
+                  <h3 className={heal.scienceBentoTitle}>Remove the Source. Heal.</h3>
+                  <p className={heal.scienceBentoDesc}>
+                    The menstrual cycle is a tightly regulated, self-correcting system. Remove
+                    the primary chemical source — disposable pads — and many women find the body
+                    begins to restore its natural hormonal rhythm.
+                  </p>
+                  <div className={heal.scienceOutcome}>
+                    <TbCheck size={16} className={heal.scienceOutcomeIcon} />
+                    <span>No medication. No procedure. Just removing the source.</span>
+                  </div>
+                </div>
+              </motion.div>
+
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={heal.pcosAlert}>
-              <TbAlertTriangle size={22} className={heal.pcosAlertIcon} />
-              <div className={heal.pcosAlertText}>
-                <h4>Fertility &amp; PCOS — What Doctors Are Now Seeing</h4>
-                <p>
-                  70–80% of women with ovulation-related infertility have PCOS. Fertility doctors
-                  working with Saukhyam Foundation are now prescribing reusable menstrual products
-                  as a first-line intervention — before pills or procedures — and reporting real results:
-                  more regular periods, PCOS symptoms reducing, and in many cases, natural conception.
-                  A one-time investment in reusable pads costs less than ₹10/month over 3–4 years —
-                  compare that to ₹15,000–5,00,000 for fertility treatment.
-                </p>
+
+            {/* ── PCOS Callout ── */}
+            <motion.div variants={fadeInUp} className={heal.pcosCallout}>
+              <div className={heal.pcosCalloutLeft}>
+                <div className={heal.pcosCalloutIcon}>
+                  <TbAlertTriangle size={26} />
+                </div>
+                <div>
+                  <div className={heal.pcosCalloutEyebrow}>Clinical Insight</div>
+                  <h3 className={heal.pcosCalloutTitle}>
+                    Fertility &amp; PCOS —<br />What Doctors Are Now Seeing
+                  </h3>
+                </div>
+              </div>
+              <p className={heal.pcosCalloutDesc}>
+                70–80% of women with ovulation-related infertility have PCOS. Fertility doctors
+                working with Saukhyam Foundation are now prescribing reusable menstrual products
+                as a first-line intervention — before pills or procedures — and reporting real results:
+                more regular periods, PCOS symptoms reducing, and in many cases, natural conception.
+              </p>
+              <div className={heal.pcosCalloutStat}>
+                <span className={heal.pcosCalloutStatNum}>₹10<small>/mo</small></span>
+                <span className={heal.pcosCalloutStatLabel}>vs ₹15,000–5,00,000 for fertility treatment</span>
               </div>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={heal.scienceCitations}>
-              <span className={heal.scienceCitation}>
-                <strong>2025</strong> — Journal of Materials Science: Dioxins, VOCs &amp; phthalates confirmed in sanitary pads
-              </span>
-              <span className={heal.scienceCitation}>
-                <strong>2024</strong> — BJOG Systematic Review: Endocrine disruptors found in every tested pad and tampon
-              </span>
-              <Link href="/science" className={heal.scienceCitation}>
-                Read full research on our Science page <ArrowRight size={11} />
-              </Link>
+            {/* ── Citation Strip ── */}
+            <motion.div variants={fadeInUp} className={heal.citationStrip}>
+              <span className={heal.citationStripLabel}>Peer-reviewed sources:</span>
+              <div className={heal.citations}>
+                <span className={heal.citation}>
+                  <strong>2025</strong> — Journal of Materials Science: Dioxins, VOCs &amp; phthalates confirmed in sanitary pads
+                </span>
+                <div className={heal.citationDot} />
+                <span className={heal.citation}>
+                  <strong>2024</strong> — BJOG Systematic Review: Endocrine disruptors found in every tested pad and tampon
+                </span>
+                <div className={heal.citationDot} />
+                <Link href="/science" className={`${heal.citation} ${heal.citationLink}`}>
+                  Read all research <ArrowRight size={11} />
+                </Link>
+              </div>
             </motion.div>
+
           </motion.div>
         </div>
       </section>
+
 
       {/* ── 5. 2-3-4 Formula ── */}
       <section className={heal.formulaSection}>

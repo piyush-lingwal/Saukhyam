@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { ShoppingBag, Menu, X, Search, Heart } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { ShoppingBag, Menu, X, Search, Heart, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import styles from './Navbar.module.css';
 
@@ -20,7 +20,11 @@ const navItems = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const { totalItems, openCart } = useCart();
 
   useEffect(() => {
@@ -31,7 +35,46 @@ export default function Navbar() {
 
   useEffect(() => {
     setIsMobileOpen(false);
+    setIsSearchOpen(false);
+    setSearchQuery('');
   }, [pathname]);
+
+  // Focus input when search bar opens
+  useEffect(() => {
+    if (isSearchOpen) {
+      setTimeout(() => searchInputRef.current?.focus(), 80);
+    }
+  }, [isSearchOpen]);
+
+  // Close search bar on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isSearchOpen) {
+        setIsSearchOpen(false);
+        setSearchQuery('');
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchOpen]);
+
+  const handleSearchOpen = () => {
+    setIsSearchOpen(true);
+  };
+
+  const handleSearchClose = () => {
+    setIsSearchOpen(false);
+    setSearchQuery('');
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = searchQuery.trim();
+    if (trimmed) {
+      router.push(`/products?search=${encodeURIComponent(trimmed)}`);
+      handleSearchClose();
+    }
+  };
 
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? 'hidden' : '';
@@ -42,7 +85,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
+      <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isSearchOpen ? styles.searchActive : ''}`}>
         <div className={styles.navContainer}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
@@ -56,8 +99,8 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop Nav Links */}
-          <div className={styles.navLinks}>
+          {/* Desktop Nav Links — hidden when search is open */}
+          <div className={`${styles.navLinks} ${isSearchOpen ? styles.navLinksHidden : ''}`}>
             {navItems.map((item) => (
               <Link
                 key={item.label}
@@ -69,12 +112,56 @@ export default function Navbar() {
             ))}
           </div>
 
+          {/* Inline Search Bar — expands when open */}
+          {isSearchOpen && (
+            <form
+              className={styles.searchBar}
+              onSubmit={handleSearchSubmit}
+              role="search"
+              aria-label="Search products"
+            >
+              <Search size={18} className={styles.searchBarIcon} aria-hidden="true" />
+              <input
+                ref={searchInputRef}
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search products, e.g. banana fiber pad…"
+                className={styles.searchBarInput}
+                aria-label="Search products"
+                autoComplete="off"
+              />
+              {searchQuery && (
+                <button
+                  type="submit"
+                  className={styles.searchBarSubmit}
+                  aria-label="Go to search results"
+                >
+                  <ArrowRight size={16} />
+                </button>
+              )}
+              <button
+                type="button"
+                className={styles.searchBarClose}
+                onClick={handleSearchClose}
+                aria-label="Close search"
+              >
+                <X size={20} />
+              </button>
+            </form>
+          )}
+
           {/* Right Actions */}
           <div className={styles.navActions}>
-            <button className={styles.actionBtn} aria-label="Search">
-              <Search size={20} />
+            <button
+              className={`${styles.actionBtn} ${isSearchOpen ? styles.actionBtnActive : ''}`}
+              onClick={isSearchOpen ? handleSearchClose : handleSearchOpen}
+              aria-label={isSearchOpen ? 'Close search' : 'Open search'}
+              aria-expanded={isSearchOpen}
+            >
+              {isSearchOpen ? <X size={20} /> : <Search size={20} />}
             </button>
-            <button className={styles.actionBtn} onClick={openCart} aria-label="Cart">
+            <button className={styles.actionBtn} onClick={openCart} aria-label="Open cart">
               <ShoppingBag size={20} />
               {totalItems > 0 && (
                 <span className={styles.cartBadge}>{totalItems}</span>

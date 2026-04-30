@@ -115,10 +115,10 @@ export default function HomePage() {
 
         {/* Side women images — visible on wide screens only */}
         <div className={styles.heroSideLeft} aria-hidden="true">
-          <img src="/hero-woman-left.png.png" alt="" />
+          <img src="/hero-woman-left.png" alt="" />
         </div>
         <div className={styles.heroSideRight} aria-hidden="true">
-          <img src="/hero-woman-right.png.png" alt="" />
+          <img src="/hero-woman-right.png" alt="" />
         </div>
 
         <div className={`container ${styles.heroContainer}`}>
@@ -411,7 +411,8 @@ export default function HomePage() {
 
             {/* REACH Logo Card (small square) */}
             <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachLogo}`}>
-              <img src="/ReachLogo/HEAL logo RGB_Vertical.png" alt="REACH" className={styles.bLogoImage} />
+              {/* Note: The REACH logo asset lives in /ReachLogo/ — filename reflects original asset naming */}
+              <img src="/ReachLogo/HEAL logo RGB_Vertical.png" alt="REACH — Rural Empowerment and Community Health" className={styles.bLogoImage} />
             </motion.a>
 
             {/* REACH Info Card (Row 3) */}
