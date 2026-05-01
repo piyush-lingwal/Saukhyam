@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Fragment, useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -24,6 +24,7 @@ import {
   TbBolt,
   TbCheck,
   TbArrowRight,
+  TbPlus,
 } from 'react-icons/tb';
 import styles from '../program.module.css';
 import heal from './heal.module.css';
@@ -54,13 +55,13 @@ const challengeCards = [
     icon: TbCalendarTime,
     step: 'Step 2',
     title: '6 Months. That\'s All.',
-    desc: 'Give your body a full 6 months — either a 3-month gradual transition followed by 3 months of complete reusable use, or the full 6 months using Saukhyam exclusively.',
+    desc: 'Give your body a full 6 months - either a 3-month gradual transition followed by 3 months of complete reusable use, or the full 6 months using Saukhyam exclusively.',
   },
   {
     icon: TbCertificate,
     step: 'Step 3',
     title: 'Money Back. No Questions.',
-    desc: 'If your period problems have not reduced or improved — not even a little — return your pads, even used, and we will refund your money completely. No questions asked.',
+    desc: 'If your period problems have not reduced or improved - not even a little - return your pads, even used, and we will refund your money completely. No questions asked.',
   },
 ];
 
@@ -68,22 +69,22 @@ const scienceSteps = [
   {
     step: '01',
     title: 'Chemicals in Disposable Pads',
-    desc: 'Conventional disposable pads contain dioxins, phthalates, volatile organic compounds (VOCs), superabsorbent polymers, fragrances, and synthetic bleaching residues — all confirmed or suspected endocrine disruptors. Peer-reviewed studies from 2024 (BJOG) and 2025 (Journal of Materials Science) found them in every tested pad brand.',
+    desc: 'Conventional disposable pads contain dioxins, phthalates, volatile organic compounds (VOCs), superabsorbent polymers, fragrances, and synthetic bleaching residues - all confirmed or suspected endocrine disruptors. Peer-reviewed studies from 2024 (BJOG) and 2025 (Journal of Materials Science) found them in every tested pad brand.',
   },
   {
     step: '02',
     title: 'Direct Bloodstream Entry',
-    desc: 'Unlike food, what enters the vaginal area bypasses the liver\'s first-pass metabolism. Vaginal tissue is highly vascular and absorptive. Even trace amounts are absorbed directly into the bloodstream during 4–6 days every cycle — month after month, for decades.',
+    desc: 'Unlike food, what enters the vaginal area bypasses the liver\'s first-pass metabolism. Vaginal tissue is highly vascular and absorptive. Even trace amounts are absorbed directly into the bloodstream during 4–6 days every cycle - month after month, for decades.',
   },
   {
     step: '03',
     title: 'Hormonal Disruption',
-    desc: 'These endocrine disruptors mimic estrogen and interfere with the hypothalamic-pituitary-ovarian (HPO) axis — the body\'s core hormonal regulator. This is strongly linked to PCOS, irregular cycles, heavy bleeding, severe cramps, acne, and in some cases, fertility challenges.',
+    desc: 'These endocrine disruptors mimic estrogen and interfere with the hypothalamic-pituitary-ovarian (HPO) axis - the body\'s core hormonal regulator. This is strongly linked to PCOS, irregular cycles, heavy bleeding, severe cramps, acne, and in some cases, fertility challenges.',
   },
   {
     step: '04',
     title: 'Remove the Source. Heal.',
-    desc: 'The menstrual cycle is a tightly regulated, self-correcting system. Remove the primary chemical source — disposable pads — and many women find the body begins to restore its natural hormonal rhythm. No medication. No procedure. Just removing what was causing the disruption.',
+    desc: 'The menstrual cycle is a tightly regulated, self-correcting system. Remove the primary chemical source - disposable pads - and many women find the body begins to restore its natural hormonal rhythm. No medication. No procedure. Just removing what was causing the disruption.',
   },
 ];
 
@@ -94,31 +95,31 @@ const healingStories = [
     condition: 'PCOS',
     initial: 'L',
     quote: 'She didn\'t know she had PCOS. Irregular periods, stubborn acne, fatigue, unexpected weight gain. Doctors said "lose weight". Friends said "just hormones." Until someone told her to check what was in her sanitary napkin. She switched to a reusable pad. Within 3 months, something shifted. Periods became more regular. Skin cleared. Energy returned.',
-    outcome: '3 months — Cycles regularised, acne cleared, energy returned',
+    outcome: '3 months - Cycles regularised, acne cleared, energy returned',
   },
   {
     name: 'Dr. Priyanka',
-    role: 'State Director, UP — Saukhyam Foundation',
+    role: 'State Director, UP - Saukhyam Foundation',
     condition: 'Irregular Cycles',
     initial: 'P',
     quote: 'As a doctor, I tried Tranexa and hormonal medicines. Nothing really changed. Then I switched to Saukhyam in December 2024. After more than a year, my cycles became more regular. The discomfort reduced. The anxiety eased. When I learned about pad chemicals entering the bloodstream directly, it made sense. Remove the exposure. Let the body heal.',
-    outcome: '6 months — Regular cycles, reduced discomfort, no medication',
+    outcome: '6 months - Regular cycles, reduced discomfort, no medication',
   },
   {
     name: 'Arola Thonger',
     role: 'Nurse & Satellite Centre Founder, Nagaland',
     condition: 'Irregular Periods',
     initial: 'A',
-    quote: 'A nurse in Nagaland who kept seeing irregular periods, discomfort, and fertility concerns in the women she treated. It was also personal — she had irregular periods herself. One small shift: disposable to Saukhyam reusable. Within 6–7 months, her periods became regular and cramps reduced. No medication. Just the switch.',
-    outcome: '6–7 months — Regular periods, reduced cramps, no medication',
+    quote: 'A nurse in Nagaland who kept seeing irregular periods, discomfort, and fertility concerns in the women she treated. It was also personal - she had irregular periods herself. One small shift: disposable to Saukhyam reusable. Within 6–7 months, her periods became regular and cramps reduced. No medication. Just the switch.',
+    outcome: '6–7 months - Regular periods, reduced cramps, no medication',
   },
   {
     name: 'Virginie',
     role: 'HEAL Challenge Participant',
     condition: 'Endometriosis',
     initial: 'V',
-    quote: 'A 5 cm ovarian cyst had been detected. Five years after switching to Saukhyam — combined with yoga and dietary changes — the cyst reduced to 2 cm with no medication required. Periods are now nearly normal. Structural conditions may not fully resolve, but the overall experience can become significantly better.',
-    outcome: '5 years — Cyst reduced 5cm → 2cm, nearly normal periods',
+    quote: 'A 5 cm ovarian cyst had been detected. Five years after switching to Saukhyam - combined with yoga and dietary changes - the cyst reduced to 2 cm with no medication required. Periods are now nearly normal. Structural conditions may not fully resolve, but the overall experience can become significantly better.',
+    outcome: '5 years - Cyst reduced 5cm → 2cm, nearly normal periods',
   },
 ];
 
@@ -127,7 +128,7 @@ const formulaSteps = [
     month: 'Month 1',
     days: '2',
     label: 'days with reusables',
-    tip: 'Start on your lightest flow days — usually the last 2 days of your cycle. Use at home, when comfortable.',
+    tip: 'Start on your lightest flow days - usually the last 2 days of your cycle. Use at home, when comfortable.',
   },
   {
     month: 'Month 2',
@@ -139,27 +140,27 @@ const formulaSteps = [
     month: 'Month 3',
     days: '4+',
     label: 'days with reusables',
-    tip: 'Cover most of your cycle. By now most women feel ready to make a complete shift.',
+    tip: 'Cover most of your cycle. By now many feel ready to make a complete shift.',
   },
 ];
 
 const refundCards = [
   {
-    num: '01',
+    num: '1',
     icon: TbClipboardList,
     title: 'Enroll Before You Begin',
     desc: 'Fill a short form at purchase describing your period problems. This establishes your baseline for the healing journey.',
   },
   {
-    num: '02',
+    num: '2',
     icon: TbArrowBack,
     title: 'Return Used Pads',
     desc: 'If after 6 months your problems haven\'t improved, mail your used pads back to us. No judgment, no awkwardness.',
   },
   {
-    num: '03',
+    num: '3',
     icon: TbAward,
-    title: 'Full Refund. Guaranteed.',
+    title: 'Full Refund.\nGuaranteed.',
     desc: 'We process your complete refund. No fine print, no conditions beyond an honest 6-month attempt with reusable pads.',
   },
 ];
@@ -167,19 +168,19 @@ const refundCards = [
 const faqItems = [
   {
     q: 'Will the HEAL Challenge work with any reusable pad, or only Saukhyam?',
-    a: 'The core principle — removing chemical exposure — will work with any high-quality reusable pad made from natural, toxin-free materials. However, Saukhyam is the only product we have 2+ years of documented case studies with. We can only guarantee refunds for our own product.',
+    a: 'The core principle - removing chemical exposure - will work with any high-quality reusable pad that is cotton-cloth based and has natural, toxin-free materials. In fact, it should work with any reusable period product. However, Saukhyam is the only product we have 2+ years of documented case studies with. We can only guarantee refunds for our own product.',
   },
   {
     q: 'What if I have a structural condition like endometriosis or fibroids?',
-    a: 'Structural conditions will not completely resolve from a pad switch alone — and we are honest about this. However, your overall period experience (pain levels, regularity, discomfort) is very likely to improve. This is why, in 2+ years of running the HEAL Challenge, not a single person has asked for a refund. The experience gets better even if the underlying condition needs separate medical attention.',
+    a: 'Structural conditions will not completely resolve from a pad switch alone - and we are honest about this. However, your overall period experience (pain levels, regularity, discomfort) is very likely to improve. The experience gets better even if the underlying condition needs separate medical attention.',
   },
   {
     q: 'What role do environmental toxins play in PCOS?',
-    a: 'Nobody knows the exact cause of PCOS. What science does confirm is that endocrine-disrupting chemicals (dioxins, phthalates, VOCs) interfere with the hormonal systems that regulate the menstrual cycle. The vaginal route of absorption is especially significant because these chemicals bypass the liver and enter the bloodstream directly. Even small trace amounts can have a disproportionate hormonal effect. Removing this daily exposure allows the body\'s self-regulating hormonal system to resume.',
+    a: 'Nobody knows the exact cause of PCOS. What science does confirm is that endocrine-disrupting chemicals (dioxins, phthalates, VOCs) interfere with the hormonal systems that regulate the menstrual cycle. The vaginal route of absorption is especially significant because these chemicals bypass the liver and enter the bloodstream directly. Even small trace amounts can have a disproportionate hormonal effect.',
   },
   {
     q: 'Do I need to make a 100% shift from day one?',
-    a: 'Ideally yes — healing depends on completely removing the chemical source. But if you cannot switch all at once, use the 2-3-4 formula: 2 days in Month 1, 3 in Month 2, 4+ in Month 3. Allow 3 months for transition + 3 months of complete usage = the full 6-month challenge.',
+    a: 'Ideally yes - healing depends on completely removing the chemical source. But if you cannot switch all at once, use the 2-3-4 formula: 2 days in Month 1, 3 in Month 2, 4+ in Month 3. Allow 3 months for transition + 3 months of complete usage = the full 6-month challenge.',
   },
   {
     q: 'What if my periods are very irregular and I skip months?',
@@ -191,7 +192,7 @@ const faqItems = [
   },
   {
     q: 'How do I officially enroll, and how does the refund process work?',
-    a: 'When you purchase Saukhyam pads for the HEAL Challenge, fill in the enrollment form (coming soon on the order confirmation page) describing your period problems. If after 6 months you wish to claim a refund, fill in the return form and mail your used pads back to us. We process a full refund. Currently the forms are being finalised — reach out via the contact page and we will guide you through.',
+    a: 'Before you purchase Saukhyam pads for the HEAL Challenge, fill in the enrollment form describing your period problems. If after 6 months you wish to claim a refund, fill in the return form and mail your used pads back to us. We process a full refund. These forms can be accessed from the Enroll in HEAL Challenge section above.',
   },
 ];
 
@@ -214,42 +215,46 @@ export default function HealPage() {
       {/* ── 1. Hero ── */}
       <section className={heal.heroSection}>
 
-        {/* ── Centered content ── */}
+        {/* ── Split content: text left, logo right ── */}
         <motion.div
           className={heal.heroInner}
           initial="hidden"
           animate="visible"
           variants={stagger}
         >
-          {/* Logo pill */}
+          {/* Left: text content */}
+          <motion.div variants={stagger} className={heal.heroContent}>
+            {/* Eyebrow */}
+            <motion.div variants={fadeInUp} className={heal.heroEyebrow}>
+              The 6-Month Money-Back Challenge
+            </motion.div>
+
+            {/* Headline */}
+            <motion.h1 variants={fadeInUp} className={heal.heroHeadline}>
+              Painful Periods?
+              <span className={heal.heroHeadlineAccent}>There&apos;s a Real Fix.</span>
+            </motion.h1>
+
+            {/* Sub-copy */}
+            <motion.p variants={fadeInUp} className={heal.heroSubcopy}>
+              Switch to Saukhyam reusable pads for 6 months.
+              Period problems not better? Return your pads - even used - for a full refund.
+            </motion.p>
+
+            {/* CTAs */}
+          </motion.div>
+
+          {/* Right: logo pill */}
           <motion.div variants={fadeInUp} className={heal.heroLogoPill}>
             <Image
               src="/HealLogo/HEAL logo RGB_Horizontal with tag line.png"
-              alt="HEAL — Health, Environment & Active Living"
-              width={280}
-              height={64}
+              alt="HEAL - Health, Environment & Active Living"
+              width={320}
+              height={80}
               className={heal.heroLogo}
               priority
             />
           </motion.div>
-
-          {/* Eyebrow */}
-          <motion.div variants={fadeInUp} className={heal.heroEyebrow}>
-            The 6-Month Money-Back Challenge
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1 variants={fadeInUp} className={heal.heroHeadline}>
-            Switch Completely
-            <span className={heal.heroHeadlineAccent}>Heal Completely</span>
-          </motion.h1>
-
-          {/* Sub-copy */}
-          <motion.p variants={fadeInUp} className={heal.heroSubcopy}>
-            Switch to Saukhyam reusable pads for 6 months.
-            Period problems not better? Return your pads — even used — for a full refund.
-          </motion.p>
-
         </motion.div>
 
         {/* ── Stats shelf pinned to the bottom edge ── */}
@@ -275,16 +280,16 @@ export default function HealPage() {
             <span className={heal.heroStatLabel}>Continued beyond 6 months</span>
           </div>
           <div className={heal.heroStatItem}>
-            <TbShieldCheck size={18} className={heal.heroStatIcon} />
-            <span className={heal.heroStatNum}>0</span>
-            <span className={heal.heroStatLabel}>Refund claims in 2+ years</span>
+            <TbCalendarTime size={18} className={heal.heroStatIcon} />
+            <span className={heal.heroStatNum}>74%</span>
+            <span className={heal.heroStatLabel}>Complete shift in 3 months</span>
           </div>
         </motion.div>
 
       </section>
 
 
-      {/* ── 3. How It Works — Immersive Vertical Journey ── */}
+      {/* ── 3. How It Works - Immersive Vertical Journey ── */}
       <section className={heal.challengeSection}>
         {/* Ambient background blobs */}
         <div className={heal.challengeBlobA} aria-hidden="true" />
@@ -305,7 +310,7 @@ export default function HealPage() {
                 <span className={heal.journeyTitleAccent}> in 3 Steps</span>
               </h2>
               <p className={heal.journeySubtitle}>
-                One of the most powerful interventions in women&apos;s health — and the simplest.
+                One of the most powerful interventions in women&apos;s health - and the simplest.
                 No pills. No procedures. No side effects.
               </p>
             </motion.div>
@@ -354,6 +359,10 @@ export default function HealPage() {
                       <span className={heal.journeyMiniLabel}>Gradual formula available</span>
                     </div>
                   </div>
+
+                  <a href="#science" className={heal.journeyScrollLink}>
+                    Why does switching work? <TbArrowRight size={14} />
+                  </a>
                 </div>
               </motion.div>
 
@@ -382,7 +391,7 @@ export default function HealPage() {
                 <div className={heal.journeyContent}>
                   <h3 className={heal.journeyCardTitle}>6 Months. That&apos;s All.</h3>
                   <p className={heal.journeyCardDesc}>
-                    Give your body a full 6 months — either a 3-month gradual transition followed by
+                    Give your body a full 6 months - either a 3-month gradual transition followed by
                     3 months of complete reusable use, or the full 6 months using Saukhyam exclusively.
                   </p>
 
@@ -397,7 +406,7 @@ export default function HealPage() {
                       <span className={heal.journeyTimelineNum}>3</span>
                       <span>months transition</span>
                     </div>
-                    <TbArrowRight size={16} className={heal.journeyTimelineArrow} />
+                    <TbPlus size={16} className={heal.journeyTimelineArrow} />
                     <div className={heal.journeyTimelinePill}>
                       <span className={heal.journeyTimelineNum}>3</span>
                       <span>months complete use</span>
@@ -407,6 +416,10 @@ export default function HealPage() {
                       <span>✦ Healing</span>
                     </div>
                   </div>
+
+                  <a href="#formula" className={heal.journeyScrollLink}>
+                    Can&apos;t switch all at once? See the gradual formula <TbArrowRight size={14} />
+                  </a>
                 </div>
               </motion.div>
 
@@ -435,7 +448,7 @@ export default function HealPage() {
                 <div className={heal.journeyContent}>
                   <h3 className={heal.journeyCardTitle}>Money Back. No Questions.</h3>
                   <p className={heal.journeyCardDesc}>
-                    If your period problems have not reduced or improved — not even a little —
+                    If your period problems have not reduced or improved,
                     return your pads, even used, and we will refund your money completely.
                     No questions asked.
                   </p>
@@ -456,56 +469,32 @@ export default function HealPage() {
                       <span className={heal.journeyMiniLabel}>Money-back if no results</span>
                     </div>
                   </div>
+
+                  <a href="#refund" className={heal.journeyScrollLink}>
+                    How does the refund process work? <TbArrowRight size={14} />
+                  </a>
                 </div>
               </motion.div>
 
             </div>{/* end journeyTrack */}
 
-            {/* ── Saukhyam Promise — Gold Trust Block ── */}
-            <motion.div variants={fadeInUp} className={heal.promiseBanner}>
-              <div className={heal.promiseBannerGlowLeft} aria-hidden="true" />
-              <div className={heal.promiseBannerGlowRight} aria-hidden="true" />
-              <div className={heal.promiseBannerInner}>
-                <div className={heal.promiseBannerLeft}>
-                  <div className={heal.promiseBannerShield}>
-                    <TbShieldCheck size={38} />
-                  </div>
-                  <div>
-                    <div className={heal.promiseBannerEyebrow}>The Saukhyam Promise</div>
-                    <h3 className={heal.promiseBannerTitle}>
-                      Never had to honour<br />a refund. Not once.
-                    </h3>
-                  </div>
-                </div>
-                <div className={heal.promiseBannerDivider} />
-                <div className={heal.promiseBannerRight}>
-                  <div className={heal.promiseStats}>
-                    <div className={heal.promiseStat}>
-                      <span className={heal.promiseStatNum}>2+</span>
-                      <span className={heal.promiseStatLabel}>Years running</span>
-                    </div>
-                    <div className={heal.promiseStatDot} />
-                    <div className={heal.promiseStat}>
-                      <span className={heal.promiseStatNum}>0</span>
-                      <span className={heal.promiseStatLabel}>Refund claims</span>
-                    </div>
-                    <div className={heal.promiseStatDot} />
-                    <div className={heal.promiseStat}>
-                      <span className={heal.promiseStatNum}>100%</span>
-                      <span className={heal.promiseStatLabel}>Money-back guarantee</span>
-                    </div>
-                  </div>
-                  <p className={heal.promiseBannerDesc}>
-                    Thousands of women. PCOS, irregular cycles, heavy bleeding, severe cramps,
-                    endometriosis. Not a single refund claimed in 2+ years.
-                    The guarantee is real — we just haven&apos;t needed it yet.
-                  </p>
-                  <Link href="/products" className={heal.promiseBannerCta}>
-                    <TbLeaf size={18} />
-                    Start the HEAL Challenge
-                    <TbArrowRight size={18} />
-                  </Link>
-                </div>
+            {/* ── Ready to Take the HEAL Challenge ── */}
+            <motion.div variants={fadeInUp} className={heal.journeyCtaBanner}>
+              <h2 className={heal.journeyCtaTitle}>Ready to Take the HEAL Challenge?</h2>
+              <p className={heal.journeyCtaDesc}>
+                6 months. A complete switch to Saukhyam reusable pads. A full refund if your period
+                problems don&apos;t improve. Join hundreds of thousands who have already healed.
+              </p>
+              <div className={heal.dualCta}>
+                <Link href="/products" className={heal.ctaBtnPrimary}>
+                  <TbLeaf size={18} />
+                  Start the HEAL Challenge
+                  <TbArrowRight size={18} />
+                </Link>
+                <a href="#faq" className={heal.ctaBtnSecondary}>
+                  <TbQuestionMark size={18} />
+                  Frequently Asked Questions
+                </a>
               </div>
             </motion.div>
 
@@ -513,8 +502,8 @@ export default function HealPage() {
         </div>
       </section>
 
-      {/* ── 4. Why It Works — Science ── */}
-      <section className={heal.scienceSection}>
+      {/* ── 4. Why It Works - Science ── */}
+      <section id="science" className={heal.scienceSection}>
         {/* Background texture layer */}
         <div className={heal.scienceBg} aria-hidden="true" />
 
@@ -539,7 +528,7 @@ export default function HealPage() {
             {/* ── Science Bento Grid ── */}
             <motion.div variants={stagger} className={heal.scienceBento}>
 
-              {/* Card 01 — Chemicals (wide) */}
+              {/* Card 01 - Chemicals (wide) */}
               <motion.div variants={fadeInUp} className={`${heal.scienceBentoCard} ${heal.scienceBentoCardA}`}>
                 <span className={heal.scienceBentoWatermark}>01</span>
                 <div className={heal.scienceBentoInner}>
@@ -547,18 +536,18 @@ export default function HealPage() {
                   <h3 className={heal.scienceBentoTitle}>Chemicals in Disposable Pads</h3>
                   <p className={heal.scienceBentoDesc}>
                     Conventional disposable pads contain dioxins, phthalates, VOCs, superabsorbent
-                    polymers, fragrances, and synthetic bleaching residues — all confirmed or suspected
+                    polymers, fragrances, and synthetic bleaching residues - all confirmed or suspected
                     endocrine disruptors. Found in every tested brand.
                   </p>
                   <div className={heal.scienceChips}>
-                    {['Dioxins', 'Phthalates', 'VOCs', 'Fragrances', 'Bleach residues'].map(c => (
+                    {['Dioxins', 'Phthalates', 'VOCs', 'Fragrances', 'Bleach Residues'].map(c => (
                       <span key={c} className={heal.scienceChip}>{c}</span>
                     ))}
                   </div>
                 </div>
               </motion.div>
 
-              {/* Card 02 — Bloodstream (tall) */}
+              {/* Card 02 - Bloodstream (tall) */}
               <motion.div variants={fadeInUp} className={`${heal.scienceBentoCard} ${heal.scienceBentoCardB}`}>
                 <span className={heal.scienceBentoWatermark}>02</span>
                 <div className={heal.scienceBentoInner}>
@@ -570,38 +559,38 @@ export default function HealPage() {
                   </p>
                   <div className={heal.scienceStatPill}>
                     <span className={heal.scienceStatPillNum}>4–6</span>
-                    <span>days every cycle, month after month, for decades</span>
+                    <span>days per cycle, every month, for decades</span>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Card 03 — Hormonal Disruption (tall) */}
+              {/* Card 03 - Hormonal Disruption (tall) */}
               <motion.div variants={fadeInUp} className={`${heal.scienceBentoCard} ${heal.scienceBentoCardC}`}>
                 <span className={heal.scienceBentoWatermark}>03</span>
                 <div className={heal.scienceBentoInner}>
                   <div className={heal.scienceBentoTag}>The Damage</div>
                   <h3 className={heal.scienceBentoTitle}>Hormonal Disruption</h3>
                   <p className={heal.scienceBentoDesc}>
-                    Endocrine disruptors mimic estrogen and interfere with the HPO axis —
+                    Endocrine disruptors mimic estrogen and interfere with the HPO axis -
                     the body&apos;s core hormonal regulator.
                   </p>
                   <div className={heal.scienceChips}>
-                    {['PCOS', 'Irregular cycles', 'Heavy bleeding', 'Severe cramps', 'Fertility'].map(c => (
+                    {['PCOS', 'Irregular Cycles', 'Heavy Bleeding', 'Severe Cramps', 'Infertility'].map(c => (
                       <span key={c} className={`${heal.scienceChip} ${heal.scienceChipWarning}`}>{c}</span>
                     ))}
                   </div>
                 </div>
               </motion.div>
 
-              {/* Card 04 — Remove Source. Heal. (wide) */}
+              {/* Card 04 - Remove Source. Heal. (wide) */}
               <motion.div variants={fadeInUp} className={`${heal.scienceBentoCard} ${heal.scienceBentoCardD}`}>
                 <span className={heal.scienceBentoWatermark}>04</span>
                 <div className={heal.scienceBentoInner}>
                   <div className={heal.scienceBentoTag}>The Resolution</div>
-                  <h3 className={heal.scienceBentoTitle}>Remove the Source. Heal.</h3>
+                  <h3 className={heal.scienceBentoTitle}>Remove the Source.<br />Heal.</h3>
                   <p className={heal.scienceBentoDesc}>
                     The menstrual cycle is a tightly regulated, self-correcting system. Remove
-                    the primary chemical source — disposable pads — and many women find the body
+                    the primary chemical source - disposable pads - and many women find the body
                     begins to restore its natural hormonal rhythm.
                   </p>
                   <div className={heal.scienceOutcome}>
@@ -623,18 +612,19 @@ export default function HealPage() {
                 <div>
                   <div className={heal.pcosCalloutEyebrow}>Clinical Insight</div>
                   <h3 className={heal.pcosCalloutTitle}>
-                    Fertility &amp; PCOS —<br />What Doctors Are Now Seeing
+                    Fertility &amp; PCOS -<br />What Doctors Are Now Seeing
                   </h3>
                 </div>
               </div>
               <p className={heal.pcosCalloutDesc}>
                 70–80% of women with ovulation-related infertility have PCOS. Fertility doctors
                 working with Saukhyam Foundation are now prescribing reusable menstrual products
-                as a first-line intervention — before pills or procedures — and reporting real results:
+                as a first-line intervention - before pills or procedures - and reporting real results:
                 more regular periods, PCOS symptoms reducing, and in many cases, natural conception.
               </p>
               <div className={heal.pcosCalloutStat}>
                 <span className={heal.pcosCalloutStatNum}>₹10<small>/mo</small></span>
+                <span className={heal.pcosCalloutStatLabel} style={{ color: '#0d9488', fontSize: '0.68rem', marginBottom: '4px' }}>for reusable pads</span>
                 <span className={heal.pcosCalloutStatLabel}>vs ₹15,000–5,00,000 for fertility treatment</span>
               </div>
             </motion.div>
@@ -644,11 +634,11 @@ export default function HealPage() {
               <span className={heal.citationStripLabel}>Peer-reviewed sources:</span>
               <div className={heal.citations}>
                 <span className={heal.citation}>
-                  <strong>2025</strong> — Journal of Materials Science: Dioxins, VOCs &amp; phthalates confirmed in sanitary pads
+                  <strong>2025</strong> - Journal of Materials Science: Dioxins, VOCs &amp; phthalates confirmed in sanitary pads
                 </span>
                 <div className={heal.citationDot} />
                 <span className={heal.citation}>
-                  <strong>2024</strong> — BJOG Systematic Review: Endocrine disruptors found in every tested pad and tampon
+                  <strong>2024</strong> - BJOG Systematic Review: Endocrine disruptors found in every tested pad and tampon
                 </span>
                 <div className={heal.citationDot} />
                 <Link href="/science" className={`${heal.citation} ${heal.citationLink}`}>
@@ -663,7 +653,7 @@ export default function HealPage() {
 
 
       {/* ── 5. 2-3-4 Formula ── */}
-      <section className={heal.formulaSection}>
+      <section id="formula" className={heal.formulaSection}>
         <div className="container">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
@@ -673,7 +663,7 @@ export default function HealPage() {
               <h2 className={styles.sectionTitle}>The 2-3-4 Formula</h2>
               <p className={heal.formulaSubtitle}>
                 Can&apos;t switch 100% from day one? That&apos;s okay. Use this gradual approach
-                to build confidence over 3 months — then complete your switch and start
+                to build confidence over 3 months - then complete your switch and start
                 your healing clock. The full 6-month challenge still applies.
               </p>
             </motion.div>
@@ -682,7 +672,7 @@ export default function HealPage() {
               {formulaSteps.map((step, idx) => (
                 <Fragment key={step.month}>
                   <motion.div variants={fadeInUp} className={heal.formulaStep}>
-                    <div className={heal.formulaStepNum}>{idx + 1}</div>
+                    <div className={heal.formulaStepNum}>{['A','B','C'][idx]}</div>
                     <div className={heal.formulaStepMonth}>{step.month}</div>
                     <div className={heal.formulaStepDays}>{step.days}</div>
                     <div className={heal.formulaStepLabel}>{step.label}</div>
@@ -700,7 +690,7 @@ export default function HealPage() {
             <motion.div variants={fadeInUp} className={heal.formulaNote}>
               <p>
                 <strong>After Month 3:</strong> You are ready for a complete shift. Use Saukhyam
-                for every day of your period — for at least 3 more months. This gives your body
+                for every day of your period - for at least 3 more months. This gives your body
                 the uninterrupted, chemical-free environment it needs to self-correct.
                 Total: 3 months transition + 3 months complete usage ={' '}
                 <strong>the full 6-month HEAL Challenge.</strong>
@@ -710,7 +700,54 @@ export default function HealPage() {
         </div>
       </section>
 
-      {/* ── 6. Real Healing Stories ── */}
+      {/* ── 6. Sign Up / Refund Promise ── */}
+      <section id="refund" className={heal.refundSection}>
+        <div className="container">
+          <motion.div
+            className={heal.refundSectionInner}
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+          >
+            <motion.div variants={fadeInUp} className={heal.refundZeroClaims}>
+              <TbShieldCheck size={17} />
+              Zero refund claims in 2+ years of running the HEAL Challenge
+            </motion.div>
+
+            <motion.h2 variants={fadeInUp} className={heal.refundTitle}>
+              Sign Up for the HEAL Challenge
+            </motion.h2>
+            <motion.p variants={fadeInUp} className={heal.refundSubtitle}>
+              We are confident enough in this challenge to offer a full, no-questions-asked
+              refund. Here is exactly how it works:
+            </motion.p>
+
+            <motion.div variants={stagger} className={heal.refundGrid}>
+              {refundCards.map((card) => (
+                <motion.div key={card.title} variants={fadeInUp} className={heal.refundCard}>
+                  <div className={heal.refundCardNum}>{card.num}</div>
+                  <div className={heal.refundCardIcon}>
+                    <card.icon size={22} />
+                  </div>
+                  <h3 className={heal.refundCardTitle}>
+                    {card.title.split('\n').map((line, i, arr) => (
+                      <Fragment key={i}>{line}{i < arr.length - 1 && <><br /><br /></>}</Fragment>
+                    ))}
+                  </h3>
+                  <p className={heal.refundCardDesc}>{card.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.p variants={fadeInUp} className={heal.refundDisclaimer}>
+              Note: Structural conditions such as endometriosis, uterine fibroids, or polyps
+              may not fully resolve from a product switch alone. However, your overall period
+              experience - pain, regularity, comfort - is very likely to improve. The refund
+              applies when period problems do not get better in any measurable way.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 7. Real Healing Stories ── */}
       <section className={heal.storiesSection}>
         <div className="container">
           <motion.div
@@ -721,7 +758,7 @@ export default function HealPage() {
               <h2 className={styles.sectionTitle}>Real Healing. Documented.</h2>
               <p className={styles.sectionDesc}>
                 These are not testimonials written for a website. They are living case studies
-                from women who shared their journeys publicly — every one of them asked the
+                from women who shared their journeys publicly - every one of them asked the
                 same question we are asking you to consider.
               </p>
             </motion.div>
@@ -763,58 +800,15 @@ export default function HealPage() {
         </div>
       </section>
 
-      {/* ── 7. Refund Promise ── */}
-      <section className={heal.refundSection}>
-        <div className="container">
-          <motion.div
-            className={heal.refundSectionInner}
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-          >
-            <motion.div variants={fadeInUp} className={heal.refundZeroClaims}>
-              <TbShieldCheck size={17} />
-              Zero refund claims in 2+ years of running the HEAL Challenge
-            </motion.div>
-
-            <motion.h2 variants={fadeInUp} className={heal.refundTitle}>
-              The Guarantee Is Real.
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={heal.refundSubtitle}>
-              We are confident enough in this challenge to offer a full, no-questions-asked
-              refund. Here is exactly how it works:
-            </motion.p>
-
-            <motion.div variants={stagger} className={heal.refundGrid}>
-              {refundCards.map((card) => (
-                <motion.div key={card.title} variants={fadeInUp} className={heal.refundCard}>
-                  <div className={heal.refundCardNum}>{card.num}</div>
-                  <div className={heal.refundCardIcon}>
-                    <card.icon size={22} />
-                  </div>
-                  <h3 className={heal.refundCardTitle}>{card.title}</h3>
-                  <p className={heal.refundCardDesc}>{card.desc}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.p variants={fadeInUp} className={heal.refundDisclaimer}>
-              Note: Structural conditions such as endometriosis, uterine fibroids, or polyps
-              may not fully resolve from a product switch alone. However, your overall period
-              experience — pain, regularity, comfort — is very likely to improve. The refund
-              applies when period problems do not get better in any measurable way.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* ── 8. FAQ ── */}
-      <section className={heal.faqSection}>
+      <section id="faq" className={heal.faqSection}>
         <div className="container">
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
           >
             <motion.div variants={fadeInUp} className="section-header">
               <div className={heal.sectionBadge}><TbQuestionMark size={14} /> Questions</div>
-              <h2 className={styles.sectionTitle}>Common Questions</h2>
+              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
               <p className={styles.sectionDesc}>
                 Everything you need to know before taking the HEAL Challenge.
               </p>
@@ -859,34 +853,8 @@ export default function HealPage() {
         </div>
       </section>
 
-      {/* ── 9. CTA ── */}
-      <section className={heal.ctaSection}>
-        <div className="container">
-          <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
-          >
-            <motion.h2 variants={fadeInUp}>
-              Ready to Take the HEAL Challenge?
-            </motion.h2>
-            <motion.p variants={fadeInUp} style={{ color: 'rgba(255,255,255,0.72)', marginBottom: 0 }}>
-              6 months. A complete switch to Saukhyam reusable pads. A full refund if your period
-              problems don&apos;t improve. Join thousands of women who have already healed.
-            </motion.p>
-            <motion.div variants={fadeInUp} className={heal.dualCta}>
-              <Link href="/products" className={heal.ctaBtnPrimary}>
-                <TbLeaf size={18} />
-                Start the HEAL Challenge
-                <ArrowRight size={18} />
-              </Link>
-              <Link href="/science" className={heal.ctaBtnSecondary}>
-                <TbFlask size={18} />
-                Read the Science
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
 
     </div>
   );
 }
+

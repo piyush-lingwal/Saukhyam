@@ -344,20 +344,6 @@
    Colors: #E8185A (hot pink) · #7B1A6E (deep purple) · #4D1A58 (dark plum)
    ══════════════════════════════════════════════════ */
 
-:global([data-page-theme="heal"]) .shopBtn {
-  background: #E8185A;
-}
-:global([data-page-theme="heal"]) .shopBtn:hover {
-  background: #C4124A;
-  box-shadow: 0 4px 14px rgba(232, 24, 90, 0.32);
-}
-
-:global([data-page-theme="heal"]) .mobileShopBtn {
-  background: #E8185A;
-}
-:global([data-page-theme="heal"]) .mobileShopBtn:hover {
-  background: #C4124A;
-}
 
 :global([data-page-theme="heal"]) .cartBadge {
   background: #E8185A;

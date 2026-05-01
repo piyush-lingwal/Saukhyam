@@ -40,7 +40,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   HERO — Centered Editorial
+   HERO — Split Editorial (content left · logo right)
 ───────────────────────────────────────────────────────── */
 .heroSection {
   position: relative;
@@ -48,7 +48,6 @@
   color: white;
   padding: clamp(1.25rem, 2.5vw, 2rem) 0 0;
   background: linear-gradient(160deg, #8C1070 0%, #5D1A68 45%, #3A1245 100%);
-  text-align: center;
 }
 
 /* Pink top accent bar */
@@ -75,31 +74,40 @@
   pointer-events: none;
 }
 
-/* ── Inner wrapper ── */
+/* ── Inner wrapper — two-column split ── */
 .heroInner {
   position: relative;
   z-index: 1;
-  max-width: 760px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 var(--container-padding);
-  display: flex;
-  flex-direction: column;
+  padding: clamp(1rem, 2.5vw, 2rem) var(--container-padding);
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
 }
 
-/* ── Logo pill ── */
+/* ── Left text block ── */
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* ── Logo pill (right column) ── */
 .heroLogoPill {
   background: white;
-  border-radius: var(--radius-full);
-  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6) var(--space-8);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--space-8);
+  flex-shrink: 0;
 }
 
 .heroLogo {
-  height: 52px;
+  height: 108px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -120,11 +128,7 @@
 
 .heroEyebrow::before,
 .heroEyebrow::after {
-  content: '';
-  flex: 1;
-  max-width: 40px;
-  height: 1px;
-  background: rgba(251, 207, 232, 0.4);
+  display: none;
 }
 
 /* ── Headline ── */
@@ -149,18 +153,19 @@
   font-size: var(--text-lg);
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.75;
-  max-width: 560px;
-  margin: 0 auto var(--space-10);
+  max-width: 520px;
+  margin: 0;
 }
 
 /* ── CTA group ── */
 .heroCTAGroup {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--space-4);
   flex-wrap: wrap;
-  margin-bottom: var(--space-10);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
 }
 
 .heroCtaPrimary {
@@ -287,6 +292,40 @@
   line-height: 1.4;
 }
 
+/* ── Hero: collapse to single column on tablets ── */
+@media (max-width: 860px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: clamp(2rem, 4vw, 3rem) var(--container-padding);
+    gap: var(--space-8);
+  }
+
+  .heroContent {
+    align-items: center;
+    text-align: center;
+    order: 2;
+  }
+
+  .heroLogoPill {
+    order: 1;
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-7);
+  }
+
+  .heroLogo {
+    height: 72px;
+  }
+
+  .heroSubcopy {
+    margin: 0 auto;
+  }
+
+  .heroCTAGroup {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 640px) {
   .heroStatsShelf {
     grid-template-columns: repeat(2, 1fr);
@@ -327,8 +366,28 @@
 .challengeSection {
   position: relative;
   padding: var(--section-gap) 0;
+  padding-top: calc(var(--section-gap) + 2rem);
   background: linear-gradient(180deg, #fff 0%, #fff5f8 40%, #fff0f6 100%);
   overflow: hidden;
+}
+
+/* ── Scroll-to link inside journey cards ── */
+.journeyScrollLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--heal-pink);
+  text-decoration: none;
+  margin-top: var(--space-2);
+  transition: gap 0.2s ease, opacity 0.2s ease;
+  opacity: 0.85;
+}
+
+.journeyScrollLink:hover {
+  gap: var(--space-3);
+  opacity: 1;
 }
 
 /* Ambient background blobs */
@@ -759,6 +818,48 @@
   box-shadow: 0 14px 32px rgba(232,24,90,0.45);
 }
 
+/* ── Inline CTA Banner (replaces promise banner) ── */
+.journeyCtaBanner {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--heal-pink) 0%, var(--heal-purple) 100%);
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.journeyCtaBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 10% 20%, rgba(255,255,255,0.08), transparent 60%),
+    radial-gradient(ellipse 50% 70% at 90% 80%, rgba(0,0,0,0.12), transparent 60%);
+  pointer-events: none;
+}
+
+.journeyCtaTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: white;
+  margin-bottom: var(--space-3);
+  position: relative;
+  z-index: 1;
+}
+
+.journeyCtaDesc {
+  font-size: var(--text-lg);
+  color: rgba(255,255,255,0.72);
+  max-width: 540px;
+  margin: 0 auto var(--space-8);
+  line-height: 1.75;
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Responsive ── */
 @media (max-width: 860px) {
   .journeyCard {
@@ -1013,24 +1114,23 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   SCIENCE SECTION — Dark Premium Layout
+   SCIENCE SECTION — Light Cream
 ───────────────────────────────────────────────────────── */
 .scienceSection {
   position: relative;
   padding: var(--section-gap) 0;
-  background: linear-gradient(160deg, #1a0a2e 0%, #2d0f42 45%, #1e0a30 100%);
-  color: white;
+  background: #fdf6f9;
+  color: var(--heal-plum);
   overflow: hidden;
 }
 
-/* Subtle dot-grid texture overlay */
+/* Soft pink blush corners */
 .scienceBg {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(circle, rgba(232, 24, 90, 0.12) 0%, transparent 60%),
-    radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 100% 100%, 32px 32px;
+    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(232,24,90,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 45% at 0% 100%, rgba(123,26,110,0.05) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -1046,7 +1146,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: #FFD966;
+  color: var(--heal-pink);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -1060,13 +1160,13 @@
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
-  color: #fff;
+  color: var(--heal-plum);
   margin-bottom: var(--space-4);
 }
 
 .scienceSubtitle {
   font-size: var(--text-lg);
-  color: rgba(255,255,255,0.6);
+  color: var(--color-text-secondary);
   max-width: 580px;
   margin: 0 auto;
   line-height: 1.75;
@@ -1087,88 +1187,112 @@
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1.5px solid transparent;
+  background: #fff;
   display: flex;
   flex-direction: column;
   transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
-              box-shadow 0.35s cubic-bezier(0.16,1,0.3,1);
+              border-color 0.35s ease;
   min-height: 260px;
 }
 
-.scienceBentoCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 48px rgba(0,0,0,0.35);
-}
+.scienceBentoCard:hover { transform: translateY(-4px); }
 
-/* ── Card A: Step 01 — amber accent (The Source) ── */
+/* ── Card A — Amber / The Source ── */
 .scienceBentoCardA {
   grid-column: span 2;
-  background: rgba(255,255,255,0.045);
-  border-color: rgba(251,191,36,0.2);
+  background: #fffbeb;
+  border-color: rgba(217,119,6,0.2);
 }
+.scienceBentoCardA:hover { border-color: rgba(217,119,6,0.4); }
 .scienceBentoCardA::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  height: 3px;
+  background: linear-gradient(90deg, #d97706, #f59e0b);
   border-radius: 20px 20px 0 0;
 }
+.scienceBentoCardA .scienceBentoTag  { color: #b45309; }
+.scienceBentoCardA .scienceBentoTitle { color: #78350f; }
+.scienceBentoCardA .scienceBentoWatermark { color: rgba(217,119,6,0.08); }
+.scienceBentoCardA .scienceChip {
+  background: rgba(217,119,6,0.08);
+  border-color: rgba(217,119,6,0.25);
+  color: #92400e;
+}
 
-/* ── Card B: Step 02 — HEAL pink accent (The Route) ── */
+/* ── Card B — Coral / The Route ── */
 .scienceBentoCardB {
   grid-column: span 1;
-  background: rgba(255,255,255,0.045);
-  border-color: rgba(232,24,90,0.25);
+  background: #fff7f0;
+  border-color: rgba(234,88,12,0.18);
 }
+.scienceBentoCardB:hover { border-color: rgba(234,88,12,0.38); }
 .scienceBentoCardB::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #E8185A, #c4124a);
+  height: 3px;
+  background: linear-gradient(90deg, #ea580c, #fb923c);
   border-radius: 20px 20px 0 0;
 }
+.scienceBentoCardB .scienceBentoTag  { color: #c2410c; }
+.scienceBentoCardB .scienceBentoTitle { color: #7c2d12; }
+.scienceBentoCardB .scienceBentoWatermark { color: rgba(234,88,12,0.08); }
 
-/* ── Card C: Step 03 — orange-red accent (The Damage) ── */
+/* ── Card C — Rose / The Damage ── */
 .scienceBentoCardC {
   grid-column: span 1;
-  background: rgba(255,255,255,0.045);
-  border-color: rgba(239,68,68,0.22);
+  background: #fff1f2;
+  border-color: rgba(225,29,72,0.18);
 }
+.scienceBentoCardC:hover { border-color: rgba(225,29,72,0.38); }
 .scienceBentoCardC::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #dc2626, #ef4444);
+  height: 3px;
+  background: linear-gradient(90deg, #e11d48, #fb7185);
   border-radius: 20px 20px 0 0;
 }
+.scienceBentoCardC .scienceBentoTag  { color: #be123c; }
+.scienceBentoCardC .scienceBentoTitle { color: #881337; }
+.scienceBentoCardC .scienceBentoWatermark { color: rgba(225,29,72,0.08); }
+.scienceBentoCardC .scienceChipWarning {
+  background: rgba(225,29,72,0.08);
+  border-color: rgba(225,29,72,0.25);
+  color: #9f1239;
+}
 
-/* ── Card D: Step 04 — emerald green accent (Resolution) ── */
+/* ── Card D — Sage Green / The Resolution ── */
 .scienceBentoCardD {
   grid-column: span 2;
-  background: rgba(255,255,255,0.045);
-  border-color: rgba(16,185,129,0.2);
+  background: #f0faf4;
+  border-color: rgba(22,163,74,0.2);
 }
+.scienceBentoCardD:hover { border-color: rgba(22,163,74,0.4); }
 .scienceBentoCardD::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #059669, #10b981);
+  height: 3px;
+  background: linear-gradient(90deg, #16a34a, #4ade80);
   border-radius: 20px 20px 0 0;
 }
+.scienceBentoCardD .scienceBentoTag  { color: #15803d; }
+.scienceBentoCardD .scienceBentoTitle { color: #14532d; }
+.scienceBentoCardD .scienceBentoWatermark { color: rgba(22,163,74,0.08); }
 
 /* Watermark step number */
 .scienceBentoWatermark {
   position: absolute;
-  top: -8px;
-  right: 16px;
+  top: -4px;
+  right: 14px;
   font-family: var(--font-heading);
-  font-size: clamp(5rem, 10vw, 7.5rem);
+  font-size: clamp(3rem, 6vw, 4.5rem);
   font-weight: 900;
-  color: rgba(255,255,255,0.05);
+  color: rgba(232,24,90,0.07);
   line-height: 1;
   letter-spacing: -0.05em;
   pointer-events: none;
@@ -1186,26 +1310,20 @@
   flex: 1;
 }
 
-/* Step tag */
+/* Step tag — base (each card overrides color) */
 .scienceBentoTag {
   font-size: 0.62rem;
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  opacity: 0.85;
 }
 
-.scienceBentoCardA .scienceBentoTag { color: #fbbf24; }
-.scienceBentoCardB .scienceBentoTag { color: #fb7185; }
-.scienceBentoCardC .scienceBentoTag { color: #f87171; }
-.scienceBentoCardD .scienceBentoTag { color: #34d399; }
-
-/* Card title */
+/* Card title — base */
 .scienceBentoTitle {
   font-family: var(--font-heading);
   font-size: clamp(1.1rem, 2.2vw, 1.4rem);
   font-weight: 800;
-  color: #fff;
   letter-spacing: -0.02em;
   line-height: 1.25;
   margin: 0;
@@ -1214,7 +1332,7 @@
 /* Card description */
 .scienceBentoDesc {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.55);
+  color: #4b5563;
   line-height: 1.78;
   max-width: none;
   margin: 0;
@@ -1233,21 +1351,15 @@
 }
 
 @media (max-width: 560px) {
-  .scienceBento {
-    grid-template-columns: 1fr;
-  }
+  .scienceBento { grid-template-columns: 1fr; }
   .scienceBentoCardA,
   .scienceBentoCardB,
   .scienceBentoCardC,
-  .scienceBentoCardD {
-    grid-column: span 1;
-  }
+  .scienceBentoCardD { grid-column: span 1; }
   .scienceBentoCard { min-height: auto; }
 }
 
-
-
-/* Chemical compound chips (Step 01) */
+/* ── Chemical compound chips (Card A) ── */
 .scienceChips {
   display: flex;
   flex-wrap: wrap;
@@ -1257,33 +1369,33 @@
 .scienceChip {
   display: inline-block;
   padding: 4px 12px;
-  background: rgba(251,191,36,0.1);
-  border: 1px solid rgba(251,191,36,0.28);
+  background: var(--heal-pink-pale);
+  border: 1px solid rgba(232,24,90,0.22);
   border-radius: var(--radius-full);
   font-size: 0.72rem;
   font-weight: 700;
-  color: #fbbf24;
+  color: var(--heal-pink);
   letter-spacing: 0.04em;
 }
 
-/* Warning chips (Step 03 — linked conditions) */
+/* Damage chips (Card C) */
 .scienceChipWarning {
-  background: rgba(239,68,68,0.1);
-  border-color: rgba(239,68,68,0.28);
-  color: #fca5a5;
+  background: rgba(232,24,90,0.08);
+  border-color: rgba(232,24,90,0.28);
+  color: var(--heal-plum);
 }
 
-/* Stat pill (Step 02) */
+/* Stat pill (Card B — coral) */
 .scienceStatPill {
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-5);
-  background: rgba(232,24,90,0.1);
-  border: 1px solid rgba(232,24,90,0.2);
+  background: rgba(234,88,12,0.08);
+  border: 1px solid rgba(234,88,12,0.22);
   border-radius: var(--radius-full);
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.65);
+  color: #7c2d12;
   width: fit-content;
 }
 
@@ -1291,38 +1403,38 @@
   font-family: var(--font-heading);
   font-size: 1.35rem;
   font-weight: 900;
-  color: #fb7185;
+  color: #ea580c;
   line-height: 1;
   letter-spacing: -0.02em;
 }
 
-/* Outcome chip (Step 04) */
+/* Outcome chip (Card D — green) */
 .scienceOutcome {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
-  background: rgba(100,220,130,0.1);
-  border: 1px solid rgba(100,220,130,0.25);
+  background: rgba(22,163,74,0.1);
+  border: 1px solid rgba(22,163,74,0.25);
   border-radius: var(--radius-full);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: #86efac;
+  color: #14532d;
   width: fit-content;
 }
 
 .scienceOutcomeIcon {
-  color: #4ade80;
+  color: #16a34a;
   flex-shrink: 0;
 }
 
-/* ── PCOS Callout ── */
+/* ── PCOS Callout — Clinical Insight (teal) ── */
 .pcosCallout {
   position: relative;
   z-index: 1;
   margin-top: clamp(2rem, 4vw, 3rem);
-  background: linear-gradient(135deg, rgba(232,24,90,0.12) 0%, rgba(123,26,110,0.1) 100%);
-  border: 1px solid rgba(232,24,90,0.25);
+  background: #f0fdfa;
+  border: 1.5px solid rgba(13,148,136,0.22);
   border-radius: 20px;
   padding: clamp(1.5rem, 3vw, 2.5rem);
   display: grid;
@@ -1342,12 +1454,12 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: rgba(232,24,90,0.18);
-  border: 1.5px solid rgba(232,24,90,0.35);
+  background: rgba(13,148,136,0.12);
+  border: 1.5px solid rgba(13,148,136,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #F99BAC;
+  color: #0f766e;
   flex-shrink: 0;
 }
 
@@ -1356,7 +1468,8 @@
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(249,155,172,0.8);
+  color: #0f766e;
+  opacity: 0.8;
   margin-bottom: var(--space-2);
 }
 
@@ -1364,7 +1477,7 @@
   font-family: var(--font-heading);
   font-size: clamp(1.1rem, 2.2vw, 1.35rem);
   font-weight: 800;
-  color: #fff;
+  color: #134e4a;
   line-height: 1.3;
   margin: 0;
   letter-spacing: -0.02em;
@@ -1372,7 +1485,7 @@
 
 .pcosCalloutDesc {
   font-size: var(--text-sm);
-  color: rgba(255,255,255,0.58);
+  color: #374151;
   line-height: 1.78;
   max-width: none;
   margin: 0;
@@ -1386,19 +1499,19 @@
   text-align: center;
   gap: var(--space-1);
   padding: var(--space-4) var(--space-5);
-  background: rgba(255,217,102,0.08);
-  border: 1px solid rgba(255,217,102,0.2);
+  background: rgba(13,148,136,0.08);
+  border: 1.5px solid rgba(13,148,136,0.22);
   border-radius: 16px;
   grid-column: 3;
   align-self: center;
-  min-width: 120px;
+  min-width: 130px;
 }
 
 .pcosCalloutStatNum {
   font-family: var(--font-heading);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 900;
-  color: #FFD966;
+  color: #0d9488;
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -1412,7 +1525,7 @@
 .pcosCalloutStatLabel {
   font-size: 0.6rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.4);
+  color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   text-align: center;
@@ -1443,7 +1556,7 @@
   font-weight: 800;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: var(--color-text-muted);
 }
 
 .citations {
@@ -1455,13 +1568,13 @@
 
 .citation {
   font-size: var(--text-xs);
-  color: rgba(255,255,255,0.38);
+  color: var(--color-text-muted);
   font-weight: 500;
   line-height: 1.5;
 }
 
 .citation strong {
-  color: rgba(255,217,102,0.75);
+  color: var(--heal-plum);
 }
 
 .citationLink {
@@ -1840,7 +1953,7 @@
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-xl);
-  padding: var(--space-7);
+  padding: var(--space-9) var(--space-8);
   text-align: center;
   transition: background var(--duration-normal) var(--ease-out);
 }
@@ -1976,6 +2089,8 @@
   gap: var(--space-4);
   flex-wrap: wrap;
   margin-top: var(--space-8);
+  position: relative;
+  z-index: 1;
 }
 
 .ctaBtnPrimary {
