@@ -1,4 +1,4 @@
-/* ═══════════════════════════════════════════════════
+﻿/* ═══════════════════════════════════════════════════
    HEAL PAGE — Brand Color Palette (from logo)
    ──────────────────────────────────────────────────
    Hot pink  #E8185A  — "HEAL" letters
@@ -46,7 +46,7 @@
   position: relative;
   overflow: hidden;
   color: white;
-  padding: clamp(1.25rem, 2.5vw, 2rem) 0 0;
+  padding: clamp(0.5rem, 1vw, 1rem) 0 0;
   background: linear-gradient(160deg, #8C1070 0%, #5D1A68 45%, #3A1245 100%);
 }
 
@@ -365,8 +365,8 @@
 ───────────────────────────────────────────────────────── */
 .challengeSection {
   position: relative;
-  padding: var(--section-gap) 0;
-  padding-top: calc(var(--section-gap) + 2rem);
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  padding-top: clamp(2rem, 4vw, 3.5rem);
   background: linear-gradient(180deg, #fff 0%, #fff5f8 40%, #fff0f6 100%);
   overflow: hidden;
 }
@@ -1118,7 +1118,7 @@
 ───────────────────────────────────────────────────────── */
 .scienceSection {
   position: relative;
-  padding: var(--section-gap) 0;
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
   background: #fdf6f9;
   color: var(--heal-plum);
   overflow: hidden;
@@ -1287,10 +1287,10 @@
 /* Watermark step number */
 .scienceBentoWatermark {
   position: absolute;
-  top: -4px;
+  top: 12px;
   right: 14px;
   font-family: var(--font-heading);
-  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 900;
   color: rgba(232,24,90,0.07);
   line-height: 1;
@@ -1627,7 +1627,7 @@
    2-3-4 FORMULA
 ───────────────────────────────────────────────────────── */
 .formulaSection {
-  padding: var(--section-gap) 0;
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
   background: var(--color-bg);
 }
 
@@ -1733,6 +1733,36 @@
   opacity: 0.4;
 }
 
+.formulaCtaWrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-8) var(--space-4);
+  background: var(--heal-pink-pale);
+  border-top: 1px solid rgba(232,24,90,0.1);
+  border-bottom: 1px solid rgba(232,24,90,0.1);
+}
+
+.formulaCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-10);
+  background: linear-gradient(135deg, var(--heal-pink) 0%, var(--heal-purple) 100%);
+  color: white;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
+}
+
+.formulaCtaBtn:hover {
+  transform: translateY(-3px) scale(1.02);
+  opacity: 0.92;
+  color: white;
+}
+
 .formulaNote {
   background: var(--heal-pink-pale);
   border: 1px solid var(--heal-pink-light);
@@ -1758,7 +1788,7 @@
    REAL STORIES
 ───────────────────────────────────────────────────────── */
 .storiesSection {
-  padding: var(--section-gap) 0;
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
   background: var(--heal-pink-pale);
 }
 
@@ -1882,7 +1912,7 @@
 ───────────────────────────────────────────────────────── */
 .refundSection {
   background: var(--heal-plum);
-  padding: var(--section-gap) 0;
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
   color: white;
   text-align: center;
   position: relative;
@@ -2011,7 +2041,7 @@
    FAQ
 ───────────────────────────────────────────────────────── */
 .faqSection {
-  padding: var(--section-gap) 0;
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
   background: var(--color-bg);
 }
 

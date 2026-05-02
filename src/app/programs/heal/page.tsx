@@ -160,7 +160,7 @@ const refundCards = [
   {
     num: '3',
     icon: TbAward,
-    title: 'Full Refund.\nGuaranteed.',
+    title: 'Full Refund. Guaranteed.',
     desc: 'We process your complete refund. No fine print, no conditions beyond an honest 6-month attempt with reusable pads.',
   },
 ];
@@ -231,7 +231,7 @@ export default function HealPage() {
 
             {/* Headline */}
             <motion.h1 variants={fadeInUp} className={heal.heroHeadline}>
-              Painful Periods?
+              Period Problems?
               <span className={heal.heroHeadlineAccent}>There&apos;s a Real Fix.</span>
             </motion.h1>
 
@@ -337,8 +337,7 @@ export default function HealPage() {
                   <h3 className={heal.journeyCardTitle}>Make the Switch</h3>
                   <p className={heal.journeyCardDesc}>
                     Stop using disposable sanitary napkins. Make a 100% shift to Saukhyam reusable pads.
-                    If you cannot switch immediately, follow the 2-3-4 formula to transition gradually
-                    over 3 months.
+                    If you cannot switch immediately, follow the 2-3-4 formula (explained in Step 2) to transition gradually over 3 months.
                   </p>
 
                   {/* Key insight chip */}
@@ -418,7 +417,7 @@ export default function HealPage() {
                   </div>
 
                   <a href="#formula" className={heal.journeyScrollLink}>
-                    Can&apos;t switch all at once? See the gradual formula <TbArrowRight size={14} />
+                    Can&apos;t switch all at once? See the 2-3-4 Formula <TbArrowRight size={14} />
                   </a>
                 </div>
               </motion.div>
@@ -455,12 +454,12 @@ export default function HealPage() {
 
                   <div className={heal.journeyInsight}>
                     <TbCheck size={15} className={heal.journeyInsightIcon} />
-                    <span>Zero refund claims in 2+ years of the HEAL Challenge</span>
+                    <span>0.7% refund claims in 2+ years of the HEAL Challenge</span>
                   </div>
 
                   <div className={heal.journeyMiniStats}>
                     <div className={heal.journeyMiniStat}>
-                      <span className={heal.journeyMiniNum}>0</span>
+                      <span className={heal.journeyMiniNum}>0.7%</span>
                       <span className={heal.journeyMiniLabel}>Refund claims ever</span>
                     </div>
                     <div className={heal.journeyMiniDivider} />
@@ -486,11 +485,11 @@ export default function HealPage() {
                 problems don&apos;t improve. Join hundreds of thousands who have already healed.
               </p>
               <div className={heal.dualCta}>
-                <Link href="/products" className={heal.ctaBtnPrimary}>
+                <a href="#refund" className={heal.ctaBtnPrimary}>
                   <TbLeaf size={18} />
                   Start the HEAL Challenge
                   <TbArrowRight size={18} />
-                </Link>
+                </a>
                 <a href="#faq" className={heal.ctaBtnSecondary}>
                   <TbQuestionMark size={18} />
                   Frequently Asked Questions
@@ -696,6 +695,7 @@ export default function HealPage() {
                 <strong>the full 6-month HEAL Challenge.</strong>
               </p>
             </motion.div>
+
           </motion.div>
         </div>
       </section>
@@ -709,11 +709,11 @@ export default function HealPage() {
           >
             <motion.div variants={fadeInUp} className={heal.refundZeroClaims}>
               <TbShieldCheck size={17} />
-              Zero refund claims in 2+ years of running the HEAL Challenge
+              0.7% refund claims in 2+ years of running the HEAL Challenge
             </motion.div>
 
             <motion.h2 variants={fadeInUp} className={heal.refundTitle}>
-              Sign Up for the HEAL Challenge
+              Start the HEAL Challenge
             </motion.h2>
             <motion.p variants={fadeInUp} className={heal.refundSubtitle}>
               We are confident enough in this challenge to offer a full, no-questions-asked
@@ -727,11 +727,7 @@ export default function HealPage() {
                   <div className={heal.refundCardIcon}>
                     <card.icon size={22} />
                   </div>
-                  <h3 className={heal.refundCardTitle}>
-                    {card.title.split('\n').map((line, i, arr) => (
-                      <Fragment key={i}>{line}{i < arr.length - 1 && <><br /><br /></>}</Fragment>
-                    ))}
-                  </h3>
+                  <h3 className={heal.refundCardTitle}>{card.title}</h3>
                   <p className={heal.refundCardDesc}>{card.desc}</p>
                 </motion.div>
               ))}
@@ -746,6 +742,15 @@ export default function HealPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* ── Start CTA strip ── */}
+      <div className={heal.formulaCtaWrap}>
+        <Link href="/products" className={heal.formulaCtaBtn}>
+          <TbLeaf size={18} />
+          Start the HEAL Challenge
+          <TbArrowRight size={18} />
+        </Link>
+      </div>
 
       {/* ── 7. Real Healing Stories ── */}
       <section className={heal.storiesSection}>
