@@ -739,18 +739,17 @@ export default function HealPage() {
               experience - pain, regularity, comfort - is very likely to improve. The refund
               applies when period problems do not get better in any measurable way.
             </motion.p>
+
+            <motion.div variants={fadeInUp} className={heal.formulaCtaWrap}>
+              <Link href="/products" className={heal.formulaCtaBtn}>
+                <TbLeaf size={18} />
+                Get Your Saukhyam Pads
+                <TbArrowRight size={18} />
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
-
-      {/* ── Start CTA strip ── */}
-      <div className={heal.formulaCtaWrap}>
-        <Link href="/products" className={heal.formulaCtaBtn}>
-          <TbLeaf size={18} />
-          Start the HEAL Challenge
-          <TbArrowRight size={18} />
-        </Link>
-      </div>
 
       {/* ── 7. Real Healing Stories ── */}
       <section className={heal.storiesSection}>
