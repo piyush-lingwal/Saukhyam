@@ -621,8 +621,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA Section ── */}
-      <section className={styles.ctaSection}>
+      {/* ── Donate Section ── */}
+      <section className={styles.donateSection}>
         <div className="container">
           <motion.div
             initial="hidden"
@@ -630,16 +630,51 @@ export default function HomePage() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            <motion.h2 variants={fadeInUp}>Ready to Make the Switch?</motion.h2>
-            <motion.p variants={fadeInUp} className={styles.ctaDesc}>
-              Join 5 lakh+ women who are healing their periods and healing the planet.
-              Start your journey with Saukhyam today.
-            </motion.p>
-            <motion.div variants={fadeInUp}>
-              <Link href="/products" className={styles.ctaBtnWhite}>
-                <ShoppingBag size={20} />
-                Shop Now
+            {/* Header */}
+            <motion.div variants={fadeInUp} className={styles.donateHeader}>
+              <div className={styles.donateBadge}>
+                <HandHeart size={14} />
+                Support the Mission
+              </div>
+              <h2 className={styles.donateTitle}>
+                Every Rupee Reaches a Real Woman
+              </h2>
+              <p className={styles.donateSubtitle}>
+                Saukhyam Foundation runs free menstrual health programmes, distributes
+                reusable pads to underprivileged girls, and trains community health workers
+                across India. Your donation makes it possible.
+              </p>
+            </motion.div>
+
+            {/* Impact amount cards */}
+            <motion.div variants={fadeInUp} className={styles.donateImpactGrid}>
+              <div className={styles.donateImpactCard}>
+                <span className={styles.donateAmount}>&#x20B9;50</span>
+                <span className={styles.donateImpactLabel}>Provides reusable pads for 1 girl for a month</span>
+              </div>
+              <div className={`${styles.donateImpactCard} ${styles.donateImpactCardHighlight}`}>
+                <span className={styles.donateAmount}>&#x20B9;200</span>
+                <span className={styles.donateImpactLabel}>Gives 1 girl a full year of safe, chemical-free periods</span>
+              </div>
+              <div className={styles.donateImpactCard}>
+                <span className={styles.donateAmount}>&#x20B9;500</span>
+                <span className={styles.donateImpactLabel}>Funds a community health session at a satellite centre</span>
+              </div>
+              <div className={styles.donateImpactCard}>
+                <span className={styles.donateAmount}>&#x20B9;1,000</span>
+                <span className={styles.donateImpactLabel}>Sponsors menstrual health education for an entire school</span>
+              </div>
+            </motion.div>
+
+            {/* CTA */}
+            <motion.div variants={fadeInUp} className={styles.donateCta}>
+              <Link href="/contact" className={styles.donateBtnPrimary}>
+                <HandHeart size={20} />
+                Donate Now
               </Link>
+              <p className={styles.donateTrust}>
+                Saukhyam Foundation is a registered nonprofit. All donations go directly to programme expenses.
+              </p>
             </motion.div>
           </motion.div>
         </div>
