@@ -226,6 +226,18 @@ export default function HealPage() {
           />
         </div>
 
+        {/* ── Logo — absolute top-left of hero section ── */}
+        <div className={heal.heroLogoInline}>
+          <Image
+            src="/HealLogo/HEAL logo RGB_Horizontal with tag line.png"
+            alt="HEAL - Health, Environment & Active Living"
+            width={220}
+            height={56}
+            className={heal.heroLogo}
+            priority
+          />
+        </div>
+
         {/* ── Centered content over image ── */}
         <motion.div
           className={heal.heroInner}
@@ -234,18 +246,6 @@ export default function HealPage() {
           variants={stagger}
         >
           <motion.div variants={stagger} className={heal.heroContent}>
-            {/* Logo */}
-            <motion.div variants={fadeInUp} className={heal.heroLogoInline}>
-              <Image
-                src="/HealLogo/HEAL logo RGB_Horizontal with tag line.png"
-                alt="HEAL - Health, Environment & Active Living"
-                width={220}
-                height={56}
-                className={heal.heroLogo}
-                priority
-              />
-            </motion.div>
-
             {/* Eyebrow */}
             <motion.div variants={fadeInUp} className={heal.heroEyebrow}>
               The 6-Month Money-Back Challenge
@@ -259,8 +259,9 @@ export default function HealPage() {
 
             {/* Sub-copy */}
             <motion.p variants={fadeInUp} className={heal.heroSubcopy}>
-              Switch to Saukhyam reusable pads for 6 months.
-              Period problems not better? Return your pads - even used - for a full refund.
+              Switch to Saukhyam reusable pads for 6 months.<br />
+              Period problems not better?<br />
+              Return your pads - even used - for a full refund.
             </motion.p>
           </motion.div>
         </motion.div>

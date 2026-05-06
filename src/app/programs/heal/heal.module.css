@@ -94,27 +94,30 @@
   justify-content: center;
 }
 
-/* ── Centered text content ── */
+/* ── Text content — centered ── */
 .heroContent {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  width: 100%;
 }
 
-/* ── Logo pill ── */
+/* ── Logo pill — absolute top left of heroSection ── */
 .heroLogoInline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
   background: white;
-  border-radius: var(--radius-full);
-  padding: var(--space-3) var(--space-8);
+  border-radius: 0 0 var(--radius-2xl) 0;
+  padding: var(--space-3) var(--space-8) var(--space-3) var(--space-5);
   display: inline-flex;
   align-items: center;
-  margin-bottom: var(--space-7);
-  transform: translateY(-12px);
 }
 
 .heroLogo {
-  height: 76px;
+  height: 60px;
   width: auto;
   display: block;
   object-fit: contain;
@@ -131,6 +134,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  align-self: center;
 }
 
 .heroEyebrow::before,
@@ -1756,7 +1760,7 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-4) var(--space-12);
-  background: var(--heal-pink);
+  background: var(--green-600);
   color: white;
   font-family: var(--font-heading);
   font-size: var(--text-base);
@@ -1770,10 +1774,10 @@
 }
 
 .formulaCtaBtn:hover {
-  background: var(--heal-pink-hover);
+  background: var(--green-700);
   color: white;
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(232,24,90,0.4), 0 0 0 4px rgba(232,24,90,0.12);
+  box-shadow: 0 12px 32px rgba(22,163,74,0.35), 0 0 0 4px rgba(22,163,74,0.12);
 }
 
 .formulaNote {
