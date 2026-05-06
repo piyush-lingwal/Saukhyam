@@ -215,15 +215,37 @@ export default function HealPage() {
       {/* ── 1. Hero ── */}
       <section className={heal.heroSection}>
 
-        {/* ── Split content: text left, logo right ── */}
+        {/* ── Background photo layer ── */}
+        <div className={heal.heroBgPhoto} aria-hidden="true">
+          <Image
+            src="/HEAL Page Photos/Photo3.jpeg"
+            alt=""
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            priority
+          />
+        </div>
+
+        {/* ── Centered content over image ── */}
         <motion.div
           className={heal.heroInner}
           initial="hidden"
           animate="visible"
           variants={stagger}
         >
-          {/* Left: text content */}
           <motion.div variants={stagger} className={heal.heroContent}>
+            {/* Logo */}
+            <motion.div variants={fadeInUp} className={heal.heroLogoInline}>
+              <Image
+                src="/HealLogo/HEAL logo RGB_Horizontal with tag line.png"
+                alt="HEAL - Health, Environment & Active Living"
+                width={220}
+                height={56}
+                className={heal.heroLogo}
+                priority
+              />
+            </motion.div>
+
             {/* Eyebrow */}
             <motion.div variants={fadeInUp} className={heal.heroEyebrow}>
               The 6-Month Money-Back Challenge
@@ -240,20 +262,6 @@ export default function HealPage() {
               Switch to Saukhyam reusable pads for 6 months.
               Period problems not better? Return your pads - even used - for a full refund.
             </motion.p>
-
-            {/* CTAs */}
-          </motion.div>
-
-          {/* Right: logo pill */}
-          <motion.div variants={fadeInUp} className={heal.heroLogoPill}>
-            <Image
-              src="/HealLogo/HEAL logo RGB_Horizontal with tag line.png"
-              alt="HEAL - Health, Environment & Active Living"
-              width={320}
-              height={80}
-              className={heal.heroLogo}
-              priority
-            />
           </motion.div>
         </motion.div>
 
@@ -479,6 +487,15 @@ export default function HealPage() {
 
             {/* ── Ready to Take the HEAL Challenge ── */}
             <motion.div variants={fadeInUp} className={heal.journeyCtaBanner}>
+              {/* Background photo */}
+              <div className={heal.journeyCtaBannerBg} aria-hidden="true">
+                <Image
+                  src="/HEAL Page Photos/Photo2.jpeg"
+                  alt=""
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+                />
+              </div>
               <h2 className={heal.journeyCtaTitle}>Ready to Take the HEAL Challenge?</h2>
               <p className={heal.journeyCtaDesc}>
                 6 months. A complete switch to Saukhyam reusable pads. A full refund if your period
@@ -702,7 +719,19 @@ export default function HealPage() {
 
       {/* ── 6. Sign Up / Refund Promise ── */}
       <section id="refund" className={heal.refundSection}>
-        <div className="container">
+        <div className={heal.refundLayout}>
+          {/* Photo1 side image */}
+          <div className={heal.refundPhotoCol}>
+            <Image
+              src="/HEAL Page Photos/Photo1.jpeg"
+              alt="Woman enrolling in the HEAL Challenge"
+              fill
+              style={{ objectFit: 'cover', objectPosition: 'center top' }}
+            />
+            <div className={heal.refundPhotoOverlay} aria-hidden="true" />
+          </div>
+
+          {/* Content side */}
           <motion.div
             className={heal.refundSectionInner}
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
@@ -748,7 +777,7 @@ export default function HealPage() {
               </Link>
             </motion.div>
           </motion.div>
-        </div>
+        </div>{/* end refundLayout */}
       </section>
 
       {/* ── 7. Real Healing Stories ── */}
