@@ -218,7 +218,7 @@ export default function HealPage() {
         {/* ── Background photo layer ── */}
         <div className={heal.heroBgPhoto} aria-hidden="true">
           <Image
-            src="/HEAL Page Photos/Photo3.jpeg"
+            src="/HEAL Page Photos/Photo3.png"
             alt=""
             fill
             style={{ objectFit: 'cover', objectPosition: 'center' }}
