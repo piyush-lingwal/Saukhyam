@@ -1,0 +1,72 @@
+VoiceNote:- 1
+n CARE, the idea is that a college campus takes steps to eliminate carbon emissions or reduce its carbon footprint. If 200 girls on a college campus make the shift to reusable products—and for HEAL, it was only Saukhyam, isn't it, because a refund was involved? You don't have to put this in writing, but just for your own understanding. But in CARE, we work with partner brands and make their products available too, including reusable pads of other brands, menstrual cups, and period panties. In fact, we can have a section where brands can fill up a small form to say that they want to partner with CARE so that their products can also be made available on campus stores inside college campuses. Usually, every college campus that has hostels will have some kind of small store on their premises, so these products can be made available there.
+
+But coming back to the messaging for the campus administration: We are building this page for the campus top leadership. CARE stands for Campus Action for Reusable Essentials. It is designed so that boys and girls take steps to reduce the usage of disposables on their campus. Later they can extend it to other things as well, but we start with menstrual products. So instead of disposable sanitary napkins, we move towards reusable menstrual products.
+
+What do boys do? Boys also play a vital role because we want to break taboos that exist—if only girls talk about periods, boys are never included in that conversation. In fact, on this page, we can embed one video that has over 1 crore views on YouTube which talks about the importance of including boys in the conversation as well. Boys can help design posters, man stalls, and act as ambassadors.
+
+Who is a CARE ambassador? Every college that starts CARE should put together a small team of ambassadors. The team is chosen from those who have already made the shift to reusable products themselves. It usually proceeds like this: First, the products are made available in the campus store. Then, if there is an opportunity either online or in person, an awareness workshop is done. The girls get to try the products and hopefully make a shift, which gives them the opportunity to apply to become a CARE ambassador. Ambassadors are by no means girls alone; boys are also welcome. It can be a small team of 3 to 4, or two teams of the same size, taking up different parts of the campus. For very big campuses with many schools, there can be one team of CARE ambassadors per school.
+
+CARE ambassadors are enrolled and run sustained campaigns for one semester on campus. Running a campaign means putting up posters in the hostel and hosting 'solidarity circles' (or another name) where experienced users answer questions about how to use, wash, and dry the products, or how to insert a menstrual cup. It also involves setting up pop-up stalls near high-traffic areas like cafes. Both boys and girls can man these stalls, though initially, girls can man them if it makes people more comfortable. These visible campaigns increase the uptake of reusables.
+
+They also conduct events on suitable days. September is PCOS Awareness Month, so the HEAL campaign can be run then. July is Plastic Free Month; since microplastics from disposable pads enter our bodies and people do not know about this, awareness can be built around that. Other days include Earth Day and World Environment Day.
+
+These awareness activities usually continue for at least two semesters. Then, the ambassadors graduate and a new team is formed. Colleges don't have to spend any money. As colleges tell us, it transforms their campus and sustainability takes deep roots. This is as far as CARE is concerned; I will leave a separate message about Careathon."
+
+VoiceNote:-2
+    So now, what is the Careathon? A Careathon is when we work with a cohort of colleges. In Dehradun, we started with a cohort, but that was actually the wrong approach. Generally, we should work with one or two colleges in a city and go deep into those colleges first. They should first implement CARE over a whole year—across two semesters—in their own campuses, and then they are ready to host a Careathon. In the initial stages at Tula's, we were still learning. Before we fully implemented CARE in Tula's, we implemented it in six colleges at the same time. The downside to that was nobody really knew what CARE was all about. Still, people did their best and some gains were made, but now we have fine-tuned this model.
+
+Again, this is all for your own understanding, not for putting on the webpage. But the right way to do a Careathon—and by the way, Tula's coined the term 'Careathon,' so full credit to them for that. We can certainly explain what a hackathon is for the IT folks who would know that, and use it to explain a Careathon. A Careathon is a sustained effort at making sustainability central to menstrual product choices.
+
+If one campus has done it in a city, it can then host a Careathon. There are no expenses for implementing CARE, and the expenses for hosting a Careathon are minimal. Usually, either the Saukhyam Foundation takes care of it, or the costs are split between the host university and Saukhyam. Considering the gains to be had, the expenses are very minimal. It operates like a competition: a certain amount of time is given, say one semester, and folks make the same changes on their campuses. The teams sign up to participate.
+
+The key thing is that even after the Careathon ends, the colleges are expected to continue their efforts as part of the CARE implementation because that is when the real gains are made. In just four months, we cannot make deep changes; we can start a movement, but it needs to continue. Hopefully, it will reach a self-sustaining point, and after that, no more changes or active efforts are needed.
+
+So, we should also have a form for colleges who want to start CARE in their own city. Essentially, they are filling up the form to become a 'Nodal College.' A college located in a city where we already have Nodal Colleges doesn't need to contact us directly; they can be reached through the Careathons that we host. I hope this makes sense. That is why the form should be placed in this particular section, or immediately after it."
+
+Analysis of the Careathon Initiative & Rollout Strategy
+Based on the transcript, here is a breakdown of the operational model, financial structure, and web-page requirements for the Careathon program.
+
+VoiceNote:- 3
+So, only two forms are needed: one is for inviting brands if they want to join this movement of reusable menstrual products, and the other is for colleges to sign up if those colleges are in cities other than where our movement is currently ongoing. Actually, we can ask any college to sign up.
+
+Now, what is the goal for one semester? As I said, 200 girls making a switch leads to a certain climate impact: one ton of carbon dioxide equivalent is reduced. But other than that, there is something known as the—I forget the exact name of the effect, but it has to do with bell curves; I will share the write-up for it with you. Every diffusion of an innovation through a population follows this bell curve. The thing is, you have to cross 16%, and especially, you have to cross what is known as the 'chasm of death' before that. If you get up to, say, 13% or something, but don't cross over to 16%, you will plunge into the valley of death. Once I share the photos or the write-up with you, it will be apparent.
+
+So, until you get to 16%, you have to keep putting in sustained effort. This 16% number should be determined right at the start so that the team knows the goal. Earlier we introduced CARE ambassadors, a team of four to five students. We should also have CARE mentors, a team of two to three faculty or staff members. These are folks who have some standing in the college; people will listen to them, and they have some authority.
+
+This team should first calculate: What is the tipping point? How many total girls are there? What would be 16% of that? And what would it take for that number of girls to make the shift? A team of four to five ambassadors working one-on-one with students can easily, easily achieve this if the ambassadors have made the shift themselves. So, the processes we follow are quite robust and it can be done, but it needs sustained effort over a period of a year.
+
+And what is in it for the colleges? They get to report it for their NAAC accreditations. One ton of carbon dioxide equivalent prevented is a big deal. Secondly, sustainability takes root in the college and creates a change in the college campus culture. And the third big gain is that boys and girls feel comfortable enough to work on this topic together, which helps to break so many taboos. I will give you the link to that film also now, so we can try and embed it into this page"
+
+after these voice note ,she shares this utube video link - "https://www.youtube.com/watch?v=fB9_nJ-j2v0&t=24s"  for more better understanding and after that a pdf which contain theoey of diffusion of innovation ,i had that pdf as well in saukhyam main folder 
+
+and after all these again voice notes 
+
+VoiceNote:-4
+"This is a very, very detailed explanation of what the theory of diffusion of innovation is. Again, it is for you—not all of it needs to find a place on the page. But I think you have a good ability, either yourself or working with AI, to extract the key points and to say it in a very nice way. So let's try and do that, because we will have to explain this 16%. The part about the chasm, there is no need to explain that in as much detail. But we definitely have to explain this 16% to show that we need to keep working until we reach that point."
+
+VoiceNote:- 5
+This 16% is reached in one year. If it is reached in one semester, nothing like it, but one additional semester is given in case in one semester, you know, sufficient momentum is not built up.
+
+VoiceNote:-6
+"Every year we also host the CARE awards. In Dehradun it is pending. Dehradun mein jaise maine kaha ki humne Careathon, we jumped to Careathon. But anyways, we host the CARE awards and in Bhubaneswar we are hosting and we are getting many nominations. I will share with you the creative for that. So ek section CARE awards ke liye bhi ho sakta hai. And maybe, I don't know if we have a nomination link in that and we make it active every year when the new nominations are happening and the rest of the time it can say that nominations are now closed. Check back again here when CARE awards are announced for your city. So something like that we can try."
+
+and after that she has send me linkedin post link list in a pdf which i had added in saukhyam folder 
+
+VoiceNote:- 7
+"Piyush, so one girl who makes the shift to reusable menstrual products helps to prevent the emission of 5.8 kg carbon dioxide equivalent annually every year. Every year for the rest of her menstruating lifetime, she will create this climate impact. That is the equation, that is how the 200 girls and 1 ton comes. So if somewhere this needs to be explained... This 5.8 kg comes from, it's there in published literature also. It's there in some of the papers I think we also referenced to them on the science page. And it is as per our calculations also. We have also worked with a European institute to come up with the climate impact. If needed, we can put that explanation also. And I will see if we can try and get, you know, this is equivalent to planting this many trees or whatever to give a sort of a... I think one of my posts, one of my LinkedIn posts which I've shared, the second post I think, where it says that a pad in a school girl's handbag or school bag is can be a climate solution. In that also I've given some calculations, so see if we can, if anything is of relevance, if we can take from there also(she is talking about 2nd link in the pdf)"
+
+VoiceNote:-8
+"And one last point, toh HEAL mein toh hum individual ke upar focus kar rahe hain, CARE mein hum campus ke upar focus kar rahe hain. Toh jo photos hum create karenge, if we can show, you know, buildings at the back and students in front and a mix of boys and girls, I think those kinds of photos, you know, we can use. Of course, campus ambassadors are few only, and when we are talking about 200 girls making a shift and so on, so anyway, I'm sure ChatGPT will create the right photos. "
+
+VoiceNote:-9
+"Piyush, one important point I want to make for the CARE page. So CARE is a student-driven movement. It is not driven by the campus administration, and neither is it driven by Saukhyam Foundation or its partners. It is a student-driven movement, and the best CARE implementations happen when the team of CARE ambassadors on the college campus takes initiative, believes in the cause, makes the shift themselves, and then proceeds to run small campaigns in the hostels and also in the college itself.
+
+The role of the campus administration is to form a small team of faculty and staff that can provide very visible support to this team of campus ambassadors. And the role of Saukhyam Foundation is to ensure that period products of different brands are made available in the campus store, and also all the material for the campaign is provided to the student ambassadors, and the training is given.
+
+So that's how it runs. I mean, I am mentioning some of these things because if we have a very clear page for CARE, like we do for HEAL right now... HEAL is B2C. In other words, we are not a business, but you know what is traditionally known as business-to-consumer. So it is for individual people, for a person who's having a period disorder.
+
+CARE is B2B. We don't need to put that on the page, of course, but again for your own understanding. So this is for one organization to another—from Saukhyam to the university administration. If we have a clear page that tells what CARE is, then just like HEAL, we managed to get a very good page that is clear for the person who's going to sign up that this is how it is. That is what I'm trying to drive here. And CARE has to be student-led; it cannot be faculty-led or Saukhyam-led. So that point, if we can bring out nicely, that would be great. Thank you."
+
+VoiceNote:-10
+And of course, just like there are CARE ambassadors, there are CARE mentors also. So, in fact, we are having awards—awards in two categories. Where we mention the CARE awards, there we can mention the CARE mentors. Mentors are usually the faculty and staff."

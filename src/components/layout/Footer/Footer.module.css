@@ -171,6 +171,14 @@
 }
 
 
+/* ══════════════════════════════════════════════════
+   CARE PAGE THEME — activated by [data-page-theme="care"] on <html>
+   ══════════════════════════════════════════════════ */
+
+:global([data-page-theme="care"]) .footer::before {
+  background: linear-gradient(90deg, var(--green-400), #0D9488, var(--green-400));
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .footerTop {

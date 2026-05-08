@@ -365,6 +365,31 @@
   background: rgba(232, 24, 90, 0.06);
 }
 
+/* ══════════════════════════════════════════════════
+   CARE PAGE THEME — activated by [data-page-theme="care"] on <html>
+   Colors: #0D9488 (teal) · #0F766E (deep teal) · #134E4A (dark teal)
+   ══════════════════════════════════════════════════ */
+
+:global([data-page-theme="care"]) .cartBadge {
+  background: #0D9488;
+}
+
+:global([data-page-theme="care"]) .navLink:hover {
+  color: #0D9488;
+  background: rgba(13, 148, 136, 0.06);
+}
+:global([data-page-theme="care"]) .navLink.active {
+  color: #0D9488;
+}
+:global([data-page-theme="care"]) .navLink.active::after {
+  background: #0D9488;
+}
+
+:global([data-page-theme="care"]) .actionBtn:hover {
+  color: #0D9488;
+  background: rgba(13, 148, 136, 0.06);
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .navLinks {
