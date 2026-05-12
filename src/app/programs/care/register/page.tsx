@@ -1,6 +1,7 @@
 ﻿'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
@@ -16,9 +17,14 @@ import {
   TbSend,
   TbShieldCheck,
   TbCheck,
-  TbSparkles,
-  TbRocket,
-  TbInfinity,
+  TbBolt,
+  TbMessageCircle,
+  TbStar,
+  TbRecycle,
+  TbWorld,
+  TbAward,
+  TbCertificate,
+  TbMail,
 } from 'react-icons/tb';
 import care from '../care.module.css';
 
@@ -32,55 +38,90 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 const campusEvents = [
   {
-    month: 'July',
-    name: 'Plastic Free Month',
-    desc: 'Microplastics from disposable pads enter our bodies and most people do not know about this. CARE runs awareness campaigns around plastic-free choices for periods.',
+    month: 'January – February',
+    name: 'Semester 1 Campaign Launch',
+    desc: 'CARE ambassadors kick off the academic year with hostel campaigns, pop-up stalls in high-traffic areas, and solidarity circles. Products are stocked in the campus store for the first time.',
+    tag: 'Semester Start',
   },
   {
-    month: 'September',
-    name: 'PCOS Awareness Month',
-    desc: 'Run the HEAL challenge on campus - connect period health with the chemical exposure from disposable pads. PCOS affects 6 crore Indian women.',
+    month: 'May 28',
+    name: 'World Menstrual Hygiene Day',
+    desc: 'The biggest awareness moment in the CARE calendar. Campuses run open stalls, panel discussions, social media drives, and invite the wider community to join the conversation.',
+    tag: 'Global Day',
   },
   {
-    month: 'April',
-    name: 'Earth Day',
-    desc: '1 girl switching saves 125+ kg of lifetime pad waste. Earth Day is a powerful moment for campus-wide sustainability pledges.',
+    month: 'July – August',
+    name: 'Semester 2 CARE Launch',
+    desc: 'A fresh wave of hostel campaigns begins with new student cohorts. Nodal CARE Colleges support neighbouring campuses. Returning ambassadors mentor new recruits.',
+    tag: 'Semester Start',
   },
   {
-    month: 'June',
-    name: 'World Environment Day',
-    desc: 'Celebrate the campus\'s progress toward its sustainability and carbon reduction commitments with visible campaigns and ambassador recognitions.',
+    month: 'November – December',
+    name: 'CARE Awards Ceremony',
+    desc: 'Annual recognition of top student ambassadors, faculty mentors, and the most impactful campuses of the year. Hosted city by city across India by Saukhyam Foundation.',
+    tag: 'Annual Event',
   },
 ];
 
-const careathonSteps = [
+const awardCategories = [
   {
-    num: '01',
-    icon: TbSchool,
-    title: 'Implement CARE on Your Campus',
-    desc: 'One college implements CARE properly — across at least two semesters — with ambassadors, mentors, store availability, and sustained campaigns.',
-    tag: 'CARE Impact Certificate',
-  },
-  {
-    num: '02',
-    icon: TbBuildingCommunity,
-    title: 'Become a Nodal College',
-    desc: 'After a full year of successful implementation, the college is invited to become a Nodal CARE College — the top 5% of all CARE campuses in India.',
-    tag: 'Nodal College Status',
-  },
-  {
-    num: '03',
     icon: TbTrophy,
-    title: 'Host a Careathon',
-    desc: 'Invite other colleges in the city to participate in a semester-long competition. Teams sign up, set targets, and race to make the shift on their campuses.',
-    tag: 'Careathon Host Trophy',
+    category: 'Student Award',
+    title: 'CARE Ambassador of the Year',
+    desc: 'Recognising the student ambassador or team that demonstrated exceptional initiative, sustained campaign effort, and measurable impact in shifting their campus toward reusable menstrual products.',
   },
   {
-    num: '04',
-    icon: TbInfinity,
-    title: 'Sustain and Graduate',
-    desc: 'Ambassadors graduate and new teams are formed each year. The movement becomes self-sustaining — CARE lives beyond any single batch of students.',
-    tag: 'Self-sustaining Movement',
+    icon: TbCertificate,
+    category: 'Faculty/Staff Award',
+    title: 'CARE Mentor of the Year',
+    desc: 'Recognising the faculty or staff member who provided visible, sustained, and impactful support to the student ambassador team - enabling the movement to take root on campus.',
+  },
+];
+
+
+const whatIsPoints = [
+  {
+    icon: TbUsers,
+    title: 'Student-Led, Always',
+    desc: 'CARE is driven by students, not faculty or Saukhyam. The best implementations happen when student ambassadors take initiative and believe in the cause.',
+  },
+  {
+    icon: TbBuildingCommunity,
+    title: 'Multi-Brand Access',
+    desc: 'Unlike HEAL, CARE works with partner brands — reusable pads of various brands, menstrual cups, and period panties are all made available in the campus store.',
+  },
+  {
+    icon: TbRecycle,
+    title: 'Campus-Scale Impact',
+    desc: '200 girls making the switch prevents 1 ton of CO₂ equivalent annually — and qualifies for NAAC sustainability reporting.',
+  },
+  {
+    icon: TbWorld,
+    title: 'Breaking Taboos Together',
+    desc: 'Boys are equal participants — designing posters, manning stalls, and acting as ambassadors to normalize the conversation on campus.',
+  },
+];
+
+const campaignTypes = [
+  {
+    icon: TbMessageCircle,
+    title: 'Solidarity Circles',
+    desc: 'Small group sessions where experienced users answer questions on usage, washing, and drying reusable products.',
+  },
+  {
+    icon: TbBolt,
+    title: 'Pop-up Stalls',
+    desc: 'High-traffic areas near cafes and common rooms — both boys and girls can man these stalls.',
+  },
+  {
+    icon: TbCalendarEvent,
+    title: 'Hostel Campaigns',
+    desc: 'Posters, one-on-one conversations, and buddy support within hostels over the full semester.',
+  },
+  {
+    icon: TbStar,
+    title: 'Awareness Workshops',
+    desc: 'Structured workshops on the science of disposable pad chemicals, PCOS links, and environmental impact.',
   },
 ];
 
@@ -102,6 +143,9 @@ export default function CareRegisterPage() {
     collegeName: '', city: '', contactPerson: '', designation: '', email: '', message: '',
   });
   const [collegeSubmitted, setCollegeSubmitted] = useState(false);
+  const [notifEmail, setNotifEmail] = useState('');
+  const [notifCity, setNotifCity]   = useState('');
+  const [notifSent, setNotifSent]   = useState(false);
 
   useEffect(() => {
     document.documentElement.dataset.pageTheme = 'care';
@@ -111,6 +155,11 @@ export default function CareRegisterPage() {
   const handleCollegeSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setCollegeSubmitted(true);
+  };
+
+  const handleNotifSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (notifEmail.trim() && notifCity) setNotifSent(true);
   };
 
   return (
@@ -138,6 +187,180 @@ export default function CareRegisterPage() {
               <ArrowLeft size={16} /> Back to CARE
             </Link>
           </div>
+        </div>
+      </section>
+
+
+      {/* ── Bring CARE to Your College ── */}
+      <section className={care.whatIsSection}>
+        <div className="container">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeInUp} className={care.whatIsGrid}>
+
+              {/* Left: headline + intro + CARE acronym + stat cards */}
+              <div>
+                <div className={care.sectionBadge}><TbBolt size={14} /> Why CARE?</div>
+                <h2 className={care.whatIsHeadline}>
+                  <span className={care.whatIsHeadlinePre}>Bring CARE</span>
+                  <span className={care.whatIsHeadlineAccent}>to Your College</span>
+                </h2>
+
+                <p className={care.whatIsIntro}>
+                  CARE is India&apos;s first structured, student-led campus programme for menstrual sustainability.
+                  Unlike one-off awareness drives, CARE targets the campus as a unit — building
+                  ambassadors, breaking taboos, and shifting an entire generation toward reusable products.
+                  No cost to the college. Real, measurable impact.
+                </p>
+
+                <div className={care.careAcronym}>
+                  {[
+                    { letter: 'C', word: 'Campus',     meaning: 'Taking the shift to where 200+ girls live, learn, and lead together.' },
+                    { letter: 'A', word: 'Action',     meaning: 'Real campaigns and real products — not just awareness posters.' },
+                    { letter: 'R', word: 'Reusable',   meaning: 'Cloth pads, menstrual cups, and period panties replacing disposables.' },
+                    { letter: 'E', word: 'Essentials', meaning: 'A need every girl has, every month, for the next 30 years of her life.' },
+                  ].map((item) => (
+                    <motion.div key={item.letter} variants={fadeInUp} className={care.careAcronymRow}>
+                      <span className={care.careAcronymLetter}>{item.letter}</span>
+                      <span className={care.careAcronymWord}>{item.word}</span>
+                      <span className={care.careAcronymMeaning}>{item.meaning}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className={care.whatIsStatGrid}>
+                  {[
+                    { value: '₹0',   label: 'Cost to the college',             accent: '#7C3AED' },
+                    { value: '200',  label: 'Girls = 1 ton CO₂ prevented',      accent: '#C026D3' },
+                    { value: 'NAAC', label: 'Reportable sustainability impact',  accent: '#E8185A' },
+                  ].map((stat) => (
+                    <div key={stat.value} className={care.whatIsStatCard} style={{ '--stat-accent': stat.accent } as React.CSSProperties}>
+                      <span className={care.whatIsStatValue}>{stat.value}</span>
+                      <span className={care.whatIsStatLabel}>{stat.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: bento mosaic grid */}
+              <motion.div variants={stagger} className={care.bentoGrid}>
+                {whatIsPoints.map((point, i) => (
+                  <motion.div
+                    key={point.title}
+                    variants={fadeInUp}
+                    transition={{ type: 'spring', stiffness: 110, damping: 20, delay: i * 0.1 }}
+                    className={care.bentoCard}
+                  >
+                    <div className={care.bentoCardStripe} />
+                    <div className={care.bentoCardBody}>
+                      <div className={care.bentoCardIcon}>
+                        <point.icon size={i === 0 ? 28 : 24} />
+                      </div>
+                      <div className={care.bentoCardText}>
+                        <span className={care.bentoCardNum}>0{i + 1}</span>
+                        <div className={care.bentoCardTitle}>{point.title}</div>
+                        <p className={care.bentoCardDesc}>{point.desc}</p>
+                      </div>
+                    </div>
+                    {i === 0 && (
+                      <div className={care.bentoCardImageWrap}>
+                        <Image
+                          src="/CARE Page Photos/Students.png"
+                          alt="CARE student ambassadors"
+                          fill
+                          className={care.bentoCardImage}
+                          sizes="220px"
+                        />
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </motion.div>
+
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+
+      {/* ── CARE Team: Roles, Responsibilities and Campaigns ── */}
+      <section className={care.structureSection}>
+        <div className="container">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.div variants={fadeInUp} className={care.structureHeader}>
+              <div className={care.sectionBadge}><TbUsers size={14} /> The CARE Team</div>
+              <h2 className={care.structureTitle}>Roles, Responsibilities<br />and Campaigns</h2>
+              <p className={care.structureSubtitle}>
+                Every CARE implementation has three layers: a student team, a faculty support team,
+                and a campus store making reusable products available.
+              </p>
+            </motion.div>
+
+            <motion.div variants={stagger} className={care.rolesGrid}>
+              <motion.div variants={fadeInUp} className={care.roleCard}>
+                <div className={care.roleCardHeader}>
+                  <div className={care.roleIconCircle}><TbUsers size={28} /></div>
+                  <div className={care.roleCardNum}>01</div>
+                </div>
+                <div className={care.roleCardBody}>
+                  <div className={care.roleLabel}>Students</div>
+                  <div className={care.roleTitle}>CARE Ambassadors</div>
+                  <div className={care.roleCount}>Team of 4–5</div>
+                  <p className={care.roleDesc}>
+                    Chosen from students who have already made the shift themselves. They run hostel
+                    campaigns, solidarity circles, and pop-up stalls — the engine of the movement.
+                    Both boys and girls are welcome.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeInUp} className={care.roleCard}>
+                <div className={care.roleCardHeader}>
+                  <div className={care.roleIconCircle}><TbSchool size={28} /></div>
+                  <div className={care.roleCardNum}>02</div>
+                </div>
+                <div className={care.roleCardBody}>
+                  <div className={care.roleLabel}>Faculty / Staff</div>
+                  <div className={care.roleTitle}>CARE Mentors</div>
+                  <div className={care.roleCount}>Team of 2–3</div>
+                  <p className={care.roleDesc}>
+                    Faculty or staff members with standing in the college who provide visible support
+                    to the ambassador team. Their presence and authority enables the campaign
+                    to reach wider and persist longer.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeInUp} className={care.roleCard}>
+                <div className={care.roleCardHeader}>
+                  <div className={care.roleIconCircle}><TbBuildingCommunity size={28} /></div>
+                  <div className={care.roleCardNum}>03</div>
+                </div>
+                <div className={care.roleCardBody}>
+                  <div className={care.roleLabel}>Campus Store</div>
+                  <div className={care.roleTitle}>Product Access</div>
+                  <div className={care.roleCount}>Multi-brand</div>
+                  <p className={care.roleDesc}>
+                    Reusable pads of multiple brands, menstrual cups, and period panties made
+                    available in the campus store. Saukhyam Foundation coordinates availability
+                    with partner brands at no cost to the college.
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <div className={care.campaignsSub}>Our Campaigns</div>
+            </motion.div>
+            <motion.div variants={stagger} className={care.campaignsGrid}>
+              {campaignTypes.map((c) => (
+                <motion.div key={c.title} variants={fadeInUp} className={care.campaignCard}>
+                  <div className={care.campaignIcon}><c.icon size={22} /></div>
+                  <div className={care.campaignTitle}>{c.title}</div>
+                  <div className={care.campaignDesc}>{c.desc}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -242,19 +465,17 @@ export default function CareRegisterPage() {
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeInUp} className={care.eventsHeader}>
-              <div className={care.sectionBadge}><TbCalendarEvent size={14} /> Key Dates</div>
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', fontWeight: 800, color: 'var(--care-purple-dark)', letterSpacing: '-0.03em', lineHeight: 1.15, marginBottom: 'var(--space-4)' }}>
-                Run Campaigns on These Days
-              </h2>
-              <p style={{ fontSize: 'var(--text-lg)', color: 'var(--color-text-secondary)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.75 }}>
-                These dates give campaigns a hook - a reason to reach out, put up posters,
-                and host events that are already on the public consciousness.
+              <div className={care.sectionBadge}><TbCalendarEvent size={14} /> Mark Your Calendar</div>
+              <h2 className={care.structureTitle}>Key Events in the CARE Year</h2>
+              <p className={care.structureSubtitle}>
+                CARE runs year-round. These are the anchor moments every campus should plan around.
               </p>
             </motion.div>
 
             <motion.div variants={stagger} className={care.eventsGrid}>
               {campusEvents.map((ev) => (
                 <motion.div key={ev.name} variants={fadeInUp} className={care.eventCard}>
+                  <div className={care.eventTag}>{ev.tag}</div>
                   <div className={care.eventMonth}>{ev.month}</div>
                   <div className={care.eventName}>{ev.name}</div>
                   <p className={care.eventDesc}>{ev.desc}</p>
@@ -266,60 +487,85 @@ export default function CareRegisterPage() {
       </section>
 
 
-      {/* ── 3. Careathon Journey ── */}
-      <section className={care.journeySection}>
+      {/* ── CARE Awards ── */}
+      <section className={care.awardsSection}>
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-
-            {/* Header */}
-            <motion.div variants={fadeInUp} className={care.journeyHeader}>
+            <motion.div variants={fadeInUp} className={care.awardsHeader}>
               <div className={care.sectionBadge}>
-                <TbTrophy size={14} /> Multi-College Competition
+                <TbAward size={14} /> Annual Recognition
               </div>
-              <h2 className={care.journeyTitle}>The Careathon Journey</h2>
-              <p className={care.journeySubtitle}>
-                Four phases — from first implementation to a self-sustaining city-wide movement.
-                Every college starts at Phase 01.
+              <h2 className={care.awardsTitle}>CARE Awards</h2>
+              <p className={care.awardsSubtitle}>
+                Every year, Saukhyam Foundation hosts the CARE Awards to recognise the students
+                and faculty who drove the most impactful campus transformations.
               </p>
             </motion.div>
 
-            {/* 2×2 milestone grid */}
-            <motion.div variants={stagger} className={care.journeyGrid}>
-              {careathonSteps.map((step) => (
-                <motion.div key={step.num} variants={fadeInUp} className={care.journeyCard}>
-                  <div className={care.journeyCardWatermark}>{step.num}</div>
-                  <div className={care.journeyCardPhase}>Phase {step.num}</div>
-                  <div className={care.journeyCardIcon}><step.icon size={26} /></div>
-                  <div className={care.journeyCardTitle}>{step.title}</div>
-                  <p className={care.journeyCardDesc}>{step.desc}</p>
-                  <div className={care.journeyCardTag}>
-                    <TbSparkles size={12} /> {step.tag}
+            <motion.div variants={stagger} className={care.awardsGrid}>
+              {awardCategories.map((award) => (
+                <motion.div key={award.title} variants={fadeInUp} className={care.awardCard}>
+                  <div className={care.awardCardHeader}>
+                    <div className={care.awardIconCircle}><award.icon size={30} /></div>
+                  </div>
+                  <div className={care.awardCardBody}>
+                    <div className={care.awardCategory}>{award.category}</div>
+                    <h3 className={care.awardTitle}>{award.title}</h3>
+                    <p className={care.awardDesc}>{award.desc}</p>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
 
-            {/* Bottom CTA */}
-            <motion.div variants={fadeInUp} className={care.journeyCallout}>
-              <div className={care.journeyCalloutText}>
-                <div className={care.journeyCalloutTitle}>
-                  Ready to Start Your Campus Journey?
+            <motion.div variants={fadeInUp} className={care.nominationsStatus}>
+              {notifSent ? (
+                <div className={care.nominationsSuccess}>
+                  <TbCheck size={20} />
+                  <span>
+                    You&apos;re on the list! We&apos;ll notify you when CARE Awards nominations
+                    open in <strong>{notifCity}</strong>.
+                  </span>
                 </div>
-                <p className={care.journeyCalloutDesc}>
-                  Register below — whether your city already has CARE or you&apos;re the first to bring it.
-                  As a pioneer, you become the Nodal College when the Careathon launches in your city.
-                </p>
-              </div>
-              <a href="#college-form" className={care.journeyCalloutBtn}>
-                <TbRocket size={18} />
-                Start at Phase 01
-                <TbArrowRight size={18} />
-              </a>
+              ) : (
+                <>
+                  <p className={care.nominationsStatusLabel}>
+                    <strong>Nominations open city by city.</strong>{' '}Get notified the moment
+                    they open in your region — no spam, just one email.
+                  </p>
+                  <form className={care.nominationsForm} onSubmit={handleNotifSubmit}>
+                    <input
+                      type="email"
+                      required
+                      placeholder="Your email address"
+                      value={notifEmail}
+                      onChange={(e) => setNotifEmail(e.target.value)}
+                      className={care.nominationsInput}
+                    />
+                    <select
+                      required
+                      value={notifCity}
+                      onChange={(e) => setNotifCity(e.target.value)}
+                      className={care.nominationsSelect}
+                    >
+                      <option value="" disabled>Select city</option>
+                      {['Ahmedabad','Bengaluru','Bhopal','Chennai','Delhi','Hyderabad',
+                        'Indore','Jaipur','Kolkata','Lucknow','Mumbai','Nagpur',
+                        'Pune','Surat','Vadodara','Other'].map((city) => (
+                        <option key={city} value={city}>{city}</option>
+                      ))}
+                    </select>
+                    <button type="submit" className={care.nominationsSubmitBtn}>
+                      <TbMail size={15} /> Notify Me
+                    </button>
+                  </form>
+                </>
+              )}
             </motion.div>
-
           </motion.div>
         </div>
       </section>
+
+
 
 
       {/* ── 4. College Sign-up Form ── */}

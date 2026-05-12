@@ -1477,6 +1477,25 @@
   line-height: 1.68;
 }
 
+.stepCardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: var(--space-3);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--step-color, #8B2FC9);
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 1px;
+  transition: opacity 0.2s ease, gap 0.2s ease;
+}
+
+.stepCardCta:hover {
+  opacity: 0.75;
+  gap: 8px;
+}
+
 /* ── Nodal College — premium gold luxury card ── */
 .nodalCallout {
   margin: clamp(3rem, 5vw, 4rem) auto 0;
