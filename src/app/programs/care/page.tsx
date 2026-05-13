@@ -33,8 +33,8 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 /* ── Data ─────────────────────────────────────────────────────── */
 
 const heroStats = [
-  { icon: TbLeaf, value: '5.8 kg', label: 'CO\u2082 prevented per girl, per year' },
-  { icon: TbUsers, value: '200', label: 'Girls to prevent 1 ton CO\u2082' },
+  { icon: TbLeaf, value: '5.8 kg', label: 'CO\u2082 prevented per menstruator, per year' },
+  { icon: TbUsers, value: '200', label: 'Menstruators to prevent 1 ton CO\u2082' },
   { icon: TbChartLine, value: '16%', label: 'Campus tipping point' },
   { icon: TbCalendarEvent, value: '2 semesters', label: 'To sustained impact' },
 ];
@@ -94,7 +94,7 @@ const campusBenefits = [
   {
     icon: TbUsers,
     title: 'Breaking Taboos',
-    desc: 'Boys and girls working on this topic together breaks deep taboos. It builds comfort, openness, and a culture of shared responsibility for health and environment.',
+    desc: 'Boys and girls working on this topic together breaks deep taboos. It builds openness and a culture of shared responsibility for the environment.',
   },
 ];
 
@@ -122,7 +122,7 @@ const careathonSteps = [
     num: '01',
     icon: TbMail,
     title: 'Express Interest',
-    desc: 'Fill out a simple online form with your college name, city, and contact details. No cost, no commitment — Saukhyam Foundation reviews every application personally.',
+    desc: 'Fill out a simple online form with your college name, city, and contact details. No cost, no commitment. Saukhyam Foundation reviews every application personally.',
     color: '#7C3AED',
     gradient: 'linear-gradient(160deg, #6D28D9 0%, #7C3AED 100%)',
     glow: 'rgba(124,58,237,0.22)',
@@ -140,7 +140,7 @@ const careathonSteps = [
     num: '03',
     icon: TbSchool,
     title: 'Build Your Ambassador Team',
-    desc: 'Recruit 4–5 student ambassadors — boys and girls, ideally from students who have already made the shift. Saukhyam provides training materials, campaign kits, and starter product packs at no charge.',
+    desc: 'Recruit 4–5 student ambassadors, boys and girls, ideally from students who have already made the shift. Saukhyam provides training materials, campaign kits, and starter product packs at no charge.',
     color: '#047857',
     gradient: 'linear-gradient(160deg, #064E3B 0%, #047857 100%)',
     glow: 'rgba(4,120,87,0.22)',
@@ -262,8 +262,8 @@ export default function CarePage() {
           </motion.div>
 
           <motion.h1 variants={fadeInUp} className={care.heroHeadline}>
-            A student-led menstrual health
-            <span className={care.heroHeadlineAccent}>movement</span>
+            India&apos;s largest student-led
+            <span className={care.heroHeadlineAccent}>menstrual health movement</span>
           </motion.h1>
 
           <motion.p variants={fadeInUp} className={care.heroSubcopy}>
@@ -355,8 +355,8 @@ export default function CarePage() {
               </div>
               <h2 className={care.impactTitle}>The Climate Impact</h2>
               <p className={care.impactSubtitle}>
-                These numbers are based on peer-reviewed Life Cycle Assessment (LCA) research
-                validated by an independent European environmental research group.
+                These numbers are based on peer-reviewed Life Cycle Assessment (LCA) research.
+                200 menstruators switching equivalent to the annual carbon absorption of ~ 50 mature trees.
               </p>
             </motion.div>
 
@@ -369,13 +369,7 @@ export default function CarePage() {
               ))}
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={care.impactEquation}>
-              <p>
-                <strong>The equation:</strong> 1 girl switching saves 5.8 kg CO\u2082/year &times; 200 girls
-                = <strong>1 ton CO\u2082 equivalent per year</strong>, every year, for the rest of their menstruating lifetime.
-                This is equivalent to the annual carbon absorption of approximately 45 mature trees.
-              </p>
-            </motion.div>
+
           </motion.div>
         </div>
       </section>
@@ -391,7 +385,7 @@ export default function CarePage() {
                 No Cost. Real Gains.
               </h2>
               <p className={care.structureSubtitle}>
-                Colleges that run CARE incur no expenses. What they gain is significant —
+                Colleges that run CARE incur no expenses. What they gain is significant
                 in accreditation, in culture, and in the conversations their students have.
               </p>
             </motion.div>
@@ -418,8 +412,8 @@ export default function CarePage() {
               <div className={care.sectionBadge}><TbBolt size={14} /> How It Works</div>
               <h2 className={care.careathonTitle}>Five Steps to a Greener Campus</h2>
               <p className={care.careathonSubtitle}>
-                From expressing interest to reporting measurable impact — the CARE journey is
-                designed to be simple, student-driven, and completely cost-free for your college.
+                From expressing interest to reporting measurable impact, the CARE journey is
+                designed to be student-driven and astonishingly simple.
               </p>
             </motion.div>
 

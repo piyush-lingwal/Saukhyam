@@ -25,6 +25,8 @@
   --care-pink-hover: #C4124A;
   --care-pink-light: #FCE4EC;
   --care-pink-pale: #FFF0F6;
+  --care-green: #16A34A;
+  --care-green-hover: #15803D;
   --care-hero-accent: #F9A8D4;
 
   --color-primary: #8B2FC9;
@@ -179,7 +181,7 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-4) var(--space-10);
-  background: var(--care-pink);
+  background: var(--care-green);
   color: white;
   font-family: var(--font-heading);
   font-size: var(--text-base);
@@ -190,7 +192,7 @@
 }
 
 .heroCta:hover {
-  background: var(--care-pink-hover);
+  background: var(--care-green-hover);
   color: white;
   transform: translateY(-2px);
 }
