@@ -50,6 +50,18 @@ const campusEvents = [
     tag: 'Global Day',
   },
   {
+    month: 'July',
+    name: 'Plastic Free Month',
+    desc: 'Microplastics from disposable pads enter our bodies and most people do not know about this. CARE runs awareness campaigns around plastic-free choices for periods.',
+    tag: 'Awareness Month',
+  },
+  {
+    month: 'September',
+    name: 'PCOS Awareness Month',
+    desc: 'Run the HEAL challenge on campus — connect period health with the chemical exposure from disposable pads. PCOS affects 6 crore Indian women.',
+    tag: 'Awareness Month',
+  },
+  {
     month: 'July – August',
     name: 'Semester 2 CARE Launch',
     desc: 'A fresh wave of hostel campaigns begins with new student cohorts. Nodal CARE Colleges support neighbouring campuses. Returning ambassadors mentor new recruits.',
