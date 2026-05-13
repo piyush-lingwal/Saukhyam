@@ -229,9 +229,9 @@ export default function CareRegisterPage() {
 
                 <div className={care.whatIsStatGrid}>
                   {[
-                    { value: '₹0',   label: 'Cost to the college',             accent: '#7C3AED' },
-                    { value: '200',  label: 'Girls = 1 ton CO₂ prevented',      accent: '#C026D3' },
-                    { value: 'NAAC', label: 'Reportable sustainability impact',  accent: '#E8185A' },
+                    { value: '₹0',   label: 'Cost to the college',             accent: '#2D6748' },
+                    { value: '200',  label: 'Girls = 1 ton CO₂ prevented',      accent: '#388E3C' },
+                    { value: 'NAAC', label: 'Reportable sustainability impact',  accent: '#1A3A28' },
                   ].map((stat) => (
                     <div key={stat.value} className={care.whatIsStatCard} style={{ '--stat-accent': stat.accent } as React.CSSProperties}>
                       <span className={care.whatIsStatValue}>{stat.value}</span>
@@ -393,7 +393,7 @@ export default function CareRegisterPage() {
                   />
                   <path
                     d="M115,108 C130,92 145,60 180,35 C215,10 235,10 270,35 C305,60 320,92 335,120 C350,148 360,165 375,175 L375,180 L115,180 Z"
-                    fill="rgba(139,47,201,0.2)"
+                    fill="rgba(56,142,60,0.20)"
                     stroke="none"
                   />
                   <path
