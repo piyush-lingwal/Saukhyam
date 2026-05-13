@@ -11,7 +11,7 @@ const footerLinks = {
   knowUs: [
     { label: 'Our Story', href: '/about' },
     { label: 'Team', href: '/team' },
-    { label: 'Awards', href: '/awards' },
+    { label: 'Partners', href: '/partners' },
     { label: 'Press & Media', href: '/press' },
     { label: 'Internships', href: '/internships' },
     { label: 'Contact Us', href: '/contact' },
