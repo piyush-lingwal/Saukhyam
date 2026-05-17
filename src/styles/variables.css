@@ -146,7 +146,7 @@
   --transition-all: all var(--duration-normal) var(--ease-out);
 
   /* ── Glass ── */
-  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.75);
   --glass-blur: blur(12px);
   --glass-border: 1px solid rgba(255, 255, 255, 0.3);
 

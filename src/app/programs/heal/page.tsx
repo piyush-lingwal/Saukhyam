@@ -299,7 +299,7 @@ export default function HealPage() {
 
 
       {/* ── 3. How It Works - Immersive Vertical Journey ── */}
-      <section className={heal.challengeSection}>
+      <section id="challenge" className={heal.challengeSection}>
         {/* Ambient background blobs */}
         <div className={heal.challengeBlobA} aria-hidden="true" />
         <div className={heal.challengeBlobB} aria-hidden="true" />
