@@ -2,7 +2,7 @@
   <img src="public/logo.svg" alt="Saukhyam Reusable Pads" width="280" />
 </p>
 
-<h3 align="center">India's First Banana Fiber Reusable Pad — Handcrafted by Rural Women</h3>
+<h3 align="center">India's First Banana Fiber Reusable Pads — Handcrafted by Rural Women</h3>
 
 <p align="center">
   <a href="#tech-stack"><img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js" alt="Next.js 16" /></a>
