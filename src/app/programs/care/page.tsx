@@ -509,14 +509,14 @@ export default function CarePage() {
                 <div className={care.sectionBadge}><TbUsers size={14} /> Breaking Taboos</div>
                 <h2>Boys Are Part of<br />This Conversation</h2>
                 <p>
-                  If only girls talk about periods, boys are never included in that conversation -
-                  and taboos persist for another generation. CARE is intentionally designed so that
+                  If only girls talk about periods and boys are never included in that conversation,
+                  taboos persist for another generation. CARE is intentionally designed so that
                   boys are equal participants.
                 </p>
                 <p>
-                  Boys can design posters, man stalls, and act as ambassadors. Their visible
-                  participation normalises the conversation, creates safer spaces for girls to
-                  ask questions, and accelerates the culture shift on campus.
+                  Boys make wonderful ambassadors. They print posters, man stalls and their visible
+                  participation normalises the conversation. This creates safer spaces for girls to
+                  ask questions and accelerates the culture shift on campus.
                 </p>
                 <div className={care.boysRoles}>
                   {['Design Posters', 'Man Stalls', 'Campus Ambassadors', 'Solidarity Circles', 'Awareness Campaigns'].map((role) => (
