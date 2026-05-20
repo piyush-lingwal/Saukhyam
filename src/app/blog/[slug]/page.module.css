@@ -4,8 +4,13 @@
    ══════════════════════════════════════════════════════════════ */
 
 .blogDetail {
-  background: #fafafa;
+  background: var(--color-bg-warm, #fafafa);
   min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .blogDetail {
+  background: var(--color-bg);
 }
 
 /* ── Reading-progress bar (fixed, under navbar) ── */
@@ -1019,4 +1024,213 @@
   .heroMetaDivider {
     display: none;
   }
+}
+
+/* ── Images & parallax ── */
+.figureImage,
+.coverImage,
+.relatedCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover {
+  position: relative;
+  overflow: hidden;
+}
+
+.breadcrumbTheme {
+  margin-left: auto;
+}
+
+/* Newsletter */
+.newsletter {
+  margin-top: 3rem;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--green-50), #fff);
+  border: 1px solid var(--green-100);
+  text-align: center;
+}
+
+.newsletterIcon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: var(--green-100);
+  color: var(--green-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newsletterTitle {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--green-900);
+  margin: 0 0 0.5rem;
+}
+
+.newsletterDesc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0 auto 1.25rem;
+  max-width: 420px;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 400px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.newsletterInput {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.75rem 1rem;
+  border-radius: 100px;
+  border: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+.newsletterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.newsletterBtn:hover {
+  transform: translateY(-2px);
+}
+
+.newsletterSuccess {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--green-700);
+  font-weight: 600;
+}
+
+/* Comments */
+.comments {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.commentsTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--green-900);
+  margin-bottom: 1.25rem;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.commentInput,
+.commentTextarea {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+}
+
+.commentSubmit {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.25rem;
+  background: var(--green-600);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.commentList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.commentItem {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--color-bg-card);
+  border-radius: 14px;
+  border: 1px solid var(--color-border-light);
+}
+
+.commentAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.commentMeta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.commentText {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+[data-theme="dark"] .newsletter {
+  background: var(--color-bg-subtle);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .newsletterTitle,
+[data-theme="dark"] .commentsTitle {
+  color: var(--color-text);
+}
+
+[data-theme="dark"] .commentItem {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
 }

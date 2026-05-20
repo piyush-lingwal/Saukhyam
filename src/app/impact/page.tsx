@@ -16,6 +16,12 @@ const stagger = {
 };
 
 export default function ImpactPage() {
+  const getPressUrl = (title: string, publication: string, url: string) => {
+    if (url && url !== '#') return url;
+    const query = encodeURIComponent(`${title} ${publication} Saukhyam`);
+    return `https://www.google.com/search?q=${query}`;
+  };
+
   return (
     <div className={styles.impactPage}>
       {/* ── Hero ── */}
@@ -115,7 +121,7 @@ export default function ImpactPage() {
                 key={item.id}
                 variants={fadeInUp}
                 className={styles.pressCard}
-                href={item.url}
+                href={getPressUrl(item.title, item.publication, item.url)}
                 target="_blank"
                 rel="noopener noreferrer"
               >

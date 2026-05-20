@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Navbar from '@/components/layout/Navbar/Navbar';
-import Footer from '@/components/layout/Footer/Footer';
+import LayoutShell from '@/components/layout/LayoutShell';
 import CartDrawer from '@/components/cart/CartDrawer/CartDrawer';
 import { CartProvider } from '@/context/CartContext';
 
@@ -46,9 +45,7 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning>
         <CartProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          <LayoutShell>{children}</LayoutShell>
           <CartDrawer />
         </CartProvider>
       </body>

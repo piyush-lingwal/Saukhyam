@@ -5,7 +5,12 @@
 .blogPage {
   padding-top: var(--navbar-height);
   min-height: 100vh;
-  background: #fafafa;
+  background: var(--color-bg-warm, #fafafa);
+  transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] .blogPage {
+  background: var(--color-bg);
 }
 
 /* ── Hero ── */
@@ -665,4 +670,187 @@
   .featuredBody {
     padding: 1.6rem;
   }
+}
+
+/* ── Enhanced listing features ── */
+.heroTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #86efac;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.themeToggle:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.resultsCount {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary, #6b7280);
+  margin-bottom: 1.25rem;
+}
+
+.blogCardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.blogCardImage,
+.featuredCardImage {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.blogCard:hover .blogCardImage,
+.featuredCard:hover .featuredCardImage {
+  transform: scale(1.06);
+}
+
+.blogImageWrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.featuredImage {
+  position: relative;
+}
+
+/* Skeleton loading */
+.skeletonCard {
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--color-bg-card, #fff);
+  border: 1px solid var(--color-border-light, #e5e7eb);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonImage {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+.skeletonBody {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.skeletonLine {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border-light, #e5e7eb);
+}
+
+.paginationInfo {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary, #6b7280);
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pageBtn,
+.pageNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--color-border, #e5e7eb);
+  background: var(--color-bg-card, #fff);
+  color: var(--color-text, #111);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageBtn:hover:not(:disabled),
+.pageNum:hover {
+  border-color: var(--green-400);
+  background: var(--green-50);
+  color: var(--green-700);
+}
+
+.pageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pageNumActive {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+}
+
+.pageEllipsis {
+  padding: 0 0.25rem;
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .featuredCard,
+[data-theme="dark"] .blogCard,
+[data-theme="dark"] .skeletonCard {
+  background: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .filterSection {
+  background: var(--color-bg-subtle);
+}
+
+[data-theme="dark"] .blogTitle,
+[data-theme="dark"] .featuredTitle {
+  color: var(--color-text);
 }

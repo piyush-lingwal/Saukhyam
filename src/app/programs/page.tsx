@@ -129,6 +129,19 @@ export default function ProgramsPage() {
         </div>
       </section>
 
+      {/* ── State Pages ── */}
+      <section className={styles.section}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h2 className={styles.sectionTitle}>REACH & CARE across India</h2>
+          <p style={{ color: 'var(--color-text-muted)', maxWidth: 520, margin: '0 auto 1.5rem' }}>
+            11 dedicated state impact pages with live stats, campaigns, timelines, and volunteer opportunities.
+          </p>
+          <Link href="/programs/states" className={styles.programLink} style={{ display: 'inline-flex', marginTop: '0.5rem' }}>
+            <MapPin size={18} /> Explore state pages <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
+
       {/* ── Impact Numbers ── */}
       <section className={`${styles.section} ${styles.sectionAlt}`}>
         <div className="container" style={{ textAlign: 'center' }}>

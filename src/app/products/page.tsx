@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   ShoppingBag, Leaf, Eye, Truck, Shield,
-  RefreshCw, Heart, ChevronRight, PackageSearch,
+  RefreshCw, Heart, ChevronLeft, ChevronRight, PackageSearch,
   ShieldCheck, Droplets, Wind, Zap, CheckCircle2, XCircle, Users, Trophy,
 } from 'lucide-react';
 import { products, type Product } from '@/data/products';
@@ -62,6 +62,8 @@ export default function ProductsPage() {
   const { addItem } = useCart();
   const [activeCategory, setActiveCategory] = useState<Category>('all');
   const [sortBy, setSortBy] = useState<SortOption>('default');
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 9;
 
   const filteredProducts = useMemo(() => {
     let filtered = activeCategory === 'all'
@@ -87,6 +89,30 @@ export default function ProductsPage() {
     const cats = new Set(products.map(p => p.category));
     return ['all', ...Array.from(cats)] as Category[];
   }, []);
+
+  // Temporary dummy pagination data: duplicate current filtered list with unique IDs.
+  const displayProducts = useMemo(
+    () => [
+      ...filteredProducts.map((p, idx) => ({ ...p, id: `${p.id}-a${idx}` })),
+      ...filteredProducts.map((p, idx) => ({ ...p, id: `${p.id}-b${idx}` })),
+    ],
+    [filteredProducts]
+  );
+
+  const totalPages = Math.max(1, Math.ceil(displayProducts.length / productsPerPage));
+
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * productsPerPage;
+    return displayProducts.slice(start, start + productsPerPage);
+  }, [displayProducts, currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, sortBy]);
+
+  useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(totalPages);
+  }, [currentPage, totalPages]);
 
   return (
     <div className={styles.productsPage}>
@@ -173,7 +199,7 @@ export default function ProductsPage() {
             animate="visible"
             variants={staggerContainer}
           >
-            {filteredProducts.map((product) => (
+            {paginatedProducts.map((product) => (
               <motion.div key={product.id} variants={fadeInUp} className={styles.productCard}>
                 {product.badge && <span className={styles.productBadge}>{product.badge}</span>}
 
@@ -232,6 +258,48 @@ export default function ProductsPage() {
             <h3>No products found</h3>
             <p>Try adjusting your filters to find what you&apos;re looking for.</p>
           </div>
+        )}
+
+        {filteredProducts.length > 0 && totalPages > 1 && (
+          <nav className={styles.productPagination} aria-label="Products page navigation">
+            <p className={styles.paginationMeta}>
+              Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong> · {displayProducts.length} products
+            </p>
+            <div className={styles.paginationTabs}>
+              <button
+                type="button"
+                className={styles.paginationNav}
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                aria-label="Previous page"
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  type="button"
+                  className={`${styles.paginationTab} ${page === currentPage ? styles.paginationTabActive : ''}`}
+                  onClick={() => setCurrentPage(page)}
+                  aria-label={`Go to page ${page}`}
+                  aria-current={page === currentPage ? 'page' : undefined}
+                >
+                  {page}
+                </button>
+              ))}
+
+              <button
+                type="button"
+                className={styles.paginationNav}
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                aria-label="Next page"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </nav>
         )}
 
         {/* ── Benefits Banner ── */}

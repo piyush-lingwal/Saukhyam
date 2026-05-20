@@ -188,6 +188,18 @@ export default function ReachPage() {
         </div>
       </section>
 
+      <section className={`${styles.section} ${styles.sectionAlt}`}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h2 className={styles.sectionTitle}>Explore impact by state</h2>
+          <p className={styles.sectionDesc} style={{ margin: '0 auto var(--space-6)' }}>
+            Detailed REACH & CARE pages for Maharashtra, Kerala, Uttar Pradesh, and 8 more regions.
+          </p>
+          <Link href="/programs/states" className={styles.outlineBtn}>
+            <MapPin size={18} /> View all state pages <ArrowRight size={16} />
+          </Link>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className={styles.cta}>
         <div className="container" style={{ textAlign: 'center' }}>
