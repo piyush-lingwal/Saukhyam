@@ -1,0 +1,178 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.card {
+  background: white;
+  border-radius: var(--science-radius);
+  box-shadow: 0 4px 24px rgba(30, 77, 61, 0.06);
+  border: 1px solid rgba(30, 77, 61, 0.08);
+  overflow: hidden;
+  transition: box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.card:hover {
+  box-shadow: 0 12px 36px rgba(30, 77, 61, 0.1);
+}
+
+.card.green {
+  border-left: 4px solid var(--science-leaf);
+}
+
+.card.navy {
+  border-left: 4px solid var(--science-navy);
+}
+
+.trigger {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  width: 100%;
+  padding: var(--space-6);
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+}
+
+.num {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  background: var(--science-cream);
+  color: var(--science-forest);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card.navy .num {
+  background: rgba(34, 58, 94, 0.08);
+  color: var(--science-navy);
+}
+
+.triggerBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--science-charcoal);
+  line-height: 1.35;
+  margin-bottom: var(--space-3);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.journalChip {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: var(--science-cream);
+  color: var(--science-forest);
+}
+
+.card.navy .journalChip {
+  background: rgba(34, 58, 94, 0.08);
+  color: var(--science-navy);
+}
+
+.year {
+  font-size: var(--text-sm);
+  color: var(--gray-500);
+  font-weight: 600;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--science-leaf);
+  transition: transform 0.3s var(--ease-out);
+  margin-top: 4px;
+}
+
+.card.open .chevron {
+  transform: rotate(180deg);
+}
+
+.panel {
+  overflow: hidden;
+}
+
+.panelInner {
+  padding: 0 var(--space-6) var(--space-6);
+  padding-left: calc(var(--space-6) + 2.5rem + var(--space-5));
+}
+
+@media (max-width: 640px) {
+  .panelInner {
+    padding-left: var(--space-6);
+  }
+}
+
+.summary {
+  font-size: var(--text-base);
+  color: var(--gray-600);
+  line-height: 1.75;
+  margin-bottom: var(--space-5);
+  max-width: none;
+}
+
+.citation {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4);
+  background: var(--science-cream);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-5);
+}
+
+.authors {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--science-charcoal);
+}
+
+.journalLine {
+  font-size: var(--text-sm);
+  color: var(--science-leaf);
+  font-style: italic;
+}
+
+.paperLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--science-forest);
+  text-decoration: none;
+  transition: gap 0.2s, color 0.2s;
+}
+
+.paperLink:hover {
+  color: var(--science-leaf);
+  gap: var(--space-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .chevron {
+    transition: none;
+  }
+}

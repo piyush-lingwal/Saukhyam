@@ -137,6 +137,9 @@ export default function ProductsPage() {
 
         <div className={styles.toolbar}>
           <div className={styles.filterTabs}>
+            <Link href="/saukhyam-pads" className={styles.filterTabLink}>
+              Saukhyam Pads
+            </Link>
             {availableCategories.map(cat => (
               <button
                 key={cat}

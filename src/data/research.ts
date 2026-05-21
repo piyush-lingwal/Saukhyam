@@ -214,28 +214,28 @@ export interface KeyFinding {
 
 export const keyFindings: KeyFinding[] = [
   {
-    icon: 'FlaskConical',
+    icon: 'BookOpen',
     stat: '16+',
     label: 'Peer-Reviewed Studies',
-    description: 'Published in top journals including BJOG, Environment International, and PLOS ONE',
+    description: 'Published in leading journals including BJOG, Environment International and PLOS ONE.',
   },
   {
     icon: 'Globe',
     stat: '7',
     label: 'Countries Tested',
-    description: 'Heavy metals found in pads from China, Japan, South Korea, USA, UK, Australia & Germany',
+    description: 'Heavy metals and chemical compounds studied across global products.',
   },
   {
-    icon: 'AlertTriangle',
+    icon: 'Microscope',
     stat: '22',
-    label: 'Human Studies on BPA-PCOS Link',
-    description: 'Most showing higher BPA exposure among women with PCOS',
+    label: 'Human Studies',
+    description: 'Most reporting higher BPA exposure among women with PCOS.',
   },
   {
-    icon: 'Flag',
+    icon: 'ShieldAlert',
     stat: 'Higher',
-    label: 'Chemical Load in Indian Pads',
-    description: 'Indian brands contain higher concentrations of hazardous chemicals than US, EU, Japan brands',
+    label: 'Chemical Load',
+    description: 'Indian pads reported higher concentrations than products in several developed regions.',
   },
 ];
 
