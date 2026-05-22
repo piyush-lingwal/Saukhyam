@@ -24,19 +24,13 @@ import {
   X,
   ExternalLink,
   Brain,
-  Activity,
 } from 'lucide-react';
 import {
   hiddenDangersStudies,
   recentResearchStudies,
-  keyFindings,
   chemicalsFound,
-  researchConclusion,
   type ResearchStudy,
 } from '@/data/research';
-import CountUp from '@/components/science/CountUp';
-import ScienceHeroVisual from '@/components/science/ScienceHeroVisual';
-import SciencePCOSVisual from '@/components/science/SciencePCOSVisual';
 import ResearchAccordion from '@/components/science/ResearchAccordion';
 import styles from './page.module.css';
 
@@ -47,14 +41,6 @@ const fadeInUp = {
 
 const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 const staggerFast = { visible: { transition: { staggerChildren: 0.05 } } };
-
-const statIcons: Record<string, typeof BookOpen> = {
-  BookOpen,
-  Globe,
-  Microscope,
-  ShieldAlert,
-  FlaskConical,
-};
 
 const chemicalIcons: Record<string, typeof Beaker> = {
   Phthalates: Beaker,
@@ -71,10 +57,42 @@ const chemicalIcons: Record<string, typeof Beaker> = {
 
 const allStudies: ResearchStudy[] = [...hiddenDangersStudies, ...recentResearchStudies];
 
-const SCIENCE_HERO_IMAGE = '/science/hero-saukhyam-pads.png';
-/** Respectful wellness — gentle abdominal comfort representation */
-const SCIENCE_PCOS_IMAGE =
-  'https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg?auto=compress&cs=tinysrgb&w=1920';
+const SCIENCE_HERO_IMAGE = '/science/hero-doctor.png';
+
+const heroGlassStats = [
+  { value: '16+', label: 'Studies Backed' },
+  { value: '100%', label: 'Natural Fiber' },
+  { value: 'Zero', label: 'Chemical Free' },
+];
+
+const evidenceCards = [
+  {
+    title: '16+',
+    subtitle: 'Peer-Reviewed Studies',
+    desc: 'Published in top journals including BJOG, Environment International, and PLOS ONE',
+    icon: BookOpen,
+  },
+  {
+    title: '7',
+    subtitle: 'Countries Tested',
+    desc: 'Heavy metals found in pads from China, Japan, South Korea, USA, UK, Australia & Germany',
+    icon: Globe,
+  },
+  {
+    title: '22',
+    subtitle: 'Human Studies on BPA-PCOS Link',
+    desc: 'Most showing higher BPA exposure among women with PCOS',
+    icon: Microscope,
+  },
+  {
+    title: 'Higher',
+    subtitle: 'Chemical Load in Indian Pads',
+    desc: 'Indian brands contain higher concentrations of hazardous chemicals than US, EU, Japan brands',
+    icon: ShieldAlert,
+  },
+];
+
+const SCIENCE_PCOS_IMAGE = '/science/pcos-wellness.png';
 
 function studiesForChemical(name: string): ResearchStudy[] {
   const key = name.split(' ')[0].toLowerCase();
@@ -104,7 +122,7 @@ export default function SciencePage() {
   return (
     <div className={styles.sciencePage}>
       {/* ═══ SECTION 1 — HERO ═══ */}
-      <section className={styles.hero}>
+      <section className={styles.hero} aria-labelledby="science-hero-heading">
         <div className={styles.heroMedia} aria-hidden="true">
           <Image
             src={SCIENCE_HERO_IMAGE}
@@ -114,108 +132,102 @@ export default function SciencePage() {
             sizes="100vw"
             className={styles.heroImage}
           />
-          <div className={styles.heroOverlay} />
         </div>
-        <div className="container">
+        <div className={styles.heroInner}>
           <motion.div
-            className={styles.heroGrid}
+            className={styles.heroContent}
             initial="hidden"
             animate="visible"
             variants={stagger}
           >
-            <div className={styles.heroLeft}>
-              <motion.nav
-                variants={fadeInUp}
-                className={styles.heroBreadcrumb}
-                aria-label="Breadcrumb"
-              >
-                <Link href="/">Home</Link>
-                <span className={styles.breadcrumbSep} aria-hidden="true">
-                  /
-                </span>
-                <span className={styles.breadcrumbCurrent}>Science</span>
-              </motion.nav>
-              <div className={styles.heroTextPanel}>
-                <motion.p variants={fadeInUp} className={styles.heroBrandTitle}>
-                  The Science Behind Saukhyam
-                </motion.p>
-                <motion.h1 variants={fadeInUp} className={styles.heroTitle}>
-                  The Science Behind Safer Period Care
-                </motion.h1>
-                <motion.h2 variants={fadeInUp} className={styles.heroBananaTitle}>
-                  Why <span className={styles.heroAccent}>Banana Fiber</span>
-                  <br />
-                  Changes Everything
-                </motion.h2>
-                <motion.p variants={fadeInUp} className={styles.heroBody}>
-                  India&apos;s first banana fiber absorbent technology — naturally antimicrobial,
-                  chemical free, and scientifically proven to be better for your body. Backed by
-                  16+ peer-reviewed studies.
-                </motion.p>
-                <motion.div variants={fadeInUp} className={styles.heroActions}>
-                  <Link href="/products" className={styles.btnPrimary}>
-                    <ShoppingBag size={18} aria-hidden="true" />
-                    Switch Now
-                  </Link>
-                  <a href="#research" className={styles.btnOutline}>
-                    <BookOpen size={18} aria-hidden="true" />
-                    Read the Research
-                  </a>
-                </motion.div>
-              </div>
-            </div>
-            <motion.div variants={fadeInUp} className={styles.heroRight}>
-              <ScienceHeroVisual />
+            <motion.nav
+              variants={fadeInUp}
+              className={styles.heroBreadcrumb}
+              aria-label="Breadcrumb"
+            >
+              <Link href="/">Home</Link>
+              <span className={styles.breadcrumbSep} aria-hidden="true">
+                {' '}
+                &gt;{' '}
+              </span>
+              <span className={styles.breadcrumbCurrent}>Science</span>
+            </motion.nav>
+
+            <motion.span variants={fadeInUp} className={styles.heroSecondaryPill}>
+              The Science Behind Saukhyam
+            </motion.span>
+
+            <motion.h1
+              id="science-hero-heading"
+              variants={fadeInUp}
+              className={styles.heroTitle}
+            >
+              <span className={styles.heroTitleLine}>The Science behind</span>
+              <span className={styles.heroTitleAccent}>Safer Period Care</span>
+            </motion.h1>
+
+            <motion.p variants={fadeInUp} className={styles.heroBody}>
+              India&apos;s first banana fiber absorbent technology — naturally antimicrobial,
+              chemical-free, and scientifically proven to be better for your body. Backed by 16+
+              peer-reviewed studies.
+            </motion.p>
+
+            <motion.div variants={fadeInUp} className={styles.heroGlassStats}>
+              {heroGlassStats.map(stat => (
+                <div key={stat.label} className={styles.heroGlassCard}>
+                  <span className={styles.heroGlassValue}>{stat.value}</span>
+                  <span className={styles.heroGlassLabel}>{stat.label}</span>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* ═══ SECTION 2 — THE EVIDENCE ═══ */}
-      <section id="research" className={styles.evidence}>
-        <div className="container">
-          <motion.div
+      <section id="research" className={styles.evidenceLuxury}>
+        <div className={styles.evidenceLuxuryInner}>
+          <motion.header
+            className={styles.evidenceLuxuryHeader}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
             variants={stagger}
-            className={styles.evidenceHeader}
           >
-            <motion.span variants={fadeInUp} className={styles.eyebrow}>
+            <motion.span variants={fadeInUp} className={styles.evidenceLuxuryTag}>
+              <FlaskConical size={14} aria-hidden="true" />
               The Evidence
             </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.h2}>
-              Research Compilation — 2025
+            <motion.h2 variants={fadeInUp} className={styles.evidenceLuxuryTitle}>
+              The Hidden Dangers in Disposable Pads
             </motion.h2>
-            <motion.p variants={fadeInUp} className={styles.lead}>
-              Recent peer-reviewed research has documented chemicals and heavy metals in disposable
-              menstrual products, while studies increasingly explore potential reproductive and
-              hormonal impacts.
+            <motion.p variants={fadeInUp} className={styles.evidenceLuxuryDesc}>
+              Recent peer-reviewed research confirms that disposable sanitary napkins contain
+              harmful chemicals linked to reproductive health disorders.
             </motion.p>
-            <motion.p variants={fadeInUp} className={styles.leadSecondary}>
-              Below is a research snapshot and detailed scientific compilation.
-            </motion.p>
-          </motion.div>
+          </motion.header>
 
           <motion.div
-            className={styles.statsGrid}
+            className={styles.evidenceLuxuryGrid}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-40px' }}
             variants={stagger}
           >
-            {keyFindings.map(finding => {
-              const Icon = statIcons[finding.icon] || BookOpen;
+            {evidenceCards.map(card => {
+              const CardIcon = card.icon;
               return (
-                <motion.article key={finding.label} variants={fadeInUp} className={styles.statGlass}>
-                  <div className={styles.statIconWrap}>
-                    <Icon size={24} aria-hidden="true" />
+                <motion.article
+                  key={card.subtitle}
+                  variants={fadeInUp}
+                  className={styles.evidenceLuxuryCard}
+                >
+                  <div className={styles.evidenceLuxuryIconWrap}>
+                    <CardIcon size={22} aria-hidden="true" />
                   </div>
-                  <div className={styles.statValue}>
-                    <CountUp value={finding.stat} />
-                  </div>
-                  <h3 className={styles.statLabel}>{finding.label}</h3>
-                  <p className={styles.statDesc}>{finding.description}</p>
+                  <h3 className={styles.evidenceLuxuryCardStat}>{card.title}</h3>
+                  <p className={styles.evidenceLuxuryCardLabel}>{card.subtitle}</p>
+                  <p className={styles.evidenceLuxuryCardDesc}>{card.desc}</p>
                 </motion.article>
               );
             })}
@@ -406,104 +418,44 @@ export default function SciencePage() {
       </section>
 
       {/* ═══ SECTION 5 — PCOS ═══ */}
-      <section className={styles.pcosSection}>
-        <div className={styles.pcosMedia} aria-hidden="true">
+      <section className={styles.pcosPremium}>
+        <div className={styles.pcosPremiumMedia} aria-hidden="true">
           <Image
             src={SCIENCE_PCOS_IMAGE}
-            alt=""
+            alt="Doctor and patient in a supportive wellness consultation"
             fill
             sizes="100vw"
-            className={styles.pcosBgImage}
+            className={styles.pcosPremiumBg}
+            priority={false}
           />
-          <div className={styles.pcosOverlay} />
+          <div className={styles.pcosPremiumOverlay} />
         </div>
-        <div className="container">
-          <div className={styles.pcosGrid}>
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-              className={styles.pcosVisualCol}
-            >
-              <SciencePCOSVisual />
-            </motion.div>
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-              className={styles.pcosContent}
-            >
-              <motion.span variants={fadeInUp} className={styles.eyebrow}>
-                <Activity size={14} aria-hidden="true" />
-                Hormonal Health
-              </motion.span>
-              <motion.h2 variants={fadeInUp} className={styles.h2}>
-                The PCOS / PMOS Connection
-              </motion.h2>
-              <motion.p variants={fadeInUp} className={styles.bodyText}>
-                Human studies increasingly link higher endocrine-disrupting chemical (EDC)
-                exposures with PCOS. Animal studies confirm BPA can induce PCOS-like syndrome —
-                establishing causation.
-              </motion.p>
-              <motion.blockquote variants={fadeInUp} className={styles.quoteBox}>
-                Human evidence shows association. Experimental models demonstrate biological
-                plausibility.
-              </motion.blockquote>
-              <motion.div variants={fadeInUp}>
-                <Link href="/faq" className={styles.pcosBtn}>
-                  Learn More About PCOS
-                  <ChevronRight size={18} aria-hidden="true" />
-                </Link>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ SECTION 6 — CONSENSUS ═══ */}
-      <section className={styles.consensusSection}>
-        <div className={styles.consensusAmbient} aria-hidden="true" />
-        <div className="container">
+        <div className={styles.pcosPremiumWrap}>
           <motion.div
+            className={styles.pcosPremiumGlass}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-40px' }}
             variants={stagger}
-            className={styles.consensusHeader}
           >
-            <motion.span variants={fadeInUp} className={styles.consensusEyebrow}>
-              Summary
+            <motion.span variants={fadeInUp} className={styles.pcosPremiumTag}>
+              Research &amp; Hormonal Health
             </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.consensusTitle}>
-              The Scientific Consensus Is Clear
+            <motion.h2 variants={fadeInUp} className={styles.pcosPremiumTitle}>
+              The PCOS Connection
             </motion.h2>
+            <motion.p variants={fadeInUp} className={styles.pcosPremiumDesc}>
+              Human studies increasingly link higher endocrine-disrupting chemical (EDC) exposures
+              with PCOS. Animal studies confirm BPA can induce PCOS-like syndrome — establishing
+              causation.
+            </motion.p>
+            <motion.div variants={fadeInUp}>
+              <a href="#research" className={styles.pcosPremiumCta}>
+                Explore The Research
+                <ChevronRight size={18} aria-hidden="true" />
+              </a>
+            </motion.div>
           </motion.div>
-
-          <motion.ol
-            className={styles.consensusList}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {researchConclusion.points.map((point, i) => (
-              <motion.li
-                key={i}
-                variants={fadeInUp}
-                className={`${styles.consensusCard} ${i === researchConclusion.points.length - 1 ? styles.consensusCardFeatured : ''}`}
-              >
-                <span className={styles.consensusIndex} aria-hidden="true">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div className={styles.consensusCardBody}>
-                  <CheckCircle2 size={20} className={styles.consensusIcon} aria-hidden="true" />
-                  <p>{point}</p>
-                </div>
-              </motion.li>
-            ))}
-          </motion.ol>
         </div>
       </section>
 
