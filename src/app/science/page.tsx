@@ -60,7 +60,7 @@ const allStudies: ResearchStudy[] = [...hiddenDangersStudies, ...recentResearchS
 const SCIENCE_HERO_IMAGE = '/science/hero-doctor.png';
 
 const heroGlassStats = [
-  { value: '16+', label: 'Scientific Publications' },
+  { value: '11', label: 'Scientific Publications' },
   { value: 'Plant-Based', label: 'Banana Fiber Technology' },
   { value: 'Free From', label: 'Synthetic Additives' },
 ];
@@ -150,7 +150,12 @@ export default function SciencePage() {
                 {' '}
                 &gt;{' '}
               </span>
-              <span className={styles.breadcrumbCurrent}>Science</span>
+              <Link href="/science">Science</Link>
+              <span className={styles.breadcrumbSep} aria-hidden="true">
+                {' '}
+                &gt;{' '}
+              </span>
+              <span className={styles.breadcrumbCurrent}>About Disposable Pads</span>
             </motion.nav>
 
             <motion.span variants={fadeInUp} className={styles.heroSecondaryPill}>
@@ -162,7 +167,7 @@ export default function SciencePage() {
               variants={fadeInUp}
               className={styles.heroTitle}
             >
-              <span className={styles.heroTitleLine}>The Science behind</span>
+              <span className={styles.heroTitleLine}>The Science Behind</span>
               <span className={styles.heroTitleAccent}>Safer Period Care</span>
             </motion.h1>
 
