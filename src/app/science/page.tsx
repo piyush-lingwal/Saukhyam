@@ -60,9 +60,9 @@ const allStudies: ResearchStudy[] = [...hiddenDangersStudies, ...recentResearchS
 const SCIENCE_HERO_IMAGE = '/science/hero-doctor.png';
 
 const heroGlassStats = [
-  { value: '16+', label: 'Studies Backed' },
-  { value: '100%', label: 'Natural Fiber' },
-  { value: 'Zero', label: 'Chemical Free' },
+  { value: '16+', label: 'Scientific Publications' },
+  { value: 'Plant-Based', label: 'Banana Fiber Technology' },
+  { value: 'Free From', label: 'Synthetic Additives' },
 ];
 
 const evidenceCards = [
@@ -167,9 +167,7 @@ export default function SciencePage() {
             </motion.h1>
 
             <motion.p variants={fadeInUp} className={styles.heroBody}>
-              India&apos;s first banana fiber absorbent technology — naturally antimicrobial,
-              chemical-free, and scientifically proven to be better for your body. Backed by 16+
-              peer-reviewed studies.
+              Scientific studies identify chemicals in disposable sanitary pads that may be absorbed through intimate tissues and interfere with endocrine function.
             </motion.p>
 
             <motion.div variants={fadeInUp} className={styles.heroGlassStats}>
@@ -180,57 +178,6 @@ export default function SciencePage() {
                 </div>
               ))}
             </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ═══ SECTION 2 — THE EVIDENCE ═══ */}
-      <section id="research" className={styles.evidenceLuxury}>
-        <div className={styles.evidenceLuxuryInner}>
-          <motion.header
-            className={styles.evidenceLuxuryHeader}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={stagger}
-          >
-            <motion.span variants={fadeInUp} className={styles.evidenceLuxuryTag}>
-              <FlaskConical size={14} aria-hidden="true" />
-              The Evidence
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.evidenceLuxuryTitle}>
-              The Hidden Dangers in Disposable Pads
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={styles.evidenceLuxuryDesc}>
-              Recent peer-reviewed research confirms that disposable sanitary napkins contain
-              harmful chemicals linked to reproductive health disorders.
-            </motion.p>
-          </motion.header>
-
-          <motion.div
-            className={styles.evidenceLuxuryGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-            variants={stagger}
-          >
-            {evidenceCards.map(card => {
-              const CardIcon = card.icon;
-              return (
-                <motion.article
-                  key={card.subtitle}
-                  variants={fadeInUp}
-                  className={styles.evidenceLuxuryCard}
-                >
-                  <div className={styles.evidenceLuxuryIconWrap}>
-                    <CardIcon size={22} aria-hidden="true" />
-                  </div>
-                  <h3 className={styles.evidenceLuxuryCardStat}>{card.title}</h3>
-                  <p className={styles.evidenceLuxuryCardLabel}>{card.subtitle}</p>
-                  <p className={styles.evidenceLuxuryCardDesc}>{card.desc}</p>
-                </motion.article>
-              );
-            })}
           </motion.div>
         </div>
       </section>
@@ -301,6 +248,56 @@ export default function SciencePage() {
         </div>
       </section>
 
+      {/* ═══ SECTION 2 — THE EVIDENCE ═══ */}
+      <section id="research" className={styles.evidenceLuxury}>
+        <div className={styles.evidenceLuxuryInner}>
+          <motion.header
+            className={styles.evidenceLuxuryHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+          >
+            <motion.span variants={fadeInUp} className={styles.evidenceLuxuryTag}>
+              <FlaskConical size={14} aria-hidden="true" />
+              The Evidence
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className={styles.evidenceLuxuryTitle}>
+              The Science of Disposable Pads
+            </motion.h2>
+            <motion.p variants={fadeInUp} className={styles.evidenceLuxuryDesc}>
+              Recent scientific research explores chemicals in disposable sanitary napkins and their possible role in endocrine and reproductive health concerns.
+            </motion.p>
+          </motion.header>
+
+          <motion.div
+            className={styles.evidenceLuxuryGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={stagger}
+          >
+            {evidenceCards.map(card => {
+              const CardIcon = card.icon;
+              return (
+                <motion.article
+                  key={card.subtitle}
+                  variants={fadeInUp}
+                  className={styles.evidenceLuxuryCard}
+                >
+                  <div className={styles.evidenceLuxuryIconWrap}>
+                    <CardIcon size={22} aria-hidden="true" />
+                  </div>
+                  <h3 className={styles.evidenceLuxuryCardStat}>{card.title}</h3>
+                  <p className={styles.evidenceLuxuryCardLabel}>{card.subtitle}</p>
+                  <p className={styles.evidenceLuxuryCardDesc}>{card.desc}</p>
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Chemical studies modal */}
       {chemicalModal && (
         <div
@@ -358,7 +355,7 @@ export default function SciencePage() {
             className={styles.researchIntro}
           >
             <motion.h2 variants={fadeInUp} className={styles.h2}>
-              11 Recent Peer-Reviewed Papers
+              <span className={styles.highlightNumber}>11</span> Recent Peer-Reviewed Papers
             </motion.h2>
             <motion.p variants={fadeInUp} className={styles.lead}>
               High-quality scientific publications on chemicals, toxins and health impacts
@@ -396,24 +393,6 @@ export default function SciencePage() {
             <ResearchAccordion studies={chemicalsCategory2} timelineColor="navy" />
           </motion.div>
 
-          {/* 2024 compilation — preserved in full */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className={styles.categoryBlock}
-          >
-            <h3 className={styles.categoryTitle}>
-              <BookOpen size={20} aria-hidden="true" />
-              Earlier Compilation — 2024
-            </h3>
-            <p className={styles.categoryDesc}>
-              We compiled these studies in 2024 when we first started approaching doctors. Doctors
-              were more willing to believe us after we shared this research with them.
-            </p>
-            <ResearchAccordion studies={hiddenDangersStudies} timelineColor="green" />
-          </motion.div>
         </div>
       </section>
 
