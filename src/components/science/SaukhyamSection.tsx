@@ -97,7 +97,7 @@ export default function SaukhyamSection() {
           </motion.h1>
           <motion.p variants={fadeInUp} className={styles.heroSubtitle}>
             India&apos;s first banana fiber absorbent technology, naturally antimicrobial,
-            chemical-free, and scientifically proven to be better for your body. Backed by 16+
+            chemical-free, and scientifically proven to be better for your body. Backed by 11
             peer-reviewed studies.
           </motion.p>
           <motion.div variants={fadeInUp} className={styles.heroActions}>

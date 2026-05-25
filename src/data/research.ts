@@ -155,7 +155,7 @@ export interface KeyFinding {
 export const keyFindings: KeyFinding[] = [
   {
     icon: 'BookOpen',
-    stat: '16+',
+    stat: '11',
     label: 'Peer-Reviewed Studies',
     description: 'Published in leading journals including BJOG, Environment International and PLOS ONE.',
   },

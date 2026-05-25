@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
   Microscope,
   BookOpen,
@@ -59,10 +59,45 @@ const chemicalIcons: Record<string, typeof Beaker> = {
 const allStudies: ResearchStudy[] = recentResearchStudies;
 
 const heroGlassStats = [
-  { value: '16+', label: 'Scientific Publications' },
+  { value: '11', label: 'Scientific Publications' },
   { value: 'Plant-Based', label: 'Banana Fiber Technology' },
   { value: 'Free From', label: 'Synthetic Additives' },
 ];
+
+function AnimatedStat({
+  value,
+  suffix = '',
+  duration = 2,
+}: {
+  value: number;
+  suffix?: string;
+  duration?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let frameId: number;
+    const startTime = performance.now();
+    const animate = (now: number) => {
+      const progress = Math.min((now - startTime) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(value * eased));
+      if (progress < 1) frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [isInView, value, duration]);
+
+  return (
+    <span ref={ref}>
+      {display}
+      {suffix}
+    </span>
+  );
+}
 
 const featuredAreas = [
   { id: 'materials', label: 'Menstrual Product Materials', icon: Layers, desc: 'Exploring constituent safety and plastic-free alternatives.' },
@@ -86,32 +121,38 @@ function getCategoryTag(category: string): string {
 
 const evidenceCards = [
   {
-    title: '16+',
+    value: 11,
+    display: null as string | null,
     subtitle: 'Peer-Reviewed Studies',
-    desc: 'Published in top journals including BJOG, Environment International, and PLOS ONE',
+    desc: 'Published in leading journals including BJOG, Environment International, and PLOS ONE',
     icon: BookOpen,
+    animate: true,
   },
   {
-    title: '7',
+    value: 7,
+    display: null,
     subtitle: 'Countries Tested',
-    desc: 'Heavy metals found in pads from China, Japan, South Korea, USA, UK, Australia & Germany',
+    desc: 'Heavy metals identified in pads from China, Japan, South Korea, USA, UK, Australia, and Germany',
     icon: Globe,
+    animate: true,
   },
   {
-    title: '22',
+    value: 22,
+    display: null,
     subtitle: 'Human Studies on BPA-PCOS/PMOS Link',
-    desc: 'Most showing higher BPA exposure among women with PCOS/PMOS',
+    desc: 'Most reporting higher BPA exposure among women with PCOS/PMOS',
     icon: Microscope,
+    animate: true,
   },
   {
-    title: 'Higher',
+    value: null,
+    display: 'Higher',
     subtitle: 'Chemical Load in Indian Pads',
-    desc: 'Indian brands contain higher concentrations of hazardous chemicals than US, EU, Japan brands',
+    desc: 'Indian brands reported higher concentrations of certain chemicals compared with products studied from the US, EU, and Japan',
     icon: ShieldAlert,
+    animate: false,
   },
 ];
-
-const SCIENCE_PCOS_IMAGE = '/science/pcos-wellness.png';
 
 function studiesForChemical(name: string): ResearchStudy[] {
   const key = name.split(' ')[0].toLowerCase();
@@ -131,6 +172,14 @@ export default function SciencePage() {
   const [chemicalModal, setChemicalModal] = useState<string | null>(null);
   const [selectedArea, setSelectedArea] = useState<string>('All');
   const [expandedStudies, setExpandedStudies] = useState<Record<string, boolean>>({});
+
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+  const heroBgY = useTransform(heroScroll, [0, 1], [0, 70]);
+  const heroContentY = useTransform(heroScroll, [0, 1], [0, 35]);
 
   const toggleSummary = (id: string) => {
     setExpandedStudies(prev => ({ ...prev, [id]: !prev[id] }));
@@ -161,10 +210,29 @@ export default function SciencePage() {
   return (
     <div className={styles.sciencePage}>
       {/* ═══ SECTION 1, HERO ═══ */}
-      <section className={styles.hero} aria-labelledby="science-hero-heading">
+      <section
+        ref={heroRef}
+        className={styles.hero}
+        aria-labelledby="science-hero-heading"
+      >
+        <motion.div className={styles.heroBgLayer} style={{ y: heroBgY }} aria-hidden="true">
+          <Image
+            src="/science/hero-lab.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroBgImg}
+          />
+        </motion.div>
+        <div className={styles.heroOverlay} aria-hidden="true" />
+        <div className={styles.heroGrain} aria-hidden="true" />
+        <div className={styles.heroMoleculePattern} aria-hidden="true" />
+
         <div className={`container ${styles.heroContainer}`}>
           <motion.div
             className={styles.heroContent}
+            style={{ y: heroContentY }}
             initial="hidden"
             animate="visible"
             variants={stagger}
@@ -201,7 +269,9 @@ export default function SciencePage() {
             <motion.div variants={fadeInUp} className={styles.heroGlassStats}>
               {heroGlassStats.map(stat => (
                 <div key={stat.label} className={styles.heroGlassCard}>
-                  <span className={styles.heroGlassValue}>{stat.value}</span>
+                  <span className={styles.heroGlassValue}>
+                    {stat.value === '11' ? <AnimatedStat value={11} /> : stat.value}
+                  </span>
                   <span className={styles.heroGlassLabel}>{stat.label}</span>
                 </div>
               ))}
@@ -214,7 +284,9 @@ export default function SciencePage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <ScienceHeroVisual />
+            <div className={styles.heroVisualGlass}>
+              <ScienceHeroVisual />
+            </div>
           </motion.div>
         </div>
       </section>
@@ -236,7 +308,7 @@ export default function SciencePage() {
               What&apos;s Inside Your Disposable Pad?
             </motion.h2>
             <motion.p variants={fadeInUp} className={styles.subCenter}>
-              Research from 16+ studies reports the presence of multiple chemicals in commercial
+              Research from 11 studies reports the presence of multiple chemicals in commercial
               sanitary napkins, several classified as endocrine-disrupting or biologically active
               compounds.
             </motion.p>
@@ -286,7 +358,9 @@ export default function SciencePage() {
       </section>
 
       {/* ═══ SECTION 3, THE EVIDENCE ═══ */}
-      <section id="research" className={styles.evidenceLuxury}>
+      <section id="evidence" className={styles.evidenceLuxury}>
+        <div className={styles.evidenceLuxuryBg} aria-hidden="true" />
+        <div className={styles.evidenceLuxuryPattern} aria-hidden="true" />
         <div className={styles.evidenceLuxuryInner}>
           <motion.header
             className={styles.evidenceLuxuryHeader}
@@ -325,9 +399,16 @@ export default function SciencePage() {
                   <div className={styles.evidenceLuxuryIconWrap}>
                     <CardIcon size={22} aria-hidden="true" />
                   </div>
-                  <h3 className={styles.evidenceLuxuryCardStat}>{card.title}</h3>
+                  <h3 className={styles.evidenceLuxuryCardStat}>
+                    {card.animate && card.value !== null ? (
+                      <AnimatedStat value={card.value} />
+                    ) : (
+                      card.display
+                    )}
+                  </h3>
                   <p className={styles.evidenceLuxuryCardLabel}>{card.subtitle}</p>
                   <p className={styles.evidenceLuxuryCardDesc}>{card.desc}</p>
+                  <div className={styles.evidenceCardGlow} aria-hidden="true" />
                 </motion.article>
               );
             })}
@@ -529,35 +610,22 @@ export default function SciencePage() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Soft CTA block at bottom of library */}
-          <motion.div
-            className={styles.libraryCTA}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            <motion.h3 variants={fadeInUp} className={styles.ctaTitleLight}>
-              Encouraging More Informed Period Care
-            </motion.h3>
-            <motion.p variants={fadeInUp} className={styles.ctaTextLight}>
-              Ongoing scientific research continues to inspire conversations around ingredient transparency, material innovation, and intimate wellness.
-            </motion.p>
-            <motion.div variants={fadeInUp} className={styles.ctaButtonsLight}>
-              <Link href="/saukhyam-pads" className={styles.btnCtaExplore}>
-                Explore Banana Fiber Technology
-              </Link>
-              <Link href="/about" className={styles.btnCtaLearn}>
-                Learn More About Saukhyam
-              </Link>
-            </motion.div>
-          </motion.div>
-
         </div>
       </section>
 
       {/* ═══ SECTION 5, HORMONAL HEALTH ═══ */}
       <section className={styles.hormonalSection}>
+        <div className={styles.hormonalBg} aria-hidden="true">
+          <Image
+            src="/science/pcos-wellness.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className={styles.hormonalBgImg}
+          />
+        </div>
+        <div className={styles.hormonalOverlay} aria-hidden="true" />
+        <div className={styles.hormonalGrain} aria-hidden="true" />
         <div className="container">
           <div className={styles.hormonalGrid}>
             <motion.div
@@ -621,8 +689,6 @@ export default function SciencePage() {
           </div>
         </div>
       </section>
-
-      {/* ═══ SECTION 7, CTA ═══ */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaWave} aria-hidden="true">
           <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
@@ -650,8 +716,8 @@ export default function SciencePage() {
               <h2 className={styles.ctaTitle}>Make the Switch</h2>
             </motion.div>
             <motion.p variants={fadeInUp} className={styles.ctaSub}>
-              16+ peer-reviewed studies. 7 countries tested. The evidence is overwhelming , 
-              chemical-free banana fiber pads are the healthier choice.
+              11 peer-reviewed studies. 7 countries tested. The evidence is overwhelming.
+              Chemical-free banana fiber pads are the healthier choice.
             </motion.p>
             <motion.div variants={fadeInUp} className={styles.ctaActions}>
               <Link href="/products" className={styles.ctaPrimary}>

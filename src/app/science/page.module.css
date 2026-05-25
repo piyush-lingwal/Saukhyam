@@ -62,16 +62,61 @@
   margin-bottom: var(--space-6);
 }
 
-/* ═══ SECTION 1, HERO (split layout + warm earthy background) ═══ */
+/* ═══ SECTION 1, HERO (cinematic background) ═══ */
 .hero {
   position: relative;
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: clamp(85vh, 92vh, 100vh);
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding-top: var(--navbar-height);
-  background: radial-gradient(circle at 80% 20%, #FAF8F5 0%, #F5EFE6 45%, #E4ECE6 100%);
-  padding-bottom: 4rem;
+  padding: calc(var(--navbar-height) + 2rem) 0 4rem;
+  isolation: isolate;
+}
+
+.heroBgLayer {
+  position: absolute;
+  inset: -10% 0;
+  z-index: 0;
+}
+
+.heroBgImg {
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(105deg,
+      rgba(26, 47, 74, 0.88) 0%,
+      rgba(30, 77, 61, 0.72) 42%,
+      rgba(248, 243, 234, 0.55) 72%,
+      rgba(248, 243, 234, 0.35) 100%
+    );
+}
+
+.heroGrain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.heroMoleculePattern {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(111, 166, 122, 0.8) 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(183, 169, 201, 0.6) 1px, transparent 1px);
+  background-size: 48px 48px, 64px 64px;
 }
 
 .hero::before {
@@ -79,6 +124,8 @@
 }
 
 .heroContainer {
+  position: relative;
+  z-index: 3;
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
   align-items: center;
@@ -90,7 +137,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  color: var(--science-charcoal);
+  color: #fff;
   z-index: 2;
 }
 
@@ -106,21 +153,21 @@
 }
 
 .heroBreadcrumb a {
-  color: var(--gray-500);
+  color: rgba(255, 255, 255, 0.72);
   text-decoration: none;
   transition: color var(--duration-fast) var(--ease-out);
 }
 
 .heroBreadcrumb a:hover {
-  color: var(--science-forest);
+  color: rgba(111, 166, 122, 1);
 }
 
 .breadcrumbSep {
-  color: var(--gray-300);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .breadcrumbCurrent {
-  color: var(--science-forest);
+  color: rgba(111, 166, 122, 1);
   font-weight: 600;
 }
 
@@ -130,8 +177,8 @@
   font-size: 12px;
   font-weight: 700;
   color: var(--science-forest);
-  background: rgba(110, 166, 122, 0.12);
-  border: 1px solid rgba(110, 166, 122, 0.25);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(111, 166, 122, 0.35);
   padding: 8px 18px;
   border-radius: var(--radius-full);
   margin-bottom: 24px;
@@ -142,18 +189,19 @@
 .heroTitle {
   font-family: var(--font-heading);
   font-size: clamp(2.5rem, 5.2vw, 4.25rem);
-  font-weight: 400; /* softer elegant font weight */
+  font-weight: 400;
   line-height: 1.15;
-  color: var(--science-forest);
+  color: #fff;
   margin: 0 0 24px 0;
   letter-spacing: -0.025em;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.2);
 }
 
 .heroBody {
   font-family: var(--font-body);
   font-size: 1.1rem;
   line-height: 1.75;
-  color: var(--gray-600);
+  color: rgba(255, 255, 255, 0.88);
   max-width: 600px;
   margin: 0 0 36px 0;
 }
@@ -169,30 +217,32 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: white;
-  border: 1px solid rgba(228, 242, 232, 0.8);
+  flex: 1 1 180px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 20px;
   padding: 22px 26px;
-  color: var(--science-charcoal);
-  box-shadow: 0 4px 20px rgba(30, 77, 61, 0.03);
-  transition: 
-    transform var(--duration-normal) var(--ease-out), 
-    border-color var(--duration-normal) var(--ease-out), 
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
     box-shadow var(--duration-normal) var(--ease-out);
-  flex: 1 1 180px;
 }
 
 .heroGlassCard:hover {
-  border-color: rgba(110, 166, 122, 0.4);
+  border-color: rgba(111, 166, 122, 0.55);
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(30, 77, 61, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .heroGlassValue {
   font-family: var(--font-heading);
   font-size: 26px;
   font-weight: 700;
-  color: var(--science-forest);
+  color: #fff;
   line-height: 1.2;
 }
 
@@ -200,7 +250,7 @@
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
-  color: var(--gray-500);
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.35;
 }
 
@@ -212,20 +262,59 @@
   z-index: 1;
 }
 
-/* ═══ SECTION 2, THE EVIDENCE (luxury pastel) ═══ */
+.heroVisualGlass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* ═══ SECTION 2, THE EVIDENCE (scientific dashboard) ═══ */
 .evidenceLuxury {
-  padding: clamp(5rem, 10vw, 7rem) clamp(1.25rem, 5vw, 5rem);
-  background: #eef6ef;
+  position: relative;
+  padding: clamp(5rem, 10vw, 7.5rem) clamp(1.25rem, 5vw, 5rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.evidenceLuxuryBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(165deg,
+      #1a2f4a 0%,
+      #1e4d3d 35%,
+      #eef6ef 65%,
+      #f8f3ea 100%
+    );
+}
+
+.evidenceLuxuryPattern {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(111, 166, 122, 0.9) 1px, transparent 1px),
+    radial-gradient(circle at 85% 75%, rgba(183, 169, 201, 0.7) 1px, transparent 1px),
+    linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.03) 50%, transparent 51%);
+  background-size: 56px 56px, 72px 72px, 120px 120px;
 }
 
 .evidenceLuxuryInner {
-  max-width: 1100px;
+  position: relative;
+  z-index: 2;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
 .evidenceLuxuryHeader {
   text-align: center;
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.75rem);
 }
 
 .evidenceLuxuryTag {
@@ -238,100 +327,127 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #3d7a55;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
   margin-bottom: 1.25rem;
+  backdrop-filter: blur(8px);
 }
 
 .evidenceLuxuryTag svg {
-  color: #5a9a6e;
+  color: rgba(111, 166, 122, 1);
 }
 
 .evidenceLuxuryTitle {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-size: clamp(2rem, 4.5vw, 2.85rem);
   font-weight: 700;
-  color: #1a2f4a;
-  line-height: 1.2;
+  color: #fff;
+  line-height: 1.18;
   letter-spacing: -0.02em;
   margin: 0 auto 1.25rem;
   max-width: 720px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
 }
 
 .evidenceLuxuryDesc {
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.75;
-  color: #5c6b63;
-  max-width: 580px;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 620px;
   margin: 0 auto;
 }
 
 .evidenceLuxuryGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .evidenceLuxuryCard {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 2.25rem 1.75rem 2rem;
+  align-items: flex-start;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  border-radius: 22px;
+  padding: 2rem 1.75rem 1.85rem;
   box-shadow:
-    0 4px 6px rgba(26, 47, 74, 0.02),
-    0 12px 32px rgba(26, 47, 74, 0.05);
-  border: 1px solid rgba(228, 242, 232, 0.6);
-  transition: 
-    transform 0.4s var(--ease-out), 
-    box-shadow 0.4s var(--ease-out), 
-    border-color 0.4s var(--ease-out);
+    0 4px 6px rgba(26, 47, 74, 0.03),
+    0 16px 40px rgba(26, 47, 74, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  transition:
+    transform 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
+    border-color 0.45s var(--ease-out);
+  overflow: hidden;
 }
 
 .evidenceLuxuryCard:hover {
-  transform: translateY(-6px) scale(1.025);
-  border-color: rgba(111, 166, 122, 0.35);
+  transform: translateY(-8px);
+  border-color: rgba(111, 166, 122, 0.45);
   box-shadow:
-    0 15px 35px rgba(111, 166, 122, 0.1),
-    0 20px 40px rgba(26, 47, 74, 0.08);
+    0 20px 50px rgba(111, 166, 122, 0.15),
+    0 24px 48px rgba(26, 47, 74, 0.1);
+}
+
+.evidenceCardGlow {
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(111, 166, 122, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.evidenceLuxuryCard:hover .evidenceCardGlow {
+  opacity: 1;
 }
 
 .evidenceLuxuryIconWrap {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: #e4f2e8;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(111, 166, 122, 0.18) 0%, rgba(30, 77, 61, 0.08) 100%);
   color: #3d7a55;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1.25rem;
+  border: 1px solid rgba(111, 166, 122, 0.2);
 }
 
 .evidenceLuxuryCardStat {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-size: clamp(2.25rem, 3.5vw, 3rem);
   font-weight: 800;
-  color: #3d7a55; /* Prominent numbers with soft green emphasis */
-  margin: 0 0 0.5rem;
-  line-height: 1.1;
+  color: #1e4d3d;
+  margin: 0 0 0.4rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .evidenceLuxuryCardLabel {
   font-family: var(--font-body);
   font-size: 0.9375rem;
-  font-weight: 600;
-  color: #3d7a55;
-  margin: 0 0 0.75rem;
+  font-weight: 700;
+  color: #1a2f4a;
+  margin: 0 0 0.65rem;
   line-height: 1.35;
 }
 
 .evidenceLuxuryCardDesc {
   font-family: var(--font-body);
   font-size: 0.8125rem;
-  color: #6b7a72;
+  color: #5c6b63;
   line-height: 1.65;
   margin: 0;
   max-width: none;
@@ -918,11 +1034,48 @@
 }
 
 .hormonalSection {
+  position: relative;
   padding: clamp(5rem, 9vw, 8rem) 0;
-  background: #FAF8F5;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hormonalBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hormonalBgImg {
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.hormonalOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(105deg,
+      rgba(248, 243, 234, 0.94) 0%,
+      rgba(248, 243, 234, 0.88) 45%,
+      rgba(238, 246, 239, 0.75) 100%
+    );
+}
+
+.hormonalGrain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
 }
 
 .hormonalGrid {
+  position: relative;
+  z-index: 3;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 4.5rem;
@@ -972,13 +1125,14 @@
 }
 
 .infoCard {
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid rgba(228, 242, 232, 0.5);
-  box-shadow: 0 4px 15px rgba(26, 47, 74, 0.02);
   display: flex;
   gap: 14px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(228, 242, 232, 0.6);
+  box-shadow: 0 8px 24px rgba(26, 47, 74, 0.04);
 }
 
 .infoCardIcon {
