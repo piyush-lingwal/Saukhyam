@@ -754,108 +754,87 @@
   }
 }
 
-/* ── Why Banana Fiber Entry Banner ── */
-.fiberEntryContainer {
-  margin-top: var(--space-12);
-  margin-bottom: var(--space-4);
+/* ── Why Banana Fiber Navigation Button ── */
+.fiberNavWrap {
+  padding: var(--space-10) 0 var(--space-6);
+  background: var(--color-bg-warm);
 }
 
-.fiberEntryCard {
+.fiberNavInner {
+  display: flex;
+  justify-content: center;
+}
+
+.fiberNavBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #26332b;
+  text-decoration: none;
   background: linear-gradient(135deg, #fdfbfa 0%, #f7f2e8 100%);
   border: 1px solid #e8d8bf;
-  border-radius: var(--radius-2xl);
-  padding: var(--space-8) var(--space-10);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-8);
-  box-shadow: var(--shadow-sm);
-  transition: var(--transition-all);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 12px rgba(38, 51, 43, 0.06);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
 }
 
-.fiberEntryCard::before {
+.fiberNavBtn::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--green-600);
+  inset: 0;
+  background: linear-gradient(135deg, rgba(198, 167, 105, 0.08) 0%, rgba(107, 138, 107, 0.06) 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
 
-.fiberEntryCard:hover {
+.fiberNavBtn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--green-300);
-}
-
-.fiberEntryContent {
-  flex: 1;
-}
-
-.fiberEntryPill {
-  display: inline-flex;
-  align-items: center;
-  font-size: var(--text-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-wider);
-  color: var(--green-700);
-  background: var(--green-50);
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-full);
-  margin-bottom: var(--space-3);
-  border: 1px solid var(--green-100);
-}
-
-.fiberEntryTitle {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: 700;
+  border-color: #c6a769;
+  box-shadow: 0 6px 24px rgba(38, 51, 43, 0.1);
   color: #26332b;
-  margin-bottom: var(--space-2);
 }
 
-.fiberEntryText {
-  font-size: var(--text-sm);
-  color: var(--color-text-secondary);
-  line-height: var(--leading-relaxed);
-  max-width: 600px;
+.fiberNavBtn:hover::before {
+  opacity: 1;
 }
 
-.fiberEntryBtn {
-  display: inline-flex;
+.fiberNavIcon {
+  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-6);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--white);
-  background: var(--green-700);
+  justify-content: center;
+  width: 28px;
+  height: 28px;
   border-radius: var(--radius-full);
-  text-decoration: none;
-  transition: var(--transition-all);
-  white-space: nowrap;
+  background: rgba(107, 138, 107, 0.12);
+  color: #6b8a6b;
+  position: relative;
+  z-index: 1;
+  transition: background 0.35s ease;
 }
 
-.fiberEntryBtn:hover {
-  background: var(--green-800);
-  color: var(--white);
-  transform: translateX(4px);
-  box-shadow: var(--shadow-md);
+.fiberNavBtn:hover .fiberNavIcon {
+  background: rgba(107, 138, 107, 0.2);
 }
 
-@media (max-width: 768px) {
-  .fiberEntryCard {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-4);
-    padding: var(--space-6);
-  }
-  .fiberEntryBtn {
-    width: 100%;
-    justify-content: center;
-  }
+.fiberNavLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.fiberNavArrow {
+  position: relative;
+  z-index: 1;
+  color: #c6a769;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fiberNavBtn:hover .fiberNavArrow {
+  transform: translateX(3px);
 }

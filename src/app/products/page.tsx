@@ -292,31 +292,22 @@ export default function ProductsPage() {
         </motion.div>
       </div>
 
-      {/* ── Why Banana Fiber Entry ── */}
-      <div className={styles.fiberEntryContainer}>
+      {/* ── Why Banana Fiber Navigation ── */}
+      <div className={styles.fiberNavWrap}>
         <div className="container">
           <motion.div
-            className={styles.fiberEntryCard}
+            className={styles.fiberNavInner}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <div className={styles.fiberEntryContent}>
-              <span className={styles.fiberEntryPill}>
-                <Leaf size={12} style={{ marginRight: '6px' }} />
-                Natural Innovation
+            <Link href="/why-banana-fiber" className={styles.fiberNavBtn}>
+              <span className={styles.fiberNavIcon}>
+                <Leaf size={15} />
               </span>
-              <h3 className={styles.fiberEntryTitle}>
-                The Story Behind the Core
-              </h3>
-              <p className={styles.fiberEntryText}>
-                Discover why we choose banana fiber — a resilient, natural material that transforms agricultural residue into premium care.
-              </p>
-            </div>
-            <Link href="/why-banana-fiber" className={styles.fiberEntryBtn}>
-              Why Banana Fiber
-              <ChevronRight size={16} />
+              <span className={styles.fiberNavLabel}>Why Banana Fiber</span>
+              <ChevronRight size={16} className={styles.fiberNavArrow} />
             </Link>
           </motion.div>
         </div>
