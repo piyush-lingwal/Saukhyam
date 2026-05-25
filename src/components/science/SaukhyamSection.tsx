@@ -14,29 +14,29 @@ const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
 const padLayers = [
   {
     num: 1,
-    title: 'Top Layer — Soft Cotton',
+    title: 'Top Layer, Soft Cotton',
     description: '100% cotton surface for comfort and breathability',
   },
   {
     num: 2,
-    title: 'Absorbent Core — Banana Fiber',
+    title: 'Absorbent Core, Banana Fiber',
     description: 'Natural banana fiber with antimicrobial properties (3g–9g)',
   },
   {
     num: 3,
-    title: 'Moisture Barrier — PU Layer',
+    title: 'Moisture Barrier, PU Layer',
     description: 'Polyurethane leak-proof layer prevents any seepage',
   },
   {
     num: 4,
-    title: 'Base Layer — Cotton Back',
+    title: 'Base Layer, Cotton Back',
     description: 'Breathable cotton back with snap-button wings',
   },
 ];
 
 const comparisonRows = [
   { feature: 'Material', saukhyam: 'Banana Fiber + Cotton', disposable: 'Wood Pulp + Plastic + SAP Gel' },
-  { feature: 'Chemicals', saukhyam: 'Zero — 100% Chemical Free', disposable: 'Dioxins, Phthalates, VOCs, Chlorine' },
+  { feature: 'Chemicals', saukhyam: 'Zero, 100% Chemical Free', disposable: 'Dioxins, Phthalates, VOCs, Chlorine' },
   { feature: 'Lifespan', saukhyam: '2–3 Years (100+ cycles)', disposable: 'Single Use (4–8 hours)' },
   { feature: 'Cost / Year', saukhyam: '₹200–400 / year', disposable: '₹2,400–4,000 / year' },
   { feature: 'Waste Generated', saukhyam: '0 kg (biodegradable)', disposable: '125+ kg lifetime waste' },
@@ -96,7 +96,7 @@ export default function SaukhyamSection() {
             The Innovation Behind Saukhyam Pads Changes Everything
           </motion.h1>
           <motion.p variants={fadeInUp} className={styles.heroSubtitle}>
-            India&apos;s first banana fiber absorbent technology — naturally antimicrobial,
+            India&apos;s first banana fiber absorbent technology, naturally antimicrobial,
             chemical-free, and scientifically proven to be better for your body. Backed by 16+
             peer-reviewed studies.
           </motion.p>
@@ -124,7 +124,7 @@ export default function SaukhyamSection() {
             4 Layers of Natural Protection
           </motion.h2>
           <motion.p variants={fadeInUp} className={styles.sectionSubtitle}>
-            Each layer is carefully engineered — natural, functional, and skin-safe. Zero
+            Each layer is carefully engineered, natural, functional, and skin-safe. Zero
             chemicals. Zero compromise.
           </motion.p>
         </motion.header>
@@ -166,19 +166,19 @@ export default function SaukhyamSection() {
             </motion.div>
 
             <motion.p variants={fadeInUp} className={styles.extraText}>
-              Banana trees fruit only once, then are cut — we transform that waste into a
+              Banana trees fruit only once, then are cut, we transform that waste into a
               powerful absorbent material with natural antimicrobial properties.
             </motion.p>
 
             <motion.p variants={fadeInUp} className={styles.extraText}>
-              Research shows banana fiber contains pathogenesis-related (PR) proteins —
+              Research shows banana fiber contains pathogenesis-related (PR) proteins , 
               naturally occurring antimicrobial compounds. This allows the absorbent core to
               resist bacterial growth naturally, without chemical treatment.
             </motion.p>
 
             <motion.p variants={fadeInUp} className={styles.extraText}>
               The PU (polyurethane) leak-proof layer is breathable yet impermeable, preventing
-              leakage while allowing airflow — eliminating the &quot;greenhouse effect&quot;
+              leakage while allowing airflow, eliminating the &quot;greenhouse effect&quot;
               caused by plastic-backed disposable pads.
             </motion.p>
           </motion.aside>

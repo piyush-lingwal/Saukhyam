@@ -33,7 +33,7 @@ export default function ScienceHeroVisual() {
           <circle cx="160" cy="240" r="9" fill="#223A5E" opacity="0.5" />
           <circle cx="240" cy="240" r="9" fill="#223A5E" opacity="0.5" />
         </g>
-        {/* Feminine health outline — abstract organic form */}
+        {/* Feminine health outline, abstract organic form */}
         <path
           d="M200 260 C170 260 155 290 155 320 C155 345 175 365 200 375 C225 365 245 345 245 320 C245 290 230 260 200 260 Z"
           stroke="#6FA67A"

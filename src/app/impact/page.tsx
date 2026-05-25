@@ -34,7 +34,7 @@ export default function ImpactPage() {
               Recognized by <span className={styles.heroAccent}>India & the World</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              From NITI Aayog to the UN Climate Conference — Saukhyam&apos;s impact
+              From NITI Aayog to the UN Climate Conference, Saukhyam&apos;s impact
               has been acknowledged across national and international platforms.
             </motion.p>
           </motion.div>

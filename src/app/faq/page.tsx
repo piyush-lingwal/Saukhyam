@@ -63,7 +63,7 @@ export default function FAQPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            Everything you need to know about Saukhyam reusable pads — from usage and washing to science and impact.
+            Everything you need to know about Saukhyam reusable pads, covering usage and washing to science and impact.
           </motion.p>
         </div>
       </section>

@@ -1,0 +1,777 @@
+/* ═══════════════════════════════════════════════════
+   WHY BANANA FIBER PAGE STYLES (Soft Luxury & Science)
+   ═══════════════════════════════════════════════════ */
+
+/* ── Custom Theme Palette Local Variables ── */
+.whyBananaFiberPage {
+  --color-bg-primary: #F7F2E8;    /* Warm ivory / natural cream */
+  --color-bg-secondary: #E8D8BF;  /* Soft sand / beige */
+  --color-accent-green: #6B8A6B;  /* Muted botanical green */
+  --color-accent-gold: #C6A769;   /* Soft muted gold */
+  --color-text-dark: #26332B;     /* Deep charcoal */
+  --color-text-muted: #5c6c62;
+  --color-glass-white: rgba(255, 255, 255, 0.45);
+  --color-glass-border: rgba(198, 167, 105, 0.2);
+
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-dark);
+  font-family: var(--font-body), sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Section Transition & Organic Dividers ── */
+.sectionDivider {
+  height: 100px;
+  background: linear-gradient(to bottom, var(--color-bg-primary), var(--color-bg-secondary));
+  position: relative;
+  overflow: hidden;
+}
+
+.sectionDividerAlt {
+  height: 100px;
+  background: linear-gradient(to bottom, var(--color-bg-secondary), var(--color-bg-primary));
+  position: relative;
+  overflow: hidden;
+}
+
+.organicBackground {
+  position: relative;
+}
+
+.organicBackground::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: radial-gradient(var(--color-accent-green) 1px, transparent 0);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── SECTION 1 — HERO ── */
+.heroSection {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: var(--space-16) 0;
+  background: radial-gradient(circle at 80% 20%, rgba(198, 167, 105, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(107, 138, 107, 0.1) 0%, transparent 60%),
+              var(--color-bg-primary);
+  overflow: hidden;
+}
+
+.heroContainer {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.heroBreadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-accent-green);
+  margin-bottom: var(--space-6);
+  font-weight: 500;
+}
+
+.heroBreadcrumb a {
+  color: var(--color-text-dark);
+  opacity: 0.7;
+}
+
+.heroBreadcrumb a:hover {
+  color: var(--color-accent-green);
+  opacity: 1;
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: var(--color-text-dark);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-6);
+}
+
+.heroSubTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--color-accent-green);
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-8);
+  border-left: 3px solid var(--color-accent-gold);
+  padding-left: var(--space-4);
+  max-width: 550px;
+}
+
+.heroText {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 580px;
+}
+
+.heroVisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.heroImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--color-glass-border);
+}
+
+.heroImageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroBlurBlob {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: rgba(198, 167, 105, 0.15);
+  filter: blur(80px);
+  border-radius: var(--radius-full);
+  top: 10%;
+  right: -50px;
+  z-index: 1;
+}
+
+/* ── SECTION 2 — THE BANANA PLANT STORY ── */
+.plantStorySection {
+  padding: var(--section-gap) 0;
+  background-color: var(--color-bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.plantStorySection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 10% 30%, rgba(107, 138, 107, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.plantStoryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.plantStoryImageWrap {
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.plantStoryImageWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plantStoryContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: var(--space-6);
+}
+
+.sectionBadge {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-accent-green);
+  background: rgba(107, 138, 107, 0.1);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-6);
+}
+
+.sectionText {
+  font-size: var(--text-base);
+  color: var(--color-text-dark);
+  opacity: 0.9;
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* ── SECTION 3 — RESOURCE & INDIA STORY ── */
+.resourceSection {
+  padding: var(--section-gap) 0;
+  background-color: var(--color-bg-primary);
+  position: relative;
+}
+
+.resourceGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+  margin-bottom: var(--space-16);
+}
+
+.flowTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-8);
+  text-align: center;
+  position: relative;
+}
+
+.processFlow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding: var(--space-4) 0;
+}
+
+.processFlow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: var(--space-8);
+  right: var(--space-8);
+  height: 2px;
+  background: linear-gradient(to right, var(--color-bg-secondary) 0%, var(--color-accent-green) 50%, var(--color-bg-secondary) 100%);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.flowStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.flowIconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-primary);
+  border: 2px solid var(--color-accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-green);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-3);
+  transition: var(--transition-all);
+}
+
+.flowStep:hover .flowIconWrap {
+  transform: scale(1.1);
+  background: var(--color-bg-secondary);
+  border-color: var(--color-accent-green);
+}
+
+.flowLabel {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.flowDesc {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 2px;
+  max-width: 120px;
+}
+
+/* ── SECTION 4 — ABSORBENCY ── */
+.absorbencySection {
+  padding: var(--section-gap) 0;
+  background: radial-gradient(ellipse at center, rgba(198, 167, 105, 0.08) 0%, var(--color-bg-secondary) 100%);
+  display: flex;
+  align-items: center;
+}
+
+.centeredLayout {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.glassCard {
+  background: var(--color-glass-white);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-12) var(--space-8);
+  box-shadow: var(--shadow-xl);
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: var(--space-8);
+  text-align: left;
+  margin-top: var(--space-8);
+}
+
+.metricBig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.metricNum {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 10vw, 6.5rem);
+  font-weight: 800;
+  color: var(--color-accent-gold);
+  line-height: 1;
+}
+
+.metricLabel {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  margin-top: -5px;
+}
+
+.absorbencyContent h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-4);
+}
+
+.absorbencyContent p {
+  color: var(--color-text-dark);
+  opacity: 0.85;
+}
+
+/* ── SECTION 5 — USER EXPERIENCE TO SCIENCE ── */
+.transitionSection {
+  padding: var(--section-gap) 0;
+  background: linear-gradient(135deg, #1C2721 0%, #26332B 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.transitionSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 80%, rgba(198, 167, 105, 0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.transitionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.darkBadge {
+  color: var(--color-accent-gold);
+  background: rgba(198, 167, 105, 0.15);
+  border: 1px solid rgba(198, 167, 105, 0.3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+  display: inline-flex;
+}
+
+.darkTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--white);
+  margin-bottom: var(--space-6);
+  line-height: var(--leading-tight);
+}
+
+.darkText {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.darkMetric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-12) var(--space-6);
+  position: relative;
+  backdrop-filter: blur(4px);
+}
+
+.darkMetricValue {
+  font-family: var(--font-heading);
+  font-size: clamp(5rem, 12vw, 8rem);
+  font-weight: 800;
+  color: var(--color-accent-gold);
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(198, 167, 105, 0.2);
+}
+
+.darkMetricLabel {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: var(--space-2);
+  text-align: center;
+}
+
+/* ── SECTION 6 — INSIDE THE FIBER ── */
+.insideSection {
+  padding: var(--section-gap) 0;
+  background-color: var(--color-bg-primary);
+  position: relative;
+}
+
+.moleculeOverlay {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.scienceCardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.scienceCard {
+  background: var(--white);
+  border: 1px solid rgba(198, 167, 105, 0.25);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+}
+
+.scienceCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent-green);
+}
+
+.scienceCardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  color: var(--color-accent-green);
+}
+
+.scienceCardTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--color-text-dark);
+  font-weight: 700;
+}
+
+.scienceCardText {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-normal);
+}
+
+/* ── SECTION 7 — WHAT SCIENCE FOUND ── */
+.findingsSection {
+  padding: var(--section-gap) 0;
+  background-color: var(--color-bg-secondary);
+}
+
+.findingsIntro {
+  text-align: center;
+  max-width: var(--container-narrow);
+  margin: 0 auto var(--space-12);
+}
+
+.findingsIntro p {
+  font-size: var(--text-base);
+  color: var(--color-text-dark);
+  opacity: 0.9;
+}
+
+.compoundsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+  max-width: 1100px;
+  margin: 0 auto var(--space-12);
+}
+
+.compoundCard {
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(198, 167, 105, 0.3);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.compoundCard:hover {
+  background: var(--white);
+  border-color: var(--color-accent-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.compoundName {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.findingsDisclaimer {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 4px solid var(--color-accent-gold);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: var(--space-4) var(--space-6);
+  text-align: left;
+  box-shadow: var(--shadow-xs);
+}
+
+.findingsDisclaimer p {
+  font-size: var(--text-sm);
+  color: var(--color-text-dark);
+  line-height: var(--leading-relaxed);
+  max-width: 100%;
+}
+
+/* ── SECTION 8 — SCIENCE CONTINUES ── */
+.continuesSection {
+  padding: var(--section-gap) 0;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.continuesContainer {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.continuesText {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  opacity: 0.95;
+}
+
+/* ── SECTION 9 — SAUKHYAM PHILOSOPHY ── */
+.philosophySection {
+  padding: clamp(6rem, 12vw, 10rem) 0;
+  background: linear-gradient(135deg, #18221C 0%, #0F1612 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophySection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(107, 138, 107, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.philosophyGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.philosophyContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.philosophyTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  color: var(--white);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-6);
+}
+
+.philosophyText {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: var(--space-10);
+}
+
+.philosophyQuoteBlock {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-8);
+  width: 100%;
+}
+
+.philosophyQuote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-style: italic;
+  color: var(--color-accent-gold);
+  line-height: var(--leading-snug);
+  max-width: 600px;
+}
+
+.philosophyImageWrap {
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.philosophyImageWrap img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ── Mobile Layout Adjustments ── */
+@media (max-width: 992px) {
+  .heroContainer, .plantStoryGrid, .resourceGrid, .transitionGrid, .philosophyGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .plantStoryContent {
+    padding-right: 0;
+  }
+
+  .glassCard {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .scienceCardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processFlow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-8) var(--space-6);
+  }
+
+  .processFlow::before {
+    display: none;
+  }
+
+  .flowStep {
+    flex: 0 0 40%;
+  }
+
+  .philosophyContent {
+    order: 2;
+  }
+
+  .philosophyImageWrap {
+    order: 1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .flowStep {
+    flex: 0 0 100%;
+  }
+  
+  .compoundsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+}

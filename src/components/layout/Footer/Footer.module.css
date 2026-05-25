@@ -172,7 +172,7 @@
 
 
 /* ══════════════════════════════════════════════════
-   CARE PAGE THEME — activated by [data-page-theme="care"] on <html>
+   CARE PAGE THEME, activated by [data-page-theme="care"] on <html>
    ══════════════════════════════════════════════════ */
 
 :global([data-page-theme="care"]) .footer::before {

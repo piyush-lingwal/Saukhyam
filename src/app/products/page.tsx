@@ -32,18 +32,18 @@ const trustItems = [
 ];
 
 const reusablePoints = [
-  '100% chemical free — no dioxins, phthalates, or bleach',
+  '100% chemical free: no dioxins, phthalates, or bleach',
   'Banana fiber with natural antimicrobial properties',
   'Lasts 2-3 years with proper care',
   'Saves ₹3,000+ per year vs disposables',
-  'Biodegradable — zero landfill waste',
+  'Biodegradable, leading to zero landfill waste',
   'Handcrafted by empowered rural women',
 ];
 
 const disposablePoints = [
   'Contains dioxins, phthalates, and VOCs',
   'Synthetic superabsorbent polymers next to skin',
-  'Single use — 12,000+ pads in a lifetime',
+  'Single use: 12,000+ pads in a lifetime',
   'Costs ₹3,000-5,000 per year recurring',
   'Takes 500-800 years to decompose',
   'Mass-produced in chemical factories',
@@ -290,6 +290,36 @@ export default function ProductsPage() {
             <span className={styles.statLabel}>Pad Lifespan</span>
           </motion.div>
         </motion.div>
+      </div>
+
+      {/* ── Why Banana Fiber Entry ── */}
+      <div className={styles.fiberEntryContainer}>
+        <div className="container">
+          <motion.div
+            className={styles.fiberEntryCard}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <div className={styles.fiberEntryContent}>
+              <span className={styles.fiberEntryPill}>
+                <Leaf size={12} style={{ marginRight: '6px' }} />
+                Natural Innovation
+              </span>
+              <h3 className={styles.fiberEntryTitle}>
+                The Story Behind the Core
+              </h3>
+              <p className={styles.fiberEntryText}>
+                Discover why we choose banana fiber — a resilient, natural material that transforms agricultural residue into premium care.
+              </p>
+            </div>
+            <Link href="/why-banana-fiber" className={styles.fiberEntryBtn}>
+              Why Banana Fiber
+              <ChevronRight size={16} />
+            </Link>
+          </motion.div>
+        </div>
       </div>
 
       {/* ── Why Switch ── */}
