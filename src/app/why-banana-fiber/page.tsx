@@ -235,20 +235,22 @@ export default function WhyBananaFiberPage() {
         aria-labelledby="plant-story-title"
       >
         <div className={styles.plantStoryWatermark} aria-hidden="true">
-          ONE HARVEST. SECOND PURPOSE.
+          <span>ONE HARVEST</span>
+          <span>SECOND PURPOSE</span>
         </div>
+        <div className={styles.plantStoryGlow} aria-hidden="true" />
         <div className={styles.plantStoryGrain} aria-hidden="true" />
 
-        <div className="container">
-          <motion.article
-            className={styles.plantStoryEditorial}
+        <div className={`container ${styles.plantStoryContainer}`}>
+          <motion.header
+            className={styles.plantStoryHeader}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
             variants={staggerContainer}
           >
-            <motion.span className={styles.sectionBadge} variants={fadeInUp}>
-              <Compass size={12} style={{ marginRight: '4px' }} />
+            <motion.span className={styles.plantStoryBadge} variants={fadeInUp}>
+              <Compass size={13} aria-hidden="true" />
               The Life Cycle
             </motion.span>
 
@@ -260,45 +262,94 @@ export default function WhyBananaFiberPage() {
               A Plant With Its Own Story
             </motion.h2>
 
-            <motion.div className={styles.plantStoryCluster} variants={fadeInUp}>
-              <p className={styles.plantStoryLead}>Not every plant lives the same journey.</p>
-              <p>A mango tree returns with fruit season after season.</p>
-              <p>An orange tree continues year after year.</p>
-              <p className={styles.plantStoryHighlight}>The banana plant is different.</p>
-              <p>It bears fruit only once.</p>
-              <p>After harvest, its work is complete.</p>
-              <p>What remains is often treated as agricultural residue.</p>
-              <p className={styles.plantStoryEmphasis}>But sometimes, what is left behind holds unexpected value.</p>
+            <motion.div className={styles.plantStoryDivider} variants={fadeInUp} aria-hidden="true">
+              <span className={styles.plantStoryDividerLine} />
+              <Leaf size={16} className={styles.plantStoryDividerIcon} />
+              <span className={styles.plantStoryDividerLine} />
             </motion.div>
+          </motion.header>
 
-            <motion.div className={`${styles.plantStoryCluster} ${styles.plantStoryClusterAlt}`} variants={fadeInUp}>
-              <h3 className={styles.plantStoryMicroHead}>Nature Leaves Nothing Without Purpose</h3>
-              <p>From this harvested plant, banana fiber is carefully extracted and transformed into the heart of Saukhyam reusable pads.</p>
-              <p>A natural cellulose fiber, banana fiber shares the absorbent qualities of conventional materials, but its story begins differently.</p>
-              <p>Not from newly sourced material.</p>
-              <p className={styles.plantStoryHighlight}>But from what nature has already provided.</p>
-            </motion.div>
+          <motion.div
+            className={styles.plantStoryBody}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+          >
+            <motion.article
+              className={`${styles.plantStoryCard} ${styles.plantStoryCardFeatured}`}
+              variants={fadeInUp}
+            >
+              <div className={styles.plantStoryCardAccent} aria-hidden="true" />
+              <div className={styles.plantStoryCardInner}>
+                <p className={styles.plantStoryLead}>Not every plant lives the same journey.</p>
+                <p>A mango tree returns with fruit season after season.</p>
+                <p>An orange tree continues year after year.</p>
+                <p className={styles.plantStoryHighlight}>The banana plant is different.</p>
+                <p>It bears fruit only once.</p>
+                <p>After harvest, its work is complete.</p>
+                <p>What remains is often treated as agricultural residue.</p>
+                <p className={styles.plantStoryEmphasis}>But sometimes, what is left behind holds unexpected value.</p>
+              </div>
+            </motion.article>
 
-            <motion.div className={styles.plantStoryCluster} variants={fadeInUp}>
-              <h3 className={styles.plantStoryMicroHead}>A Story Rooted Here</h3>
-              <p>India is among the world&apos;s largest banana-growing nations.</p>
-              <p>With every harvest comes plant material that has already completed its natural cycle.</p>
-              <p>Instead of being overlooked, this fiber finds a second purpose.</p>
-              <p className={styles.plantStoryTagline}>Useful. Thoughtful. Intentional.</p>
-            </motion.div>
+            <div className={styles.plantStoryCardGrid}>
+              <motion.article className={styles.plantStoryCard} variants={fadeInUp}>
+                <div className={styles.plantStoryCardIconWrap} aria-hidden="true">
+                  <Leaf size={18} />
+                </div>
+                <h3 className={styles.plantStoryMicroHead}>Nature Leaves Nothing Without Purpose</h3>
+                <div className={styles.plantStoryCardInner}>
+                  <p>From this harvested plant, banana fiber is carefully extracted and transformed into the heart of Saukhyam reusable pads.</p>
+                  <p>A natural cellulose fiber, banana fiber shares the absorbent qualities of conventional materials, but its story begins differently.</p>
+                  <p>Not from newly sourced material.</p>
+                  <p className={styles.plantStoryHighlight}>But from what nature has already provided.</p>
+                </div>
+              </motion.article>
 
-            <motion.div className={`${styles.plantStoryCluster} ${styles.plantStoryClusterAlt}`} variants={fadeInUp}>
+              <motion.article className={styles.plantStoryCard} variants={fadeInUp}>
+                <div className={styles.plantStoryCardIconWrap} aria-hidden="true">
+                  <Compass size={18} />
+                </div>
+                <h3 className={styles.plantStoryMicroHead}>A Story Rooted Here</h3>
+                <div className={styles.plantStoryCardInner}>
+                  <p>India is among the world&apos;s largest banana-growing nations.</p>
+                  <p>With every harvest comes plant material that has already completed its natural cycle.</p>
+                  <p>Instead of being overlooked, this fiber finds a second purpose.</p>
+                  <p className={styles.plantStoryTagline}>Useful. Thoughtful. Intentional.</p>
+                </div>
+              </motion.article>
+            </div>
+
+            <motion.article className={`${styles.plantStoryCard} ${styles.plantStoryCardWide}`} variants={fadeInUp}>
+              <div className={styles.plantStoryCardIconWrap} aria-hidden="true">
+                <Sparkles size={18} />
+              </div>
               <h3 className={styles.plantStoryMicroHead}>More Than a Material</h3>
-              <p>For Saukhyam, banana fiber is not simply an absorbent layer.</p>
-              <p>It reflects a different way of thinking.</p>
-              <p>One that values resources, respects nature, and believes meaningful innovation can begin with what already exists.</p>
-            </motion.div>
+              <div className={styles.plantStoryCardInner}>
+                <p>For Saukhyam, banana fiber is not simply an absorbent layer.</p>
+                <p>It reflects a different way of thinking.</p>
+                <p>One that values resources, respects nature, and believes meaningful innovation can begin with what already exists.</p>
+              </div>
+            </motion.article>
 
             <motion.div className={styles.plantStoryClosing} variants={fadeInUp}>
+              <div className={styles.plantStoryClosingDots} aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
               <p>Its story does not begin in a factory.</p>
               <p>It begins with the harvest.</p>
             </motion.div>
-          </motion.article>
+
+            <motion.div className={styles.plantStoryCtaWrap} variants={fadeInUp}>
+              <a href="#journey-timeline" className={styles.plantStoryCta}>
+                Discover the Story
+                <ChevronRight size={18} aria-hidden="true" />
+              </a>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
