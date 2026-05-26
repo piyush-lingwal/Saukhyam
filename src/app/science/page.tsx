@@ -31,8 +31,6 @@ import {
   type ResearchStudy,
 } from '@/data/research';
 import styles from './page.module.css';
-import ScienceHeroVisual from '@/components/science/ScienceHeroVisual';
-import SciencePCOSVisual from '@/components/science/SciencePCOSVisual';
 import { AnimatePresence } from 'framer-motion';
 
 const fadeInUp = {
@@ -227,7 +225,6 @@ export default function SciencePage() {
         </motion.div>
         <div className={styles.heroOverlay} aria-hidden="true" />
         <div className={styles.heroGrain} aria-hidden="true" />
-        <div className={styles.heroMoleculePattern} aria-hidden="true" />
 
         <div className={`container ${styles.heroContainer}`}>
           <motion.div
@@ -276,17 +273,6 @@ export default function SciencePage() {
                 </div>
               ))}
             </motion.div>
-          </motion.div>
-
-          <motion.div
-            className={styles.heroVisualWrap}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <div className={styles.heroVisualGlass}>
-              <ScienceHeroVisual />
-            </div>
           </motion.div>
         </div>
       </section>
@@ -673,18 +659,6 @@ export default function SciencePage() {
                   <ChevronRight size={16} aria-hidden="true" />
                 </a>
               </motion.div>
-            </motion.div>
-
-            <motion.div
-              className={styles.hormonalVisualWrap}
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className={styles.visualCardGlass}>
-                <SciencePCOSVisual />
-              </div>
             </motion.div>
           </div>
         </div>
