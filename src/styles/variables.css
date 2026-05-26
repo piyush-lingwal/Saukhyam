@@ -42,23 +42,23 @@
   --red-500:        #ef4444;
   --red-600:        #dc2626;
 
-  /* ── Semantic Colors ── */
-  --color-primary:       var(--green-600);
-  --color-primary-hover: var(--green-700);
+  /* ── Semantic Colors (white · light green · dark green) ── */
+  --color-primary:       var(--green-700);
+  --color-primary-hover: var(--green-800);
   --color-primary-light: var(--green-100);
   --color-primary-50:    var(--green-50);
-  --color-secondary:     var(--green-800);
-  --color-accent:        var(--gold);
+  --color-secondary:     var(--green-900);
+  --color-accent:        var(--green-600);
   --color-danger:        var(--terracotta);
 
-  --color-text:          var(--gray-900);
-  --color-text-secondary: var(--gray-600);
-  --color-text-muted:    var(--gray-400);
+  --color-text:          var(--green-950);
+  --color-text-secondary: var(--green-800);
+  --color-text-muted:    var(--green-600);
   --color-text-inverse:  var(--white);
 
   --color-bg:            var(--white);
-  --color-bg-warm:       var(--sand-50);
-  --color-bg-subtle:     var(--green-50);
+  --color-bg-warm:       var(--green-50);
+  --color-bg-subtle:     var(--green-100);
   --color-bg-card:       var(--white);
   --color-bg-overlay:    rgba(0, 0, 0, 0.5);
 

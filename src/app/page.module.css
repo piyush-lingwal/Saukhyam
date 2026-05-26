@@ -551,7 +551,7 @@
     radial-gradient(circle at top left, rgba(134, 239, 172, 0.16), transparent 28%),
     radial-gradient(circle at 82% 18%, rgba(251, 191, 36, 0.14), transparent 24%),
     radial-gradient(circle at bottom right, rgba(251, 146, 60, 0.12), transparent 24%),
-    linear-gradient(180deg, #fcfbf7 0%, #f7f1e7 46%, #ffffff 100%);
+    linear-gradient(180deg, #ffffff 0%, #ecfdf5 46%, #ffffff 100%);
   overflow: hidden;
 }
 
@@ -650,7 +650,7 @@
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #8a5a10;
+  color: #166534;
   padding: 0;
   background: transparent;
   border: 0;
@@ -676,8 +676,8 @@
 .productCard {
   --product-accent: rgba(22, 163, 74, 0.18);
   --product-accent-strong: rgba(22, 163, 74, 0.32);
-  --product-stage-start: #edf7ef;
-  --product-stage-end: #f4e9d4;
+  --product-stage-start: #f0fdf4;
+  --product-stage-end: #dcfce7;
   --product-stage-highlight: rgba(255, 255, 255, 0.95);
   --product-chip-bg: rgba(255, 255, 255, 0.9);
   --product-chip-text: var(--green-900);
@@ -729,27 +729,27 @@
 }
 
 .productCard:nth-child(4n + 2) {
-  --product-accent: rgba(251, 191, 36, 0.2);
-  --product-accent-strong: rgba(202, 138, 4, 0.3);
-  --product-stage-start: #fff7df;
-  --product-stage-end: #f6ead8;
-  --product-chip-text: #8a5a10;
+  --product-accent: rgba(34, 197, 94, 0.2);
+  --product-accent-strong: rgba(22, 163, 74, 0.3);
+  --product-stage-start: #ecfdf5;
+  --product-stage-end: #bbf7d0;
+  --product-chip-text: #14532d;
 }
 
 .productCard:nth-child(4n + 3) {
-  --product-accent: rgba(251, 146, 60, 0.18);
-  --product-accent-strong: rgba(194, 65, 12, 0.28);
-  --product-stage-start: #fff1ea;
-  --product-stage-end: #f7eadf;
-  --product-chip-text: #9a3412;
+  --product-accent: rgba(22, 101, 52, 0.18);
+  --product-accent-strong: rgba(20, 83, 45, 0.28);
+  --product-stage-start: #f0fdf4;
+  --product-stage-end: #d1fae5;
+  --product-chip-text: #166534;
 }
 
 .productCard:nth-child(4n + 4) {
-  --product-accent: rgba(20, 184, 166, 0.16);
-  --product-accent-strong: rgba(13, 148, 136, 0.26);
-  --product-stage-start: #edf8f6;
-  --product-stage-end: #f0ebe1;
-  --product-chip-text: #115e59;
+  --product-accent: rgba(74, 222, 128, 0.16);
+  --product-accent-strong: rgba(34, 197, 94, 0.26);
+  --product-stage-start: #ecfdf5;
+  --product-stage-end: #dcfce7;
+  --product-chip-text: #15803d;
 }
 
 .productCard:hover {
