@@ -7,7 +7,6 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
   ChevronRight,
   Leaf,
-  Droplets,
   Activity,
   Compass,
   FlaskConical,
@@ -87,24 +86,17 @@ const journeySteps = [
 ];
 
 const experienceCards = [
-  {
-    title: 'Greater Comfort',
-    quote: 'Comfort became part of the experience.',
-  },
-  {
-    title: 'Gentler Experience',
-    quote: 'Many users described the transition as softer and more breathable.',
-  },
-  {
-    title: 'Meaningful Change',
-    quote: 'For some, what began as a conscious choice became a lasting one.',
-  },
+  'I felt noticeably more comfortable during my cycle after switching.',
+  'The experience felt gentler and more breathable.',
+  'What began as a sustainability choice became a comfort choice too.',
+  'I continued using Saukhyam because the difference felt meaningful.',
 ];
 
 const experienceStats = [
-  { value: 77, label: 'Reported Pain Reduction' },
-  { value: 81, label: 'Cycle Regularity Improvement' },
-  { value: 92, label: 'Continued Use After 6 Months' },
+  { value: 77, label: 'Reported changes in menstrual comfort' },
+  { value: 81, label: 'Improved cycle awareness' },
+  { value: 92, label: 'Continued beyond 6 months' },
+  { value: 74, label: 'Shifted from disposables within 3 months' },
 ];
 
 const phytochemicals = [
@@ -160,19 +152,12 @@ function AnimatedCounter({
 
 export default function WhyBananaFiberPage() {
   const heroRef = useRef<HTMLElement>(null);
-  const plantStoryRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
   });
   const heroBgY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const heroContentY = useTransform(scrollYProgress, [0, 1], [0, 40]);
-
-  const { scrollYProgress: plantScrollProgress } = useScroll({
-    target: plantStoryRef,
-    offset: ['start end', 'end start'],
-  });
-  const plantVisualY = useTransform(plantScrollProgress, [0, 1], [40, -40]);
 
   return (
     <div className={styles.whyBananaFiberPage}>
@@ -243,122 +228,77 @@ export default function WhyBananaFiberPage() {
 
       <div className={styles.sectionDivider} aria-hidden="true" />
 
-      {/* SECTION 2: THE BANANA PLANT STORY */}
+      {/* SECTION 2: A PLANT WITH ITS OWN STORY */}
       <section
         id="plant-story"
-        ref={plantStoryRef}
         className={styles.plantStorySection}
         aria-labelledby="plant-story-title"
       >
-        <div className={styles.plantStoryBg} aria-hidden="true">
-          <Image
-            src="/why-banana-fiber/plant-story-bg.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            className={styles.plantStoryBgImg}
-          />
+        <div className={styles.plantStoryWatermark} aria-hidden="true">
+          ONE HARVEST. SECOND PURPOSE.
         </div>
-        <div className={styles.plantStoryOverlay} aria-hidden="true" />
         <div className={styles.plantStoryGrain} aria-hidden="true" />
 
         <div className="container">
-          <div className={styles.plantStoryGrid}>
-            <motion.div
-              className={styles.plantStoryContent}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              variants={staggerContainer}
-            >
-              <motion.span className={styles.sectionBadge} variants={fadeInUp}>
-                <Compass size={12} style={{ marginRight: '4px' }} />
-                The Life Cycle
-              </motion.span>
+          <motion.article
+            className={styles.plantStoryEditorial}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+          >
+            <motion.span className={styles.sectionBadge} variants={fadeInUp}>
+              <Compass size={12} style={{ marginRight: '4px' }} />
+              The Life Cycle
+            </motion.span>
 
-              <motion.h2
-                id="plant-story-title"
-                className={styles.plantStoryTitle}
-                variants={fadeInUp}
-              >
-                A Plant With Its Own Story
-              </motion.h2>
-
-              <motion.div className={styles.narrativeBlock} variants={fadeInUp}>
-                <p>Not all plants live the same way.</p>
-                <p>A mango tree returns with fruit season after season. An orange tree continues its cycle year after year.</p>
-                <p className={styles.emphasisLine}>The banana plant is different.</p>
-                <p>It bears fruit only once.</p>
-                <p>After harvest, the plant is cut because its journey of fruiting is complete. What remains is often seen as agricultural residue - something left behind after the harvest.</p>
-              </motion.div>
-
-              <div className={styles.narrativeDivider} aria-hidden="true" />
-
-              <motion.div className={styles.narrativeBlock} variants={fadeInUp}>
-                <p className={styles.emphasisLine}>But sometimes, what appears to be waste holds untold value.</p>
-                <p>Saukhyam saw something more.</p>
-                <p>From this harvested plant, banana fiber is carefully extracted and transformed into the heart of a reusable pad.</p>
-              </motion.div>
-
-              <div className={styles.narrativeDivider} aria-hidden="true" />
-
-              <motion.div className={styles.narrativeBlock} variants={fadeInUp}>
-                <p>Banana fiber is a natural cellulose fiber, much like the absorbent material used in conventional sanitary napkins. The difference lies in its origin.</p>
-                <p>While sanitary napkins may be manufactured in India, the cellulose fiber used in many of them is imported from abroad. Large amounts of foreign exchange are spent purchasing this raw material.</p>
-                <p className={styles.emphasisLine}>Banana fiber tells a different story.</p>
-              </motion.div>
-
-              <div className={styles.narrativeDivider} aria-hidden="true" />
-
-              <motion.div className={styles.narrativeBlock} variants={fadeInUp}>
-                <p>India is among the world&apos;s largest producers of bananas. With every harvest comes plant material that has already completed its natural life cycle. Instead of allowing this valuable resource to remain unused, banana fiber gives it a second purpose.</p>
-                <p>This is not a material grown or cut specifically for extraction.</p>
-                <p>It is created from what nature has already provided.</p>
-                <p>That is what makes banana fiber special.</p>
-                <p>Not simply because it is natural, but because it transforms agricultural residue into something meaningful, useful, and deeply connected to thoughtful living.</p>
-              </motion.div>
-
-              <div className={styles.narrativeDivider} aria-hidden="true" />
-
-              <motion.div className={styles.narrativeBlock} variants={fadeInUp}>
-                <p>For Saukhyam, banana fiber is more than an absorbent material.</p>
-                <p>It is a reminder that innovation can begin with respect - respect for resources, for nature, and for the choices behind the products we use.</p>
-              </motion.div>
-
-              <motion.div className={styles.closingEmphasis} variants={fadeInUp}>
-                <p className={styles.emphasisLineLarge}>These are not merely products made in India.</p>
-                <p className={styles.emphasisLineLarge}>They are products whose story begins here.</p>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              className={styles.plantStoryVisuals}
-              style={{ y: plantVisualY }}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
+            <motion.h2
+              id="plant-story-title"
+              className={styles.plantStoryTitle}
               variants={fadeInUp}
             >
-              <div className={styles.visualStack}>
-                <div className={styles.visualPrimary}>
-                  <Image
-                    src="/why-banana-fiber/plant-story-fiber.jpg"
-                    alt="Close-up of golden banana fiber extracted from harvested plant stem"
-                    width={480}
-                    height={360}
-                  />
-                </div>
-                <div className={styles.visualAccent}>
-                  <Image
-                    src="/why-banana-fiber/plant-story-bg.jpg"
-                    alt="Harvested banana plant stem with visible natural fiber layers"
-                    width={280}
-                    height={200}
-                  />
-                </div>
-              </div>
+              A Plant With Its Own Story
+            </motion.h2>
+
+            <motion.div className={styles.plantStoryCluster} variants={fadeInUp}>
+              <p className={styles.plantStoryLead}>Not every plant lives the same journey.</p>
+              <p>A mango tree returns with fruit season after season.</p>
+              <p>An orange tree continues year after year.</p>
+              <p className={styles.plantStoryHighlight}>The banana plant is different.</p>
+              <p>It bears fruit only once.</p>
+              <p>After harvest, its work is complete.</p>
+              <p>What remains is often treated as agricultural residue.</p>
+              <p className={styles.plantStoryEmphasis}>But sometimes, what is left behind holds unexpected value.</p>
             </motion.div>
-          </div>
+
+            <motion.div className={`${styles.plantStoryCluster} ${styles.plantStoryClusterAlt}`} variants={fadeInUp}>
+              <h3 className={styles.plantStoryMicroHead}>Nature Leaves Nothing Without Purpose</h3>
+              <p>From this harvested plant, banana fiber is carefully extracted and transformed into the heart of Saukhyam reusable pads.</p>
+              <p>A natural cellulose fiber, banana fiber shares the absorbent qualities of conventional materials, but its story begins differently.</p>
+              <p>Not from newly sourced material.</p>
+              <p className={styles.plantStoryHighlight}>But from what nature has already provided.</p>
+            </motion.div>
+
+            <motion.div className={styles.plantStoryCluster} variants={fadeInUp}>
+              <h3 className={styles.plantStoryMicroHead}>A Story Rooted Here</h3>
+              <p>India is among the world&apos;s largest banana-growing nations.</p>
+              <p>With every harvest comes plant material that has already completed its natural cycle.</p>
+              <p>Instead of being overlooked, this fiber finds a second purpose.</p>
+              <p className={styles.plantStoryTagline}>Useful. Thoughtful. Intentional.</p>
+            </motion.div>
+
+            <motion.div className={`${styles.plantStoryCluster} ${styles.plantStoryClusterAlt}`} variants={fadeInUp}>
+              <h3 className={styles.plantStoryMicroHead}>More Than a Material</h3>
+              <p>For Saukhyam, banana fiber is not simply an absorbent layer.</p>
+              <p>It reflects a different way of thinking.</p>
+              <p>One that values resources, respects nature, and believes meaningful innovation can begin with what already exists.</p>
+            </motion.div>
+
+            <motion.div className={styles.plantStoryClosing} variants={fadeInUp}>
+              <p>Its story does not begin in a factory.</p>
+              <p>It begins with the harvest.</p>
+            </motion.div>
+          </motion.article>
         </div>
       </section>
 
@@ -572,7 +512,7 @@ export default function WhyBananaFiberPage() {
 
       <div className={styles.sectionDividerAlt} aria-hidden="true" />
 
-      {/* SECTION 4: ABSORBENCY */}
+      {/* FROM FIBER TO CARE */}
       <section className={styles.absorbencySection}>
         <div className="container">
           <div className={styles.centeredLayout}>
@@ -583,8 +523,8 @@ export default function WhyBananaFiberPage() {
               viewport={{ once: true, margin: '-100px' }}
               variants={fadeInUp}
             >
-              <Droplets size={12} style={{ marginRight: '4px' }} />
-              Performance Capacity
+              <Heart size={12} style={{ marginRight: '4px' }} />
+              Fiber to Care
             </motion.span>
 
             <motion.h2
@@ -594,7 +534,7 @@ export default function WhyBananaFiberPage() {
               viewport={{ once: true, margin: '-100px' }}
               variants={fadeInUp}
             >
-              Why Banana Fiber Works
+              From Fiber to Care
             </motion.h2>
 
             <motion.div
@@ -656,8 +596,8 @@ export default function WhyBananaFiberPage() {
             </motion.h2>
             <motion.div className={styles.userExperiencesIntro} variants={fadeInUp}>
               <p>Something unexpected began to emerge.</p>
-              <p>Over time, many Saukhyam users began sharing experiences around comfort, consistency, and continued use.</p>
-              <p>These observations inspired deeper scientific curiosity.</p>
+              <p>Over time, many Saukhyam users began sharing experiences around greater menstrual comfort, long-term usability, and a more conscious relationship with period care.</p>
+              <p>These observations sparked curiosity and inspired deeper scientific exploration.</p>
             </motion.div>
           </motion.div>
 
@@ -669,15 +609,13 @@ export default function WhyBananaFiberPage() {
               viewport={{ once: true, margin: '-80px' }}
               variants={staggerContainer}
             >
-              {experienceCards.map((card, i) => (
+              {experienceCards.map((quote, i) => (
                 <motion.figure
-                  key={card.title}
+                  key={quote}
                   className={styles.experienceCard}
                   variants={fadeInUp}
-                  style={{ marginTop: i > 0 ? undefined : 0 }}
                 >
-                  <figcaption className={styles.experienceCardTitle}>{card.title}</figcaption>
-                  <blockquote className={styles.experienceCardQuote}>&ldquo;{card.quote}&rdquo;</blockquote>
+                  <blockquote className={styles.experienceCardQuote}>&ldquo;{quote}&rdquo;</blockquote>
                 </motion.figure>
               ))}
             </motion.div>
@@ -861,46 +799,7 @@ export default function WhyBananaFiberPage() {
         </div>
       </section>
 
-      {/* SECTION 8: SCIENCE CONTINUES */}
-      <section className={styles.continuesSection}>
-        <div className={`container ${styles.continuesContainer}`}>
-          <motion.span
-            className={styles.sectionBadge}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeInUp}
-          >
-            <Compass size={12} style={{ marginRight: '4px' }} />
-            Future Inquiries
-          </motion.span>
-
-          <motion.h2
-            className={styles.sectionTitle}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeInUp}
-          >
-            Science Is Still Listening
-          </motion.h2>
-
-          <motion.div
-            className={styles.continuesText}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeInUp}
-          >
-            <p>Research rarely ends with a single answer.</p>
-            <p>The study notes that more work is needed to understand how these compounds behave, how they may interact with the body, and whether they contribute to the experiences reported by users.</p>
-            <p>This is not the end of the investigation.</p>
-            <p>It is the beginning of understanding banana fiber more deeply.</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 9: SAUKHYAM PHILOSOPHY */}
+      {/* WHY SAUKHYAM CHOSE REUSABLE */}
       <section className={styles.philosophySection}>
         <div className={styles.philosophyGlow} aria-hidden="true" />
         <div className="container">
