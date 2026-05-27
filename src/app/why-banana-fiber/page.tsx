@@ -16,7 +16,6 @@ import {
   RefreshCw,
   Users,
   Compass,
-  ArrowRight,
 } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -380,30 +379,6 @@ export default function WhyBananaFiberPage() {
             <p>Innovation does not always begin with something new.</p>
             <p className={styles.plantStoryPhilosophyAccent}>Sometimes, it begins with what nature has already given.</p>
           </motion.blockquote>
-
-          <motion.div
-            className={styles.plantStoryClosingStrip}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={fadeInUp}
-          >
-            <p>Its story does not begin in a factory.</p>
-            <p>It begins with the harvest.</p>
-          </motion.div>
-
-          <motion.div
-            className={styles.plantStoryCtaWrap}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={fadeInUp}
-          >
-            <a href="#journey-timeline" className={styles.plantStoryCta}>
-              Discover the Story
-              <ArrowRight size={18} aria-hidden="true" />
-            </a>
-          </motion.div>
         </div>
       </section>
 

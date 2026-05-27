@@ -483,7 +483,7 @@
 
 /* Philosophy highlight panel */
 .plantStoryPhilosophy {
-  margin: 0 0 clamp(1.75rem, 3.5vw, 2.5rem);
+  margin: 0;
   padding: clamp(2.25rem, 4.5vw, 3.25rem) clamp(2rem, 5vw, 3.5rem);
   text-align: center;
   background:
@@ -517,77 +517,6 @@
   font-style: italic;
   color: #2d5a42 !important;
   font-weight: 600 !important;
-}
-
-.plantStoryClosingStrip {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem 1.25rem;
-  margin-bottom: clamp(1.5rem, 3vw, 2rem);
-  text-align: center;
-}
-
-.plantStoryClosingStrip p {
-  font-family: var(--font-heading);
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
-  font-weight: 600;
-  color: #3e5c4a;
-  margin: 0;
-}
-
-.plantStoryClosingStrip p:last-child {
-  font-style: italic;
-  color: #2d5a42;
-}
-
-.plantStoryCtaWrap {
-  display: flex;
-  justify-content: center;
-}
-
-.plantStoryCta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 1.05rem 2.5rem;
-  font-family: var(--font-body);
-  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #f8f6f0;
-  text-decoration: none;
-  background: linear-gradient(135deg, #3a6b50 0%, #1e3d2f 50%, #2d5a42 100%);
-  border: 1px solid rgba(111, 166, 122, 0.4);
-  border-radius: var(--radius-full);
-  box-shadow:
-    0 6px 28px rgba(30, 61, 47, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  transition:
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    gap 0.35s ease,
-    background 0.4s ease;
-}
-
-.plantStoryCta:hover {
-  transform: translateY(-4px);
-  gap: 0.85rem;
-  color: #fff;
-  background: linear-gradient(135deg, #427358 0%, #234a38 50%, #356548 100%);
-  box-shadow:
-    0 14px 40px rgba(30, 61, 47, 0.3),
-    0 0 28px rgba(111, 166, 122, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
-
-.plantStoryCta svg {
-  flex-shrink: 0;
-  transition: transform 0.35s ease;
-}
-
-.plantStoryCta:hover svg {
-  transform: translateX(3px);
 }
 
 .sectionBadge {
