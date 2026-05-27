@@ -291,13 +291,22 @@
 .plantStoryContainer {
   position: relative;
   z-index: 3;
-  max-width: 980px;
+  max-width: 1120px;
   margin-inline: auto;
 }
 
-.plantStoryHeader {
-  text-align: center;
-  margin-bottom: clamp(3rem, 6vw, 4.5rem);
+.plantStoryHero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: center;
+  margin-bottom: clamp(3.5rem, 7vw, 5rem);
+}
+
+.plantStoryHeroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .plantStoryBadge {
@@ -325,307 +334,234 @@
   color: #1e3d2f;
   line-height: 1.08;
   letter-spacing: -0.02em;
-  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: clamp(1.25rem, 2.5vw, 1.5rem);
   text-wrap: balance;
 }
 
-.plantStoryDivider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  max-width: 280px;
-  margin: 0 auto;
-}
-
-.plantStoryDividerLine {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(62, 92, 74, 0.35) 50%,
-    transparent
-  );
-}
-
-.plantStoryDividerIcon {
-  color: #5a7a66;
-  opacity: 0.65;
-  flex-shrink: 0;
-}
-
-.plantStoryBody {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.75rem, 3.5vw, 2.5rem);
-}
-
-.plantStoryCardGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(1.75rem, 3.5vw, 2.5rem);
-}
-
-.plantStoryCard {
-  position: relative;
-  padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.75rem, 3.5vw, 2.75rem);
-  background: rgba(255, 255, 255, 0.58);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 24px;
-  box-shadow:
-    0 20px 50px -24px rgba(30, 61, 47, 0.12),
-    0 0 0 1px rgba(62, 92, 74, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-  transition:
-    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.45s ease;
-  overflow: hidden;
-}
-
-.plantStoryCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(111, 166, 122, 0.45) 30%,
-    rgba(216, 180, 138, 0.35) 70%,
-    transparent 100%
-  );
-  opacity: 0;
-  transition: opacity 0.45s ease;
-}
-
-.plantStoryCard:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 32px 64px -28px rgba(30, 61, 47, 0.16),
-    0 0 0 1px rgba(62, 92, 74, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.98);
-  border-color: rgba(111, 166, 122, 0.22);
-}
-
-.plantStoryCard:hover::before {
-  opacity: 1;
-}
-
-.plantStoryCardFeatured {
-  text-align: center;
-  padding: clamp(2.25rem, 4vw, 3.25rem) clamp(2rem, 5vw, 3.5rem);
-}
-
-.plantStoryCardFeatured .plantStoryCardInner {
-  max-width: 720px;
-  margin-inline: auto;
-}
-
-.plantStoryCardWide {
-  text-align: center;
-}
-
-.plantStoryCardWide .plantStoryCardInner {
-  max-width: 680px;
-  margin-inline: auto;
-}
-
-.plantStoryCardAccent {
-  position: absolute;
-  top: -40%;
-  right: -15%;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, rgba(111, 166, 122, 0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.plantStoryCardIconWrap {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin-bottom: 1.1rem;
-  color: #3e5c4a;
-  background: rgba(111, 166, 122, 0.12);
-  border: 1px solid rgba(62, 92, 74, 0.12);
-  border-radius: var(--radius-full);
-}
-
-.plantStoryCardFeatured .plantStoryCardIconWrap {
-  margin-inline: auto;
-}
-
-.plantStoryCardWide .plantStoryCardIconWrap {
-  margin-inline: auto;
-}
-
-.plantStoryCardInner {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.85rem, 1.6vw, 1.1rem);
-}
-
-.plantStoryCardInner p {
-  font-family: var(--font-body);
-  font-size: clamp(1.05rem, 1.35vw, 1.15rem);
-  color: #4a5c54;
-  line-height: 1.8;
+.plantStoryIntro {
+  font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+  color: #3f5248;
+  line-height: 1.75;
+  max-width: 480px;
   margin: 0;
 }
 
-.plantStoryLead {
-  font-family: var(--font-heading);
-  font-size: clamp(1.25rem, 2vw, 1.45rem) !important;
-  font-weight: 600;
-  color: #1e3d2f !important;
-  line-height: 1.55 !important;
+.plantStoryHeroVisual {
+  display: flex;
+  justify-content: center;
 }
 
-.plantStoryHighlight {
-  font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 2.1vw, 1.4rem) !important;
-  font-weight: 700 !important;
-  color: #2d5a42 !important;
-  line-height: 1.55 !important;
-  padding: 0.35rem 0;
+.plantStoryImageFrame {
   position: relative;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow:
+    0 32px 72px -28px rgba(30, 61, 47, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.75);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
 }
 
-.plantStoryHighlight::after {
-  content: '';
+.plantStoryImageFrame:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    0 40px 80px -28px rgba(30, 61, 47, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.9);
+}
+
+.plantStoryHeroImage {
+  width: 100%;
+  height: auto;
   display: block;
-  width: 48px;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+/* Life cycle timeline cards */
+.lifeCycleTimeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.lifeCycleTrack {
+  position: absolute;
+  top: 2.75rem;
+  left: 8%;
+  right: 8%;
   height: 2px;
-  margin: 0.65rem auto 0;
-  background: linear-gradient(90deg, transparent, #6fa67a, transparent);
-  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(111, 166, 122, 0.35) 15%,
+    rgba(111, 166, 122, 0.35) 85%,
+    transparent
+  );
+  z-index: 0;
 }
 
-.plantStoryCardFeatured .plantStoryHighlight::after,
-.plantStoryCardWide .plantStoryHighlight::after {
-  margin-inline: auto;
-}
-
-.plantStoryCard:not(.plantStoryCardFeatured):not(.plantStoryCardWide) .plantStoryHighlight::after {
-  margin-inline: 0;
-}
-
-.plantStoryEmphasis {
-  font-family: var(--font-heading);
-  font-size: clamp(1.15rem, 2vw, 1.3rem) !important;
-  font-style: italic;
-  font-weight: 500;
-  color: #3e5c4a !important;
-  line-height: 1.65 !important;
-  margin-top: 0.35rem !important;
-}
-
-.plantStoryMicroHead {
-  font-family: var(--font-heading);
-  font-size: clamp(1.35rem, 2.4vw, 1.65rem);
-  font-weight: 700;
-  color: #1e3d2f;
-  margin-bottom: clamp(1rem, 2vw, 1.35rem);
-  line-height: 1.3;
-  letter-spacing: 0.02em;
-}
-
-.plantStoryCardFeatured .plantStoryMicroHead,
-.plantStoryCardWide .plantStoryMicroHead {
-  text-align: center;
-}
-
-.plantStoryTagline {
-  font-family: var(--font-heading);
-  font-size: clamp(1.15rem, 2vw, 1.35rem) !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.06em;
-  color: #2d5a42 !important;
-  line-height: 1.5 !important;
-  margin-top: 0.5rem !important;
-  padding-top: 0.75rem;
-  border-top: 1px solid rgba(111, 166, 122, 0.2);
-}
-
-.plantStoryClosing {
-  text-align: center;
-  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 2.5rem);
-  margin-top: clamp(0.5rem, 1.5vw, 1rem);
-  background: rgba(255, 255, 255, 0.42);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(216, 180, 138, 0.22);
-  border-radius: 24px;
+.lifeCycleCard {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(0.65rem, 1.2vw, 0.85rem);
-  box-shadow: 0 12px 40px -20px rgba(30, 61, 47, 0.08);
+  padding: clamp(1.5rem, 2.5vw, 2rem) clamp(1.25rem, 2vw, 1.5rem);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 22px;
+  box-shadow:
+    0 16px 44px -18px rgba(30, 61, 47, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
 }
 
-.plantStoryClosingDots {
+.lifeCycleCard:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 28px 56px -20px rgba(30, 61, 47, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.lifeCycleStep {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #6fa67a;
+  opacity: 0.75;
+  margin-bottom: 0.65rem;
+}
+
+.lifeCycleEmoji {
+  font-size: 1.75rem;
+  line-height: 1;
+  margin-bottom: 0.85rem;
+}
+
+.lifeCycleCardTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-weight: 700;
+  color: #1e3d2f;
+  line-height: 1.3;
+  margin-bottom: 0.85rem;
+}
+
+.lifeCycleList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
+  flex-direction: column;
   gap: 0.45rem;
-  margin-bottom: 0.5rem;
 }
 
-.plantStoryClosingDots span {
+.lifeCycleList li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: clamp(0.88rem, 1.1vw, 0.95rem);
+  color: #4a5c54;
+  line-height: 1.55;
+}
+
+.lifeCycleList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background: #6fa67a;
-  opacity: 0.55;
+  opacity: 0.65;
 }
 
-.plantStoryClosingDots span:nth-child(2) {
-  opacity: 0.75;
+/* Philosophy highlight panel */
+.plantStoryPhilosophy {
+  margin: 0 0 clamp(1.75rem, 3.5vw, 2.5rem);
+  padding: clamp(2.25rem, 4.5vw, 3.25rem) clamp(2rem, 5vw, 3.5rem);
+  text-align: center;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(111, 166, 122, 0.14) 0%, transparent 60%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.72) 0%, rgba(234, 247, 232, 0.55) 100%);
+  border: 1px solid rgba(111, 166, 122, 0.22);
+  border-radius: 28px;
+  box-shadow: 0 20px 56px -24px rgba(30, 61, 47, 0.12);
 }
 
-.plantStoryClosing p {
+.plantStoryPhilosophyLabel {
+  display: block;
   font-family: var(--font-heading);
-  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
-  font-weight: 700;
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 800;
   color: #1e3d2f;
-  line-height: 1.45;
+  margin-bottom: 1rem;
+}
+
+.plantStoryPhilosophy p {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 500;
+  color: #3a4f44;
+  line-height: 1.6;
   margin: 0;
 }
 
-.plantStoryClosing p:last-child {
-  color: #3e5c4a;
+.plantStoryPhilosophyAccent {
+  margin-top: 0.65rem !important;
   font-style: italic;
+  color: #2d5a42 !important;
+  font-weight: 600 !important;
+}
+
+.plantStoryClosingStrip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  text-align: center;
+}
+
+.plantStoryClosingStrip p {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
   font-weight: 600;
+  color: #3e5c4a;
+  margin: 0;
+}
+
+.plantStoryClosingStrip p:last-child {
+  font-style: italic;
+  color: #2d5a42;
 }
 
 .plantStoryCtaWrap {
   display: flex;
   justify-content: center;
-  margin-top: clamp(0.5rem, 2vw, 1.25rem);
 }
 
 .plantStoryCta {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 1rem 2.25rem;
+  gap: 0.65rem;
+  padding: 1.05rem 2.5rem;
   font-family: var(--font-body);
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   color: #f8f6f0;
   text-decoration: none;
-  background: linear-gradient(135deg, #2d5a42 0%, #1e3d2f 55%, #2a4d3a 100%);
-  border: 1px solid rgba(111, 166, 122, 0.35);
+  background: linear-gradient(135deg, #3a6b50 0%, #1e3d2f 50%, #2d5a42 100%);
+  border: 1px solid rgba(111, 166, 122, 0.4);
   border-radius: var(--radius-full);
   box-shadow:
-    0 4px 24px rgba(30, 61, 47, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    0 6px 28px rgba(30, 61, 47, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
   transition:
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -634,14 +570,14 @@
 }
 
 .plantStoryCta:hover {
-  transform: translateY(-3px);
-  gap: 0.75rem;
+  transform: translateY(-4px);
+  gap: 0.85rem;
   color: #fff;
-  background: linear-gradient(135deg, #356548 0%, #234a38 55%, #2f5542 100%);
+  background: linear-gradient(135deg, #427358 0%, #234a38 50%, #356548 100%);
   box-shadow:
-    0 12px 36px rgba(30, 61, 47, 0.28),
-    0 0 24px rgba(111, 166, 122, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 14px 40px rgba(30, 61, 47, 0.3),
+    0 0 28px rgba(111, 166, 122, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .plantStoryCta svg {
@@ -650,7 +586,7 @@
 }
 
 .plantStoryCta:hover svg {
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 .sectionBadge {
@@ -827,21 +763,22 @@
   color: #1e3d2f;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.absorbencySubtitle {
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  color: #4a6356;
+  line-height: 1.65;
+  max-width: 520px;
+  margin: 0 auto;
 }
 
 .absorbencySplit {
   display: grid;
-  grid-template-columns: minmax(240px, 320px) 1fr;
-  gap: clamp(2rem, 4vw, 3.5rem);
-  align-items: center;
-  padding: clamp(2rem, 4vw, 3rem);
-  background: rgba(255, 255, 255, 0.62);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 28px;
-  box-shadow:
-    0 24px 60px -28px rgba(30, 61, 47, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  grid-template-columns: minmax(260px, 340px) 1fr;
+  gap: clamp(2rem, 4vw, 3rem);
+  align-items: stretch;
 }
 
 .absorbencyMetricCard {
@@ -850,30 +787,43 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 320px;
   padding: clamp(2.5rem, 5vw, 3.5rem) clamp(1.5rem, 3vw, 2rem);
   background: linear-gradient(145deg, rgba(234, 247, 232, 0.95) 0%, rgba(223, 243, 227, 0.85) 100%);
   border: 1px solid rgba(111, 166, 122, 0.28);
-  border-radius: 24px;
+  border-radius: 28px;
   box-shadow:
-    0 16px 48px -20px rgba(30, 77, 61, 0.18),
+    0 20px 56px -22px rgba(30, 77, 61, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
   overflow: hidden;
 }
 
 .absorbencyMetricCard:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   box-shadow:
-    0 28px 56px -22px rgba(30, 77, 61, 0.22),
-    0 0 32px rgba(111, 166, 122, 0.15),
+    0 32px 64px -24px rgba(30, 77, 61, 0.24),
+    0 0 36px rgba(111, 166, 122, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .absorbencyMetricGlow {
   position: absolute;
   inset: -20%;
-  background: radial-gradient(circle, rgba(111, 166, 122, 0.2) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(111, 166, 122, 0.22) 0%, transparent 65%);
   pointer-events: none;
+}
+
+.absorbencyWave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: linear-gradient(180deg, transparent, rgba(111, 166, 122, 0.12));
+  pointer-events: none;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 48'%3E%3Cpath fill='black' d='M0 24 Q150 0 300 24 T600 24 T900 24 T1200 24 V48 H0 Z'/%3E%3C/svg%3E");
+  mask-size: cover;
 }
 
 .absorbencyMetricNum {
@@ -896,16 +846,50 @@
   color: #2d5a42;
 }
 
-.absorbencyContent {
+.fiberCareCards {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.85rem, 1.5vw, 1.15rem);
+  gap: clamp(1rem, 2vw, 1.25rem);
 }
 
-.absorbencyContent p {
-  font-size: clamp(1.05rem, 1.35vw, 1.15rem);
-  color: #3a4f44;
-  line-height: 1.8;
+.fiberCareCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: clamp(1.35rem, 2.5vw, 1.75rem) clamp(1.5rem, 3vw, 2rem);
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 20px;
+  box-shadow: 0 12px 36px -16px rgba(30, 61, 47, 0.1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.fiberCareCard:hover {
+  transform: translateX(6px);
+  box-shadow: 0 20px 44px -16px rgba(30, 61, 47, 0.14);
+}
+
+.fiberCareEmoji {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.fiberCareCardTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 1.4vw, 1.15rem);
+  font-weight: 700;
+  color: #1e3d2f;
+  margin: 0 0 0.4rem;
+  line-height: 1.3;
+}
+
+.fiberCareCardText {
+  font-size: clamp(0.95rem, 1.2vw, 1.02rem);
+  color: #4a6356;
+  line-height: 1.65;
   margin: 0;
 }
 
@@ -2015,9 +1999,26 @@
   }
 
   .plantStoryGrid, .resourceGrid, .philosophyGrid,
-  .journeyStep, .scienceLabGrid, .absorbencySplit {
+  .journeyStep, .scienceLabGrid, .absorbencySplit, .plantStoryHero {
     grid-template-columns: 1fr;
     gap: var(--space-8);
+  }
+
+  .plantStoryHeroContent {
+    align-items: center;
+    text-align: center;
+  }
+
+  .plantStoryIntro {
+    max-width: 100%;
+  }
+
+  .lifeCycleTimeline {
+    grid-template-columns: 1fr;
+  }
+
+  .lifeCycleTrack {
+    display: none;
   }
 
   .userExperiencesQuotesGrid {
@@ -2059,29 +2060,13 @@
     margin-left: auto;
   }
 
-  .plantStoryCardGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .plantStoryCard {
-    text-align: center;
-  }
-
-  .plantStoryCard:not(.plantStoryCardFeatured):not(.plantStoryCardWide) .plantStoryHighlight::after {
-    margin-inline: auto;
-  }
-
-  .plantStoryCardIconWrap {
-    margin-inline: auto;
-  }
-
-  .plantStoryMicroHead {
-    text-align: center;
-  }
-
   .plantStoryWatermark span {
     font-size: clamp(2.5rem, 14vw, 4rem);
     letter-spacing: 0.08em;
+  }
+
+  .lifeCycleTimeline {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .journeyStepReverse {
@@ -2135,6 +2120,14 @@
 
   .experienceStatsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .lifeCycleTimeline {
+    grid-template-columns: 1fr;
+  }
+
+  .fiberCareCard:hover {
+    transform: translateY(-4px);
   }
 
   .scienceMetricCard {
