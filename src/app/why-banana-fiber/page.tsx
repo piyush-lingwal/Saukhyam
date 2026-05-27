@@ -38,19 +38,16 @@ const staggerContainer = {
 const lifeCycleCards = [
   {
     step: '01',
-    emoji: '🌱',
     title: 'The Banana Plant Is Different',
     points: ['Bears fruit only once', 'Completes its natural cycle after harvest'],
   },
   {
     step: '02',
-    emoji: '🍃',
     title: 'After Harvest',
     points: ['Often treated as agricultural residue', 'Left behind despite its hidden value'],
   },
   {
     step: '03',
-    emoji: '🧵',
     title: 'Nature Finds a Second Purpose',
     points: [
       'Banana fiber carefully extracted',
@@ -60,7 +57,6 @@ const lifeCycleCards = [
   },
   {
     step: '04',
-    emoji: '🇮🇳',
     title: 'A Story That Begins Here',
     points: ['India grows millions of banana plants', 'Fiber gains a meaningful second life'],
   },
@@ -68,19 +64,42 @@ const lifeCycleCards = [
 
 const fiberToCareCards = [
   {
-    emoji: '🧵',
+    step: '01',
     title: 'Natural Performance',
     text: 'Banana fiber serves as the primary absorbent layer in Saukhyam reusable pads.',
   },
   {
-    emoji: '💧',
+    step: '02',
     title: 'Scientifically Studied',
     text: 'Research found Saukhyam banana fiber can absorb up to six times its dry weight.',
   },
   {
-    emoji: '🌿',
+    step: '03',
     title: 'Purpose + Performance',
     text: 'Its value lies not only in origin, but in how effectively it performs.',
+  },
+];
+
+const philosophyBlocks = [
+  {
+    label: 'A Different Choice',
+    lines: [
+      'Some brands use banana fiber in disposable products.',
+      'Saukhyam chose another path.',
+    ],
+  },
+  {
+    label: 'Resources Deserve Respect',
+    lines: [
+      'Even agricultural residue carries value.',
+      'Inspired by Ammaji\u2019s vision, Saukhyam believes materials should be used thoughtfully.',
+    ],
+  },
+  {
+    label: 'Designed for Longevity',
+    lines: [
+      'Banana fiber became part of a reusable journey\u2014created not for a single use, but for lasting care.',
+    ],
   },
 ];
 
@@ -340,7 +359,6 @@ export default function WhyBananaFiberPage() {
             {lifeCycleCards.map((card) => (
               <motion.article className={styles.lifeCycleCard} key={card.step} variants={fadeInUp}>
                 <span className={styles.lifeCycleStep}>{card.step}</span>
-                <span className={styles.lifeCycleEmoji} aria-hidden="true">{card.emoji}</span>
                 <h3 className={styles.lifeCycleCardTitle}>{card.title}</h3>
                 <ul className={styles.lifeCycleList}>
                   {card.points.map((point) => (
@@ -553,7 +571,7 @@ export default function WhyBananaFiberPage() {
               <motion.div className={styles.fiberCareCards} variants={staggerContainer}>
                 {fiberToCareCards.map((card) => (
                   <motion.article className={styles.fiberCareCard} key={card.title} variants={fadeInUp}>
-                    <span className={styles.fiberCareEmoji} aria-hidden="true">{card.emoji}</span>
+                    <span className={styles.fiberCareStep}>{card.step}</span>
                     <div>
                       <h3 className={styles.fiberCareCardTitle}>{card.title}</h3>
                       <p className={styles.fiberCareCardText}>{card.text}</p>
@@ -759,60 +777,53 @@ export default function WhyBananaFiberPage() {
 
       {/* WHY SAUKHYAM CHOSE REUSABLE */}
       <section className={styles.philosophySection} aria-labelledby="philosophy-heading">
-        <div className={styles.philosophyBg} aria-hidden="true" />
+        <div className={styles.philosophyBgImage} aria-hidden="true">
+          <Image
+            src="/why-banana-fiber/philosophy-bg.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className={styles.philosophyBgImg}
+          />
+        </div>
+        <div className={styles.philosophyOverlay} aria-hidden="true" />
         <div className={styles.philosophyGrain} aria-hidden="true" />
-        <div className={styles.philosophyGlow} aria-hidden="true" />
+
         <div className="container">
-          <div className={styles.philosophyGrid}>
-            <motion.div
-              className={styles.philosophyContent}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={staggerContainer}
-            >
-              <motion.span className={styles.philosophyBadge} variants={fadeInUp}>
-                <Heart size={13} aria-hidden="true" />
-                Saukhyam Purpose
-              </motion.span>
-
-              <motion.h2 id="philosophy-heading" className={styles.philosophyTitle} variants={fadeInUp}>
+          <motion.div
+            className={styles.philosophyInner}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={staggerContainer}
+          >
+            <motion.header className={styles.philosophyHeader} variants={fadeInUp}>
+              <span className={styles.philosophyBadge}>Saukhyam Purpose</span>
+              <h2 id="philosophy-heading" className={styles.philosophyTitle}>
                 Why Saukhyam Chose Reusable
-              </motion.h2>
+              </h2>
+            </motion.header>
 
-              <motion.div className={styles.philosophyText} variants={fadeInUp}>
-                <p>Some brands use banana fiber in disposable products.</p>
-                <p>Saukhyam made a different choice.</p>
-                <p>Even when a material comes from agricultural residue, it remains valuable.</p>
-                <p>Inspired by Ammaji&apos;s vision, Saukhyam believes resources should be treated with care and used thoughtfully.</p>
-                <p>That is why banana fiber became part of a reusable journey, one designed not for a single moment, but for lasting use.</p>
-              </motion.div>
+            <div className={styles.philosophyBlocks}>
+              {philosophyBlocks.map((block) => (
+                <motion.article className={styles.philosophyBlock} key={block.label} variants={fadeInUp}>
+                  <h3 className={styles.philosophyBlockLabel}>{block.label}</h3>
+                  <div className={styles.philosophyBlockLines}>
+                    {block.lines.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
+                </motion.article>
+              ))}
+            </div>
 
-              <motion.div className={styles.philosophyQuoteBlock} variants={fadeInUp}>
-                <blockquote className={styles.philosophyQuote}>
-                  &ldquo;Sometimes the most meaningful materials are the ones nature has already provided.&rdquo;
-                </blockquote>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              className={styles.philosophyImageWrap}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              <div className={styles.philosophyImageFrame}>
-                <Image
-                  src="/why-banana-fiber/reusable-pads.jpg"
-                  alt="Saukhyam red reusable pads styled on a wooden surface with yellow flowers and raw fiber"
-                  width={560}
-                  height={420}
-                  className={styles.philosophyImage}
-                />
-              </div>
-            </motion.div>
-          </div>
+            <motion.blockquote className={styles.philosophyQuotePanel} variants={fadeInUp}>
+              <Quote size={28} className={styles.philosophyQuoteIcon} aria-hidden="true" />
+              <p className={styles.philosophyQuote}>
+                &ldquo;Sometimes the most meaningful materials are the ones nature has already provided.&rdquo;
+              </p>
+            </motion.blockquote>
+          </motion.div>
         </div>
       </section>
     </div>
