@@ -12,6 +12,10 @@ import {
   FlaskConical,
   Heart,
   Sparkles,
+  Quote,
+  TrendingUp,
+  RefreshCw,
+  Users,
 } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -93,10 +97,10 @@ const experienceCards = [
 ];
 
 const experienceStats = [
-  { value: 77, label: 'Reported changes in menstrual comfort' },
-  { value: 81, label: 'Improved cycle awareness' },
-  { value: 92, label: 'Continued beyond 6 months' },
-  { value: 74, label: 'Shifted from disposables within 3 months' },
+  { value: 77, label: 'Reported changes in menstrual comfort', icon: Heart },
+  { value: 81, label: 'Improved cycle awareness', icon: TrendingUp },
+  { value: 92, label: 'Continued beyond 6 months', icon: RefreshCw },
+  { value: 74, label: 'Shifted from disposables within 3 months', icon: Users },
 ];
 
 const phytochemicals = [
@@ -107,6 +111,13 @@ const phytochemicals = [
   'Lauric acid',
   'Myristic acid',
   'Stachydrine',
+  'Ferulic acid',
+];
+
+const scienceMethods = [
+  { title: 'LC–MS', subtitle: 'Advanced Analysis', icon: FlaskConical },
+  { title: 'GC–MS', subtitle: 'Chemical Profiling', icon: Activity },
+  { title: '27', subtitle: 'Active Compounds', icon: Sparkles, isMetric: true },
 ];
 
 function AnimatedCounter({
@@ -535,93 +546,57 @@ export default function WhyBananaFiberPage() {
           >
             &ldquo;Every reusable pad carries the effort of many women, the strength of nature, and the promise of sustainability.&rdquo;
           </motion.blockquote>
-
-          <motion.div
-            className={styles.journeyCta}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
-          >
-            <motion.h3 className={styles.journeyCtaTitle} variants={fadeInUp}>
-              A Product That Does More Than Protect
-            </motion.h3>
-            <motion.ul className={styles.journeyCtaList} variants={fadeInUp}>
-              <li>Sustainable living</li>
-              <li>Reduced menstrual waste</li>
-              <li>Women-led livelihoods</li>
-              <li>Affordable long-term care</li>
-            </motion.ul>
-            <motion.div variants={fadeInUp}>
-              <Link href="/products" className={styles.journeyCtaBtn}>
-                Explore Our Products
-              </Link>
-            </motion.div>
-          </motion.div>
         </div>
       </section>
 
       <div className={styles.sectionDividerAlt} aria-hidden="true" />
 
       {/* FROM FIBER TO CARE */}
-      <section className={styles.absorbencySection}>
+      <section className={styles.absorbencySection} aria-labelledby="fiber-to-care-heading">
+        <div className={styles.absorbencyBg} aria-hidden="true" />
+        <div className={styles.absorbencyGlow} aria-hidden="true" />
+
         <div className="container">
-          <div className={styles.centeredLayout}>
-            <motion.span
-              className={styles.sectionBadge}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              <Heart size={12} style={{ marginRight: '4px' }} />
-              Fiber to Care
-            </motion.span>
+          <motion.div
+            className={styles.absorbencyLayout}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            variants={staggerContainer}
+          >
+            <motion.div className={styles.absorbencyHeader} variants={fadeInUp}>
+              <span className={styles.absorbencyBadge}>
+                <Heart size={13} aria-hidden="true" />
+                Fiber to Care
+              </span>
+              <h2 id="fiber-to-care-heading" className={styles.absorbencyTitle}>
+                From Fiber to Care
+              </h2>
+            </motion.div>
 
-            <motion.h2
-              className={styles.sectionTitle}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              From Fiber to Care
-            </motion.h2>
-
-            <motion.div
-              className={styles.glassCard}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              <div className={styles.metricBig}>
+            <div className={styles.absorbencySplit}>
+              <motion.div className={styles.absorbencyMetricCard} variants={fadeInUp}>
+                <div className={styles.absorbencyMetricGlow} aria-hidden="true" />
                 <motion.span
-                  className={styles.metricNum}
-                  initial={{ scale: 0.8, opacity: 0 }}
+                  className={styles.absorbencyMetricNum}
+                  initial={{ scale: 0.85, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.15, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <AnimatedCounter value={6} decimals={0} suffix="×" />
                 </motion.span>
-                <span className={styles.metricLabel}>Absorption</span>
-              </div>
-              <div className={styles.absorbencyContent}>
-                <p>
-                  A material chosen for care must first perform its role well.
-                </p>
-                <p>
-                  Banana fiber serves as the primary absorbent material in Saukhyam reusable pads.
-                </p>
-                <p>
-                  Research conducted around Saukhyam banana fiber found that it can absorb up to six times its dry weight in fluid.
-                </p>
-                <p>
-                  Its strength lies not only in where it comes from, but also in how effectively it functions.
-                </p>
-              </div>
-            </motion.div>
-          </div>
+                <span className={styles.absorbencyMetricLabel}>Absorption</span>
+              </motion.div>
+
+              <motion.div className={styles.absorbencyContent} variants={fadeInUp}>
+                <p>A material chosen for care must first perform its role well.</p>
+                <p>Banana fiber serves as the primary absorbent material in Saukhyam reusable pads.</p>
+                <p>Research conducted around Saukhyam banana fiber found that it can absorb up to six times its dry weight in fluid.</p>
+                <p>Its strength lies not only in where it comes from, but also in how effectively it functions.</p>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -632,7 +607,7 @@ export default function WhyBananaFiberPage() {
         <div className={styles.userExperiencesGrain} aria-hidden="true" />
 
         <div className="container">
-          <motion.div
+          <motion.header
             className={styles.userExperiencesHeader}
             initial="hidden"
             whileInView="visible"
@@ -646,48 +621,50 @@ export default function WhyBananaFiberPage() {
               What Users Began Noticing
             </motion.h2>
             <motion.div className={styles.userExperiencesIntro} variants={fadeInUp}>
-              <p>Something unexpected began to emerge.</p>
+              <p className={styles.userExperiencesIntroLead}>Something unexpected began to emerge.</p>
               <p>Over time, many Saukhyam users began sharing experiences around greater menstrual comfort, long-term usability, and a more conscious relationship with period care.</p>
               <p>These observations sparked curiosity and inspired deeper scientific exploration.</p>
             </motion.div>
+          </motion.header>
+
+          <motion.div
+            className={styles.userExperiencesQuotesGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+          >
+            {experienceCards.map((quote) => (
+              <motion.figure
+                key={quote}
+                className={styles.experienceCard}
+                variants={fadeInUp}
+              >
+                <Quote size={22} className={styles.experienceCardIcon} aria-hidden="true" />
+                <blockquote className={styles.experienceCardQuote}>&ldquo;{quote}&rdquo;</blockquote>
+              </motion.figure>
+            ))}
           </motion.div>
 
-          <div className={styles.userExperiencesGrid}>
-            <motion.div
-              className={styles.experienceCardsCol}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              variants={staggerContainer}
-            >
-              {experienceCards.map((quote, i) => (
-                <motion.figure
-                  key={quote}
-                  className={styles.experienceCard}
-                  variants={fadeInUp}
-                >
-                  <blockquote className={styles.experienceCardQuote}>&ldquo;{quote}&rdquo;</blockquote>
-                </motion.figure>
-              ))}
-            </motion.div>
-
-            <motion.div
-              className={styles.experienceStatsCol}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-              variants={staggerContainer}
-            >
-              {experienceStats.map((stat) => (
-                <motion.div key={stat.label} className={styles.experienceStatCard} variants={fadeInUp}>
-                  <span className={styles.experienceStatValue}>
-                    <AnimatedCounter value={stat.value} suffix="%" duration={2.2} />
-                  </span>
-                  <span className={styles.experienceStatLabel}>{stat.label}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          <motion.div
+            className={styles.experienceStatsGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+          >
+            {experienceStats.map((stat) => (
+              <motion.div key={stat.label} className={styles.experienceStatCard} variants={fadeInUp}>
+                <div className={styles.experienceStatIconWrap} aria-hidden="true">
+                  <stat.icon size={20} />
+                </div>
+                <span className={styles.experienceStatValue}>
+                  <AnimatedCounter value={stat.value} suffix="%" duration={2.2} />
+                </span>
+                <span className={styles.experienceStatLabel}>{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
 
           <motion.div
             className={styles.scienceHandoff}
@@ -708,150 +685,116 @@ export default function WhyBananaFiberPage() {
         </div>
       </section>
 
-      <div className={styles.scienceTransitionFade} aria-hidden="true" />
+      {/* MERGED: INSIDE THE FIBER + WHAT SCIENCE FOUND */}
+      <section id="science-lab" className={styles.scienceLabSection} aria-labelledby="science-lab-heading">
+        <div className={styles.scienceLabBg} aria-hidden="true" />
+        <div className={styles.scienceLabGrain} aria-hidden="true" />
+        <div className={styles.scienceLabGlow} aria-hidden="true" />
 
-      {/* SECTION 6: INSIDE THE FIBER */}
-      <section id="science-lab" className={styles.insideSection}>
-        <div className={styles.moleculeOverlay} aria-hidden="true" />
         <div className="container">
-          <div className={styles.centeredLayout}>
-            <motion.span
-              className={styles.sectionBadge}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              <FlaskConical size={12} style={{ marginRight: '4px' }} />
-              Inside Banana Fiber · Laboratory Testing
-            </motion.span>
-
-            <motion.h2
-              className={styles.sectionTitle}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              Looking Inside the Fiber
-            </motion.h2>
-
-            <motion.div
-              className={styles.sectionText}
-              style={{ maxWidth: '750px', margin: '0 auto', textAlign: 'center' }}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              <p>Banana fiber may appear simple.</p>
-              <p>Its chemistry is not.</p>
-              <p>Researchers studied the fiber using advanced analytical techniques to understand what it contains.</p>
-              <p>The investigation revealed a complex profile of naturally occurring phytochemicals present within banana fiber.</p>
-              <p>These compounds became the focus of further scientific exploration.</p>
-            </motion.div>
-
-            <motion.div
-              className={styles.scienceCardGrid}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={staggerContainer}
-            >
-              <motion.div className={styles.scienceCard} variants={fadeInUp}>
-                <FlaskConical size={28} />
-                <span className={styles.scienceCardTitle}>LC–MS</span>
-              </motion.div>
-
-              <motion.div className={styles.scienceCard} variants={fadeInUp}>
-                <Activity size={28} />
-                <span className={styles.scienceCardTitle}>GC–MS</span>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 7: WHAT SCIENCE FOUND */}
-      <section className={styles.findingsSection}>
-        <div className="container">
-          <div className={styles.findingsIntro}>
-            <motion.span
-              className={styles.sectionBadge}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              <FlaskConical size={12} style={{ marginRight: '4px' }} />
-              Active Compounds
-            </motion.span>
-
-            <motion.h2
-              className={styles.sectionTitle}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              What Science Found
-            </motion.h2>
-
-            <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              The research identified 27 bioactive phytochemicals associated in scientific literature with anti-inflammatory, analgesic, and antinociceptive activities.
-            </motion.p>
-
-            <motion.p
-              className={styles.compoundsIntro}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              variants={fadeInUp}
-            >
-              Among them were compounds such as:
-            </motion.p>
-          </div>
-
-          <motion.div
-            className={styles.compoundsGrid}
+          <motion.header
+            className={styles.scienceLabHeader}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
             variants={staggerContainer}
           >
-            {phytochemicals.map((name) => (
-              <motion.div
-                className={styles.compoundCard}
-                key={name}
-                variants={fadeInUp}
-              >
-                <span className={styles.compoundName}>{name}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+            <motion.span className={styles.scienceLabBadge} variants={fadeInUp}>
+              <FlaskConical size={13} aria-hidden="true" />
+              Inside Banana Fiber · Laboratory Testing
+            </motion.span>
+            <motion.h2 id="science-lab-heading" className={styles.scienceLabTitle} variants={fadeInUp}>
+              Looking Inside the Fiber
+            </motion.h2>
+          </motion.header>
 
-          <motion.div
-            className={styles.findingsDisclaimer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            variants={fadeInUp}
-          >
-            <p>
-              These findings do not claim that banana fiber alone relieves pain.
-              But they do open an important scientific conversation about the material and its potential role in menstrual comfort.
-            </p>
-          </motion.div>
+          <div className={styles.scienceLabGrid}>
+            <motion.div
+              className={styles.scienceLabStory}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={staggerContainer}
+            >
+              <motion.div className={styles.scienceLabNarrative} variants={fadeInUp}>
+                <p>Banana fiber may appear simple.</p>
+                <p>Its chemistry is not.</p>
+                <p>Researchers studied the fiber using advanced analytical techniques to understand what it contains.</p>
+                <p>The investigation revealed a complex profile of naturally occurring phytochemicals present within banana fiber.</p>
+                <p>These compounds became the focus of further scientific exploration.</p>
+              </motion.div>
+
+              <motion.div className={styles.scienceLabTransition} variants={fadeInUp}>
+                <div className={styles.scienceLabTransitionLine} aria-hidden="true">
+                  <span />
+                  <FlaskConical size={14} />
+                  <span />
+                </div>
+                <span className={styles.scienceLabSubBadge}>Active Compounds</span>
+                <h3 className={styles.scienceLabSubTitle}>What Science Found</h3>
+                <p className={styles.scienceLabFinding}>
+                  The research identified 27 bioactive phytochemicals associated in scientific literature with anti-inflammatory, analgesic, and antinociceptive activities.
+                </p>
+                <p className={styles.scienceLabCompoundsIntro}>Among them were compounds such as:</p>
+              </motion.div>
+
+              <motion.div className={styles.compoundPills} variants={staggerContainer}>
+                {phytochemicals.map((name) => (
+                  <motion.span className={styles.compoundPill} key={name} variants={fadeInUp}>
+                    {name}
+                  </motion.span>
+                ))}
+              </motion.div>
+
+              <motion.div className={styles.scienceLabDisclaimer} variants={fadeInUp}>
+                <p>
+                  These findings do not claim that banana fiber alone relieves pain.
+                  But they do open an important scientific conversation about the material and its potential role in menstrual comfort.
+                </p>
+              </motion.div>
+            </motion.div>
+
+            <motion.aside
+              className={styles.scienceLabVisual}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              variants={staggerContainer}
+            >
+              <motion.div className={styles.scienceLabImageWrap} variants={fadeInUp}>
+                <Image
+                  src="/why-banana-fiber/user-experience.png"
+                  alt="Woman experiencing comfort with a Saukhyam reusable pad, connecting science to lived care"
+                  width={480}
+                  height={560}
+                  className={styles.scienceLabImage}
+                />
+              </motion.div>
+
+              <div className={styles.scienceMetricCards}>
+                {scienceMethods.map((method) => (
+                  <motion.div
+                    className={`${styles.scienceMetricCard} ${method.isMetric ? styles.scienceMetricCardHighlight : ''}`}
+                    key={method.title}
+                    variants={fadeInUp}
+                  >
+                    <div className={styles.scienceMetricIcon} aria-hidden="true">
+                      <method.icon size={method.isMetric ? 22 : 24} />
+                    </div>
+                    <span className={styles.scienceMetricTitle}>{method.title}</span>
+                    <span className={styles.scienceMetricSubtitle}>{method.subtitle}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.aside>
+          </div>
         </div>
       </section>
 
       {/* WHY SAUKHYAM CHOSE REUSABLE */}
-      <section className={styles.philosophySection}>
+      <section className={styles.philosophySection} aria-labelledby="philosophy-heading">
+        <div className={styles.philosophyBg} aria-hidden="true" />
+        <div className={styles.philosophyGrain} aria-hidden="true" />
         <div className={styles.philosophyGlow} aria-hidden="true" />
         <div className="container">
           <div className={styles.philosophyGrid}>
@@ -862,12 +805,12 @@ export default function WhyBananaFiberPage() {
               viewport={{ once: true, margin: '-100px' }}
               variants={staggerContainer}
             >
-              <motion.span className={styles.darkBadge} variants={fadeInUp}>
-                <Heart size={12} style={{ marginRight: '6px', alignSelf: 'center' }} />
+              <motion.span className={styles.philosophyBadge} variants={fadeInUp}>
+                <Heart size={13} aria-hidden="true" />
                 Saukhyam Purpose
               </motion.span>
 
-              <motion.h2 className={styles.philosophyTitle} variants={fadeInUp}>
+              <motion.h2 id="philosophy-heading" className={styles.philosophyTitle} variants={fadeInUp}>
                 Why Saukhyam Chose Reusable
               </motion.h2>
 
@@ -893,12 +836,15 @@ export default function WhyBananaFiberPage() {
               viewport={{ once: true, margin: '-100px' }}
               variants={fadeInUp}
             >
-              <Image
-                src="/why-banana-fiber/reusable-pads.jpg"
-                alt="Saukhyam red reusable pads styled on a wooden surface with yellow flowers and raw fiber"
-                width={500}
-                height={350}
-              />
+              <div className={styles.philosophyImageFrame}>
+                <Image
+                  src="/why-banana-fiber/reusable-pads.jpg"
+                  alt="Saukhyam red reusable pads styled on a wooden surface with yellow flowers and raw fiber"
+                  width={560}
+                  height={420}
+                  className={styles.philosophyImage}
+                />
+              </div>
             </motion.div>
           </div>
         </div>
