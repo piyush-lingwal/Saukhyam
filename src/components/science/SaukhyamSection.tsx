@@ -155,7 +155,7 @@ export default function SaukhyamSection() {
             variants={stagger}
           >
             <motion.div variants={fadeInUp} className={styles.magicBox}>
-              <h3 className={styles.magicTitle}>✨ The Magic of Layer 2</h3>
+              <h3 className={styles.magicTitle}>The Magic of Layer 2</h3>
               <ul className={styles.magicList}>
                 <li>
                   Banana fiber is sourced from <strong>agricultural waste</strong>
@@ -216,10 +216,10 @@ export default function SaukhyamSection() {
                   <tr>
                     <th>Feature</th>
                     <th>
-                      <span className={styles.thGood}>🌿 Saukhyam Reusable</span>
+                      <span className={styles.thGood}>Saukhyam Reusable</span>
                     </th>
                     <th>
-                      <span className={styles.thBad}>🚫 Disposable Pads</span>
+                      <span className={styles.thBad}>Disposable Pads</span>
                     </th>
                   </tr>
                 </thead>

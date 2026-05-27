@@ -17,12 +17,12 @@ import { useCart } from '@/context/CartContext';
 import styles from './page.module.css';
 
 const tickerMessages = [
-  '✨ 5 Lakh+ women have switched to Saukhyam',
-  '🌿 Made with banana fiber, 100% chemical free',
-  '♻️ Each pad lasts 2-3 years, saving 100+ kg waste',
-  '🏆 Recognized by NITI Aayog & UN Climate Conference',
-  '🇮🇳 Handcrafted by rural women across India',
-  '💚 Join the reusable revolution today',
+  '5 Lakh+ women have switched to Saukhyam',
+  'Made with banana fiber, 100% chemical free',
+  'Each pad lasts 2-3 years, saving 100+ kg waste',
+  'Recognized by NITI Aayog & UN Climate Conference',
+  'Handcrafted by rural women across India',
+  'Join the reusable revolution today',
 ];
 
 const trustItems = [
