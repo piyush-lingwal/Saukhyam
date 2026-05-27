@@ -763,10 +763,10 @@ export default function WhyBananaFiberPage() {
             >
               <motion.div className={styles.scienceLabImageWrap} variants={fadeInUp}>
                 <Image
-                  src="/why-banana-fiber/user-experience.png"
-                  alt="Woman experiencing comfort with a Saukhyam reusable pad, connecting science to lived care"
-                  width={480}
-                  height={560}
+                  src="/why-banana-fiber/laboratory-testing.png"
+                  alt="Banana fiber samples, microscope, and laboratory analysis equipment on a research bench"
+                  width={560}
+                  height={420}
                   className={styles.scienceLabImage}
                 />
               </motion.div>

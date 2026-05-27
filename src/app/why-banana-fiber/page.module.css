@@ -1704,6 +1704,14 @@
   box-shadow:
     0 28px 64px -24px rgba(30, 61, 47, 0.18),
     0 0 0 1px rgba(255, 255, 255, 0.7);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+}
+
+.scienceLabImageWrap:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 36px 72px -24px rgba(30, 61, 47, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.85);
 }
 
 .scienceLabImage {
@@ -1711,7 +1719,8 @@
   height: auto;
   display: block;
   object-fit: cover;
-  aspect-ratio: 5 / 6;
+  object-position: center;
+  aspect-ratio: 4 / 3;
 }
 
 .scienceMetricCards {
