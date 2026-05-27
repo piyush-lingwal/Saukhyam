@@ -106,6 +106,7 @@ const journeySteps = [
   {
     step: '01',
     title: "Extracting Nature\u2019s Strength",
+    short: 'Raw banana fiber carefully separated and cleaned by women artisans.',
     body: 'Raw banana fiber is carefully separated and cleaned by skilled women artisans. What was once agricultural waste becomes the foundation of a sustainable innovation.',
     quote: 'Nature already created the solution. We simply gave it purpose.',
     image: '/why-banana-fiber/journey/journey-extract.png',
@@ -115,6 +116,7 @@ const journeySteps = [
   {
     step: '02',
     title: 'Preparing the Fiber',
+    short: 'Fibers softened and refined into a breathable absorbent layer.',
     body: 'The fibers are softened, refined, and processed to create a breathable absorbent layer designed for comfort and long-term use.',
     tagline: 'Soft on skin. Gentle on the environment.',
     image: '/why-banana-fiber/journey/journey-processing.png',
@@ -124,6 +126,7 @@ const journeySteps = [
   {
     step: '03',
     title: 'Handcrafted With Precision',
+    short: 'Pads stitched with thoughtful craftsmanship and quality checks.',
     body: 'Every reusable pad is stitched with care by women-led teams using thoughtful craftsmanship and quality checks at every stage.',
     tagline: 'This is not factory mass production. This is human-centered creation.',
     image: '/why-banana-fiber/journey/journey-handcraft.png',
@@ -133,6 +136,7 @@ const journeySteps = [
   {
     step: '04',
     title: 'Naturally Dyed & Finished',
+    short: 'Layers pressed and assembled for durability and comfort.',
     body: 'The vibrant red fabric reflects confidence, strength, and menstrual dignity. Each layer is carefully pressed, shaped, and assembled for durability and comfort.',
     tagline: 'Beautifully designed. Purposefully made.',
     image: '/why-banana-fiber/journey/journey-drying.png',
@@ -142,6 +146,7 @@ const journeySteps = [
   {
     step: '05',
     title: 'Sustainable. Reusable. Empowering.',
+    short: 'Final reusable pad reducing waste and supporting menstrual care.',
     body: 'The final product is a reusable menstrual pad made from banana fiber \u2014 helping reduce waste while supporting healthier and more sustainable menstrual care.',
     tagline: 'One reusable pad can replace hundreds of disposable products.',
     image: '/why-banana-fiber/journey/journey-product.png',
@@ -314,38 +319,29 @@ export default function WhyBananaFiberPage() {
         <div className={styles.plantStoryGrain} aria-hidden="true" />
 
         <div className={`container ${styles.plantStoryContainer}`}>
-          <motion.div
-            className={styles.plantStoryHero}
+          <motion.header
+            className={styles.plantStoryHeader}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
             variants={staggerContainer}
           >
-            <motion.div className={styles.plantStoryHeroContent} variants={fadeInUp}>
-              <span className={styles.plantStoryBadge}>
-                <Compass size={13} aria-hidden="true" />
-                The Life Cycle
-              </span>
-              <h2 id="plant-story-title" className={styles.plantStoryTitle}>
-                A Plant With Its Own Story
-              </h2>
-              <p className={styles.plantStoryIntro}>
-                Not every plant lives the same journey. The banana plant completes its natural cycle in a single harvest — and what remains holds unexpected value.
-              </p>
+            <motion.span className={styles.plantStoryBadge} variants={fadeInUp}>
+              <Compass size={13} aria-hidden="true" />
+              The Life Cycle
+            </motion.span>
+            <motion.h2 id="plant-story-title" className={styles.plantStoryTitle} variants={fadeInUp}>
+              A Plant With Its Own Story
+            </motion.h2>
+            <motion.div className={styles.plantStoryHeaderDivider} aria-hidden="true" variants={fadeInUp}>
+              <span />
+              <Leaf size={13} />
+              <span />
             </motion.div>
-
-            <motion.div className={styles.plantStoryHeroVisual} variants={fadeInUp}>
-              <div className={styles.plantStoryImageFrame}>
-                <Image
-                  src="/why-banana-fiber-macro.png"
-                  alt="Close-up of natural banana plant fiber texture"
-                  width={520}
-                  height={520}
-                  className={styles.plantStoryHeroImage}
-                />
-              </div>
-            </motion.div>
-          </motion.div>
+            <motion.p className={styles.plantStoryIntro} variants={fadeInUp}>
+              Not every plant lives the same journey. The banana plant completes its natural cycle in a single harvest — and what remains holds unexpected value.
+            </motion.p>
+          </motion.header>
 
           <motion.div
             className={styles.lifeCycleTimeline}
@@ -354,17 +350,19 @@ export default function WhyBananaFiberPage() {
             viewport={{ once: true, margin: '-80px' }}
             variants={staggerContainer}
           >
-            <div className={styles.lifeCycleTrack} aria-hidden="true" />
+            <div className={styles.lifeCycleConnector} aria-hidden="true" />
             {lifeCycleCards.map((card) => (
-              <motion.article className={styles.lifeCycleCard} key={card.step} variants={fadeInUp}>
-                <span className={styles.lifeCycleStep}>{card.step}</span>
-                <h3 className={styles.lifeCycleCardTitle}>{card.title}</h3>
-                <ul className={styles.lifeCycleList}>
-                  {card.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </motion.article>
+              <motion.div className={styles.lifeCycleItem} key={card.step} variants={fadeInUp}>
+                <div className={styles.lifeCycleNode}>{card.step}</div>
+                <article className={styles.lifeCycleCard}>
+                  <h3 className={styles.lifeCycleCardTitle}>{card.title}</h3>
+                  <ul className={styles.lifeCycleList}>
+                    {card.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </article>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -384,118 +382,74 @@ export default function WhyBananaFiberPage() {
 
       <div className={styles.sectionDivider} aria-hidden="true" />
 
-      {/* SECTION: FROM BANANA STEM TO DIGNITY */}
-      <section className={styles.journeySection} aria-labelledby="journey-heading">
-        <div className={styles.journeyHero}>
-          <div className={styles.journeyHeroBg} aria-hidden="true">
-            <Image
-              src="/why-banana-fiber/journey/journey-handcraft.png"
-              alt=""
-              fill
-              sizes="100vw"
-              className={styles.journeyHeroImg}
-            />
-          </div>
-          <div className={styles.journeyHeroOverlay} aria-hidden="true" />
-          <div className={`container ${styles.journeyHeroInner}`}>
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={staggerContainer}
-            >
-              <motion.span className={styles.journeyEyebrow} variants={fadeInUp}>
-                From Banana Stem to Dignity
-              </motion.span>
-              <motion.h2 id="journey-heading" className={styles.journeyHeroTitle} variants={fadeInUp}>
-                Turning Banana Fiber Into Comfort, Confidence &amp; Change
-              </motion.h2>
-              <motion.p className={styles.journeyHeroSub} variants={fadeInUp}>
-                Empowering women through sustainable menstrual care handcrafted from nature.
-              </motion.p>
-              <motion.a href="#journey-timeline" className={styles.journeyHeroBtn} variants={fadeInUp}>
-                Discover the Journey
-              </motion.a>
-            </motion.div>
-          </div>
-        </div>
-
+      {/* SECTION: CRAFTED BY WOMEN */}
+      <section className={styles.craftedSection} aria-labelledby="crafted-heading">
+        <div className={styles.craftedBg} aria-hidden="true" />
         <div className="container">
           <motion.div
-            className={styles.journeyIntro}
+            className={styles.craftedGrid}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-80px' }}
             variants={staggerContainer}
           >
-            <motion.p className={styles.journeyIntroLead} variants={fadeInUp}>
-              Crafted by Women. Powered by Nature. Designed for Comfort.
-            </motion.p>
-            <motion.p className={styles.journeyIntroText} variants={fadeInUp}>
-              What begins as discarded banana stem fiber is transformed into something meaningful — soft, reusable menstrual pads that support both women and the planet.
-            </motion.p>
-            <motion.p className={styles.journeyIntroText} variants={fadeInUp}>
-              Every thread tells a story of care, craftsmanship, sustainability, and empowerment.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className={styles.journeyTimelineHeader}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeInUp}
-          >
-            <span className={styles.sectionBadge}>
-              <Leaf size={12} style={{ marginRight: '4px' }} />
-              The Journey of Banana Fiber
-            </span>
-          </motion.div>
-
-          <div id="journey-timeline" className={styles.journeyTimeline}>
-            {journeySteps.map((step, index) => (
-              <motion.article
-                key={step.step}
-                className={`${styles.journeyStep} ${index % 2 === 1 ? styles.journeyStepReverse : ''}`}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-80px' }}
-                variants={staggerContainer}
+            {/* LEFT: Video */}
+            <motion.div className={styles.craftedVideoCol} variants={fadeInUp}>
+              <div className={styles.craftedVideoWrap}>
+                <div className={styles.craftedVideoFrame}>
+                  <iframe
+                    src="https://www.youtube.com/embed/Q-nxYk30pho"
+                    title="Crafted by Women – Banana Fiber to Saukhyam Pad"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className={styles.craftedIframe}
+                  />
+                </div>
+              </div>
+              <p className={styles.craftedVideoCaption}>See how banana fiber becomes menstrual innovation</p>
+              <a
+                href="https://youtu.be/Q-nxYk30pho"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.craftedYouTubeLink}
               >
-                <motion.div className={styles.journeyStepVisual} variants={fadeInUp}>
-                  <div className={styles.journeyStepImageWrap}>
-                    <Image
-                      src={step.image}
-                      alt={step.imageAlt}
-                      width={560}
-                      height={420}
-                      className={styles.journeyStepImage}
-                    />
-                  </div>
-                  <p className={styles.journeyStepCaption}>{step.caption}</p>
-                </motion.div>
-                <motion.div className={styles.journeyStepContent} variants={fadeInUp}>
-                  <span className={styles.journeyStepNum}>{step.step}</span>
-                  <h3 className={styles.journeyStepTitle}>{step.title}</h3>
-                  <p className={styles.journeyStepBody}>{step.body}</p>
-                  {step.quote && (
-                    <blockquote className={styles.journeyStepQuote}>&ldquo;{step.quote}&rdquo;</blockquote>
-                  )}
-                  {step.tagline && <p className={styles.journeyStepTagline}>{step.tagline}</p>}
-                </motion.div>
-              </motion.article>
-            ))}
-          </div>
+                Watch on YouTube
+                <ChevronRight size={14} aria-hidden="true" />
+              </a>
+            </motion.div>
 
-          <motion.blockquote
-            className={styles.journeyEmotionalQuote}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeInUp}
-          >
-            &ldquo;Every reusable pad carries the effort of many women, the strength of nature, and the promise of sustainability.&rdquo;
-          </motion.blockquote>
+            {/* RIGHT: Content */}
+            <div className={styles.craftedContentCol}>
+              <motion.span className={styles.craftedLabel} variants={fadeInUp}>
+                Crafted With Purpose
+              </motion.span>
+              <motion.h2 id="crafted-heading" className={styles.craftedTitle} variants={fadeInUp}>
+                Crafted by Women. Powered by Nature. Designed for Comfort.
+              </motion.h2>
+              <motion.p className={styles.craftedIntro} variants={fadeInUp}>
+                What begins as discarded banana stem fiber is transformed into something meaningful — soft, reusable menstrual pads supporting women and the planet.
+              </motion.p>
+
+              <motion.div className={styles.craftedSteps} variants={staggerContainer}>
+                {journeySteps.map((step) => (
+                  <motion.article className={styles.craftedStep} key={step.step} variants={fadeInUp}>
+                    <span className={styles.craftedStepNum}>{step.step}</span>
+                    <div className={styles.craftedStepContent}>
+                      <h3 className={styles.craftedStepTitle}>{step.title}</h3>
+                      <p className={styles.craftedStepBody}>{step.short}</p>
+                    </div>
+                  </motion.article>
+                ))}
+              </motion.div>
+
+              <motion.blockquote className={styles.craftedQuote} variants={fadeInUp}>
+                <Quote size={22} className={styles.craftedQuoteIcon} aria-hidden="true" />
+                <p className={styles.craftedQuoteText}>
+                  &ldquo;Every reusable pad carries the effort of many women, the strength of nature, and the promise of sustainability.&rdquo;
+                </p>
+              </motion.blockquote>
+            </div>
+          </motion.div>
         </div>
       </section>
 
