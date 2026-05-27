@@ -649,23 +649,6 @@ export default function WhyBananaFiberPage() {
               </motion.div>
             ))}
           </motion.div>
-
-          <motion.div
-            className={styles.scienceHandoff}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={fadeInUp}
-          >
-            <div className={styles.scienceHandoffLine} aria-hidden="true" />
-            <p className={styles.scienceHandoffText}>
-              From lived experience to laboratory inquiry
-            </p>
-            <a href="#science-lab" className={styles.scienceHandoffLink}>
-              Inside Banana Fiber · Laboratory Testing
-              <ChevronRight size={16} aria-hidden="true" />
-            </a>
-          </motion.div>
         </div>
       </section>
 

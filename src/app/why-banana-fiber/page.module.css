@@ -1379,7 +1379,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(1rem, 2vw, 1.5rem);
-  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 0;
 }
 
 .experienceStatCard {
@@ -1443,47 +1443,6 @@
   color: #3f5248;
   margin-top: 0.75rem;
   line-height: 1.5;
-}
-
-.scienceHandoff {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  padding-top: clamp(1.5rem, 3vw, 2rem);
-}
-
-.scienceHandoffLine {
-  width: 1px;
-  height: 64px;
-  margin: 0 auto 1.5rem;
-  background: linear-gradient(to bottom, transparent, #6fa67a, transparent);
-  opacity: 0.45;
-}
-
-.scienceHandoffText {
-  font-size: clamp(0.78rem, 1vw, 0.85rem);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #4a6356;
-  margin-bottom: 1rem;
-}
-
-.scienceHandoffLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-heading);
-  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-  font-weight: 600;
-  color: #1e4d3d;
-  text-decoration: none;
-  transition: gap 0.3s ease, color 0.3s ease;
-}
-
-.scienceHandoffLink:hover {
-  gap: 0.75rem;
-  color: #2d5a42;
 }
 
 /* ── MERGED SCIENCE LAB SECTION ── */
