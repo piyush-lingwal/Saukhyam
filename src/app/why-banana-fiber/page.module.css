@@ -33,19 +33,10 @@
   background-size: 180px 180px;
 }
 
-/* ── Section Transition & Organic Dividers ── */
-.sectionDivider {
-  height: 100px;
-  background: linear-gradient(to bottom, var(--color-bg-primary), var(--color-bg-secondary));
-  position: relative;
-  overflow: hidden;
-}
-
+/* ── Section Transition (kept for reference, unused) ── */
+.sectionDivider,
 .sectionDividerAlt {
-  height: 100px;
-  background: linear-gradient(to bottom, var(--color-bg-secondary), var(--color-bg-primary));
-  position: relative;
-  overflow: hidden;
+  display: none;
 }
 
 .organicBackground {
