@@ -303,8 +303,6 @@ export default function WhyBananaFiberPage() {
         </div>
       </section>
 
-      <div className={styles.sectionDivider} aria-hidden="true" />
-
       {/* SECTION 2: THE LIFE CYCLE */}
       <section
         id="plant-story"
@@ -326,16 +324,11 @@ export default function WhyBananaFiberPage() {
             viewport={{ once: true, margin: '-80px' }}
             variants={staggerContainer}
           >
-            <motion.span className={styles.plantStoryBadge} variants={fadeInUp}>
-              <Compass size={13} aria-hidden="true" />
-              The Life Cycle
-            </motion.span>
             <motion.h2 id="plant-story-title" className={styles.plantStoryTitle} variants={fadeInUp}>
-              A Plant With Its Own Story
+              The Life Cycle — A Plant With Its Own Story
             </motion.h2>
             <motion.div className={styles.plantStoryHeaderDivider} aria-hidden="true" variants={fadeInUp}>
               <span />
-              <Leaf size={13} />
               <span />
             </motion.div>
             <motion.p className={styles.plantStoryIntro} variants={fadeInUp}>
@@ -379,8 +372,6 @@ export default function WhyBananaFiberPage() {
           </motion.blockquote>
         </div>
       </section>
-
-      <div className={styles.sectionDivider} aria-hidden="true" />
 
       {/* SECTION: CRAFTED BY WOMEN */}
       <section className={styles.craftedSection} aria-labelledby="crafted-heading">
@@ -452,8 +443,6 @@ export default function WhyBananaFiberPage() {
           </motion.div>
         </div>
       </section>
-
-      <div className={styles.sectionDividerAlt} aria-hidden="true" />
 
       {/* FROM FIBER TO CARE */}
       <section className={styles.absorbencySection} aria-labelledby="fiber-to-care-heading">
