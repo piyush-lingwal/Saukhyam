@@ -222,7 +222,7 @@
 /* SECTION 2: A PLANT WITH ITS OWN STORY — premium editorial */
 .plantStorySection {
   position: relative;
-  padding: clamp(5.5rem, 11vw, 9rem) 0 clamp(4.5rem, 9vw, 7rem);
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 5rem);
   overflow: hidden;
   isolation: isolate;
   background:
@@ -282,14 +282,15 @@
 .plantStoryContainer {
   position: relative;
   z-index: 3;
-  max-width: 1120px;
+  max-width: 1320px;
   margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 2rem);
 }
 
 .plantStoryHeader {
   text-align: center;
-  max-width: 700px;
-  margin: 0 auto clamp(3.5rem, 7vw, 5rem);
+  max-width: 860px;
+  margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -299,51 +300,37 @@
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  width: 200px;
-  margin: 0.5rem auto 1.25rem;
-  color: rgba(111, 166, 122, 0.55);
+  width: 160px;
+  margin: 0.35rem auto 1rem;
 }
 
 .plantStoryHeaderDivider span {
   flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(111, 166, 122, 0.4), transparent);
+  height: 1.5px;
+  background: linear-gradient(to right, transparent, rgba(111, 166, 122, 0.5), transparent);
 }
 
+/* plantStoryBadge kept as dead class (unused after merge) */
 .plantStoryBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 1.1rem;
-  font-size: clamp(0.7rem, 1vw, 0.78rem);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #2d4a3a;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(62, 92, 74, 0.16);
-  border-radius: var(--radius-full);
-  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 16px rgba(42, 61, 50, 0.06);
+  display: none;
 }
 
 .plantStoryTitle {
   font-family: var(--font-heading);
-  font-size: clamp(2.75rem, 5.5vw, 4rem);
+  font-size: clamp(1.85rem, 3.5vw, 2.75rem);
   font-weight: 800;
   color: #1e3d2f;
-  line-height: 1.08;
+  line-height: 1.15;
   letter-spacing: -0.02em;
-  margin-bottom: clamp(1.25rem, 2.5vw, 1.5rem);
+  margin-bottom: 0;
   text-wrap: balance;
 }
 
 .plantStoryIntro {
-  font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
   color: #3f5248;
   line-height: 1.75;
-  max-width: 560px;
+  max-width: 700px;
   margin: 0;
   text-align: center;
 }
