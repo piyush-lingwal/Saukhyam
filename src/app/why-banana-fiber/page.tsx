@@ -324,8 +324,11 @@ export default function WhyBananaFiberPage() {
             viewport={{ once: true, margin: '-80px' }}
             variants={staggerContainer}
           >
+            <motion.span className={styles.plantStoryLabelBadge} variants={fadeInUp}>
+              The Life Cycle
+            </motion.span>
             <motion.h2 id="plant-story-title" className={styles.plantStoryTitle} variants={fadeInUp}>
-              The Life Cycle — A Plant With Its Own Story
+              A Plant With Its Own Story
             </motion.h2>
             <motion.div className={styles.plantStoryHeaderDivider} aria-hidden="true" variants={fadeInUp}>
               <span />
@@ -348,6 +351,7 @@ export default function WhyBananaFiberPage() {
               <motion.div className={styles.lifeCycleItem} key={card.step} variants={fadeInUp}>
                 <div className={styles.lifeCycleNode}>{card.step}</div>
                 <article className={styles.lifeCycleCard}>
+                  <span className={styles.lifeCycleCardBg} aria-hidden="true">{card.step}</span>
                   <h3 className={styles.lifeCycleCardTitle}>{card.title}</h3>
                   <ul className={styles.lifeCycleList}>
                     {card.points.map((point) => (
@@ -366,10 +370,233 @@ export default function WhyBananaFiberPage() {
             viewport={{ once: true, margin: '-80px' }}
             variants={fadeInUp}
           >
+            <Quote size={42} className={styles.plantStoryPhilosophyIcon} aria-hidden="true" />
+            <p className={styles.plantStoryPhilosophyText}>
+              &ldquo;Innovation does not always begin with something new. Sometimes, it begins with what nature has already given.&rdquo;
+            </p>
             <span className={styles.plantStoryPhilosophyLabel}>More Than Material</span>
-            <p>Innovation does not always begin with something new.</p>
-            <p className={styles.plantStoryPhilosophyAccent}>Sometimes, it begins with what nature has already given.</p>
           </motion.blockquote>
+        </div>
+      </section>
+
+      {/* SECTION: THE JOURNEY OF SAUKHYAM */}
+      <section className={styles.journeySection} aria-labelledby="journey-heading">
+        <div className={styles.journeyBg} aria-hidden="true" />
+        <div className={styles.journeyGrain} aria-hidden="true" />
+
+        <div className="container">
+          <motion.header
+            className={styles.journeyHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            variants={staggerContainer}
+          >
+            <motion.span className={styles.journeyLabel} variants={fadeInUp}>
+              The Journey of Saukhyam
+            </motion.span>
+            <motion.h2 id="journey-heading" className={styles.journeyTitle} variants={fadeInUp}>
+              From Fiber to Care
+            </motion.h2>
+            <motion.p className={styles.journeyIntro} variants={fadeInUp}>
+              Every Saukhyam pad carries within it the hands of women artisans, the intelligence of nature, and the discipline of purposeful craft.
+            </motion.p>
+          </motion.header>
+
+          <div className={styles.journeySteps}>
+
+            {/* Step 01 */}
+            <motion.div
+              className={`${styles.journeyStep} ${styles.journeyStepLeft}`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+            >
+              <motion.div className={styles.journeyImageWrap} variants={fadeInUp}>
+                <span className={styles.journeyStepBadge}>01</span>
+                <Image
+                  src="/journey-01-fiber-extraction.png"
+                  alt="Women artisan carefully extracting raw banana fiber by hand"
+                  width={680}
+                  height={480}
+                  className={styles.journeyImage}
+                />
+              </motion.div>
+              <motion.div className={styles.journeyContent} variants={fadeInUp}>
+                <span className={styles.journeyStepLabel}>Step 01</span>
+                <h3 className={styles.journeyStepTitle}>Fiber Extraction</h3>
+                <p className={styles.journeyStepText}>
+                  The process begins at the source. Skilled women artisans carefully separate the banana stem fiber by hand, drawing out long, natural strands that will form the absorbent core of each pad. It is patient, skilled work — done with care from the very first touch.
+                </p>
+                <ul className={styles.journeyStepPoints}>
+                  <li>Hand-separated from post-harvest banana stems</li>
+                  <li>Natural cellulose fibers selected for quality</li>
+                  <li>No chemical treatments at extraction stage</li>
+                </ul>
+              </motion.div>
+            </motion.div>
+
+            {/* Step 02 */}
+            <motion.div
+              className={`${styles.journeyStep} ${styles.journeyStepRight}`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+            >
+              <motion.div className={styles.journeyContent} variants={fadeInUp}>
+                <span className={styles.journeyStepLabel}>Step 02</span>
+                <h3 className={styles.journeyStepTitle}>Preparing the Material</h3>
+                <p className={styles.journeyStepText}>
+                  Raw fiber moves into mechanical refinement. Women operating fiber-processing equipment clean, align, and prepare the strands into uniform, breathable layers. This stage transforms wild, uneven fiber into material precise enough for menstrual care.
+                </p>
+                <ul className={styles.journeyStepPoints}>
+                  <li>Fiber cleaned and aligned using processing equipment</li>
+                  <li>Uniform layers prepared for absorbency</li>
+                  <li>Quality checks at every processing stage</li>
+                </ul>
+              </motion.div>
+              <motion.div className={styles.journeyImageWrap} variants={fadeInUp}>
+                <span className={styles.journeyStepBadge}>02</span>
+                <Image
+                  src="/journey-02-fiber-machines.png"
+                  alt="Women processing banana fiber through mechanical refinement equipment"
+                  width={680}
+                  height={480}
+                  className={styles.journeyImage}
+                />
+              </motion.div>
+            </motion.div>
+
+            {/* Step 03 */}
+            <motion.div
+              className={`${styles.journeyStep} ${styles.journeyStepLeft}`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+            >
+              <motion.div className={styles.journeyImageWrap} variants={fadeInUp}>
+                <span className={styles.journeyStepBadge}>03</span>
+                <Image
+                  src="/journey-03-fiber-sorting.png"
+                  alt="Artisan sorting and refining banana fiber strands by hand"
+                  width={680}
+                  height={480}
+                  className={styles.journeyImage}
+                />
+              </motion.div>
+              <motion.div className={styles.journeyContent} variants={fadeInUp}>
+                <span className={styles.journeyStepLabel}>Step 03</span>
+                <h3 className={styles.journeyStepTitle}>Refining & Sorting</h3>
+                <p className={styles.journeyStepText}>
+                  Every fiber strand is examined. Artisans sort refined fiber by texture and quality, ensuring only the most suitable material reaches the stitching stage. This careful selection is what gives each Saukhyam pad its consistent softness and reliability.
+                </p>
+                <ul className={styles.journeyStepPoints}>
+                  <li>Fiber sorted by texture and absorbency quality</li>
+                  <li>Artisan-level inspection at this stage</li>
+                  <li>Only the finest material passes forward</li>
+                </ul>
+              </motion.div>
+            </motion.div>
+
+            {/* Step 04 */}
+            <motion.div
+              className={`${styles.journeyStep} ${styles.journeyStepRight}`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+            >
+              <motion.div className={styles.journeyContent} variants={fadeInUp}>
+                <span className={styles.journeyStepLabel}>Step 04</span>
+                <h3 className={styles.journeyStepTitle}>Stitching &amp; Craftsmanship</h3>
+                <p className={styles.journeyStepText}>
+                  Women artisans stitch each pad with precision and care. The banana fiber layer is carefully assembled within the pad structure, with attention to form, comfort, and durability. This is not machine-only work — it is craftsmanship rooted in community and skill.
+                </p>
+                <ul className={styles.journeyStepPoints}>
+                  <li>Precision stitching by trained women artisans</li>
+                  <li>Fiber core assembled within pad layers</li>
+                  <li>Each pad individually crafted and quality-checked</li>
+                </ul>
+              </motion.div>
+              <motion.div className={styles.journeyImageWrap} variants={fadeInUp}>
+                <span className={styles.journeyStepBadge}>04</span>
+                <Image
+                  src="/journey-04-stitching.png"
+                  alt="Women artisans stitching Saukhyam reusable pads at sewing machines"
+                  width={680}
+                  height={480}
+                  className={styles.journeyImage}
+                />
+              </motion.div>
+            </motion.div>
+
+            {/* Step 05 */}
+            <motion.div
+              className={`${styles.journeyStep} ${styles.journeyStepLeft}`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+            >
+              <motion.div className={styles.journeyImageWrap} variants={fadeInUp}>
+                <span className={styles.journeyStepBadge}>05</span>
+                <Image
+                  src="/journey-05-drying-finishing.png"
+                  alt="Women preparing and finishing naturally dyed fabric for Saukhyam pads"
+                  width={680}
+                  height={480}
+                  className={styles.journeyImage}
+                />
+              </motion.div>
+              <motion.div className={styles.journeyContent} variants={fadeInUp}>
+                <span className={styles.journeyStepLabel}>Step 05</span>
+                <h3 className={styles.journeyStepTitle}>Natural Dyeing &amp; Finishing</h3>
+                <p className={styles.journeyStepText}>
+                  Finished pads are naturally dyed and pressed into their final form. The deep red tones — symbolic of care and intention — come from a natural dyeing process. Fabric is laid out, dried in open air, and pressed with precision before final assembly.
+                </p>
+                <ul className={styles.journeyStepPoints}>
+                  <li>Natural dyes applied for color and character</li>
+                  <li>Air-dried for freshness and fabric integrity</li>
+                  <li>Pressed and finished to premium standard</li>
+                </ul>
+              </motion.div>
+            </motion.div>
+
+            {/* Step 06 — Final Product */}
+            <motion.div
+              className={styles.journeyFinalStep}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+            >
+              <motion.div className={styles.journeyFinalImageWrap} variants={fadeInUp}>
+                <span className={`${styles.journeyStepBadge} ${styles.journeyStepBadgeFinal}`}>06</span>
+                <Image
+                  src="/journey-06-final-product.png"
+                  alt="Finished Saukhyam reusable menstrual pads held with care"
+                  width={540}
+                  height={540}
+                  className={styles.journeyFinalImage}
+                />
+              </motion.div>
+              <motion.div className={styles.journeyFinalContent} variants={fadeInUp}>
+                <span className={styles.journeyStepLabel}>Step 06</span>
+                <h3 className={styles.journeyFinalTitle}>The Finished Saukhyam Pad</h3>
+                <p className={styles.journeyFinalText}>
+                  What began as discarded banana stem fiber — often left behind after harvest — has become a soft, reusable, purposefully crafted menstrual pad. Held in women's hands. Made by women's hands. Designed for women's care.
+                </p>
+                <blockquote className={styles.journeyFinalQuote}>
+                  <Quote size={18} className={styles.journeyFinalQuoteIcon} aria-hidden="true" />
+                  <p>&ldquo;Every pad carries the hands that made it and the material that gave itself to the purpose.&rdquo;</p>
+                </blockquote>
+              </motion.div>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
@@ -407,6 +634,64 @@ export default function WhyBananaFiberPage() {
                 Watch on YouTube
                 <ChevronRight size={14} aria-hidden="true" />
               </a>
+
+              {/* CTA buttons */}
+              <motion.div
+                className={styles.craftedCTAs}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-60px' }}
+                variants={staggerContainer}
+              >
+                <motion.div variants={fadeInUp}>
+                  <Link href="/why-banana-fiber#science-lab" className={styles.craftedBtnPrimary}>
+                    <Sparkles size={15} className={styles.craftedBtnIcon} aria-hidden="true" />
+                    Discover the Science
+                    <ChevronRight size={15} aria-hidden="true" />
+                  </Link>
+                </motion.div>
+                <motion.div variants={fadeInUp}>
+                  <Link href="/why-banana-fiber#user-experiences" className={styles.craftedBtnGhost}>
+                    Read User Stories
+                  </Link>
+                </motion.div>
+              </motion.div>
+
+              {/* Stats mini-cards */}
+              <motion.div
+                className={styles.craftedMiniStats}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-60px' }}
+                variants={staggerContainer}
+              >
+                <motion.div className={styles.craftedMiniStat} variants={fadeInUp}>
+                  <TrendingUp size={14} className={styles.craftedMiniStatIcon} aria-hidden="true" />
+                  <span className={styles.craftedMiniStatValue}>63.2%</span>
+                  <span className={styles.craftedMiniStatLabel}>Reported Comfort</span>
+                </motion.div>
+                <motion.div className={styles.craftedMiniStat} variants={fadeInUp}>
+                  <Leaf size={14} className={styles.craftedMiniStatIcon} aria-hidden="true" />
+                  <span className={styles.craftedMiniStatValue}>Natural</span>
+                  <span className={styles.craftedMiniStatLabel}>Banana Fiber</span>
+                </motion.div>
+                <motion.div className={styles.craftedMiniStat} variants={fadeInUp}>
+                  <RefreshCw size={14} className={styles.craftedMiniStatIcon} aria-hidden="true" />
+                  <span className={styles.craftedMiniStatValue}>2+ Yrs</span>
+                  <span className={styles.craftedMiniStatLabel}>Reusable Life</span>
+                </motion.div>
+              </motion.div>
+
+              {/* Scroll indicator */}
+              <div className={styles.craftedScrollHint} aria-hidden="true">
+                <span className={styles.craftedScrollDot} />
+                <span className={styles.craftedScrollText}>Scroll to Explore</span>
+              </div>
+
+              {/* Floating pulse accent */}
+              <div className={styles.craftedPulseOrb} aria-hidden="true">
+                <Leaf size={13} />
+              </div>
             </motion.div>
 
             {/* RIGHT: Content */}
@@ -529,44 +814,56 @@ export default function WhyBananaFiberPage() {
             </motion.div>
           </motion.header>
 
-          <motion.div
-            className={styles.userExperiencesQuotesGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
-          >
-            {experienceCards.map((quote) => (
-              <motion.figure
-                key={quote}
-                className={styles.experienceCard}
-                variants={fadeInUp}
-              >
-                <Quote size={22} className={styles.experienceCardIcon} aria-hidden="true" />
-                <blockquote className={styles.experienceCardQuote}>&ldquo;{quote}&rdquo;</blockquote>
-              </motion.figure>
-            ))}
-          </motion.div>
+          <div className={styles.uxBody}>
+            {/* LEFT: Quote cards */}
+            <motion.div
+              className={styles.uxQuotesCol}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+            >
+              {experienceCards.map((quote) => (
+                <motion.figure
+                  key={quote}
+                  className={styles.uxQuoteCard}
+                  variants={fadeInUp}
+                >
+                  <Quote size={20} className={styles.uxQuoteIcon} aria-hidden="true" />
+                  <blockquote className={styles.uxQuoteText}>&ldquo;{quote}&rdquo;</blockquote>
+                </motion.figure>
+              ))}
+            </motion.div>
 
-          <motion.div
-            className={styles.experienceStatsGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={staggerContainer}
-          >
-            {experienceStats.map((stat) => (
-              <motion.div key={stat.label} className={styles.experienceStatCard} variants={fadeInUp}>
-                <div className={styles.experienceStatIconWrap} aria-hidden="true">
-                  <stat.icon size={20} />
-                </div>
-                <span className={styles.experienceStatValue}>
-                  <AnimatedCounter value={stat.value} suffix="%" duration={2.2} />
-                </span>
-                <span className={styles.experienceStatLabel}>{stat.label}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+            {/* RIGHT: Stats */}
+            <motion.div
+              className={styles.uxStatsCol}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={staggerContainer}
+            >
+              {experienceStats.map((stat) => (
+                <motion.div key={stat.label} className={styles.uxStatCard} variants={fadeInUp}>
+                  <div className={styles.uxStatTop}>
+                    <span className={styles.uxStatValue}>
+                      <AnimatedCounter value={stat.value} suffix="%" duration={2.2} />
+                    </span>
+                    <div className={styles.uxStatIconWrap} aria-hidden="true">
+                      <stat.icon size={18} />
+                    </div>
+                  </div>
+                  <span className={styles.uxStatLabel}>{stat.label}</span>
+                  <div className={styles.uxStatBar} aria-hidden="true">
+                    <div
+                      className={styles.uxStatBarFill}
+                      style={{ width: `${stat.value}%` }}
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -610,12 +907,7 @@ export default function WhyBananaFiberPage() {
               </motion.div>
 
               <motion.div className={styles.scienceLabTransition} variants={fadeInUp}>
-                <div className={styles.scienceLabTransitionLine} aria-hidden="true">
-                  <span />
-                  <FlaskConical size={14} />
-                  <span />
-                </div>
-                <span className={styles.scienceLabSubBadge}>Active Compounds</span>
+                <div className={styles.scienceLabDivider} aria-hidden="true" />
                 <h3 className={styles.scienceLabSubTitle}>What Science Found</h3>
                 <p className={styles.scienceLabFinding}>
                   The research identified 27 bioactive phytochemicals associated in scientific literature with anti-inflammatory, analgesic, and antinociceptive activities.
@@ -631,12 +923,6 @@ export default function WhyBananaFiberPage() {
                 ))}
               </motion.div>
 
-              <motion.div className={styles.scienceLabDisclaimer} variants={fadeInUp}>
-                <p>
-                  These findings do not claim that banana fiber alone relieves pain.
-                  But they do open an important scientific conversation about the material and its potential role in menstrual comfort.
-                </p>
-              </motion.div>
             </motion.div>
 
             <motion.aside
@@ -647,6 +933,7 @@ export default function WhyBananaFiberPage() {
               variants={staggerContainer}
             >
               <motion.div className={styles.scienceLabImageWrap} variants={fadeInUp}>
+                <div className={styles.scienceLabImageGlow} aria-hidden="true" />
                 <Image
                   src="/why-banana-fiber/laboratory-testing.png"
                   alt="Banana fiber samples, microscope, and laboratory analysis equipment on a research bench"
@@ -656,23 +943,56 @@ export default function WhyBananaFiberPage() {
                 />
               </motion.div>
 
-              <div className={styles.scienceMetricCards}>
-                {scienceMethods.map((method) => (
-                  <motion.div
-                    className={`${styles.scienceMetricCard} ${method.isMetric ? styles.scienceMetricCardHighlight : ''}`}
-                    key={method.title}
-                    variants={fadeInUp}
-                  >
-                    <div className={styles.scienceMetricIcon} aria-hidden="true">
-                      <method.icon size={method.isMetric ? 22 : 24} />
-                    </div>
-                    <span className={styles.scienceMetricTitle}>{method.title}</span>
-                    <span className={styles.scienceMetricSubtitle}>{method.subtitle}</span>
-                  </motion.div>
-                ))}
-              </div>
+              {/* Research Snapshot card */}
+              <motion.div className={styles.scienceResearchSnapshot} variants={fadeInUp}>
+                <span className={styles.scienceSnapshotLabel}>
+                  <FlaskConical size={12} aria-hidden="true" />
+                  Research Snapshot
+                </span>
+                <ul className={styles.scienceSnapshotList}>
+                  <li>
+                    <span className={styles.scienceSnapshotDot} aria-hidden="true" />
+                    27 Bioactive Compounds Identified
+                  </li>
+                  <li>
+                    <span className={styles.scienceSnapshotDot} aria-hidden="true" />
+                    Advanced Analytical Testing
+                  </li>
+                  <li>
+                    <span className={styles.scienceSnapshotDot} aria-hidden="true" />
+                    Naturally Occurring Phytochemicals
+                  </li>
+                </ul>
+              </motion.div>
+
+              {/* Scientific detail row */}
+              <motion.div className={styles.scienceDetailRow} variants={fadeInUp}>
+                <span className={styles.scienceDetailItem}>
+                  <Activity size={13} aria-hidden="true" />
+                  Laboratory Evaluated
+                </span>
+                <span className={styles.scienceDetailDivider} aria-hidden="true" />
+                <span className={styles.scienceDetailItem}>
+                  <Sparkles size={13} aria-hidden="true" />
+                  Scientific Literature Referenced
+                </span>
+              </motion.div>
             </motion.aside>
           </div>
+
+          {/* Full-width disclaimer bar */}
+          <motion.div
+            className={styles.scienceLabDisclaimer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={fadeInUp}
+          >
+            <span className={styles.scienceLabDisclaimerIcon} aria-hidden="true">i</span>
+            <p>
+              These findings do not claim that banana fiber alone relieves pain, but they open an important scientific conversation about the material and its potential role in menstrual comfort.
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -719,7 +1039,8 @@ export default function WhyBananaFiberPage() {
             </div>
 
             <motion.blockquote className={styles.philosophyQuotePanel} variants={fadeInUp}>
-              <Quote size={28} className={styles.philosophyQuoteIcon} aria-hidden="true" />
+              <Quote size={36} className={styles.philosophyQuoteIcon} aria-hidden="true" />
+              <div className={styles.philosophyQuoteDivider} aria-hidden="true" />
               <p className={styles.philosophyQuote}>
                 &ldquo;Sometimes the most meaningful materials are the ones nature has already provided.&rdquo;
               </p>
