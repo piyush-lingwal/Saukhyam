@@ -97,7 +97,7 @@ const philosophyBlocks = [
   {
     label: 'Designed for Longevity',
     lines: [
-      'Banana fiber became part of a reusable journey\u2014created not for a single use, but for lasting care.',
+      'Banana fiber became part of a reusable journey, created not for a single use but for lasting care.',
     ],
   },
 ];
@@ -418,7 +418,7 @@ export default function WhyBananaFiberPage() {
                 Crafted by Women. Powered by Nature. Designed for Comfort.
               </motion.h2>
               <motion.p className={styles.craftedIntro} variants={fadeInUp}>
-                What begins as discarded banana stem fiber is transformed into something meaningful — soft, reusable menstrual pads supporting women and the planet.
+                What begins as discarded banana stem fiber is transformed into something meaningful, soft, reusable menstrual pads supporting women and the planet.
               </motion.p>
 
               <motion.div className={styles.craftedSteps} variants={staggerContainer}>
