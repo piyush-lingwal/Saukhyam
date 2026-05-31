@@ -317,28 +317,28 @@ const internsData: InternProfile[] = [
 
 const faqs = [
   {
-    q: 'Is the internship fully online?',
-    a: 'The internship is primarily conducted online, allowing interns to work remotely and collaborate digitally. However, interns may occasionally be expected to contribute to Saukhyam programs or initiatives taking place in their city or state. While travel requirements are limited, some involvement in local activities may be part of the experience.',
+    q: 'Is the internship remote or in-person?',
+    a: 'Internships are primarily remote-friendly. Depending on your domain and preference, there may be optional in-person opportunities at our Amritapuri, Kerala campus or field program locations.',
   },
   {
-    q: 'What is the duration of the internship?',
-    a: 'The standard internship duration is six months, designed to provide meaningful hands-on learning, professional growth, and deeper engagement with Saukhyam\'s work. Shorter-duration internships may also be available depending on project requirements.',
+    q: 'How long is the internship?',
+    a: 'The minimum duration is 4 weeks. Most interns choose 6–12 week engagements for deeper impact. Duration is flexible and decided during the discussion call.',
   },
   {
     q: 'Is the internship paid?',
-    a: 'The six-month internship generally includes a stipend after the initial period. The first month is usually unpaid, serving as an orientation and learning phase. Shorter-duration internships are typically unpaid.',
+    a: 'Currently, internships at Saukhyam are unpaid but offer significant non-monetary value — mentorship, live projects, certificate, LOR, and a mission-driven community. Select roles may have stipends; this will be communicated during the discussion.',
   },
   {
-    q: 'Who can apply for the internship?',
-    a: 'The six-month internship is generally intended for students currently enrolled in an undergraduate or graduate degree program who are interested in contributing through technology, creativity, research, or social impact initiatives.',
+    q: 'Who is eligible to apply?',
+    a: 'Any student currently enrolled in an undergraduate, postgraduate, or professional program. We also accept gap-year students and recent graduates. No specific stream is required — we welcome all backgrounds.',
   },
   {
-    q: 'What is the expected time commitment?',
-    a: 'Interns are expected to contribute approximately 40–50 hours per month. This flexible structure allows students to balance academic responsibilities while gaining meaningful practical experience.',
+    q: 'Will I receive a certificate?',
+    a: 'Yes. All interns who complete their engagement receive an official Certificate of Internship from Ayurarogya Saukhyam Foundation. Exceptional interns are also considered for a Letter of Recommendation.',
   },
   {
-    q: 'Will interns receive a certificate?',
-    a: 'Yes. Interns who successfully complete their internship receive an official internship certificate from Saukhyam in recognition of their contribution and learning experience.',
+    q: 'What commitment is expected each week?',
+    a: 'Typically 10–20 hours per week, depending on your domain. We respect that you are actively studying, so we structure work around your academic schedule.',
   },
 ];
 
