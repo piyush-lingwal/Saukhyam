@@ -309,10 +309,6 @@ export default function WhyBananaFiberPage() {
         className={styles.plantStorySection}
         aria-labelledby="plant-story-title"
       >
-        <div className={styles.plantStoryWatermark} aria-hidden="true">
-          <span>ONE HARVEST</span>
-          <span>SECOND PURPOSE</span>
-        </div>
         <div className={styles.plantStoryGlow} aria-hidden="true" />
         <div className={styles.plantStoryGrain} aria-hidden="true" />
 

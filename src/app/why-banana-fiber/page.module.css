@@ -234,31 +234,8 @@
     linear-gradient(165deg, #faf6f0 0%, #f5efe6 42%, #f8f3ec 100%);
 }
 
-.plantStoryWatermark {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(1rem, 3vw, 2rem);
-  pointer-events: none;
-  user-select: none;
-  overflow: hidden;
-}
-
-.plantStoryWatermark span {
-  font-family: var(--font-heading);
-  font-size: clamp(3.5rem, 11vw, 7.5rem);
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #3e5c4a;
-  opacity: 0.022;
-  line-height: 1;
-  white-space: nowrap;
-}
+/* plantStoryWatermark removed — background text cleared for clean premium layout */
+.plantStoryWatermark { display: none; }
 
 .plantStoryGlow {
   position: absolute;
@@ -2964,11 +2941,6 @@
 
   .scienceMetricCard > span:last-child {
     margin-left: auto;
-  }
-
-  .plantStoryWatermark span {
-    font-size: clamp(2.5rem, 14vw, 4rem);
-    letter-spacing: 0.08em;
   }
 
   .absorbencyMetricCard {
