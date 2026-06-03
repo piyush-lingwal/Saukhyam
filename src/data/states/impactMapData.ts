@@ -281,7 +281,7 @@ function buildUpImpact(): StateImpact {
     heat: 'high',
     womenReached: 0,
     villages: 75,
-    schools: exp.initiatives.length,
+    schools: exp.initiatives?.length ?? 0,
     centres: 4,
     campuses: 0,
     livelihoods: 7,
