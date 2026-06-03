@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   CARE PAGE — Brand Color Palette (from CARE Logo)
+   CARE PAGE - Brand Color Palette (from CARE Logo)
    ──────────────────────────────────────────────────
    Primary purple  #8B2FC9   ← CARE wordmark purple
    Deep purple     #3D2B6B   ← tagline dark navy-purple
@@ -52,7 +52,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   HERO — Full-bleed Purple Gradient
+   HERO - Full-bleed Purple Gradient
 ───────────────────────────────────────────────────────── */
 .heroSection {
   position: relative;
@@ -61,7 +61,7 @@
   padding: 0;
 }
 
-/* Primary green gradient background — brand identity */
+/* Primary green gradient background - brand identity */
 .heroSection::before {
   content: '';
   position: absolute;
@@ -85,7 +85,7 @@
   pointer-events: none;
 }
 
-/* Top accent bar — pale green → forest → pale green */
+/* Top accent bar - pale green → forest → pale green */
 .heroTopBar {
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -110,9 +110,9 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   HERO — Section comments updated
+   HERO - Section comments updated
 ───────────────────────────────────────────────────────── */
-/* ── CARE logo — absolute top-left ── */
+/* ── CARE logo - absolute top-left ── */
 .heroLogoWrap {
   position: absolute;
   top: 0;
@@ -286,7 +286,7 @@
   .heroStatItem:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.08); }
   .heroStatItem:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.08); }
 
-  /* Fix 4 — prevent logo badge overlapping hero headline on mobile */
+  /* Fix 4 - prevent logo badge overlapping hero headline on mobile */
   .heroLogoWrap {
     padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
   }
@@ -314,7 +314,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   REGISTER PAGE — Top banner
+   REGISTER PAGE - Top banner
 ───────────────────────────────────────────────────────── */
 .registerBanner {
   background: linear-gradient(135deg, var(--g-darkest) 0%, var(--g-deep) 100%);
@@ -399,7 +399,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   WHAT IS CARE — Light Purple Section (redesigned)
+   WHAT IS CARE - Light Purple Section (redesigned)
 ───────────────────────────────────────────────────────── */
 .whatIsSection {
   padding: clamp(4rem, 7vw, 6.5rem) 0;
@@ -410,7 +410,7 @@
   border-image: linear-gradient(90deg, var(--g-forest), var(--g-bright), var(--g-forest)) 1;
 }
 
-/* Soft green glow — top right */
+/* Soft green glow - top right */
 .whatIsSection::before {
   content: '';
   position: absolute;
@@ -421,7 +421,7 @@
   pointer-events: none;
 }
 
-/* Soft green glow — bottom left */
+/* Soft green glow - bottom left */
 .whatIsSection::after {
   content: '';
   position: absolute;
@@ -441,7 +441,7 @@
   z-index: 1;
 }
 
-/* Section badge on light bg — green */
+/* Section badge on light bg - green */
 .whatIsSection .sectionBadge {
   color: var(--g-forest);
   background: rgba(56,142,60,0.08);
@@ -643,7 +643,7 @@
   gap: 11px;
 }
 
-/* Card 1 — tall, spans 2 rows | Deep Violet — leadership */
+/* Card 1 - tall, spans 2 rows | Deep Violet - leadership */
 .bentoGrid .bentoCard:nth-child(1) {
   grid-row: span 2;
   --bc-accent: #6D28D9;
@@ -651,21 +651,21 @@
   --bc-glow: rgba(109,40,217,0.22);
   --bc-gradient: linear-gradient(145deg, #4C1D95 0%, #6D28D9 100%);
 }
-/* Card 2 — Teal/Cyan — multi-brand variety */
+/* Card 2 - Teal/Cyan - multi-brand variety */
 .bentoGrid .bentoCard:nth-child(2) {
   --bc-accent: #0E7490;
   --bc-soft: rgba(14,116,144,0.08);
   --bc-glow: rgba(14,116,144,0.22);
   --bc-gradient: linear-gradient(145deg, #164E63 0%, #0E7490 100%);
 }
-/* Card 3 — Emerald — campus sustainability & environment */
+/* Card 3 - Emerald - campus sustainability & environment */
 .bentoGrid .bentoCard:nth-child(3) {
   --bc-accent: #047857;
   --bc-soft: rgba(4,120,87,0.08);
   --bc-glow: rgba(4,120,87,0.22);
   --bc-gradient: linear-gradient(145deg, #064E3B 0%, #047857 100%);
 }
-/* Card 4 — wide, spans 2 cols | Rose/Crimson — bold social change */
+/* Card 4 - wide, spans 2 cols | Rose/Crimson - bold social change */
 .bentoGrid .bentoCard:nth-child(4) {
   grid-column: span 2;
   --bc-accent: #BE123C;
@@ -700,7 +700,7 @@
   background: var(--bc-gradient);
 }
 
-/* Card 4 — override: left-accent stripe instead of top */
+/* Card 4 - override: left-accent stripe instead of top */
 .bentoGrid .bentoCard:nth-child(4) .bentoCardStripe {
   height: auto;
   width: 5px;
@@ -794,7 +794,7 @@
   flex: 1;
 }
 
-/* Tall card — fill vertical space properly */
+/* Tall card - fill vertical space properly */
 .bentoGrid .bentoCard:nth-child(1) .bentoCardBody {
   position: relative;
   overflow: hidden;
@@ -815,7 +815,7 @@
   line-height: 1.72;
 }
 
-/* No pseudo-element footer needed — image fills the space */
+/* No pseudo-element footer needed - image fills the space */
 
 /* Student image at bottom of tall card */
 .bentoCardImageWrap {
@@ -865,7 +865,7 @@
 
 
 /* ─────────────────────────────────────────────────────────
-   CARE STRUCTURE — Roles & Campaigns
+   CARE STRUCTURE - Roles & Campaigns
 ───────────────────────────────────────────────────────── */
 .structureSection {
   padding: clamp(4rem, 7vw, 6rem) 0;
@@ -1128,7 +1128,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   16% TIPPING POINT — Dark Purple Section
+   16% TIPPING POINT - Dark Purple Section
 ───────────────────────────────────────────────────────── */
 .diffusionSection {
   padding: clamp(2.5rem, 5vw, 4rem) 0;
@@ -1331,7 +1331,7 @@
    CAREATHON
 ───────────────────────────────────────────────────────── */
 /* ─────────────────────────────────────────────────────────
-   HOW IT WORKS — Redesigned
+   HOW IT WORKS - Redesigned
 ───────────────────────────────────────────────────────── */
 .careathonSection {
   padding: clamp(4rem, 7vw, 6rem) 0;
@@ -1533,7 +1533,7 @@
   gap: 8px;
 }
 
-/* ── Nodal College — premium gold luxury card ── */
+/* ── Nodal College - premium gold luxury card ── */
 .nodalCallout {
   margin: clamp(3rem, 5vw, 4rem) auto 0;
   max-width: 920px;
@@ -1786,7 +1786,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   CAREATHON JOURNEY — next-gen dark section (register page)
+   CAREATHON JOURNEY - next-gen dark section (register page)
 ───────────────────────────────────────────────────────── */
 .journeySection {
   padding: clamp(5rem, 8vw, 7rem) 0;
@@ -2126,7 +2126,7 @@
   margin-top: var(--space-2);
 }
 
-/* ── Slider outer — handles fade & overflow ── */
+/* ── Slider outer - handles fade & overflow ── */
 .sliderOuter {
   overflow: hidden;
   position: relative;
@@ -2155,7 +2155,7 @@
 }
 .sliderRow:last-child { margin-bottom: 0; }
 
-/* Track — holds logo cards; duplicated for seamless loop */
+/* Track - holds logo cards; duplicated for seamless loop */
 .sliderTrack {
   display: flex;
   gap: 1.25rem;
@@ -2203,7 +2203,6 @@
   transform: scale(1.06) translateY(-2px);
 }
 
-/* eslint-disable-next-line */
 .sliderLogoImg {
   width: 100%;
   height: 100%;
@@ -2219,7 +2218,7 @@
 /* ─────────────────────────────────────────────────────────
    CARE AWARDS
 ───────────────────────────────────────────────────────── */
-/* ── Awards Section — light theme with photo background ── */
+/* ── Awards Section - light theme with photo background ── */
 .awardsSection {
   padding: clamp(4rem, 7vw, 6rem) 0;
   position: relative;
@@ -2277,7 +2276,7 @@
   line-height: 1.78;
 }
 
-/* ── Award cards — white with gradient header ── */
+/* ── Award cards - white with gradient header ── */
 .awardsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2491,7 +2490,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   BOYS IN THE CONVERSATION — YouTube Embed
+   BOYS IN THE CONVERSATION - YouTube Embed
 ───────────────────────────────────────────────────────── */
 .boysSection {
   padding: clamp(2.5rem, 5vw, 4rem) 0;
@@ -2780,10 +2779,10 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   FORMS — Brand Partnership + College Sign-up
+   FORMS - Brand Partnership + College Sign-up
 ───────────────────────────────────────────────────────── */
 /* ─────────────────────────────────────────────────────────
-   FORMS SECTION — Beautiful split-card layout
+   FORMS SECTION - Beautiful split-card layout
 ───────────────────────────────────────────────────────── */
 .formsSection {
   padding: clamp(4rem, 7vw, 6rem) 0;

@@ -110,7 +110,7 @@ export default function FilterDrawer({
 
               <section>
                 <h3 className="mb-2 text-xs font-bold uppercase text-slate-500">
-                  Price ₹{filters.priceMin} – ₹{filters.priceMax}
+                  Price ₹{filters.priceMin} - ₹{filters.priceMax}
                 </h3>
                 <input
                   type="range"

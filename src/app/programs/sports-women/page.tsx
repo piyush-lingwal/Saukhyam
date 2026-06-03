@@ -36,7 +36,7 @@ export default function SportsWomenPage() {
               No Athlete Should Miss <span className={styles.heroAccent}>a Single Day</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              High-performance reusable pads designed for active women — so no girl
+              High-performance reusable pads designed for active women - so no girl
               misses training, competition, or her dreams because of her period.
             </motion.p>
           </motion.div>
@@ -76,8 +76,8 @@ export default function SportsWomenPage() {
           <motion.div className={styles.stepsGrid} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             {[
               { step: '01', title: 'Academy Partnerships', desc: 'We partner with sports academies and coaches to directly reach female athletes who need reliable menstrual products.' },
-              { step: '02', title: 'Custom Pad Kits', desc: 'Athletes receive starter kits with pads designed for high activity — extra absorbent, leak-proof, and fast-drying.' },
-              { step: '03', title: 'Period Education', desc: 'Workshops on menstrual health, nutrition during periods, and how to train safely — breaking the silence in sports.' },
+              { step: '02', title: 'Custom Pad Kits', desc: 'Athletes receive starter kits with pads designed for high activity - extra absorbent, leak-proof, and fast-drying.' },
+              { step: '03', title: 'Period Education', desc: 'Workshops on menstrual health, nutrition during periods, and how to train safely - breaking the silence in sports.' },
               { step: '04', title: 'Ongoing Support', desc: 'Regular check-ins, replacement pads, and a buddy system to ensure every athlete stays supported throughout her career.' },
             ].map((item) => (
               <motion.div key={item.step} variants={fadeInUp} className={styles.stepCard}>

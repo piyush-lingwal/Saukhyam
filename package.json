@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "blog:images": "node scripts/sync-blog-images.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.0",

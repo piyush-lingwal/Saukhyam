@@ -35,7 +35,7 @@ const programs = [
     title: 'REACH',
     subtitle: 'Rural Empowerment & Community Health',
     description:
-      'Bringing safe, chemical-free menstrual hygiene to rural India through satellite centres. Training rural women to manufacture pads locally — creating livelihoods while transforming community health.',
+      'Bringing safe, chemical-free menstrual hygiene to rural India through satellite centres. Training rural women to manufacture pads locally - creating livelihoods while transforming community health.',
     stats: [
       { label: 'Satellite Centres', value: '25+' },
       { label: 'States Covered', value: '20+' },
@@ -78,7 +78,7 @@ export default function ProgramsPage() {
               Empowering <span className={styles.heroAccent}>Communities</span> Across India
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              From rural villages to sports academies — our programs create lasting change
+              From rural villages to sports academies - our programs create lasting change
               through education, livelihood, and menstrual health awareness.
             </motion.p>
           </motion.div>

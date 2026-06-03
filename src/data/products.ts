@@ -106,7 +106,7 @@ export const products: Product[] = [
     nameHi: 'फर्स्ट पीरियड किट',
     price: 550,
     description: 'A gentle, confidence-building kit for girls experiencing their first period. Soft fabric, beginner-friendly design, and a reassuring guide booklet.',
-    descriptionHi: 'पहले पीरियड्स के लिए डिज़ाइन की गई कोमल किट — मुलायम कपड़ा, शुरुआती-अनुकूल डिज़ाइन और एक आश्वस्त करने वाली गाइड।',
+    descriptionHi: 'पहले पीरियड्स के लिए डिज़ाइन की गई कोमल किट - मुलायम कपड़ा, शुरुआती-अनुकूल डिज़ाइन और एक आश्वस्त करने वाली गाइड।',
     category: 'teen',
     images: [
       'https://saukhyampads.org/cdn/shop/files/Saukhyam_Starter_Pack_6_11zon.webp?v=1749644512&width=600'
@@ -123,7 +123,7 @@ export const products: Product[] = [
     nameHi: 'पोस्टपार्टम रिकवरी किट',
     price: 1250,
     description: 'Designed for the heavy flow and sensitive recovery phase after childbirth. Maximum absorbency with ultra-gentle organic cotton for sensitive skin.',
-    descriptionHi: 'प्रसव के बाद भारी प्रवाह और संवेदनशील रिकवरी चरण के लिए — अधिकतम अवशोषण और संवेदनशील त्वचा के लिए कोमल ऑर्गेनिक कपास।',
+    descriptionHi: 'प्रसव के बाद भारी प्रवाह और संवेदनशील रिकवरी चरण के लिए - अधिकतम अवशोषण और संवेदनशील त्वचा के लिए कोमल ऑर्गेनिक कपास।',
     category: 'heavy',
     images: [
       'https://saukhyampads.org/cdn/shop/files/Night_Pack_Heavy_flow_2_11zon.webp?v=1749644616&width=600'
@@ -139,8 +139,8 @@ export const products: Product[] = [
     name: 'Perimenopause Transition Kit',
     nameHi: 'पेरिमेनोपॉज़ ट्रांज़िशन किट',
     price: 950,
-    description: 'Flexible protection for the unpredictable flow of perimenopause — from light spotting to heavy days. A complete range in one thoughtful kit.',
-    descriptionHi: 'पेरिमेनोपॉज़ के अप्रत्याशित प्रवाह के लिए लचीली सुरक्षा — हल्के स्पॉटिंग से भारी दिनों तक।',
+    description: 'Flexible protection for the unpredictable flow of perimenopause - from light spotting to heavy days. A complete range in one thoughtful kit.',
+    descriptionHi: 'पेरिमेनोपॉज़ के अप्रत्याशित प्रवाह के लिए लचीली सुरक्षा - हल्के स्पॉटिंग से भारी दिनों तक।',
     category: 'value',
     images: [
       'https://saukhyampads.org/cdn/shop/files/Super_pack_with_wet_bag_Pouch_8_11zon.webp?v=1749644449&width=600'
@@ -169,8 +169,8 @@ export const products: Product[] = [
   {
     id: 'day-pads-6',
     slug: 'day-pads-pack-of-6',
-    name: 'Day Pads — Pack of 6',
-    nameHi: 'डे पैड्स — 6 का पैक',
+    name: 'Day Pads - Pack of 6',
+    nameHi: 'डे पैड्स - 6 का पैक',
     price: 560,
     description: 'Regular flow day pads for comfortable all-day protection. Banana fiber absorbent keeps you fresh and dry.',
     descriptionHi: 'आरामदायक पूरे दिन की सुरक्षा के लिए रेगुलर फ्लो डे पैड।',
@@ -218,6 +218,19 @@ export const products: Product[] = [
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find(p => p.slug === slug);
+}
+
+/** Catalog order for prev/next navigation on product detail pages */
+export function getAdjacentProducts(slug: string): {
+  prev: Product | null;
+  next: Product | null;
+} {
+  const index = products.findIndex((p) => p.slug === slug);
+  if (index === -1) return { prev: null, next: null };
+  return {
+    prev: index > 0 ? products[index - 1]! : null,
+    next: index < products.length - 1 ? products[index + 1]! : null,
+  };
 }
 
 export function getProductsByCategory(category: Product['category']): Product[] {

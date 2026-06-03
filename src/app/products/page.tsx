@@ -1,15 +1,18 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { Suspense, useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
   ShoppingBag, Leaf, Eye, Truck, Shield,
-  RefreshCw, Heart, ChevronLeft, ChevronRight, PackageSearch,
-  ShieldCheck, Droplets, Wind, Zap, CheckCircle2, XCircle, Users, Trophy,
+  RefreshCw, Heart, ChevronRight, PackageSearch,
+  ShieldCheck, Wind, Zap, CheckCircle2, XCircle,
 } from 'lucide-react';
 import { products, type Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import ProductPagination from '@/components/products/ProductPagination';
+import BananaFiberCtaSection from '@/components/products/BananaFiberCtaSection';
 import styles from './page.module.css';
 
 type Category = 'all' | Product['category'];
@@ -32,18 +35,18 @@ const trustItems = [
 ];
 
 const reusablePoints = [
-  '100% chemical free — no dioxins, phthalates, or bleach',
+  '100% chemical free - no dioxins, phthalates, or bleach',
   'Banana fiber with natural antimicrobial properties',
   'Lasts 2-3 years with proper care',
   'Saves ₹3,000+ per year vs disposables',
-  'Biodegradable — zero landfill waste',
+  'Biodegradable - zero landfill waste',
   'Handcrafted by empowered rural women',
 ];
 
 const disposablePoints = [
   'Contains dioxins, phthalates, and VOCs',
   'Synthetic superabsorbent polymers next to skin',
-  'Single use — 12,000+ pads in a lifetime',
+  'Single use - 12,000+ pads in a lifetime',
   'Costs ₹3,000-5,000 per year recurring',
   'Takes 500-800 years to decompose',
   'Mass-produced in chemical factories',
@@ -58,8 +61,11 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const { addItem } = useCart();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const searchQuery = (searchParams.get('search') ?? '').trim().toLowerCase();
   const [activeCategory, setActiveCategory] = useState<Category>('all');
   const [sortBy, setSortBy] = useState<SortOption>('default');
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,6 +75,16 @@ export default function ProductsPage() {
     let filtered = activeCategory === 'all'
       ? [...products]
       : products.filter(p => p.category === activeCategory);
+
+    if (searchQuery) {
+      filtered = filtered.filter(
+        (p) =>
+          p.name.toLowerCase().includes(searchQuery) ||
+          p.description.toLowerCase().includes(searchQuery) ||
+          p.features.some((f) => f.toLowerCase().includes(searchQuery)) ||
+          p.category.toLowerCase().includes(searchQuery)
+      );
+    }
 
     switch (sortBy) {
       case 'price-low':
@@ -83,32 +99,28 @@ export default function ProductsPage() {
     }
 
     return filtered;
-  }, [activeCategory, sortBy]);
+  }, [activeCategory, sortBy, searchQuery]);
 
   const availableCategories = useMemo(() => {
     const cats = new Set(products.map(p => p.category));
     return ['all', ...Array.from(cats)] as Category[];
   }, []);
 
-  // Temporary dummy pagination data: duplicate current filtered list with unique IDs.
-  const displayProducts = useMemo(
-    () => [
-      ...filteredProducts.map((p, idx) => ({ ...p, id: `${p.id}-a${idx}` })),
-      ...filteredProducts.map((p, idx) => ({ ...p, id: `${p.id}-b${idx}` })),
-    ],
-    [filteredProducts]
-  );
-
-  const totalPages = Math.max(1, Math.ceil(displayProducts.length / productsPerPage));
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / productsPerPage));
 
   const paginatedProducts = useMemo(() => {
     const start = (currentPage - 1) * productsPerPage;
-    return displayProducts.slice(start, start + productsPerPage);
-  }, [displayProducts, currentPage]);
+    return filteredProducts.slice(start, start + productsPerPage);
+  }, [filteredProducts, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [activeCategory, sortBy]);
+  }, [activeCategory, sortBy, searchQuery]);
 
   useEffect(() => {
     if (currentPage > totalPages) setCurrentPage(totalPages);
@@ -159,7 +171,13 @@ export default function ProductsPage() {
 
       {/* ── Main Content ── */}
       <div className="container">
-        {/* Toolbar */}
+        {searchQuery && (
+          <p className={styles.searchBanner} role="status">
+            Showing results for <strong>&ldquo;{searchParams.get('search')}&rdquo;</strong>
+            {' · '}
+            <Link href="/products">Clear search</Link>
+          </p>
+        )}
 
         <div className={styles.toolbar}>
           <div className={styles.filterTabs}>
@@ -194,7 +212,7 @@ export default function ProductsPage() {
         {filteredProducts.length > 0 ? (
           <motion.div
             className={styles.productGrid}
-            key={activeCategory + sortBy}
+            key={`${activeCategory}-${sortBy}-${searchQuery}-${currentPage}`}
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
@@ -211,7 +229,11 @@ export default function ProductsPage() {
                       <Leaf size={48} className={styles.productPlaceholder} />
                     )}
                     <div className={styles.quickActions}>
-                      <button className={styles.quickActionBtn} aria-label="Quick view">
+                      <button
+                        className={styles.quickActionBtn}
+                        aria-label={`View ${product.name}`}
+                        onClick={(e) => { e.preventDefault(); router.push(`/products/${product.slug}`); }}
+                      >
                         <Eye size={16} />
                       </button>
                       <button className={styles.quickActionBtn} aria-label="Wishlist">
@@ -260,46 +282,13 @@ export default function ProductsPage() {
           </div>
         )}
 
-        {filteredProducts.length > 0 && totalPages > 1 && (
-          <nav className={styles.productPagination} aria-label="Products page navigation">
-            <p className={styles.paginationMeta}>
-              Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong> · {displayProducts.length} products
-            </p>
-            <div className={styles.paginationTabs}>
-              <button
-                type="button"
-                className={styles.paginationNav}
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-                aria-label="Previous page"
-              >
-                <ChevronLeft size={18} />
-              </button>
-
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                <button
-                  key={page}
-                  type="button"
-                  className={`${styles.paginationTab} ${page === currentPage ? styles.paginationTabActive : ''}`}
-                  onClick={() => setCurrentPage(page)}
-                  aria-label={`Go to page ${page}`}
-                  aria-current={page === currentPage ? 'page' : undefined}
-                >
-                  {page}
-                </button>
-              ))}
-
-              <button
-                type="button"
-                className={styles.paginationNav}
-                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                disabled={currentPage === totalPages}
-                aria-label="Next page"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          </nav>
+        {filteredProducts.length > 0 && (
+          <ProductPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalCount={filteredProducts.length}
+            onPageChange={handlePageChange}
+          />
         )}
 
         {/* ── Benefits Banner ── */}
@@ -414,6 +403,16 @@ export default function ProductsPage() {
           </motion.div>
         </div>
       </section>
+
+      <BananaFiberCtaSection />
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className={styles.productsPage} aria-busy="true" />}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }

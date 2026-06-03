@@ -17,6 +17,7 @@ import {
   chemicalsFound,
   researchConclusion,
 } from '@/data/research';
+import ScienceSectionNav from '@/components/products/ScienceSectionNav';
 import styles from './page.module.css';
 
 const fadeInUp = {
@@ -28,15 +29,15 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 const staggerFast = { visible: { transition: { staggerChildren: 0.06 } } };
 
 const padLayers = [
-  { num: 1, name: 'Top Layer — Soft Cotton', desc: '100% cotton surface for comfort and breathability', icon: Heart },
-  { num: 2, name: 'Absorbent Core — Banana Fiber', desc: 'Natural banana fiber with antimicrobial properties (3g–9g)', icon: Leaf },
-  { num: 3, name: 'Moisture Barrier — PU Layer', desc: 'Polyurethane leak-proof layer prevents any seepage', icon: Shield },
-  { num: 4, name: 'Base Layer — Cotton Back', desc: 'Breathable cotton back with snap-button wings', icon: Wind },
+  { num: 1, name: 'Top Layer - Soft Cotton', desc: '100% cotton surface for comfort and breathability', icon: Heart },
+  { num: 2, name: 'Absorbent Core - Banana Fiber', desc: 'Natural banana fiber with antimicrobial properties (3g-9g)', icon: Leaf },
+  { num: 3, name: 'Moisture Barrier - PU Layer', desc: 'Polyurethane leak-proof layer prevents any seepage', icon: Shield },
+  { num: 4, name: 'Base Layer - Cotton Back', desc: 'Breathable cotton back with snap-button wings', icon: Wind },
 ];
 
 const comparisonData = [
   { feature: 'Material', saukhyam: 'Banana Fiber + Cotton', disposable: 'Wood Pulp + Plastic + SAP Gel' },
-  { feature: 'Chemicals', saukhyam: 'Zero — 100% Chemical Free', disposable: 'Dioxins, Phthalates, VOCs, Chlorine' },
+  { feature: 'Chemicals', saukhyam: 'Zero - 100% Chemical Free', disposable: 'Dioxins, Phthalates, VOCs, Chlorine' },
   { feature: 'Lifespan', saukhyam: '2-3 Years (100+ cycles)', disposable: 'Single Use (4-8 hours)' },
   { feature: 'Cost / Year', saukhyam: '₹200-400 / year', disposable: '₹2,400-4,000 / year' },
   { feature: 'Waste Generated', saukhyam: '0 kg (biodegradable)', disposable: '125+ kg lifetime waste' },
@@ -49,7 +50,7 @@ const healthBenefits = [
   { icon: Heart, title: 'Reduced Period Pain', desc: 'Users report up to 60% reduction in cramps after switching. Banana fiber\'s therapeutic properties may help naturally.' },
   { icon: Shield, title: 'No Chemical Exposure', desc: 'Zero dioxins, phthalates, or synthetic polymers touching your skin. 100% chemical-free every cycle.' },
   { icon: Droplets, title: 'Better Skin Health', desc: 'Breathable cotton + natural fiber means no rashes, no itching, no dryness. Your skin can breathe.' },
-  { icon: Sun, title: 'Natural Disinfection', desc: 'Sunlight drying naturally kills 99.9% bacteria — no need for chemical sanitizers or UV sterilizers.' },
+  { icon: Sun, title: 'Natural Disinfection', desc: 'Sunlight drying naturally kills 99.9% bacteria - no need for chemical sanitizers or UV sterilizers.' },
   { icon: Wind, title: 'Breathable Design', desc: 'Natural materials allow air circulation, preventing the humid environment that causes infections with plastic pads.' },
   { icon: Recycle, title: 'Planet Healing', desc: 'One woman switching saves 125+ kg of non-biodegradable waste. Each pad is fully compostable at end-of-life.' },
 ];
@@ -96,6 +97,8 @@ export default function SciencePage() {
             <motion.div variants={fadeInUp} className={styles.heroBreadcrumb}>
               <Link href="/">Home</Link>
               <ChevronRight size={14} />
+              <Link href="/products">Products</Link>
+              <ChevronRight size={14} />
               <span>Science</span>
             </motion.div>
             <motion.div variants={fadeInUp} className={styles.heroLabel}>
@@ -108,7 +111,7 @@ export default function SciencePage() {
               Changes Everything
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              India&apos;s first banana fiber absorbent technology — naturally antimicrobial,
+              India&apos;s first banana fiber absorbent technology - naturally antimicrobial,
               chemical free, and scientifically proven to be better for your body.
               Backed by 16+ peer-reviewed studies.
             </motion.p>
@@ -127,8 +130,9 @@ export default function SciencePage() {
       </section>
 
       {/* ── Pad Anatomy ── */}
-      <section className={styles.section}>
+      <section id="layers" className={styles.section}>
         <div className="container">
+          <ScienceSectionNav />
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeInUp} className={styles.sectionLabel}>
               <Layers size={14} />
@@ -138,7 +142,7 @@ export default function SciencePage() {
               4 Layers of Natural Protection
             </motion.h2>
             <motion.p variants={fadeInUp} className={styles.sectionDesc}>
-              Each layer is carefully engineered — natural, functional, and skin-safe.
+              Each layer is carefully engineered - natural, functional, and skin-safe.
               Zero chemicals. Zero compromise.
             </motion.p>
           </motion.div>
@@ -183,19 +187,19 @@ export default function SciencePage() {
                     Unlike tree-based cellulose used in disposable pads (which requires
                     deforestation and chemical processing), banana fiber is sourced from
                     <strong> agricultural waste</strong>. Banana trees fruit only once, then
-                    are cut — we transform that waste into a powerful absorbent material
+                    are cut - we transform that waste into a powerful absorbent material
                     with natural antimicrobial properties.
                   </p>
                 </div>
               </motion.div>
               <motion.p variants={fadeInUp}>
-                Research shows banana fiber contains <strong>pathogenesis-related (PR) proteins</strong> —
+                Research shows banana fiber contains <strong>pathogenesis-related (PR) proteins</strong> - 
                 naturally occurring antimicrobial compounds. This means the absorbent core actively resists
                 bacterial growth, making it inherently hygienic without any chemical treatment.
               </motion.p>
               <motion.p variants={fadeInUp}>
                 The <strong>PU (polyurethane) leak-proof layer</strong> is breathable yet impermeable,
-                preventing leakage while allowing air flow — eliminating the &quot;greenhouse effect&quot;
+                preventing leakage while allowing air flow - eliminating the &quot;greenhouse effect&quot;
                 created by plastic-backed disposable pads.
               </motion.p>
             </motion.div>
@@ -204,7 +208,7 @@ export default function SciencePage() {
       </section>
 
       {/* ── Comparison ── */}
-      <section className={`${styles.section} ${styles.sectionAlt}`}>
+      <section id="comparison" className={`${styles.section} ${styles.sectionAlt}`}>
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeInUp} className={styles.sectionLabel}>
@@ -255,7 +259,7 @@ export default function SciencePage() {
       </section>
 
       {/* ── Health Benefits: Why Switch ── */}
-      <section className={styles.section}>
+      <section id="benefits" className={styles.section}>
         <div className="container">
           <motion.div
             initial="hidden"
@@ -299,7 +303,7 @@ export default function SciencePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════ */}
-      {/*  THE EVIDENCE — Research & Data                   */}
+      {/*  THE EVIDENCE - Research & Data                   */}
       {/* ══════════════════════════════════════════════════ */}
 
       {/* ── Key Findings Stats ── */}
@@ -362,7 +366,7 @@ export default function SciencePage() {
             </motion.h2>
             <motion.p variants={fadeInUp} className={styles.sectionDesc}>
               Research from 16+ studies reveals these hazardous substances in commercial
-              sanitary napkins — many of which are endocrine disruptors.
+              sanitary napkins - many of which are endocrine disruptors.
             </motion.p>
           </motion.div>
 
@@ -399,7 +403,7 @@ export default function SciencePage() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeInUp} className={`${styles.sectionLabel} ${styles.sectionLabelLight}`}>
               <FileText size={14} />
-              Research Compilation — 2024
+              Research Compilation - 2024
             </motion.span>
             <motion.h2 variants={fadeInUp} className={styles.sectionTitleLight}>
               The Hidden Dangers in Disposable Sanitary Napkins
@@ -461,14 +465,14 @@ export default function SciencePage() {
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeInUp} className={styles.sectionLabel}>
               <Beaker size={14} />
-              Research Compilation — 2025
+              Research Compilation - 2025
             </motion.span>
             <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
               11 Recent Peer-Reviewed Papers
             </motion.h2>
             <motion.p variants={fadeInUp} className={styles.sectionDesc}>
               High-quality journal publications on chemicals/toxins in disposable
-              menstrual products and related health impacts — including evidence around PCOS.
+              menstrual products and related health impacts - including evidence around PCOS.
             </motion.p>
           </motion.div>
 
@@ -540,7 +544,7 @@ export default function SciencePage() {
                   <p>
                     Human studies increasingly link higher endocrine-disrupting
                     chemical (EDC) exposures with PCOS. Animal studies confirm
-                    BPA can induce PCOS-like syndrome — establishing causation.
+                    BPA can induce PCOS-like syndrome - establishing causation.
                   </p>
                 </div>
               </motion.div>
@@ -585,7 +589,7 @@ export default function SciencePage() {
             <motion.h2 variants={fadeInUp}>The Science Is Clear. Make the Switch.</motion.h2>
             <motion.p variants={fadeInUp}>
               16+ peer-reviewed studies. 7 countries tested. The evidence is
-              overwhelming — chemical-free banana fiber pads are the healthier choice.
+              overwhelming - chemical-free banana fiber pads are the healthier choice.
             </motion.p>
             <motion.div variants={fadeInUp} className={styles.ctaButtons}>
               <Link href="/products" className={styles.ctaBtn}>

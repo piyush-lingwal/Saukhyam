@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
@@ -11,7 +11,6 @@ import {
   TbLeaf,
   TbTrophy,
   TbCalendarEvent,
-  TbBuildingCommunity,
   TbChartLine,
   TbCheck,
   TbArrowRight,
@@ -99,24 +98,6 @@ const campusBenefits = [
 ];
 
 
-const diffusionPoints = [
-  {
-    num: '16%',
-    title: 'The Campus Tipping Point',
-    desc: 'Diffusion of Innovations research shows that once 16% of a group adopts a new behaviour, the adoption becomes self-sustaining. The remaining majority follows without active persuasion.',
-  },
-  {
-    num: '200',
-    title: 'Girls to Reach Tipping Point',
-    desc: 'On a typical Indian college campus of 1,250 students, 200 girls switching to reusable products crosses the 16% threshold — and also prevents 1 ton of CO₂ annually.',
-  },
-  {
-    num: '2',
-    title: 'Semesters to Sustained Change',
-    desc: 'Campuses that reach the tipping point in their first year consistently maintain and grow adoption in subsequent years — with minimal ongoing support from Saukhyam Foundation.',
-  },
-];
-
 const careathonSteps = [
   {
     num: '01',
@@ -140,7 +121,7 @@ const careathonSteps = [
     num: '03',
     icon: TbSchool,
     title: 'Build Your Ambassador Team',
-    desc: 'Recruit 4–5 student ambassadors, boys and girls, ideally from students who have already made the shift. Saukhyam provides training materials, campaign kits, and starter product packs at no charge.',
+    desc: 'Recruit 4-5 student ambassadors, boys and girls, ideally from students who have already made the shift. Saukhyam provides training materials, campaign kits, and starter product packs at no charge.',
     color: '#047857',
     gradient: 'linear-gradient(160deg, #064E3B 0%, #047857 100%)',
     glow: 'rgba(4,120,87,0.22)',
@@ -165,7 +146,7 @@ const careathonSteps = [
   },
 ];
 
-/* ── CountUp stat — animates on scroll into view ── */
+/* ── CountUp stat - animates on scroll into view ── */
 function CountUpStat({ num, unit }: { num: string; unit: string }) {
   const [displayed, setDisplayed] = useState('0');
   const ref = useRef<HTMLDivElement>(null);
@@ -225,7 +206,7 @@ export default function CarePage() {
       <section className={care.heroSection}>
         <div className={care.heroTopBar} aria-hidden="true" />
 
-        {/* Background campus photo — sits behind purple gradient overlay */}
+        {/* Background campus photo - sits behind purple gradient overlay */}
         <div className={care.heroBgImageWrap} aria-hidden="true">
           <Image
             src="/CARE Page Photos/hero image.png"
@@ -238,7 +219,7 @@ export default function CarePage() {
         </div>
 
 
-        {/* CARE Logo — absolute top-left */}
+        {/* CARE Logo - absolute top-left */}
         <div className={care.heroLogoWrap}>
           <Image
             src="/CareLogo/CARE logo_Horizontal with tag line.png"
@@ -310,12 +291,12 @@ export default function CarePage() {
         </div>
 
         <div className={care.sliderOuter}>
-          {/* Row 1 — scrolls left */}
+          {/* Row 1 - scrolls left */}
           <div className={care.sliderRow}>
             <div className={care.sliderTrack}>
               {[...row1, ...row1].map((f, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
                 <div key={i} className={care.sliderLogoCard}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/CollgeLOGO/${f}`}
                     alt={`Partner college ${(i % row1.length) + 1}`}
@@ -326,12 +307,12 @@ export default function CarePage() {
             </div>
           </div>
 
-          {/* Row 2 — scrolls right */}
+          {/* Row 2 - scrolls right */}
           <div className={`${care.sliderRow} ${care['sliderRow--rtl']}`}>
             <div className={care.sliderTrack}>
               {[...row2, ...row2].map((f, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
                 <div key={i} className={care.sliderLogoCard}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/CollgeLOGO/${f}`}
                     alt={`Partner college ${(i % row2.length) + 9}`}
@@ -449,7 +430,7 @@ export default function CarePage() {
               ))}
             </div>
 
-            {/* ── Nodal College — premium light split card ── */}
+            {/* ── Nodal College - premium light split card ── */}
             <motion.div variants={fadeInUp} className={care.nodalCallout}>
               {/* Left: content */}
               <div className={care.nodalCalloutLeft}>
@@ -458,7 +439,7 @@ export default function CarePage() {
                 </div>
                 <h3 className={care.nodalCalloutTitle}>Become a Nodal CARE College</h3>
                 <p className={care.nodalCalloutDesc}>
-                  High-performing campuses are invited to the top tier of CARE — guiding
+                  High-performing campuses are invited to the top tier of CARE - guiding
                   neighbouring colleges, earning national recognition, and leading India&apos;s
                   campus sustainability movement.
                 </p>
@@ -537,7 +518,7 @@ export default function CarePage() {
                   />
                 </div>
                 <p className={care.videoCaption}>
-                  Over 1 crore views — why including boys transforms the conversation
+                  Over 1 crore views - why including boys transforms the conversation
                 </p>
                 <a
                   href="https://www.youtube.com/watch?v=fB9_nJ-j2v0"

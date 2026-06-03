@@ -1,4 +1,4 @@
-export type BlogCategory = 'community' | 'science' | 'sustainability' | 'stories';
+export type BlogCategory = 'heal' | 'care' | 'reach';
 
 export type BlogBlock =
   | { type: 'paragraph'; text: string }
@@ -25,6 +25,8 @@ export interface BlogPost {
   authorBio?: string;
   tags: string[];
   featured?: boolean;
+  /** Original LinkedIn post URL when content is adapted from social */
+  sourceUrl?: string;
   content: BlogBlock[];
 }
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import BlogImage from './BlogImage';
 import { useParams, notFound } from 'next/navigation';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
@@ -39,7 +39,7 @@ function ShareButtons({ title, shareUrl, copied, onCopy }: {
 }) {
   const shareTwitter = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`;
   const shareFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-  const shareWhatsApp = `https://wa.me/?text=${encodeURIComponent(`${title} — ${shareUrl}`)}`;
+  const shareWhatsApp = `https://wa.me/?text=${encodeURIComponent(`${title} - ${shareUrl}`)}`;
 
   return (
     <div className={styles.shareRow}>
@@ -131,14 +131,6 @@ export default function BlogDetailView() {
             <h1 className={styles.heroTitle}>{post.title}</h1>
             <p className={styles.heroExcerpt}>{post.excerpt}</p>
             <div className={styles.heroMeta}>
-              <div className={styles.authorChip}>
-                <div className={styles.authorAvatar}>{post.author.charAt(0)}</div>
-                <div className={styles.authorChipText}>
-                  <span className={styles.authorChipName}>{post.author}</span>
-                  <span className={styles.authorChipRole}>{post.authorRole}</span>
-                </div>
-              </div>
-              <span className={styles.heroMetaDivider} aria-hidden />
               <span className={styles.metaItem}><Calendar size={13} /> {formatBlogDate(post.date)}</span>
               <span className={styles.metaItem}><Clock size={13} /> {post.readTime}</span>
             </div>
@@ -149,7 +141,7 @@ export default function BlogDetailView() {
       <div className={styles.coverWrap}>
         <div className="container">
           <motion.div className={styles.cover} style={{ y: coverY }}>
-            <Image
+            <BlogImage
               src={post.image}
               alt={post.coverAlt ?? post.title}
               width={1200}
@@ -167,12 +159,18 @@ export default function BlogDetailView() {
           <div className={styles.bodyGrid}>
             <aside className={styles.sidebar}>
               <div className={styles.sidebarInner}>
-                <div className={styles.sidebarCard}>
-                  <div className={styles.sidebarAvatar}>{post.author.charAt(0)}</div>
-                  <div className={styles.sidebarAuthor}>{post.author}</div>
-                  <div className={styles.sidebarRole}>{post.authorRole}</div>
-                  {post.authorBio && <p className={styles.sidebarBio}>{post.authorBio}</p>}
-                </div>
+                {post.sourceUrl && (
+                  <div className={styles.sidebarSection}>
+                    <a
+                      href={post.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.sourceLink}
+                    >
+                      View original on LinkedIn
+                    </a>
+                  </div>
+                )}
                 <div className={styles.sidebarSection}>
                   <div className={styles.sidebarLabel}><Share2 size={12} /> Share</div>
                   <ShareButtons title={post.title} shareUrl={shareUrl} copied={copied} onCopy={copyLink} />
@@ -201,20 +199,6 @@ export default function BlogDetailView() {
         </div>
       </section>
 
-      <section className={styles.authorSection}>
-        <div className="container">
-          <div className={styles.authorCard}>
-            <div className={styles.authorCardAvatar}>{post.author.charAt(0)}</div>
-            <div className={styles.authorCardBody}>
-              <span className={styles.authorCardLabel}>Written by</span>
-              <h3 className={styles.authorCardName}>{post.author}</h3>
-              <span className={styles.authorCardRole}>{post.authorRole}</span>
-              {post.authorBio && <p className={styles.authorCardBio}>{post.authorBio}</p>}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {relatedPosts.length > 0 && (
         <section className={styles.relatedSection}>
           <div className="container">
@@ -229,7 +213,7 @@ export default function BlogDetailView() {
               {relatedPosts.map(rp => (
                 <Link key={rp.id} href={`/blog/${rp.slug}`} className={styles.relatedCard}>
                   <div className={styles.relatedImage}>
-                    <Image src={rp.image} alt={rp.coverAlt ?? rp.title} fill className={styles.relatedCardImage} sizes="33vw" loading="lazy" />
+                    <BlogImage src={rp.image} alt={rp.coverAlt ?? rp.title} fill className={styles.relatedCardImage} sizes="33vw" loading="lazy" />
                     <span className={styles.relatedCategoryTag} style={{ background: CATEGORY_COLORS[rp.category] }}>
                       {CATEGORY_LABELS[rp.category]}
                     </span>

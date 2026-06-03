@@ -25,7 +25,7 @@ export default function BlogNewsletter() {
       <div className={styles.newsletterIcon}><Mail size={24} /></div>
       <h3 className={styles.newsletterTitle}>Stay in the loop</h3>
       <p className={styles.newsletterDesc}>
-        Get stories, health insights, and impact updates from Saukhyam — no spam, unsubscribe anytime.
+        Get stories, health insights, and impact updates from Saukhyam - no spam, unsubscribe anytime.
       </p>
       {submitted ? (
         <p className={styles.newsletterSuccess}>

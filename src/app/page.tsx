@@ -14,11 +14,12 @@ import {
 import { products } from '@/data/products';
 import { testimonials } from '@/data/content';
 import { useCart } from '@/context/CartContext';
+import IndiaImpactMap from '@/components/home/IndiaImpactMap/IndiaImpactMap';
 import styles from './page.module.css';
 
 const tickerMessages = [
   '✨ 5 Lakh+ women have switched to Saukhyam',
-  '🌿 Made with banana fiber — 100% chemical free',
+  '🌿 Made with banana fiber - 100% chemical free',
   '♻️ Each pad lasts 2-3 years, saving 100+ kg waste',
   '🏆 Recognized by NITI Aayog & UN Climate Conference',
   '🇮🇳 Handcrafted by rural women across India',
@@ -48,18 +49,18 @@ const pressLogos = [
 ];
 
 const reusablePoints = [
-  '100% chemical free — no dioxins, phthalates, or bleach',
+  '100% chemical free - no dioxins, phthalates, or bleach',
   'Banana fiber with natural antimicrobial properties',
   'Lasts 2-3 years with proper care',
   'Saves ₹3,000+ per year vs disposables',
-  'Biodegradable — zero landfill waste',
+  'Biodegradable - zero landfill waste',
   'Handcrafted by empowered rural women',
 ];
 
 const disposablePoints = [
   'Contains dioxins, phthalates, and VOCs',
   'Synthetic superabsorbent polymers next to skin',
-  'Single use — 12,000+ pads in a lifetime',
+  'Single use - 12,000+ pads in a lifetime',
   'Costs ₹3,000-5,000 per year recurring',
   'Takes 500-800 years to decompose',
   'Mass-produced in chemical factories',
@@ -107,13 +108,7 @@ export default function HomePage() {
 
       {/* ── Hero Section ── */}
       <section className={styles.hero}>
-        {/* Background glows */}
-        <div className={styles.heroBg}>
-          <div className={`${styles.heroGlow} ${styles.heroGlow1}`} />
-          <div className={`${styles.heroGlow} ${styles.heroGlow2}`} />
-        </div>
-
-        {/* Side women images — visible on wide screens only */}
+        {/* Side women images - visible on wide screens only */}
         <div className={styles.heroSideLeft} aria-hidden="true">
           <img src="/hero-woman-left.png" alt="" />
         </div>
@@ -138,7 +133,7 @@ export default function HomePage() {
             </span>
           </motion.h1>
 
-          {/* Subtitle — World's first */}
+          {/* Subtitle - World's first */}
           <motion.p
             className={styles.heroSubtitle}
             initial={{ opacity: 0, y: 15 }}
@@ -299,7 +294,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Amma & Programs — Next-Gen Bento Grid ── */}
+      {/* ── Amma & Programs - Next-Gen Bento Grid ── */}
       <section className={styles.bentoSection}>
         <div className={styles.bentoBlobA} aria-hidden="true" />
         <div className={styles.bentoBlobB} aria-hidden="true" />
@@ -328,7 +323,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             variants={staggerContainer}
           >
-            {/* Amma — Large Photo Card (spans 2 rows) */}
+            {/* Amma - Large Photo Card (spans 2 rows) */}
             <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bAmma}`}>
               <div className={styles.bAmmaPhoto}>
                 <img src="/amma.png" alt="Mata Amritanandamayi (Amma)" className={styles.bAmmaImg} loading="lazy" />
@@ -411,8 +406,8 @@ export default function HomePage() {
 
             {/* REACH Logo Card (small square) */}
             <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachLogo}`}>
-              {/* Note: The REACH logo asset lives in /ReachLogo/ — filename reflects original asset naming */}
-              <img src="/ReachLogo/HEAL logo RGB_Vertical.png" alt="REACH — Rural Empowerment and Community Health" className={styles.bLogoImage} />
+              {/* Note: The REACH logo asset lives in /ReachLogo/ - filename reflects original asset naming */}
+              <img src="/ReachLogo/HEAL logo RGB_Vertical.png" alt="REACH - Rural Empowerment and Community Health" className={styles.bLogoImage} />
             </motion.a>
 
             {/* REACH Info Card (Row 3) */}
@@ -444,7 +439,7 @@ export default function HomePage() {
 
             {/* Community Photo Card */}
             <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bCommunity}`}>
-              <img src="/bentogrid_photo.jpeg" alt="Saukhyam community — women empowered across rural India" className={styles.bCommunityImg} loading="lazy" />
+              <img src="/bentogrid_photo.jpeg" alt="Saukhyam community - women empowered across rural India" className={styles.bCommunityImg} loading="lazy" />
               <div className={styles.bCommunityOverlay}>
                 <span className={styles.bCommunityNum}>30L+</span>
                 <span className={styles.bCommunityLabel}>Women &amp; Girls Empowered</span>
@@ -493,7 +488,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Testimonials — Animated Carousel ── */}
+      {/* ── Testimonials - Animated Carousel ── */}
       <section className={styles.testimonialsSection}>
         <div className="container">
           <motion.div
@@ -616,10 +611,13 @@ export default function HomePage() {
                 <div className={styles.impactLabel}>{stat.label}</div>
               </motion.div>
             ))}
-          </motion.div>
+        </motion.div>
 
-        </div>
+      </div>
       </section>
+
+      {/* ── Interactive India Impact Map ── */}
+      <IndiaImpactMap />
 
       {/* ── Donate Section ── */}
       <section className={styles.donateSection}>

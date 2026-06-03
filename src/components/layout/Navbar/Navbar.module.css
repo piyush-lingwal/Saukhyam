@@ -340,7 +340,7 @@
 }
 
 /* ══════════════════════════════════════════════════
-   HEAL PAGE THEME — activated by [data-page-theme="heal"] on <html>
+   HEAL PAGE THEME - activated by [data-page-theme="heal"] on <html>
    Colors: #E8185A (hot pink) · #7B1A6E (deep purple) · #4D1A58 (dark plum)
    ══════════════════════════════════════════════════ */
 
@@ -366,7 +366,7 @@
 }
 
 /* ══════════════════════════════════════════════════
-   CARE PAGE THEME — activated by [data-page-theme="care"] on <html>
+   CARE PAGE THEME - activated by [data-page-theme="care"] on <html>
    Colors: #0D9488 (teal) · #0F766E (deep teal) · #134E4A (dark teal)
    ══════════════════════════════════════════════════ */
 
@@ -388,6 +388,31 @@
 :global([data-page-theme="care"]) .actionBtn:hover {
   color: #0D9488;
   background: rgba(13, 148, 136, 0.06);
+}
+
+/* ══════════════════════════════════════════════════
+   MEDIA PAGE THEME - activated by [data-page-theme="media"] on <html>
+   Colors: deep forest green + gold accent
+   ══════════════════════════════════════════════════ */
+
+:global([data-page-theme="media"]) .cartBadge {
+  background: #14532d;
+}
+
+:global([data-page-theme="media"]) .navLink:hover {
+  color: #14532d;
+  background: rgba(20, 83, 45, 0.06);
+}
+:global([data-page-theme="media"]) .navLink.active {
+  color: #14532d;
+}
+:global([data-page-theme="media"]) .navLink.active::after {
+  background: #c9a227;
+}
+
+:global([data-page-theme="media"]) .actionBtn:hover {
+  color: #14532d;
+  background: rgba(20, 83, 45, 0.06);
 }
 
 /* ── Responsive ── */

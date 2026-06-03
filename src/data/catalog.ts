@@ -26,8 +26,8 @@ function pickTags(id: string, category: string, features: string[]): string[] {
 
 const VARIANT_SUFFIXES = [
   { suffix: '', priceOffset: 0 },
-  { suffix: ' — Deluxe Edition', priceOffset: 80 },
-  { suffix: ' — Travel Size', priceOffset: -40 },
+  { suffix: ' - Deluxe Edition', priceOffset: 80 },
+  { suffix: ' - Travel Size', priceOffset: -40 },
 ];
 
 /** API-ready catalog: base products × variants for rich pagination demos */

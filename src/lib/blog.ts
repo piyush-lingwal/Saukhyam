@@ -29,7 +29,6 @@ export function filterBlogPosts(
     return (
       p.title.toLowerCase().includes(q) ||
       p.excerpt.toLowerCase().includes(q) ||
-      p.author.toLowerCase().includes(q) ||
       p.tags.some(t => t.toLowerCase().includes(q)) ||
       p.category.toLowerCase().includes(q)
     );

@@ -99,7 +99,7 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop Nav Links — hidden when search is open */}
+          {/* Desktop Nav Links - hidden when search is open */}
           <div className={`${styles.navLinks} ${isSearchOpen ? styles.navLinksHidden : ''}`}>
             {navItems.map((item) => (
               <Link
@@ -112,7 +112,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Inline Search Bar — expands when open */}
+          {/* Inline Search Bar - expands when open */}
           {isSearchOpen && (
             <form
               className={styles.searchBar}

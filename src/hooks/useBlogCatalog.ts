@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, useCallback, useEffect } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import { blogPosts } from '@/data/blog';
 import type { BlogCategory } from '@/types/blog';
 import { BLOG_POSTS_PER_PAGE } from '@/types/blog';
@@ -11,20 +11,14 @@ export function useBlogCatalog() {
   const [category, setCategory] = useState<BlogCategory | 'all'>('all');
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
 
   const debouncedQuery = useDebounce(query, 250);
+  const isLoading = query !== debouncedQuery;
 
-  useEffect(() => {
-    setIsLoading(true);
-    const t = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(t);
-  }, [category, debouncedQuery]);
-
-  const featured = useMemo(() => blogPosts.find(p => p.featured), []);
+  const featured = useMemo(() => blogPosts.find((p) => p.featured), []);
 
   const listPosts = useMemo(() => {
-    const nonFeatured = blogPosts.filter(p => !p.featured);
+    const nonFeatured = blogPosts.filter((p) => !p.featured);
     return filterBlogPosts(nonFeatured, { category, query: debouncedQuery });
   }, [category, debouncedQuery]);
 
@@ -32,10 +26,6 @@ export function useBlogCatalog() {
     () => paginatePosts(listPosts, page, BLOG_POSTS_PER_PAGE),
     [listPosts, page],
   );
-
-  useEffect(() => {
-    if (page > pagination.totalPages) setPage(1);
-  }, [pagination.totalPages, page]);
 
   const setCategoryAndReset = useCallback((c: BlogCategory | 'all') => {
     setCategory(c);

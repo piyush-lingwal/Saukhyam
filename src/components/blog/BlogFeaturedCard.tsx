@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import BlogImage from './BlogImage';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, Tag, ArrowRight } from 'lucide-react';
 import type { BlogPost } from '@/types/blog';
@@ -19,7 +19,7 @@ export default function BlogFeaturedCard({ post }: { post: BlogPost }) {
     >
       <Link href={`/blog/${post.slug}`} className={styles.featuredCard}>
         <div className={styles.featuredImage}>
-          <Image
+          <BlogImage
             src={post.image}
             alt={post.coverAlt ?? post.title}
             fill
@@ -37,24 +37,23 @@ export default function BlogFeaturedCard({ post }: { post: BlogPost }) {
         </div>
         <div className={styles.featuredBody}>
           <div className={styles.featuredMeta}>
-            <span className={styles.featuredMetaItem}><Calendar size={13} /> {formatBlogDate(post.date)}</span>
-            <span className={styles.featuredMetaItem}><Clock size={13} /> {post.readTime}</span>
+            <span className={styles.featuredMetaItem}>
+              <Calendar size={13} /> {formatBlogDate(post.date)}
+            </span>
+            <span className={styles.featuredMetaItem}>
+              <Clock size={13} /> {post.readTime}
+            </span>
           </div>
           <h2 className={styles.featuredTitle}>{post.title}</h2>
           <p className={styles.featuredExcerpt}>{post.excerpt}</p>
           <div className={styles.featuredTags}>
-            {post.tags.map(tag => (
-              <span key={tag} className={styles.tag}><Tag size={10} /> {tag}</span>
+            {post.tags.slice(0, 3).map((tag) => (
+              <span key={tag} className={styles.tag}>
+                <Tag size={10} /> {tag}
+              </span>
             ))}
           </div>
           <div className={styles.featuredFooter}>
-            <div className={styles.featuredAuthor}>
-              <div className={styles.authorAvatar}>{post.author.charAt(0)}</div>
-              <div>
-                <div className={styles.authorName}>{post.author}</div>
-                <div className={styles.authorRole}>{post.authorRole}</div>
-              </div>
-            </div>
             <span className={styles.featuredReadBtn}>
               Read Full Story <ArrowRight size={16} />
             </span>

@@ -35,8 +35,8 @@ export function buildState(c: StateConfig): StatePageData {
     heroImage: img,
     mapCoords: STATE_COORDS[c.slug],
     mission: isNational
-      ? 'Saukhyam REACH and CARE programmes unite rural empowerment with campus sustainability — healing periods and the planet across India.'
-      : `In ${c.name}, Saukhyam bridges REACH rural outreach and CARE campus action — bringing chemical-free menstrual health, livelihoods, and climate-conscious choices to ${c.highlight}.`,
+      ? 'Saukhyam REACH and CARE programmes unite rural empowerment with campus sustainability - healing periods and the planet across India.'
+      : `In ${c.name}, Saukhyam bridges REACH rural outreach and CARE campus action - bringing chemical-free menstrual health, livelihoods, and climate-conscious choices to ${c.highlight}.`,
     missionPoints: [
       focusReach ? 'Satellite centres training rural women in pad manufacturing' : 'Urban campus ambassador networks driving reusable adoption',
       'Community health workshops breaking menstrual taboos',
@@ -61,7 +61,7 @@ export function buildState(c: StateConfig): StatePageData {
       {
         id: '2',
         title: 'HEAL Wellness Circles',
-        description: 'Three-month healing cohorts for women with PCOS, cramps, and heavy flow — combining reusables with lifestyle guidance.',
+        description: 'Three-month healing cohorts for women with PCOS, cramps, and heavy flow - combining reusables with lifestyle guidance.',
         category: 'health',
         status: 'active',
         image: STATE_IMAGES[(c.imageIndex + 2) % STATE_IMAGES.length],
@@ -69,7 +69,7 @@ export function buildState(c: StateConfig): StatePageData {
       {
         id: '3',
         title: 'Zero-Waste Period Challenge',
-        description: 'Tracking disposable pad reduction in schools and colleges — measurable environmental impact for NAAC reporting.',
+        description: 'Tracking disposable pad reduction in schools and colleges - measurable environmental impact for NAAC reporting.',
         category: 'sustainability',
         status: 'upcoming',
         image: STATE_IMAGES[(c.imageIndex + 3) % STATE_IMAGES.length],
@@ -112,7 +112,7 @@ export function buildState(c: StateConfig): StatePageData {
     ],
     testimonials: [
       {
-        quote: `Switching to Saukhyam changed how I experience periods — no rashes, less pain, and I feel proud supporting women in my village.`,
+        quote: `Switching to Saukhyam changed how I experience periods - no rashes, less pain, and I feel proud supporting women in my village.`,
         name: 'Community Member',
         role: `${c.shortName} REACH beneficiary`,
       },
@@ -140,7 +140,7 @@ export function buildState(c: StateConfig): StatePageData {
       },
       {
         question: 'Can my organisation partner with Saukhyam?',
-        answer: 'Yes — NGOs, colleges, and CSR teams can partner for distribution, workshops, or sponsorship. Contact us via the partner page.',
+        answer: 'Yes - NGOs, colleges, and CSR teams can partner for distribution, workshops, or sponsorship. Contact us via the partner page.',
       },
     ],
     gallery: [

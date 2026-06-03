@@ -77,7 +77,7 @@ export default function ProductFilters({ filters, priceBounds, onChange, onReset
         </div>
       </FilterSection>
 
-      <FilterSection title={`Price: ₹${filters.priceMin} – ₹${filters.priceMax}`}>
+      <FilterSection title={`Price: ₹${filters.priceMin} - ₹${filters.priceMax}`}>
         <div className="space-y-3">
           <input
             type="range"

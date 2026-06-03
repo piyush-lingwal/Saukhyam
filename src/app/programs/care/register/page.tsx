@@ -38,7 +38,7 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 const campusEvents = [
   {
-    month: 'January – February',
+    month: 'January - February',
     name: 'Semester 1 Campaign Launch',
     desc: 'CARE ambassadors kick off the academic year with hostel campaigns, pop-up stalls in high-traffic areas, and solidarity circles. Products are stocked in the campus store for the first time.',
     tag: 'Semester Start',
@@ -58,17 +58,17 @@ const campusEvents = [
   {
     month: 'September',
     name: 'PCOS Awareness Month',
-    desc: 'Run the HEAL challenge on campus — connect period health with the chemical exposure from disposable pads. PCOS affects 6 crore Indian women.',
+    desc: 'Run the HEAL challenge on campus - connect period health with the chemical exposure from disposable pads. PCOS affects 6 crore Indian women.',
     tag: 'Awareness Month',
   },
   {
-    month: 'July – August',
+    month: 'July - August',
     name: 'Semester 2 CARE Launch',
     desc: 'A fresh wave of hostel campaigns begins with new student cohorts. Nodal CARE Colleges support neighbouring campuses. Returning ambassadors mentor new recruits.',
     tag: 'Semester Start',
   },
   {
-    month: 'November – December',
+    month: 'November - December',
     name: 'CARE Awards Ceremony',
     desc: 'Annual recognition of top student ambassadors, faculty mentors, and the most impactful campuses of the year. Hosted city by city across India by Saukhyam Foundation.',
     tag: 'Annual Event',
@@ -100,17 +100,17 @@ const whatIsPoints = [
   {
     icon: TbBuildingCommunity,
     title: 'Multi-Brand Access',
-    desc: 'Unlike HEAL, CARE works with partner brands — reusable pads of various brands, menstrual cups, and period panties are all made available in the campus store.',
+    desc: 'Unlike HEAL, CARE works with partner brands - reusable pads of various brands, menstrual cups, and period panties are all made available in the campus store.',
   },
   {
     icon: TbRecycle,
     title: 'Campus-Scale Impact',
-    desc: '200 girls making the switch prevents 1 ton of CO₂ equivalent annually — and qualifies for NAAC sustainability reporting.',
+    desc: '200 girls making the switch prevents 1 ton of CO₂ equivalent annually - and qualifies for NAAC sustainability reporting.',
   },
   {
     icon: TbWorld,
     title: 'Breaking Taboos Together',
-    desc: 'Boys are equal participants — designing posters, manning stalls, and acting as ambassadors to normalize the conversation on campus.',
+    desc: 'Boys are equal participants - designing posters, manning stalls, and acting as ambassadors to normalize the conversation on campus.',
   },
 ];
 
@@ -123,7 +123,7 @@ const campaignTypes = [
   {
     icon: TbBolt,
     title: 'Pop-up Stalls',
-    desc: 'High-traffic areas near cafes and common rooms — both boys and girls can man these stalls.',
+    desc: 'High-traffic areas near cafes and common rooms - both boys and girls can man these stalls.',
   },
   {
     icon: TbCalendarEvent,
@@ -219,7 +219,7 @@ export default function CareRegisterPage() {
 
                 <p className={care.whatIsIntro}>
                   CARE is India&apos;s first structured, student-led campus programme for menstrual sustainability.
-                  Unlike one-off awareness drives, CARE targets the campus as a unit — building
+                  Unlike one-off awareness drives, CARE targets the campus as a unit - building
                   ambassadors, breaking taboos, and shifting an entire generation toward reusable products.
                   No cost to the college. Real, measurable impact.
                 </p>
@@ -227,7 +227,7 @@ export default function CareRegisterPage() {
                 <div className={care.careAcronym}>
                   {[
                     { letter: 'C', word: 'Campus',     meaning: 'Taking the shift to where 200+ girls live, learn, and lead together.' },
-                    { letter: 'A', word: 'Action',     meaning: 'Real campaigns and real products — not just awareness posters.' },
+                    { letter: 'A', word: 'Action',     meaning: 'Real campaigns and real products - not just awareness posters.' },
                     { letter: 'R', word: 'Reusable',   meaning: 'Cloth pads, menstrual cups, and period panties replacing disposables.' },
                     { letter: 'E', word: 'Essentials', meaning: 'A need every girl has, every month, for the next 30 years of her life.' },
                   ].map((item) => (
@@ -316,10 +316,10 @@ export default function CareRegisterPage() {
                 <div className={care.roleCardBody}>
                   <div className={care.roleLabel}>Students</div>
                   <div className={care.roleTitle}>CARE Ambassadors</div>
-                  <div className={care.roleCount}>Team of 4–5</div>
+                  <div className={care.roleCount}>Team of 4-5</div>
                   <p className={care.roleDesc}>
                     Chosen from students who have already made the shift themselves. They run hostel
-                    campaigns, solidarity circles, and pop-up stalls — the engine of the movement.
+                    campaigns, solidarity circles, and pop-up stalls - the engine of the movement.
                     Both boys and girls are welcome.
                   </p>
                 </div>
@@ -333,7 +333,7 @@ export default function CareRegisterPage() {
                 <div className={care.roleCardBody}>
                   <div className={care.roleLabel}>Faculty / Staff</div>
                   <div className={care.roleTitle}>CARE Mentors</div>
-                  <div className={care.roleCount}>Team of 2–3</div>
+                  <div className={care.roleCount}>Team of 2-3</div>
                   <p className={care.roleDesc}>
                     Faculty or staff members with standing in the college who provide visible support
                     to the ambassador team. Their presence and authority enables the campaign
@@ -542,7 +542,7 @@ export default function CareRegisterPage() {
                 <>
                   <p className={care.nominationsStatusLabel}>
                     <strong>Nominations open city by city.</strong>{' '}Get notified the moment
-                    they open in your region — no spam, just one email.
+                    they open in your region - no spam, just one email.
                   </p>
                   <form className={care.nominationsForm} onSubmit={handleNotifSubmit}>
                     <input
@@ -599,7 +599,7 @@ export default function CareRegisterPage() {
                 <div className={care.formCardIcon}><TbSchool size={26} /></div>
                 <h3 className={care.formCardTitle}>Register Your Campus</h3>
                 <p className={care.formCardDesc}>
-                  Start CARE at your college. Our team will guide you every step — from forming
+                  Start CARE at your college. Our team will guide you every step - from forming
                   the ambassador team to stocking the campus store.
                 </p>
                 <div className={care.formCardTrust}>

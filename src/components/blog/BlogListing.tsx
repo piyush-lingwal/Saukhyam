@@ -47,7 +47,7 @@ export default function BlogListing() {
               <span className={styles.heroAccent}>Real Change.</span>
             </h1>
             <p className={styles.heroDesc}>
-              25 stories from tribal villages to college campuses — impact, science, sustainability, and voices we&apos;re proud to share.
+              The latest from Saukhyam Foundation and Anju Bist on LinkedIn — HEAL, CARE, and REACH updates from across India.
             </p>
           </motion.div>
         </div>
@@ -81,7 +81,7 @@ export default function BlogListing() {
               <Search size={15} className={styles.searchIcon} />
               <input
                 type="search"
-                placeholder="Search stories, tags, authors…"
+                placeholder="Search stories and tags…"
                 value={query}
                 onChange={e => setQuery(e.target.value)}
                 className={styles.searchInput}
@@ -112,7 +112,7 @@ export default function BlogListing() {
                 transition={{ duration: 0.25 }}
               >
                 {posts.map((post, idx) => (
-                  <BlogCard key={post.id} post={post} wide={idx === 0 && page === 1} index={idx} />
+                  <BlogCard key={post.id} post={post} index={idx} />
                 ))}
               </motion.div>
             ) : (
@@ -136,7 +136,7 @@ export default function BlogListing() {
         <div className="container">
           <div className={styles.ctaContent}>
             <h3>Have a story to share?</h3>
-            <p>We feature voices from our community — write to us and inspire others.</p>
+            <p>We feature voices from our community - write to us and inspire others.</p>
             <Link href="/contact" className={styles.ctaBtn}>
               Share Your Story <ArrowRight size={16} />
             </Link>

@@ -35,14 +35,14 @@ const careathonSteps = [
     num: '01',
     icon: TbSchool,
     title: 'Implement CARE on Your Campus',
-    desc: 'One college implements CARE properly — across at least two semesters — with ambassadors, mentors, store availability, and sustained campaigns.',
+    desc: 'One college implements CARE properly - across at least two semesters - with ambassadors, mentors, store availability, and sustained campaigns.',
     tag: 'CARE Impact Certificate',
   },
   {
     num: '02',
     icon: TbBuildingCommunity,
     title: 'Become a Nodal College',
-    desc: 'After a full year of successful implementation, the college is invited to become a Nodal CARE College — the top 5% of all CARE campuses in India.',
+    desc: 'After a full year of successful implementation, the college is invited to become a Nodal CARE College - the top 5% of all CARE campuses in India.',
     tag: 'Nodal College Status',
   },
   {
@@ -56,7 +56,7 @@ const careathonSteps = [
     num: '04',
     icon: TbInfinity,
     title: 'Sustain and Graduate',
-    desc: 'Ambassadors graduate and new teams are formed each year. The movement becomes self-sustaining — CARE lives beyond any single batch of students.',
+    desc: 'Ambassadors graduate and new teams are formed each year. The movement becomes self-sustaining - CARE lives beyond any single batch of students.',
     tag: 'Self-sustaining Movement',
   },
 ];
@@ -65,7 +65,7 @@ const nodalPerks = [
   {
     icon: TbTrophy,
     title: 'Careathon Host Trophy',
-    desc: 'Your campus is officially recognised as the city anchor — receiving a dedicated Careathon Host Trophy from Saukhyam Foundation.',
+    desc: 'Your campus is officially recognised as the city anchor - receiving a dedicated Careathon Host Trophy from Saukhyam Foundation.',
   },
   {
     icon: TbUsers,
@@ -80,7 +80,7 @@ const nodalPerks = [
   {
     icon: TbAward,
     title: 'Priority for CARE Awards',
-    desc: 'Hosting a Careathon fast-tracks your nomination for the CARE Awards ceremony — the highest annual recognition in the programme.',
+    desc: 'Hosting a Careathon fast-tracks your nomination for the CARE Awards ceremony - the highest annual recognition in the programme.',
   },
 ];
 
@@ -128,7 +128,7 @@ export default function CareNodalPage() {
               <div>
                 <div className={care.registerBannerTitle}>Nodal CARE College Programme</div>
                 <p className={care.registerBannerDesc}>
-                  The top tier of CARE — host a Careathon, guide neighbouring colleges,
+                  The top tier of CARE - host a Careathon, guide neighbouring colleges,
                   and earn national recognition as a sustainability leader.
                 </p>
               </div>
@@ -151,7 +151,7 @@ export default function CareNodalPage() {
               </div>
               <h2 className={care.structureTitle}>What is a Nodal CARE College?</h2>
               <p className={care.structureSubtitle}>
-                Nodal Colleges are the top 5% of CARE campuses — colleges that have already
+                Nodal Colleges are the top 5% of CARE campuses - colleges that have already
                 implemented CARE successfully and are ready to lead the movement in their city
                 by hosting a Careathon.
               </p>
@@ -187,7 +187,7 @@ export default function CareNodalPage() {
               </div>
               <h2 className={care.journeyTitle}>The Careathon Journey</h2>
               <p className={care.journeySubtitle}>
-                Four phases — from first implementation to a self-sustaining city-wide movement.
+                Four phases - from first implementation to a self-sustaining city-wide movement.
                 Every college starts at Phase 01.
               </p>
             </motion.div>
@@ -245,7 +245,7 @@ export default function CareNodalPage() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className={care.formCard}>
-              {/* Left accent panel — gold theme */}
+              {/* Left accent panel - gold theme */}
               <div
                 className={care.formCardLeft}
                 style={{ background: 'linear-gradient(160deg, #92400E 0%, #B45309 50%, #D97706 100%)' }}
@@ -261,7 +261,7 @@ export default function CareNodalPage() {
                     <TbCheck size={14} /> Minimum 2 semesters of CARE required
                   </div>
                   <div className={care.formCardTrustItem}>
-                    <TbCheck size={14} /> Free to apply — no fees
+                    <TbCheck size={14} /> Free to apply - no fees
                   </div>
                   <div className={care.formCardTrustItem}>
                     <TbCheck size={14} /> Response within 5 working days
@@ -385,7 +385,7 @@ export default function CareNodalPage() {
             </motion.h2>
             <motion.p variants={fadeInUp}>
               Nodal status comes after a full year of implementation. Start CARE on your campus
-              first — we&apos;ll guide you every step of the way.
+              first - we&apos;ll guide you every step of the way.
             </motion.p>
             <motion.div variants={fadeInUp} className={care.ctaBannerBtns}>
               <Link href="/programs/care/register" className={care.ctaBannerPrimary}>

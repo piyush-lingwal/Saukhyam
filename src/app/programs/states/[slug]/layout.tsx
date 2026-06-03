@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!state) return { title: 'State Not Found' };
 
   return {
-    title: `${state.name} — REACH & CARE Impact`,
+    title: `${state.name} - REACH & CARE Impact`,
     description: state.heroSubtitle,
     keywords: ['REACH', 'CARE', 'Saukhyam', state.name, 'menstrual health', 'reusable pads'],
     openGraph: {

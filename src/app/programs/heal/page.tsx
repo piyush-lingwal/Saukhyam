@@ -74,7 +74,7 @@ const scienceSteps = [
   {
     step: '02',
     title: 'Direct Bloodstream Entry',
-    desc: 'Unlike food, what enters the vaginal area bypasses the liver\'s first-pass metabolism. Vaginal tissue is highly vascular and absorptive. Even trace amounts are absorbed directly into the bloodstream during 4–6 days every cycle - month after month, for decades.',
+    desc: 'Unlike food, what enters the vaginal area bypasses the liver\'s first-pass metabolism. Vaginal tissue is highly vascular and absorptive. Even trace amounts are absorbed directly into the bloodstream during 4-6 days every cycle - month after month, for decades.',
   },
   {
     step: '03',
@@ -110,8 +110,8 @@ const healingStories = [
     role: 'Nurse & Satellite Centre Founder, Nagaland',
     condition: 'Irregular Periods',
     initial: 'A',
-    quote: 'A nurse in Nagaland who kept seeing irregular periods, discomfort, and fertility concerns in the women she treated. It was also personal - she had irregular periods herself. One small shift: disposable to Saukhyam reusable. Within 6–7 months, her periods became regular and cramps reduced. No medication. Just the switch.',
-    outcome: '6–7 months - Regular periods, reduced cramps, no medication',
+    quote: 'A nurse in Nagaland who kept seeing irregular periods, discomfort, and fertility concerns in the women she treated. It was also personal - she had irregular periods herself. One small shift: disposable to Saukhyam reusable. Within 6-7 months, her periods became regular and cramps reduced. No medication. Just the switch.',
+    outcome: '6-7 months - Regular periods, reduced cramps, no medication',
   },
   {
     name: 'Virginie',
@@ -184,7 +184,7 @@ const faqItems = [
   },
   {
     q: 'What if my periods are very irregular and I skip months?',
-    a: 'The HEAL Challenge works even for highly irregular cycles. Whenever your period arrives, use reusable pads. The goal is to accumulate at least 2–3 full cycles of reusable use within 6 months. Even if periods come every 2–3 months, the window is designed to give you enough opportunity to see results.',
+    a: 'The HEAL Challenge works even for highly irregular cycles. Whenever your period arrives, use reusable pads. The goal is to accumulate at least 2-3 full cycles of reusable use within 6 months. Even if periods come every 2-3 months, the window is designed to give you enough opportunity to see results.',
   },
   {
     q: 'What about nutrition, exercise, and sleep?',
@@ -226,7 +226,7 @@ export default function HealPage() {
           />
         </div>
 
-        {/* ── Logo — absolute top-left of hero section ── */}
+        {/* ── Logo - absolute top-left of hero section ── */}
         <div className={heal.heroLogoInline}>
           <Image
             src="/HealLogo/HEAL logo RGB_Horizontal with tag line.png"
@@ -575,7 +575,7 @@ export default function HealPage() {
                     the liver&apos;s first-pass metabolism and enter the bloodstream directly.
                   </p>
                   <div className={heal.scienceStatPill}>
-                    <span className={heal.scienceStatPillNum}>4–6</span>
+                    <span className={heal.scienceStatPillNum}>4-6</span>
                     <span>days per cycle, every month, for decades</span>
                   </div>
                 </div>
@@ -634,7 +634,7 @@ export default function HealPage() {
                 </div>
               </div>
               <p className={heal.pcosCalloutDesc}>
-                70–80% of women with ovulation-related infertility have PCOS. Fertility doctors
+                70-80% of women with ovulation-related infertility have PCOS. Fertility doctors
                 working with Saukhyam Foundation are now prescribing reusable menstrual products
                 as a first-line intervention - before pills or procedures - and reporting real results:
                 more regular periods, PCOS symptoms reducing, and in many cases, natural conception.
@@ -642,7 +642,7 @@ export default function HealPage() {
               <div className={heal.pcosCalloutStat}>
                 <span className={heal.pcosCalloutStatNum}>₹10<small>/mo</small></span>
                 <span className={heal.pcosCalloutStatLabel} style={{ color: '#0d9488', fontSize: '0.68rem', marginBottom: '4px' }}>for reusable pads</span>
-                <span className={heal.pcosCalloutStatLabel}>vs ₹15,000–5,00,000 for fertility treatment</span>
+                <span className={heal.pcosCalloutStatLabel}>vs ₹15,000-5,00,000 for fertility treatment</span>
               </div>
             </motion.div>
 

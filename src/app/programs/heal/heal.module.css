@@ -1,9 +1,9 @@
 ﻿/* ═══════════════════════════════════════════════════
-   HEAL PAGE — Brand Color Palette (from logo)
+   HEAL PAGE - Brand Color Palette (from logo)
    ──────────────────────────────────────────────────
-   Hot pink  #E8185A  — "HEAL" letters
-   Deep purple  #7B1A6E  — plumeria flower petals
-   Dark plum  #4D1A58  — tagline text
+   Hot pink  #E8185A  - "HEAL" letters
+   Deep purple  #7B1A6E  - plumeria flower petals
+   Dark plum  #4D1A58  - tagline text
    ═══════════════════════════════════════════════════ */
 
 /* ── Page wrapper: override design system tokens for HEAL's pink/purple palette ── */
@@ -40,7 +40,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   HERO — Full-bleed Photo Background
+   HERO - Full-bleed Photo Background
 ───────────────────────────────────────────────────────── */
 .heroSection {
   position: relative;
@@ -80,7 +80,7 @@
   pointer-events: none;
 }
 
-/* ── Inner wrapper — centered over background ── */
+/* ── Inner wrapper - centered over background ── */
 .heroInner {
   position: relative;
   z-index: 2;
@@ -94,7 +94,7 @@
   justify-content: center;
 }
 
-/* ── Text content — centered ── */
+/* ── Text content - centered ── */
 .heroContent {
   display: flex;
   flex-direction: column;
@@ -103,7 +103,7 @@
   width: 100%;
 }
 
-/* ── Logo pill — absolute top left of heroSection ── */
+/* ── Logo pill - absolute top left of heroSection ── */
 .heroLogoInline {
   position: absolute;
   top: 0;
@@ -354,7 +354,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   HOW IT WORKS — Immersive Vertical Journey
+   HOW IT WORKS - Immersive Vertical Journey
 ───────────────────────────────────────────────────────── */
 .challengeSection {
   position: relative;
@@ -459,7 +459,7 @@
   z-index: 1;
 }
 
-/* ── Journey Card — Split-pane ── */
+/* ── Journey Card - Split-pane ── */
 .journeyCard {
   display: grid;
   grid-template-columns: 160px 1fr;
@@ -479,17 +479,17 @@
     0 1px 0 rgba(255,255,255,0.9) inset;
 }
 
-/* Step 1 — rose gradient */
+/* Step 1 - rose gradient */
 .journeyCardStep1 .journeyAccent {
   background: linear-gradient(160deg, #E8185A 0%, #c4124a 100%);
 }
 
-/* Step 2 — plum-to-pink */
+/* Step 2 - plum-to-pink */
 .journeyCardStep2 .journeyAccent {
   background: linear-gradient(160deg, #7B1A6E 0%, #a0206e 100%);
 }
 
-/* Step 3 — deep plum */
+/* Step 3 - deep plum */
 .journeyCardStep3 .journeyAccent {
   background: linear-gradient(160deg, #4D1A58 0%, #7B1A6E 100%);
 }
@@ -921,7 +921,7 @@
 
 
 /* ─────────────────────────────────────────────────────────
-   SAUKHYAM PROMISE BANNER — Gold / Amber Trust Block
+   SAUKHYAM PROMISE BANNER - Gold / Amber Trust Block
 ───────────────────────────────────────────────────────── */
 .promiseBanner {
   position: relative;
@@ -970,7 +970,7 @@
   padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem);
 }
 
-/* Left — shield + headline */
+/* Left - shield + headline */
 .promiseBannerLeft {
   display: flex;
   align-items: center;
@@ -1020,7 +1020,7 @@
   align-self: center;
 }
 
-/* Right — stats + description */
+/* Right - stats + description */
 .promiseBannerRight {
   display: flex;
   flex-direction: column;
@@ -1130,7 +1130,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   SCIENCE SECTION — Light Cream
+   SCIENCE SECTION - Light Cream
 ───────────────────────────────────────────────────────── */
 .scienceSection {
   position: relative;
@@ -1214,7 +1214,7 @@
 
 .scienceBentoCard:hover { transform: translateY(-4px); }
 
-/* ── Card A — Amber / The Source ── */
+/* ── Card A - Amber / The Source ── */
 .scienceBentoCardA {
   grid-column: span 2;
   background: #fffbeb;
@@ -1238,7 +1238,7 @@
   color: #92400e;
 }
 
-/* ── Card B — Coral / The Route ── */
+/* ── Card B - Coral / The Route ── */
 .scienceBentoCardB {
   grid-column: span 1;
   background: #fff7f0;
@@ -1257,7 +1257,7 @@
 .scienceBentoCardB .scienceBentoTitle { color: #7c2d12; }
 .scienceBentoCardB .scienceBentoWatermark { color: rgba(234,88,12,0.08); }
 
-/* ── Card C — Rose / The Damage ── */
+/* ── Card C - Rose / The Damage ── */
 .scienceBentoCardC {
   grid-column: span 1;
   background: #fff1f2;
@@ -1281,7 +1281,7 @@
   color: #9f1239;
 }
 
-/* ── Card D — Sage Green / The Resolution ── */
+/* ── Card D - Sage Green / The Resolution ── */
 .scienceBentoCardD {
   grid-column: span 2;
   background: #f0faf4;
@@ -1326,7 +1326,7 @@
   flex: 1;
 }
 
-/* Step tag — base (each card overrides color) */
+/* Step tag - base (each card overrides color) */
 .scienceBentoTag {
   font-size: 0.62rem;
   font-weight: 800;
@@ -1335,7 +1335,7 @@
   opacity: 0.85;
 }
 
-/* Card title — base */
+/* Card title - base */
 .scienceBentoTitle {
   font-family: var(--font-heading);
   font-size: clamp(1.1rem, 2.2vw, 1.4rem);
@@ -1401,7 +1401,7 @@
   color: var(--heal-plum);
 }
 
-/* Stat pill (Card B — coral) */
+/* Stat pill (Card B - coral) */
 .scienceStatPill {
   display: inline-flex;
   align-items: center;
@@ -1424,7 +1424,7 @@
   letter-spacing: -0.02em;
 }
 
-/* Outcome chip (Card D — green) */
+/* Outcome chip (Card D - green) */
 .scienceOutcome {
   display: inline-flex;
   align-items: center;
@@ -1444,7 +1444,7 @@
   flex-shrink: 0;
 }
 
-/* ── PCOS Callout — Clinical Insight (teal) ── */
+/* ── PCOS Callout - Clinical Insight (teal) ── */
 .pcosCallout {
   position: relative;
   z-index: 1;
@@ -2266,7 +2266,7 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   CTA SECTION OVERRIDE (last section — pink gradient)
+   CTA SECTION OVERRIDE (last section - pink gradient)
 ───────────────────────────────────────────────────────── */
 .ctaSection {
   padding: var(--space-16) 0;

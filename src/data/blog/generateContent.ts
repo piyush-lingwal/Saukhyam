@@ -9,8 +9,8 @@ export function buildArticleContent(opts: {
   bullets?: string[];
   section2Title: string;
   section2Body: string;
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc?: string;
+  imageAlt?: string;
   callout?: { variant: 'info' | 'success' | 'warning'; title?: string; text: string };
   closing: string;
 }): BlogBlock[] {
@@ -32,8 +32,16 @@ export function buildArticleContent(opts: {
   blocks.push(
     { type: 'heading', level: 2, text: opts.section2Title },
     { type: 'paragraph', text: opts.section2Body },
-    { type: 'image', src: opts.imageSrc, alt: opts.imageAlt, caption: opts.imageAlt },
   );
+
+  if (opts.imageSrc && opts.imageAlt) {
+    blocks.push({
+      type: 'image',
+      src: opts.imageSrc,
+      alt: opts.imageAlt,
+      caption: opts.imageAlt,
+    });
+  }
 
   if (opts.callout) {
     blocks.push({

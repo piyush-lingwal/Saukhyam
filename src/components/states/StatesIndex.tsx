@@ -38,7 +38,7 @@ export default function StatesIndex() {
               State <span className={styles.heroAccent}>Impact Pages</span>
             </motion.h1>
             <motion.p variants={fadeUp} style={{ color: 'rgba(255,255,255,0.8)', maxWidth: 560, margin: '0 auto' }}>
-              Explore Saukhyam&apos;s reach across 10 states and our national footprint — campaigns, partners, and stories of change.
+              Explore Saukhyam&apos;s reach across 10 states and our national footprint - campaigns, partners, and stories of change.
             </motion.p>
             <motion.div variants={fadeUp} className={styles.indexSearch}>
               <Search size={18} />

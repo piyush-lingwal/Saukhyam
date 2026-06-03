@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════
-//  RESEARCH DATA — Peer-Reviewed Studies on
+//  RESEARCH DATA - Peer-Reviewed Studies on
 //  Chemicals in Disposable Menstrual Products
 // ═══════════════════════════════════════════════════
 
@@ -98,7 +98,7 @@ export const recentResearchStudies: ResearchStudy[] = [
     authors: 'Various authors',
     journal: 'Environment International',
     year: 2025,
-    summary: 'Broad survey of chemicals present across product types — phthalates, parabens, phenols. Highlights potential for endocrine exposure and a need for transparency in menstrual product composition.',
+    summary: 'Broad survey of chemicals present across product types - phthalates, parabens, phenols. Highlights potential for endocrine exposure and a need for transparency in menstrual product composition.',
     category: 'chemicals',
   },
   {
@@ -188,7 +188,7 @@ export const recentResearchStudies: ResearchStudy[] = [
     authors: 'Various authors',
     journal: 'Reproductive BioMedicine Online',
     year: 2025,
-    summary: 'Adolescent BPA exposure induced PCOS-like syndrome and fertility effects in rats. Supports biological plausibility of endocrine-disrupting chemical mechanisms — not just correlational but causal.',
+    summary: 'Adolescent BPA exposure induced PCOS-like syndrome and fertility effects in rats. Supports biological plausibility of endocrine-disrupting chemical mechanisms - not just correlational but causal.',
     category: 'mechanistic',
   },
   {
@@ -244,7 +244,7 @@ export const chemicalsFound = [
   { name: 'Dioxins', effect: 'Carcinogenic compounds from chlorine bleaching of pad materials', severity: 'high' },
   { name: 'VOCs (Toluene etc.)', effect: 'Volatile organic compounds causing headaches, dizziness, hormonal disruption', severity: 'high' },
   { name: 'BPA (Bisphenol A)', effect: 'Linked to PCOS in 22 human studies; induces PCOS-like syndrome in animal models', severity: 'high' },
-  { name: 'Heavy Metals', effect: 'Lead, cadmium, arsenic, mercury — neurotoxic, accumulate in body over time', severity: 'high' },
+  { name: 'Heavy Metals', effect: 'Lead, cadmium, arsenic, mercury - neurotoxic, accumulate in body over time', severity: 'high' },
   { name: 'Parabens', effect: 'Preservatives that mimic estrogen; linked to hormonal imbalance', severity: 'medium' },
   { name: 'Pesticide Residues', effect: 'Found in Indian brands; linked to chronic inflammation and infertility', severity: 'medium' },
   { name: 'Microplastics', effect: 'Shed from pad surfaces during use; long-term effects under study', severity: 'medium' },

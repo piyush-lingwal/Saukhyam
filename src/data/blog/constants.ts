@@ -1,52 +1,76 @@
 import type { BlogCategory } from '@/types/blog';
 
+
+
 export const BLOG_CATEGORIES: { key: BlogCategory | 'all'; label: string }[] = [
+
   { key: 'all', label: 'All Stories' },
-  { key: 'community', label: 'Community' },
-  { key: 'science', label: 'Science' },
-  { key: 'sustainability', label: 'Sustainability' },
-  { key: 'stories', label: 'Personal Stories' },
+
+  { key: 'heal', label: 'HEAL' },
+
+  { key: 'care', label: 'CARE' },
+
+  { key: 'reach', label: 'REACH' },
+
 ];
 
+
+
 export const CATEGORY_COLORS: Record<BlogCategory, string> = {
-  community: '#22c55e',
-  science: '#3b82f6',
-  sustainability: '#10b981',
-  stories: '#f59e0b',
+
+  heal: '#a01a6b',
+
+  care: '#dc1464',
+
+  reach: '#0d9488',
+
 };
+
+
 
 export const CATEGORY_LABELS: Record<BlogCategory, string> = {
-  community: 'Community',
-  science: 'Science',
-  sustainability: 'Sustainability',
-  stories: 'Personal Stories',
+
+  heal: 'HEAL',
+
+  care: 'CARE',
+
+  reach: 'REACH',
+
 };
 
-/** Curated Pexels images — nature, women, wellness, rural themes */
-export const BLOG_IMAGES = [
-  'https://images.pexels.com/photos/6646668/pexels-photo-6646668.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646669/pexels-photo-6646669.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646670/pexels-photo-6646670.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646671/pexels-photo-6646671.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646672/pexels-photo-6646672.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646673/pexels-photo-6646673.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646674/pexels-photo-6646674.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646675/pexels-photo-6646675.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/6646676/pexels-photo-6646676.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/3825583/pexels-photo-3825583.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/3822863/pexels-photo-3822863.jpeg?auto=compress&cs=tinysrgb&w=1600',
-  'https://images.pexels.com/photos/3825584/pexels-photo-3825584.jpeg?auto=compress&cs=tinysrgb&w=1600',
-] as const;
+
+
+import { BLOG_EDITORIAL_IMAGES } from './linkedinPostMedia';
+
+
+
+/** LinkedIn editorial photos only — no product/pack imagery from the shop */
+
+export const BLOG_IMAGES = BLOG_EDITORIAL_IMAGES;
+
+
 
 export const AUTHORS = [
-  { name: 'Priya Sharma', role: 'Community Lead', bio: 'Priya leads rural outreach across 9 Indian states.' },
+
+  { name: 'Priya Sharma', role: 'REACH Program Lead', bio: 'Priya leads rural outreach across 9 Indian states.' },
+
   { name: 'Meena Pillai', role: 'Program Coordinator', bio: 'Meena coordinates coastal programmes in Tamil Nadu and Kerala.' },
+
   { name: 'Anjali Rao', role: 'Brand Ambassador', bio: 'Anjali switched to reusables in 2022 and advocates for HEAL.' },
+
   { name: 'Dr. Rekha Nair', role: 'Health Research', bio: 'Dr. Nair studies banana fiber and menstrual health outcomes.' },
+
   { name: 'Anju Bist', role: 'Managing Director', bio: 'Pad-woman of India, recognized by NITI Aayog among 75 Women Transforming India.' },
+
   { name: 'Sunita Devi', role: 'Field Ambassador', bio: 'Sunita trains women in Uttar Pradesh and Bihar on pad care.' },
-  { name: 'Kavitha Menon', role: 'Sustainability Lead', bio: 'Kavitha tracks environmental impact across Saukhyam programmes.' },
+
+  { name: 'Kavitha Menon', role: 'CARE Program Lead', bio: 'Kavitha leads campus sustainability across Saukhyam programmes.' },
+
 ] as const;
+
+
+
+/** First N posts on /blog are sourced from Saukhyam Foundation / Anju Bist LinkedIn */
+
+export const LINKEDIN_POST_COUNT = 14;
+

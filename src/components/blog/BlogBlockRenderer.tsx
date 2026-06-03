@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import BlogImage from './BlogImage';
 import { Info, CheckCircle2, AlertTriangle, Quote as QuoteIcon } from 'lucide-react';
 import type { BlogBlock } from '@/types/blog';
 import styles from '@/app/blog/[slug]/page.module.css';
@@ -21,7 +21,7 @@ export default function BlogBlockRenderer({ block, isFirst }: { block: BlogBlock
       return (
         <figure className={styles.figure}>
           <div className={styles.figureImg}>
-            <Image
+            <BlogImage
               src={block.src}
               alt={block.alt}
               width={1200}
@@ -39,7 +39,7 @@ export default function BlogBlockRenderer({ block, isFirst }: { block: BlogBlock
         <blockquote className={styles.quote}>
           <QuoteIcon size={28} className={styles.quoteIcon} aria-hidden />
           <p className={styles.quoteText}>&ldquo;{block.text}&rdquo;</p>
-          {block.attribution && <cite className={styles.quoteAttr}>— {block.attribution}</cite>}
+          {block.attribution && <cite className={styles.quoteAttr}>- {block.attribution}</cite>}
         </blockquote>
       );
     case 'list': {

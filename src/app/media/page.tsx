@@ -1,22 +1,40 @@
-'use client';
+import type { Metadata } from 'next';
+import NewsroomShell from '@/components/newsroom/NewsroomShell';
+import MediaHubPage from '@/components/newsroom/MediaHubPage';
 
-import { useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+export const metadata: Metadata = {
+  title: 'Media & Press | Saukhyam Foundation',
+  description:
+    'Official Saukhyam press and media archive — coverage on reusable pads, banana fibre innovation, and menstrual health across India.',
+  keywords: [
+    'Saukhyam press',
+    'Anju Bist media coverage',
+    'reusable sanitary pads media',
+    'banana fiber pads press',
+    'NGO menstrual health media',
+  ],
+  openGraph: {
+    title: 'Media & Press | Saukhyam Foundation',
+    description:
+      'Press archive aligned with the official Saukhyam Press & Media page — features, headlines, and excerpts.',
+    type: 'website',
+    url: 'https://saukhyampads.org/media',
+  },
+  alternates: {
+    canonical: '/media',
+  },
+};
 
 export default function MediaPage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace('/impact#press');
-  }, [router]);
-
   return (
-    <main style={{ padding: '4rem 1rem', textAlign: 'center' }}>
-      <p>Redirecting to Press &amp; Media...</p>
-      <p>
-        If you are not redirected, <Link href="/impact#press">click here</Link>.
-      </p>
-    </main>
+    <NewsroomShell
+      activeSlug="hub"
+      title="Media & Press"
+      lead=""
+      showSidebar={false}
+      hideHeader
+    >
+      <MediaHubPage />
+    </NewsroomShell>
   );
 }
