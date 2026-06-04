@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback, Suspense } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   Users, School, Home, Briefcase, Recycle, TreePine, Droplets,
@@ -125,7 +125,6 @@ function IndiaImpactMapInner({
   sectionId?: string;
 } = {}) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [selected, setSelected] = useState<StateImpact | null>(null);
   const [hovered,  setHovered]  = useState<{ impact: StateImpact; x: number; y: number } | null>(null);
   const mapWrapRef = useRef<HTMLDivElement>(null);
@@ -140,11 +139,12 @@ function IndiaImpactMapInner({
   /* Restore selection from ?state=slug on REACH page */
   useEffect(() => {
     if (!embedded) return;
-    const slug = searchParams.get('state');
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('state');
     if (!slug) return;
     const impact = stateImpacts.find(s => s.slug === slug);
     if (impact) setSelected(impact);
-  }, [embedded, searchParams]);
+  }, [embedded]);
 
   const selectState = useCallback((impact: StateImpact) => {
     setSelected(impact);
