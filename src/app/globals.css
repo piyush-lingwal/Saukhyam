@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @import '../styles/variables.css';
 @import '../styles/animations.css';
 
 /* ═══════════════════════════════════════════════════
-   GLOBAL STYLES: Saukhyam
+   GLOBAL STYLES - Saukhyam
    ═══════════════════════════════════════════════════ */
 
 *, *::before, *::after {
@@ -190,4 +194,115 @@ input, textarea, select {
 /* ── Main content offset for fixed navbar ── */
 main {
   padding-top: var(--navbar-height);
+}
+
+/* ── Newsroom (media) pages — legacy utilities; hub uses media.module.css ── */
+.newsroom-root {
+  --nr-text: var(--color-text);
+  --nr-muted: var(--color-text-secondary);
+  --nr-border: var(--sand-200);
+  --nr-surface: var(--white);
+  --nr-accent: var(--color-primary);
+}
+
+.newsroom-root p {
+  max-width: none;
+  color: var(--nr-muted);
+}
+
+.newsroom-root .container {
+  width: 100%;
+}
+
+@layer components {
+  .nr-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--nr-accent);
+  }
+
+  .nr-card {
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--nr-border);
+    background: var(--nr-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nr-card-hover {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .nr-card-hover:hover {
+    border-color: var(--green-200);
+    box-shadow: var(--shadow-md);
+  }
+
+  .nr-section {
+    padding-bottom: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .nr-section {
+      padding-bottom: var(--space-20);
+    }
+  }
+
+  .nr-heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--nr-text);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .nr-link {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--nr-accent);
+    transition: color 0.2s ease;
+  }
+
+  .nr-link:hover {
+    color: var(--color-primary-hover);
+  }
+
+  .nr-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    border-radius: var(--radius-full);
+    background: var(--nr-accent);
+    color: var(--white);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .nr-btn-primary:hover {
+    background: var(--color-primary-hover);
+    color: var(--white);
+  }
+
+  .nr-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    border-radius: var(--radius-full);
+    border: 1px solid var(--nr-border);
+    background: var(--nr-surface);
+    color: var(--nr-text);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .nr-btn-ghost:hover {
+    border-color: var(--green-300);
+    color: var(--nr-accent);
+  }
 }

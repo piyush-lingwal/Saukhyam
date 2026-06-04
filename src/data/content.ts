@@ -18,7 +18,7 @@ export const testimonials: Testimonial[] = [
     id: 'c1-1',
     name: 'Parvathy',
     location: 'Kerala',
-    quote: 'My periods were irregular for two years after childbirth, sometimes delayed by 35-40 days. After switching to Saukhyam 8 years ago, my cycles gradually became regular at 32 days. It took time, but now I have comfortable periods. I definitely prefer Saukhyam.',
+    quote: 'My periods were irregular for two years after childbirth - sometimes delayed by 35-40 days. After switching to Saukhyam 8 years ago, my cycles gradually became regular at 32 days. It took time, but now I have comfortable periods. I definitely prefer Saukhyam.',
     quoteHi: 'प्रसव के बाद दो साल तक मेरे पीरियड्स अनियमित थे। सौख्यम पर स्विच करने के 8 साल बाद, मेरा चक्र धीरे-धीरे 32 दिनों पर नियमित हो गया।',
     rating: 5,
     duration: '8 years',
@@ -54,8 +54,8 @@ export const testimonials: Testimonial[] = [
     id: 'c1-8',
     name: 'Virginie',
     location: 'Kerala',
-    quote: 'I was diagnosed with endometriosis, a 5 cm cyst on my ovary. My periods were very painful. I switched to Saukhyam 5 years ago along with yoga and dietary changes. The cyst has reduced from 5 cm to 2 cm. I am not on any medication. My periods are almost normal now.',
-    quoteHi: 'एंडोमेट्रियोसिस का पता चला, अंडाशय पर 5 सेमी की सिस्ट। सौख्यम के 5 साल बाद, सिस्ट 5 सेमी से 2 सेमी हो गई। कोई दवाई नहीं ले रही।',
+    quote: 'I was diagnosed with endometriosis - a 5 cm cyst on my ovary. My periods were very painful. I switched to Saukhyam 5 years ago along with yoga and dietary changes. The cyst has reduced from 5 cm to 2 cm. I am not on any medication. My periods are almost normal now.',
+    quoteHi: 'एंडोमेट्रियोसिस का पता चला - अंडाशय पर 5 सेमी की सिस्ट। सौख्यम के 5 साल बाद, सिस्ट 5 सेमी से 2 सेमी हो गई। कोई दवाई नहीं ले रही।',
     rating: 5,
     duration: '5 years',
     mainProblem: 'Endometriosis',
@@ -66,8 +66,8 @@ export const testimonials: Testimonial[] = [
     id: 'c1-9',
     name: 'Hemalatha',
     location: 'Kerala',
-    quote: 'Within 6 months of switching, my cramps went away. Disposable pads caused dryness, skin peeling and painful rashes. With Saukhyam: no itching, no dryness. My tiredness during periods also reduced. Plus I feel happy not contributing to waste.',
-    quoteHi: 'स्विच करने के 6 महीने में मेरे क्रैम्प्स दूर हो गए। डिस्पोजेबल से सूखापन और दर्दनाक रैशेज होते थे। सौख्यम से, कोई खुजली नहीं, कोई सूखापन नहीं।',
+    quote: 'Within 6 months of switching, my cramps went away. Disposable pads caused dryness, skin peeling and painful rashes. With Saukhyam - no itching, no dryness. My tiredness during periods also reduced. Plus I feel happy not contributing to waste.',
+    quoteHi: 'स्विच करने के 6 महीने में मेरे क्रैम्प्स दूर हो गए। डिस्पोजेबल से सूखापन और दर्दनाक रैशेज होते थे। सौख्यम से - कोई खुजली नहीं, कोई सूखापन नहीं।',
     rating: 5,
     duration: '5 years',
     mainProblem: 'Cramps & Rashes',
@@ -78,11 +78,11 @@ export const testimonials: Testimonial[] = [
     id: 'c1-10',
     name: 'Sujata',
     location: 'Madhya Pradesh',
-    quote: 'I suffered from PCOS/PMOS for 12-15 years. 20 days of bleeding, blackouts from pain, rashes that formed blisters. After 3 years with Saukhyam, no rashes, no pain, blood color changed to healthy red, clots minimized. My ultrasound shows ovaries are cyst-free. The transformation is unbelievable.',
-    quoteHi: '12-15 साल PCOS/PMOS से पीड़ित थी। 20 दिन का रक्तस्राव, दर्द से बेहोशी। सौख्यम के 3 साल बाद, कोई रैशेज नहीं, कोई दर्द नहीं। अल्ट्रासाउंड में अंडाशय सिस्ट-मुक्त हैं।',
+    quote: 'I suffered from PCOS for 12-15 years. 20 days of bleeding, blackouts from pain, rashes that formed blisters. After 3 years with Saukhyam, no rashes, no pain, blood color changed to healthy red, clots minimized. My ultrasound shows ovaries are cyst-free. The transformation is unbelievable.',
+    quoteHi: '12-15 साल PCOS से पीड़ित थी। 20 दिन का रक्तस्राव, दर्द से बेहोशी। सौख्यम के 3 साल बाद, कोई रैशेज नहीं, कोई दर्द नहीं। अल्ट्रासाउंड में अंडाशय सिस्ट-मुक्त हैं।',
     rating: 5,
     duration: '4 years',
-    mainProblem: 'PCOS/PMOS',
+    mainProblem: 'PCOS',
     cohort: 1,
     condition: 'pcos',
   },
@@ -94,7 +94,7 @@ export const testimonials: Testimonial[] = [
     quoteHi: 'मुझे पीरियड्स से डर लगता था। गंभीर दर्द, शरीर का अकड़ना, मुंहासे और बालों का झड़ना। सौख्यम के 4 साल बाद, दर्द न्यूनतम है, चक्र अधिक नियमित है।',
     rating: 5,
     duration: '4 years',
-    mainProblem: 'PCOS/PMOS',
+    mainProblem: 'PCOS',
     cohort: 1,
     condition: 'pcos',
   },
@@ -116,7 +116,7 @@ export const testimonials: Testimonial[] = [
     id: 'c2-1',
     name: 'Sunumol',
     location: 'Kerala',
-    quote: 'Before pregnancy, my periods were so painful I had to go to the hospital for pain relief injections. Since using Saukhyam for 2 years, I barely even notice when my period starts, completely pain-free, and the itching has disappeared entirely.',
+    quote: 'Before pregnancy, my periods were so painful I had to go to the hospital for pain relief injections. Since using Saukhyam for 2 years, I barely even notice when my period starts - completely pain-free, and the itching has disappeared entirely.',
     quoteHi: 'गर्भावस्था से पहले, दर्द इतना था कि अस्पताल जाना पड़ता था। सौख्यम के 2 साल बाद, मुझे पता भी नहीं चलता कि पीरियड्स कब शुरू होते हैं।',
     rating: 5,
     duration: '2 years',
@@ -128,8 +128,8 @@ export const testimonials: Testimonial[] = [
     id: 'c2-2',
     name: 'Mimasa',
     location: 'Gurgaon',
-    quote: 'My periods had become irregular, sometimes with months-long gaps. My mother gave me Saukhyam pads and right from the start, periods returned to becoming regular. No rashes, no pain. That problem is totally solved now.',
-    quoteHi: 'मेरे पीरियड्स अनियमित हो गए थे, कभी-कभी महीनों का गैप। सौख्यम पैड से शुरू से ही पीरियड्स नियमित हो गए।',
+    quote: 'My periods had become irregular - sometimes months-long gaps. My mother gave me Saukhyam pads and right from the start, periods returned to becoming regular. No rashes, no pain. That problem is totally solved now.',
+    quoteHi: 'मेरे पीरियड्स अनियमित हो गए थे - कभी-कभी महीनों का गैप। सौख्यम पैड से शुरू से ही पीरियड्स नियमित हो गए।',
     rating: 5,
     duration: '2 years',
     mainProblem: 'Irregular Periods',
@@ -164,8 +164,8 @@ export const testimonials: Testimonial[] = [
     id: 'c2-5',
     name: 'Dr. Priyanka',
     location: 'Uttar Pradesh',
-    quote: 'For a long time I struggled with very irregular periods. Within six months of using Saukhyam, my periods became completely regular, coming on time every month, without any medication. It felt like my body was finding its natural rhythm again.',
-    quoteHi: 'लंबे समय तक अनियमित पीरियड्स से जूझती रही। सौख्यम के छह महीनों में, पीरियड्स पूरी तरह नियमित हो गए, बिना किसी दवाई के।',
+    quote: 'For a long time I struggled with very irregular periods. Within six months of using Saukhyam, my periods became completely regular - coming on time every month, without any medication. It felt like my body was finding its natural rhythm again.',
+    quoteHi: 'लंबे समय तक अनियमित पीरियड्स से जूझती रही। सौख्यम के छह महीनों में, पीरियड्स पूरी तरह नियमित हो गए - बिना किसी दवाई के।',
     rating: 5,
     duration: '6 months',
     mainProblem: 'Irregular Periods',
@@ -199,7 +199,7 @@ export interface Award {
 export const awards: Award[] = [
   { id: 'a1', year: '2016', title: 'Most Innovative Product Award', titleHi: 'सबसे नवीन उत्पाद पुरस्कार', organization: 'National Institute of Rural Development, India', description: 'Recognized for innovative banana fiber pad technology' },
   { id: 'a2', year: '2018', title: 'Lauded at UN Climate Change Conference', titleHi: 'संयुक्त राष्ट्र जलवायु परिवर्तन सम्मेलन', organization: 'UNFCCC, Poland', description: 'Recognized at the global stage for climate-positive menstrual hygiene' },
-  { id: 'a3', year: '2020', title: 'Top 10 Finalist at Climate Launchpad', titleHi: 'क्लाइमेट लॉन्चपैड (टॉप 10 फाइनलिस्ट)', organization: "World's Largest Green Business Competition", description: 'Among top 10 green businesses globally' },
+  { id: 'a3', year: '2020', title: 'Top 10 Finalist - Climate Launchpad', titleHi: 'क्लाइमेट लॉन्चपैड - टॉप 10 फाइनलिस्ट', organization: "World's Largest Green Business Competition", description: 'Among top 10 green businesses globally' },
   { id: 'a4', year: '2020', title: 'Social Enterprise of the Year', titleHi: 'वर्ष का सामाजिक उद्यम', organization: 'Women for India & Social Founder Network', description: 'Awarded for outstanding social impact' },
   { id: 'a5', year: '2021', title: 'Women Transforming India Awards', titleHi: 'भारत बदलती महिलाएं पुरस्कार', organization: 'NITI Aayog, Govt. of India', description: 'Anju Bist recognized among 75 transformative women' },
   { id: 'a6', year: '2022', title: 'Best Social Initiative on Menstrual Hygiene', titleHi: 'मासिक धर्म स्वच्छता पर सर्वश्रेष्ठ सामाजिक पहल', organization: 'Annual MHM Conference, New Delhi', description: 'Awarded for impactful menstrual hygiene programs' },
@@ -218,21 +218,26 @@ export interface PressItem {
 }
 
 export const pressItems: PressItem[] = [
-  { id: 'p1', title: 'Meet Anju Bist Who Has Helped Over 5 Lakh Women Switch', publication: 'YourStory', url: '#' },
-  { id: 'p2', title: 'NITI Aayog honour for Kerala\'s Anju Bist - pad-woman of India', publication: 'New Indian Express', url: '#' },
-  { id: 'p3', title: 'Move over padman, this padwoman strives to make environment-friendly sanitary napkins', publication: 'India Today', url: '#' },
-  { id: 'p4', title: 'केले के रेशे से बना सैनिटरी पैड', publication: 'BBC Hindi', url: '#' },
-  { id: 'p5', title: "Don't Throw in the Towel: On Saukhyam Reusable Sanitary Pads", publication: 'The Hindu', url: '#' },
-  { id: 'p6', title: 'Making Menstruation Eco-Friendly with Banana Fiber Pads', publication: 'NDTV', url: '#' },
-  { id: 'p7', title: 'Sustainable Periods: The Woman Behind India\'s Banana Fiber Pads', publication: 'Times of India', url: '#' },
-  { id: 'p8', title: 'Banana fiber pads: A greener period solution from Kerala', publication: 'Deccan Chronicle', url: '#' },
-  { id: 'p9', title: 'Innovation in Menstrual Hygiene: Saukhyam\'s Banana Fiber Pads', publication: 'Moneycontrol', url: '#' },
-  { id: 'p10', title: 'This Kerala startup is making periods eco-friendly', publication: 'Deccan Herald', url: '#' },
-  { id: 'p11', title: 'Green Period Revolution: Saukhyam Reusable Pads', publication: 'Health Shots', url: '#' },
-  { id: 'p12', title: 'Swachh Period, Swachh Bharat: The Saukhyam Story', publication: 'Swachh India NDTV', url: '#' },
-  { id: 'p13', title: 'The Padwoman of India: Anju Bist\'s Mission', publication: 'Tribune India', url: '#' },
-  { id: 'p14', title: 'From Banana Waste to Menstrual Pads: A Kerala Innovation', publication: 'Daily Pioneer', url: '#' },
-  { id: 'p15', title: 'Saukhyam: Redefining Menstrual Hygiene in Rural India', publication: 'MSN', url: '#' },
+  { id: 'p1', title: 'Meet Anju Bist Who Has Helped Over 5 Lakh Women Switch To Reusable Sanitary Pads', publication: 'Press Feature', url: '#' },
+  { id: 'p2', title: 'NITI Aayog honour for Kerala\'s Anju Bist - pad-woman of India', publication: 'National Media', url: '#' },
+  { id: 'p3', title: 'Women brand making sanitary pads from banana fibre gets best social initiative award', publication: 'Industry Press', url: '#' },
+  { id: 'p4', title: 'Reusable Sanitary Pads of Organic Matter of Any Help?', publication: 'Health Feature', url: '#' },
+  { id: 'p5', title: 'Partnership with Pad-Woman of India for CSR initiative', publication: 'CSR Coverage', url: '#' },
+  { id: 'p6', title: 'These reusable sanitary pads made out of banana fibres offer an affordable alternative to women in rural India', publication: 'Social Impact Story', url: '#' },
+  { id: 'p7', title: 'World Menstrual Hygiene Day: Covid and lockdown making periods greener', publication: 'Health & Climate', url: '#' },
+  { id: 'p8', title: 'Reusable pads essential to make menstrual hygiene sustainable for all women and girls', publication: 'Policy Commentary', url: '#' },
+  { id: 'p9', title: 'This Kerala NGO has developed low-cost, eco-friendly cloth pads for rural women', publication: 'Regional Feature', url: '#' },
+  { id: 'p10', title: 'Reusable menstrual pads is clearly an idea whose time has come', publication: 'Opinion', url: '#' },
+  { id: 'p11', title: 'Saukhyam Reusable Pads are the first ones in the world to be made from banana fiber', publication: 'Innovation Story', url: '#' },
+  { id: 'p12', title: 'Women and girls aspire to have a better product for menstrual hygiene by shifting to reusable sanitary pads', publication: 'Impact Report', url: '#' },
+  { id: 'p13', title: 'Concern for environment, health and cost are decisive factors in the preference for banana fibre pads', publication: 'Research Coverage', url: '#' },
+  { id: 'p14', title: 'This Kerala NGO’s Cloth Pads Are Low-Cost, Eco-Friendly, and Generate Employment Too!', publication: 'Enterprise Story', url: '#' },
+  { id: 'p15', title: 'These reusable sanitary pads made of banana fibre are helping women have an eco-friendly period', publication: 'Sustainability Feature', url: '#' },
+  { id: 'p16', title: 'Now, Make Sustainable Menstrual Choices with Saukhyam Pads', publication: 'Lifestyle Coverage', url: '#' },
+  { id: 'p17', title: 'Don’t Throw in the Towel: On Saukhyam Reusable Sanitary Pads', publication: 'Editorial', url: '#' },
+  { id: 'p18', title: 'Four Ways to An Eco-Friendly Period', publication: 'Explainer', url: '#' },
+  { id: 'p19', title: 'Time to Go Green. Period!', publication: 'Magazine Feature', url: '#' },
+  { id: 'p20', title: 'Pad Positive: Towards a Sustainable Alternative', publication: 'Youth & Campus Media', url: '#' },
 ];
 
 export interface FAQItem {
@@ -249,7 +254,7 @@ export const faqItems: FAQItem[] = [
     id: 'f1', category: 'general',
     question: 'Why are people switching to reusable pads?',
     questionHi: 'लोग रीयूजेबल पैड पर क्यों स्विच कर रहे हैं?',
-    answer: 'Disposable pads contain harmful chemicals like dioxins, phthalates, and volatile organic compounds. These can cause skin irritation, allergies, hormonal disruption, and other health issues. Reusable pads are chemical-free, eco-friendly, and save money in the long run: one set lasts 2-3 years.',
+    answer: 'Disposable pads contain harmful chemicals like dioxins, phthalates, and volatile organic compounds. These can cause skin irritation, allergies, hormonal disruption, and other health issues. Reusable pads are chemical-free, eco-friendly, and save money in the long run - one set lasts 2-3 years.',
     answerHi: 'डिस्पोजेबल पैड में डाइऑक्सिन, फ्थेलेट्स और वाष्पशील ऑर्गेनिक कंपाउंड जैसे हानिकारक रसायन होते हैं। रीयूजेबल पैड रसायन-मुक्त, इको-फ्रेंडली होते हैं और लंबे समय में पैसे बचाते हैं।',
   },
   {
@@ -284,7 +289,7 @@ export const faqItems: FAQItem[] = [
     id: 'f6', category: 'compare',
     question: "What's special about banana fiber?",
     questionHi: 'केले के फाइबर में क्या खास है?',
-    answer: 'Banana fiber has natural antimicrobial properties (pathogenesis-related proteins). Unlike tree-based cellulose used in disposable pads, banana fiber comes from agricultural waste, banana trees fruit only once, then are cut. We use this waste sustainably. Research also suggests therapeutic qualities that may help reduce period cramps.',
+    answer: 'Banana fiber has natural antimicrobial properties (pathogenesis-related proteins). Unlike tree-based cellulose used in disposable pads, banana fiber comes from agricultural waste - banana trees fruit only once, then are cut. We use this waste sustainably. Research also suggests therapeutic qualities that may help reduce period cramps.',
     answerHi: 'केले के फाइबर में प्राकृतिक रोगाणुरोधी गुण होते हैं। डिस्पोजेबल पैड में उपयोग किए जाने वाले सेल्युलोज के विपरीत, केले का फाइबर कृषि अपशिष्ट से आता है।',
   },
   {
@@ -312,15 +317,15 @@ export const faqItems: FAQItem[] = [
     id: 'f10', category: 'washing',
     question: 'How do I wash the pads?',
     questionHi: 'मैं पैड कैसे धोऊं?',
-    answer: 'Soak in cold water for 5 minutes, then hand wash or machine wash with mild soap. Avoid hot water as it can set stains. Dry in direct sunlight, which naturally disinfects the pads. You can also iron them for extra softness.',
-    answerHi: '5 मिनट ठंडे पानी में भिगोएं, फिर हल्के साबुन से हाथ या मशीन से धोएं। सीधी धूप में सुखाएं, यह प्राकृतिक रूप से कीटाणुरहित करता है।',
+    answer: 'Soak in cold water for 5 minutes, then hand wash or machine wash with mild soap. Avoid hot water as it can set stains. Dry in direct sunlight - it naturally disinfects the pads. You can also iron them for extra softness.',
+    answerHi: '5 मिनट ठंडे पानी में भिगोएं, फिर हल्के साबुन से हाथ या मशीन से धोएं। सीधी धूप में सुखाएं - यह प्राकृतिक रूप से कीटाणुरहित करता है।',
   },
   {
     id: 'f11', category: 'washing',
     question: 'Do they become hard or rough after washing?',
     questionHi: 'क्या धोने के बाद वे सख्त हो जाते हैं?',
-    answer: 'They may feel slightly stiff after air drying. Simply iron the pad or soak briefly in a solution with a little baking soda, lemon, or neem leaves to restore softness. They become softer with each wash!',
-    answerHi: 'हवा में सुखाने के बाद वे थोड़े सख्त महसूस हो सकते हैं। बस पैड को इस्त्री करें या बेकिंग सोडा के साथ थोड़ा भिगोएं, इससे मुलायमता वापस आती है।',
+    answer: 'They may feel slightly stiff after air drying. Simply iron the pad or soak briefly in a solution with a little baking soda, lemon, or neem leaves - this restores softness. They become softer with each wash!',
+    answerHi: 'हवा में सुखाने के बाद वे थोड़े सख्त महसूस हो सकते हैं। बस पैड को इस्त्री करें या बेकिंग सोडा के साथ थोड़ा भिगोएं - इससे मुलायमता वापस आती है।',
   },
   {
     id: 'f12', category: 'organization',
@@ -351,159 +356,7 @@ export const teamMembers: TeamMember[] = [
   },
 ];
 
-/* ═══════════════════════════════════════════════════════════════════════
-   BLOG CONTENT SCHEMA
-   ───────────────────────────────────────────────────────────────────────
-   Blocks are the building units of a blog article. Each block maps to a
-   specific rendered component in /blog/[slug]/page.tsx. Adding a new
-   block type requires (a) a new entry in BlogBlock, (b) a renderer in
-   the detail page. Keep this schema stable so future automation
-   (CMS import, AI authoring) can generate posts deterministically.
-   See BLOG_STANDARDS.md for image sizes, content lengths & guidelines.
-   ═══════════════════════════════════════════════════════════════════════ */
-
-export type BlogBlock =
-  | { type: 'paragraph'; text: string }
-  | { type: 'heading'; level: 2 | 3; text: string }
-  | { type: 'image'; src: string; alt: string; caption?: string }
-  | { type: 'quote'; text: string; attribution?: string }
-  | { type: 'list'; style: 'bullet' | 'number'; items: string[] }
-  | { type: 'callout'; variant: 'info' | 'success' | 'warning'; title?: string; text: string };
-
-export interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  titleHi: string;
-  excerpt: string;
-  excerptHi: string;
-  image: string;
-  coverAlt?: string;
-  date: string;
-  readTime: string;
-  category: 'community' | 'science' | 'sustainability' | 'stories';
-  author: string;
-  authorRole: string;
-  authorBio?: string;
-  tags: string[];
-  featured?: boolean;
-  content: BlogBlock[];
-}
-
-export const blogPosts: BlogPost[] = [
-  {
-    id: 'b1', slug: 'breaking-taboos-sonbhadra',
-    title: 'Breaking Taboos in Sonbhadra',
-    titleHi: 'सोनभद्र में वर्जनाओं को तोड़ना',
-    excerpt: 'How our team brought menstrual awareness to one of India\'s most remote tribal communities, and what they taught us in return.',
-    excerptHi: 'कैसे हमारी टीम ने भारत के सबसे दूरदराज आदिवासी समुदायों में मासिक धर्म जागरूकता लाई।',
-    image: '/Blog_Images/1.webp',
-    coverAlt: 'Women from Sonbhadra gathered during a Saukhyam awareness workshop',
-    date: '2024-08-15', readTime: '5 min read', category: 'community',
-    author: 'Priya Sharma', authorRole: 'Community Lead',
-    authorBio: 'Priya leads Saukhyam\'s rural outreach, having trained over 12,000 women across 9 Indian states.',
-    tags: ['Rural Outreach', 'Awareness', 'Tribal India'],
-    featured: true,
-    content: [
-      { type: 'paragraph', text: 'The road to Sonbhadra ends long before the villages do. For the final forty kilometres our jeep crawls along dry riverbeds and footpaths, past Sal forests and hills carved by decades of mining. This is the southeastern edge of Uttar Pradesh, officially "backward", administratively forgotten, and home to some of India\'s oldest tribal communities.' },
-      { type: 'paragraph', text: 'We arrived with cartons of Saukhyam pads, a portable projector, and an assumption that we were bringing something new. By the end of the week, it was clear we were the ones learning.' },
-      { type: 'heading', level: 2, text: 'A Silence Worth Listening To' },
-      { type: 'paragraph', text: 'In the first village, Kusmaha, nearly sixty women sat with us in a circle under a mahua tree. None of them were using any menstrual hygiene product, disposable or otherwise. Cloth, ash, leaves. The silence around the subject was total, not out of shame, but because no one had ever asked.' },
-      { type: 'quote', text: 'We did not know there were pads that could be washed and used again. We only knew that pads in the city shops cost more than a day\'s wage.', attribution: 'Sunita Devi, 34, Kusmaha village' },
-      { type: 'paragraph', text: 'Sunita\'s observation cut to the heart of why disposable pads have failed rural India. Even where they are available, the recurring cost is impossible; a household here earns ₹150–200 on a good day of forest-produce collection. A single pack of disposables costs almost that much and lasts four days.' },
-      { type: 'heading', level: 2, text: 'What We Brought, What We Changed' },
-      { type: 'paragraph', text: 'Over three weeks our team visited 14 hamlets across the Duddhi and Myorpur blocks. We distributed starter packs, demonstrated washing and drying, and crucially, trained 23 local women as Saukhyam Sakhis who would continue the conversation after we left.' },
-      { type: 'list', style: 'bullet', items: [
-        '14 villages reached across Sonbhadra district',
-        '1,200+ women received their first reusable pad',
-        '23 local women trained as community health ambassadors',
-        '6 follow-up visits scheduled for quarterly health check-ins',
-      ] },
-      { type: 'image', src: '/Blog_Images/sonbhadra-workshop.webp', alt: 'Saukhyam Sakhis demonstrating pad washing to village women', caption: 'Local ambassadors leading a hands-on workshop in Myorpur block.' },
-      { type: 'heading', level: 3, text: 'The Drying Problem' },
-      { type: 'paragraph', text: 'One lesson we did not anticipate: in communities where menstruation is taboo, the biggest barrier to reusables is not washing, but drying. A pad drying on a line is visible proof of menstruation, and in many households that remains forbidden. We now include a small indoor drying net in every rural starter pack, designed to hang discreetly inside a bathroom or corner.' },
-      { type: 'callout', variant: 'info', title: 'A design change born in the field', text: 'The discreet drying net now ships with every starter pack distributed through our REACH programme, a direct result of what the women of Sonbhadra taught us.' },
-      { type: 'heading', level: 2, text: 'What Comes Next' },
-      { type: 'paragraph', text: 'Three months on, our follow-up survey found 78% of women were still using the pads consistently, and, more importantly, nearly all of them were talking about periods openly with their daughters for the first time. That, more than any metric, is why we drove down that river-bed road.' },
-      { type: 'paragraph', text: 'We will be back in Sonbhadra next quarter. If you\'d like to sponsor a starter pack for a woman there, the link is at the end of this article. One pad, two years, one conversation at a time.' },
-    ],
-  },
-  {
-    id: 'b2', slug: 'winds-of-change-kanyakumari',
-    title: 'Winds of Change in Kanyakumari',
-    titleHi: 'कन्याकुमारी में बदलाव की हवा',
-    excerpt: 'A fishing village at the tip of India embraces sustainable menstrual practices, one pad at a time.',
-    excerptHi: 'भारत के अंतिम छोर पर एक मछली पकड़ने वाला गांव टिकाऊ मासिक धर्म प्रथाओं को अपनाता है।',
-    image: '/Blog_Images/IMG_8023_1024x1024.webp',
-    coverAlt: 'Fishing boats on the shore of a Kanyakumari village at dawn',
-    date: '2024-07-20', readTime: '4 min read', category: 'community',
-    author: 'Meena Pillai', authorRole: 'Program Coordinator',
-    authorBio: 'Meena coordinates Saukhyam\'s coastal programmes across Tamil Nadu and Kerala, with a focus on fisherfolk communities.',
-    tags: ['REACH', 'Stories', 'Kanyakumari'],
-    content: [
-      { type: 'paragraph', text: 'In the fishing hamlet of Kovalam, just an hour north of Kanyakumari, the tide schedules everything: when men return from sea, when women sell the catch, and, until recently, when menstrual waste washed back onto the shore.' },
-      { type: 'paragraph', text: 'For decades, the only waste-disposal system in these coastal villages was the sea itself. Disposable pads, with their plastic layers and synthetic polymers, were ending up on the very beaches where children played and boats were launched.' },
-      { type: 'heading', level: 2, text: 'A Community That Noticed' },
-      { type: 'paragraph', text: 'The change here did not begin with us. It began with Jessica, a seventeen-year-old whose father is a boat-owner. After seeing plastic fragments wash ashore after each high tide, she asked her school science teacher a simple question: where do all the pads go? The answer led her to Saukhyam.' },
-      { type: 'quote', text: 'The sea feeds us. I did not want us to be feeding it plastic.', attribution: 'Jessica Xavier, student & local Saukhyam ambassador' },
-      { type: 'heading', level: 2, text: 'From One School to Twelve Villages' },
-      { type: 'paragraph', text: 'Jessica\'s school invited our team for a single workshop. That one session grew, across twelve fishing villages along the Kanyakumari coast, we now have an active REACH circle.' },
-      { type: 'list', style: 'number', items: [
-        'A session for the women: practical and hands-on, with starter packs',
-        'A separate conversation for the men of the community, because the waste is everyone\'s',
-        'A small satellite production unit, now run by eight local women',
-      ] },
-      { type: 'image', src: '/Blog_Images/kanyakumari-women.webp', alt: 'Women of a coastal Tamil Nadu village receiving Saukhyam starter packs', caption: 'The first batch of reusable pads distributed at Kovalam fisheries co-op.' },
-      { type: 'callout', variant: 'success', title: '3,400+ pads switched', text: 'In six months, coastal Kanyakumari saw 3,400 fewer disposable pads per cycle, pads that would otherwise have reached the sea.' },
-      { type: 'heading', level: 3, text: 'The Economics' },
-      { type: 'paragraph', text: 'A fishing family\'s income is seasonal and unpredictable. A reusable pad that lasts two years eliminates one of their few non-negotiable monthly expenses. For the household of Maria, who has three daughters, that is over ₹7,000 saved each year, which is enough to cover a semester of school fees.' },
-      { type: 'heading', level: 2, text: 'What We Learnt From the Coast' },
-      { type: 'paragraph', text: 'Coastal communities have taught us something that inland India had not: sustainability is not an abstract virtue here, it is visible. You see it on the shoreline every morning. When the connection between choice and consequence is that direct, behaviour change happens quickly.' },
-      { type: 'paragraph', text: 'Jessica now mentors three younger students in her school who want to carry the programme forward. The winds off the cape are still warm, still salty, and now they carry a little less plastic.' },
-    ],
-  },
-  {
-    id: 'b3', slug: 'my-saukhyam-journey',
-    title: 'My Saukhyam Journey',
-    titleHi: 'मेरी सौख्यम यात्रा',
-    excerpt: 'A personal story of switching from disposables and never looking back. The journey from skeptic to ambassador.',
-    excerptHi: 'डिस्पोजेबल से स्विच करने और कभी पीछे न मुड़ने की एक व्यक्तिगत कहानी।',
-    image: '/Blog_Images/IMG_1232_1_1024x1024.webp',
-    coverAlt: 'Anjali Rao at home with her starter pack of Saukhyam pads',
-    date: '2024-06-10', readTime: '6 min read', category: 'stories',
-    author: 'Anjali Rao', authorRole: 'Brand Ambassador',
-    authorBio: 'Anjali is a software engineer in Bengaluru and a Saukhyam ambassador. She switched in 2022 and has not bought a disposable pad since.',
-    tags: ['Personal Story', 'HEAL', 'Switch'],
-    content: [
-      { type: 'paragraph', text: 'I was the last person you would expect to switch to reusable pads. I am a software engineer. I live in a Bengaluru apartment. I order groceries online. My lifestyle is built for convenience, not laundry. And yet, two years ago, I gave away every disposable pad in my bathroom, and I have not looked back.' },
-      { type: 'heading', level: 2, text: 'Why I Was a Skeptic' },
-      { type: 'paragraph', text: 'I had three clear objections when a friend first showed me her Saukhyam starter pack:' },
-      { type: 'list', style: 'bullet', items: [
-        'Hygiene: would reusing really be clean?',
-        'Convenience: I travel often, and washing a pad in a hotel sink sounded impossible',
-        'Comfort: I assumed a thicker pad would be bulky and uncomfortable',
-      ] },
-      { type: 'paragraph', text: 'Each of those concerns, in order, dissolved within the first month.' },
-      { type: 'heading', level: 2, text: 'Month One: The Surprise' },
-      { type: 'paragraph', text: 'The first cycle was an experiment. I used Saukhyam during the day and kept disposables as a backup at night. By day three, I noticed something that had nothing to do with the pads themselves: my skin was not itching. I had not realised how much my body was reacting to the synthetic layer of disposables until it was gone.' },
-      { type: 'quote', text: 'The rashes, the heat, the low-grade irritation. I thought that was just what periods felt like. It isn\'t.' },
-      { type: 'image', src: '/Blog_Images/anjali-starter.webp', alt: 'Anjali\'s first Saukhyam starter pack laid out on a bed', caption: 'My first starter pack: the wet bag turned out to be the single most useful accessory.' },
-      { type: 'heading', level: 3, text: 'The Travel Question' },
-      { type: 'paragraph', text: 'On a work trip to Singapore two months in, I discovered the wet bag is genuinely the unsung hero. Used pad goes into the wet bag; wet bag goes into a ziplock in my suitcase; everything gets washed in one go when I\'m home. There is nothing complicated about it once you have done it once.' },
-      { type: 'callout', variant: 'info', title: 'A practical tip', text: 'Pack two wet bags if you travel: one "used" and one "clean". It makes life easier in hotel bathrooms with no drying space.' },
-      { type: 'heading', level: 2, text: 'Month Six: The Period Pain Question' },
-      { type: 'paragraph', text: 'I did not switch for health reasons. I switched for environmental ones. But by month six, my cramps, which had been a reliable nine-out-of-ten on the first day of every cycle for fifteen years, had reduced to something I could work through without painkillers.' },
-      { type: 'paragraph', text: 'I don\'t know for certain that Saukhyam caused that. Banana fiber may genuinely have anti-inflammatory properties; or simply removing the synthetic chemicals next to my skin was enough. Either way, two years in, the change has held.' },
-      { type: 'heading', level: 2, text: 'What I Tell Friends Now' },
-      { type: 'list', style: 'number', items: [
-        'Start with a starter pack, not a full value pack. You want to try before you commit.',
-        'Give it a full three cycles. The first is awkward; by the third it is automatic.',
-        'Buy the wet bag. You will not regret it.',
-        'Dry in the sun if you can. Sunlight is the cleanest disinfectant there is.',
-      ] },
-      { type: 'callout', variant: 'success', title: 'Two years, zero disposables', text: 'Over two years, I have not purchased a single disposable pad. Rough estimate: ₹9,600 saved, ~240 disposables not sent to a landfill.' },
-      { type: 'paragraph', text: 'If you are where I was two years ago, curious but not convinced: start with one pad, one cycle. Your body may surprise you. Mine did.' },
-    ],
-  },
-];
+/* Blog types & posts - see src/data/blog/ and BLOG_STANDARDS.md */
+export type { BlogBlock, BlogPost, BlogCategory } from '@/types/blog';
+export { blogPosts, getBlogPostBySlug, getAllBlogSlugs } from '@/data/blog';
 

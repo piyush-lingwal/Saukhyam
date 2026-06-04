@@ -1,15 +1,18 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { Suspense, useEffect, useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
   ShoppingBag, Leaf, Eye, Truck, Shield,
   RefreshCw, Heart, ChevronRight, PackageSearch,
-  ShieldCheck, Droplets, Wind, Zap, CheckCircle2, XCircle, Users, Trophy,
+  ShieldCheck, Wind, Zap, CheckCircle2, XCircle,
 } from 'lucide-react';
 import { products, type Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import ProductPagination from '@/components/products/ProductPagination';
+import BananaFiberCtaSection from '@/components/products/BananaFiberCtaSection';
 import styles from './page.module.css';
 
 type Category = 'all' | Product['category'];
@@ -32,18 +35,18 @@ const trustItems = [
 ];
 
 const reusablePoints = [
-  '100% chemical free: no dioxins, phthalates, or bleach',
+  '100% chemical free - no dioxins, phthalates, or bleach',
   'Banana fiber with natural antimicrobial properties',
   'Lasts 2-3 years with proper care',
   'Saves ₹3,000+ per year vs disposables',
-  'Biodegradable, leading to zero landfill waste',
+  'Biodegradable - zero landfill waste',
   'Handcrafted by empowered rural women',
 ];
 
 const disposablePoints = [
   'Contains dioxins, phthalates, and VOCs',
   'Synthetic superabsorbent polymers next to skin',
-  'Single use: 12,000+ pads in a lifetime',
+  'Single use - 12,000+ pads in a lifetime',
   'Costs ₹3,000-5,000 per year recurring',
   'Takes 500-800 years to decompose',
   'Mass-produced in chemical factories',
@@ -58,15 +61,30 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const { addItem } = useCart();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const searchQuery = (searchParams.get('search') ?? '').trim().toLowerCase();
   const [activeCategory, setActiveCategory] = useState<Category>('all');
   const [sortBy, setSortBy] = useState<SortOption>('default');
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 9;
 
   const filteredProducts = useMemo(() => {
     let filtered = activeCategory === 'all'
       ? [...products]
       : products.filter(p => p.category === activeCategory);
+
+    if (searchQuery) {
+      filtered = filtered.filter(
+        (p) =>
+          p.name.toLowerCase().includes(searchQuery) ||
+          p.description.toLowerCase().includes(searchQuery) ||
+          p.features.some((f) => f.toLowerCase().includes(searchQuery)) ||
+          p.category.toLowerCase().includes(searchQuery)
+      );
+    }
 
     switch (sortBy) {
       case 'price-low':
@@ -81,12 +99,32 @@ export default function ProductsPage() {
     }
 
     return filtered;
-  }, [activeCategory, sortBy]);
+  }, [activeCategory, sortBy, searchQuery]);
 
   const availableCategories = useMemo(() => {
     const cats = new Set(products.map(p => p.category));
     return ['all', ...Array.from(cats)] as Category[];
   }, []);
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / productsPerPage));
+
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * productsPerPage;
+    return filteredProducts.slice(start, start + productsPerPage);
+  }, [filteredProducts, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, sortBy, searchQuery]);
+
+  useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(totalPages);
+  }, [currentPage, totalPages]);
 
   return (
     <div className={styles.productsPage}>
@@ -133,13 +171,16 @@ export default function ProductsPage() {
 
       {/* ── Main Content ── */}
       <div className="container">
-        {/* Toolbar */}
+        {searchQuery && (
+          <p className={styles.searchBanner} role="status">
+            Showing results for <strong>&ldquo;{searchParams.get('search')}&rdquo;</strong>
+            {' · '}
+            <Link href="/products">Clear search</Link>
+          </p>
+        )}
 
         <div className={styles.toolbar}>
           <div className={styles.filterTabs}>
-            <Link href="/saukhyam-pads" className={styles.filterTabLink}>
-              Saukhyam Pads
-            </Link>
             {availableCategories.map(cat => (
               <button
                 key={cat}
@@ -171,12 +212,12 @@ export default function ProductsPage() {
         {filteredProducts.length > 0 ? (
           <motion.div
             className={styles.productGrid}
-            key={activeCategory + sortBy}
+            key={`${activeCategory}-${sortBy}-${searchQuery}-${currentPage}`}
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
           >
-            {filteredProducts.map((product) => (
+            {paginatedProducts.map((product) => (
               <motion.div key={product.id} variants={fadeInUp} className={styles.productCard}>
                 {product.badge && <span className={styles.productBadge}>{product.badge}</span>}
 
@@ -188,7 +229,11 @@ export default function ProductsPage() {
                       <Leaf size={48} className={styles.productPlaceholder} />
                     )}
                     <div className={styles.quickActions}>
-                      <button className={styles.quickActionBtn} aria-label="Quick view">
+                      <button
+                        className={styles.quickActionBtn}
+                        aria-label={`View ${product.name}`}
+                        onClick={(e) => { e.preventDefault(); router.push(`/products/${product.slug}`); }}
+                      >
                         <Eye size={16} />
                       </button>
                       <button className={styles.quickActionBtn} aria-label="Wishlist">
@@ -235,6 +280,15 @@ export default function ProductsPage() {
             <h3>No products found</h3>
             <p>Try adjusting your filters to find what you&apos;re looking for.</p>
           </div>
+        )}
+
+        {filteredProducts.length > 0 && (
+          <ProductPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalCount={filteredProducts.length}
+            onPageChange={handlePageChange}
+          />
         )}
 
         {/* ── Benefits Banner ── */}
@@ -290,27 +344,6 @@ export default function ProductsPage() {
             <span className={styles.statLabel}>Pad Lifespan</span>
           </motion.div>
         </motion.div>
-      </div>
-
-      {/* ── Why Banana Fiber Navigation ── */}
-      <div className={styles.fiberNavWrap}>
-        <div className="container">
-          <motion.div
-            className={styles.fiberNavInner}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-          >
-            <Link href="/why-banana-fiber" className={styles.fiberNavBtn}>
-              <span className={styles.fiberNavIcon}>
-                <Leaf size={15} />
-              </span>
-              <span className={styles.fiberNavLabel}>Why Banana Fiber</span>
-              <ChevronRight size={16} className={styles.fiberNavArrow} />
-            </Link>
-          </motion.div>
-        </div>
       </div>
 
       {/* ── Why Switch ── */}
@@ -370,6 +403,16 @@ export default function ProductsPage() {
           </motion.div>
         </div>
       </section>
+
+      <BananaFiberCtaSection />
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className={styles.productsPage} aria-busy="true" />}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }

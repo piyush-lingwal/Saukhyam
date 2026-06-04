@@ -11,10 +11,10 @@ import styles from './Navbar.module.css';
 const navItems = [
   { label: 'Our Story', href: '/about' },
   { label: 'Products', href: '/products' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Science', href: '/science' },
   { label: 'Awards', href: '/impact' },
   { label: 'FAQ', href: '/faq' },
-  { label: 'Blog', href: '/blog' },
 ];
 
 export default function Navbar() {

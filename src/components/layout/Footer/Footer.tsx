@@ -12,7 +12,7 @@ const footerLinks = {
     { label: 'Our Story', href: '/about' },
     { label: 'Team', href: '/team' },
     { label: 'Partners', href: '/partners' },
-    { label: 'Press & Media', href: '/press' },
+    { label: 'Press & Media', href: '/media' },
     { label: 'Internships', href: '/internships' },
     { label: 'Contact Us', href: '/contact' },
   ],

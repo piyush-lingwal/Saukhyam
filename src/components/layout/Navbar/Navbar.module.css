@@ -389,6 +389,30 @@
   color: #0D9488;
   background: rgba(13, 148, 136, 0.06);
 }
+/* ══════════════════════════════════════════════════
+   MEDIA PAGE THEME - activated by [data-page-theme="media"] on <html>
+   Colors: deep forest green + gold accent
+   ══════════════════════════════════════════════════ */
+
+:global([data-page-theme="media"]) .cartBadge {
+  background: #14532d;
+}
+
+:global([data-page-theme="media"]) .navLink:hover {
+  color: #14532d;
+  background: rgba(20, 83, 45, 0.06);
+}
+:global([data-page-theme="media"]) .navLink.active {
+  color: #14532d;
+}
+:global([data-page-theme="media"]) .navLink.active::after {
+  background: #c9a227;
+}
+
+:global([data-page-theme="media"]) .actionBtn:hover {
+  color: #14532d;
+  background: rgba(20, 83, 45, 0.06);
+}
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
