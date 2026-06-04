@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   Heart, Leaf, Users, Trophy, ShoppingBag,
@@ -144,9 +145,11 @@ export default function AboutPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <img
+              <Image
                 src="/amma.png"
                 alt="Mata Amritanandamayi (Amma), Spiritual Guide of Saukhyam"
+                width={400}
+                height={500}
                 className={styles.ammaImage}
                 loading="lazy"
               />
@@ -250,9 +253,11 @@ export default function AboutPage() {
               className={styles.founderImageCol}
             >
               <div className={styles.founderPhotoFrame}>
-                <img
+                <Image
                   src="/anju-bist.png"
                   alt="Anju Bist, Founder & Managing Director, Saukhyam"
+                  width={400}
+                  height={500}
                   className={styles.founderPhoto}
                   loading="lazy"
                 />
@@ -304,7 +309,7 @@ export default function AboutPage() {
             ].map((item) => (
               <motion.div key={item.step} variants={fadeUp} className={styles.howMadeCard}>
                 <div className={styles.howMadeImageWrap}>
-                  <img src={item.img} alt={item.title} className={styles.howMadeImage} loading="lazy" />
+                  <Image src={item.img} alt={item.title} width={400} height={300} className={styles.howMadeImage} loading="lazy" />
                   <div className={styles.howMadeStepBadge}>{item.step}</div>
                 </div>
                 <div className={styles.howMadeCardBody}>
@@ -441,7 +446,7 @@ export default function AboutPage() {
                   <div className={styles.timelineCard}>
                     {event.image && (
                       <div className={styles.timelineCardImage}>
-                        <img src={event.image} alt={event.title} loading="lazy" />
+                        <Image src={event.image} alt={event.title} width={400} height={250} loading="lazy" />
                       </div>
                     )}
                     <div className={styles.timelineCardBody}>

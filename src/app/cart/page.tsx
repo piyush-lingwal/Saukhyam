@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   ShoppingBag, Minus, Plus, Trash2, ArrowRight,
@@ -61,7 +62,7 @@ export default function CartPage() {
               <motion.div key={item.product.id} variants={fadeInUp} className={styles.cartItem}>
                 <div className={styles.itemImage}>
                   {item.product.images[0] ? (
-                    <img src={item.product.images[0]} alt={item.product.name} />
+                    <Image src={item.product.images[0]} alt={item.product.name} width={120} height={120} />
                   ) : (
                     <Leaf size={32} style={{ color: 'var(--green-300)', margin: 'auto', display: 'block', paddingTop: '30px' }} />
                   )}

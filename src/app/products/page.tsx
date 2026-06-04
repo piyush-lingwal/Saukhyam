@@ -1,7 +1,8 @@
 'use client';
 
-import { Suspense, useEffect, useState, useMemo } from 'react';
+import { Suspense, useState, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
@@ -108,23 +109,28 @@ function ProductsPageContent() {
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / productsPerPage));
 
+  // Clamp currentPage if it exceeds totalPages (e.g. after filtering narrows results)
+  const safePage = currentPage > totalPages ? totalPages : currentPage;
+
   const paginatedProducts = useMemo(() => {
-    const start = (currentPage - 1) * productsPerPage;
+    const start = (safePage - 1) * productsPerPage;
     return filteredProducts.slice(start, start + productsPerPage);
-  }, [filteredProducts, currentPage]);
+  }, [filteredProducts, safePage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  useEffect(() => {
+  const handleCategoryChange = (cat: Category) => {
+    setActiveCategory(cat);
     setCurrentPage(1);
-  }, [activeCategory, sortBy, searchQuery]);
+  };
 
-  useEffect(() => {
-    if (currentPage > totalPages) setCurrentPage(totalPages);
-  }, [currentPage, totalPages]);
+  const handleSortChange = (sort: SortOption) => {
+    setSortBy(sort);
+    setCurrentPage(1);
+  };
 
   return (
     <div className={styles.productsPage}>
@@ -185,7 +191,7 @@ function ProductsPageContent() {
               <button
                 key={cat}
                 className={`${styles.filterTab} ${activeCategory === cat ? styles.active : ''}`}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => handleCategoryChange(cat)}
               >
                 {categoryLabels[cat]}
               </button>
@@ -198,7 +204,7 @@ function ProductsPageContent() {
             <select
               className={styles.sortSelect}
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
+              onChange={(e) => handleSortChange(e.target.value as SortOption)}
             >
               <option value="default">Sort by: Featured</option>
               <option value="price-low">Price: Low to High</option>
@@ -224,7 +230,7 @@ function ProductsPageContent() {
                 <Link href={`/products/${product.slug}`}>
                   <div className={styles.productImageWrap}>
                     {product.images[0] ? (
-                      <img src={product.images[0]} alt={product.name} loading="lazy" />
+                      <Image src={product.images[0]} alt={product.name} width={400} height={400} loading="lazy" />
                     ) : (
                       <Leaf size={48} className={styles.productPlaceholder} />
                     )}

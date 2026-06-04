@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
@@ -91,7 +92,7 @@ export default function ProductDetailPage() {
             <div className={styles.mainImage}>
               {product.badge && <span className={styles.imageBadge}>{product.badge}</span>}
               {product.images[0] ? (
-                <img src={product.images[0]} alt={product.name} />
+                <Image src={product.images[0]} alt={product.name} width={600} height={600} priority />
               ) : (
                 <Leaf size={96} className={styles.imagePlaceholder} />
               )}
@@ -249,7 +250,7 @@ export default function ProductDetailPage() {
                 <Link key={p.id} href={`/products/${p.slug}`} className={styles.relatedCard}>
                   <div className={styles.relatedCardImage}>
                     {p.images[0] ? (
-                      <img src={p.images[0]} alt={p.name} loading="lazy" />
+                      <Image src={p.images[0]} alt={p.name} width={300} height={300} loading="lazy" />
                     ) : (
                       <Leaf size={40} className={styles.imagePlaceholder} />
                     )}

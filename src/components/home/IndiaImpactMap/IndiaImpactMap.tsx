@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Users, School, Home, Briefcase, Recycle, TreePine, Droplets,
   Wind, Heart, ArrowRight, MapPin, Sparkles, HandHeart, X, Quote,
@@ -130,7 +130,6 @@ function IndiaImpactMapInner({
   const mapWrapRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const clickTimer = useRef<number | null>(null);
-  const inView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   useEffect(() => () => {
     if (clickTimer.current) window.clearTimeout(clickTimer.current);
@@ -234,7 +233,8 @@ function IndiaImpactMapInner({
           <motion.div
             className={s.mapCol}
             initial={{ opacity: 0, scale: 0.97 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className={s.mapWrap} ref={mapWrapRef}>
@@ -333,7 +333,8 @@ function IndiaImpactMapInner({
           <motion.div
             className={s.dashCol}
             initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
             <AnimatePresence mode="wait">
