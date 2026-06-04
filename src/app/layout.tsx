@@ -7,7 +7,7 @@ import { CartProvider } from '@/context/CartContext';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Saukhyam Reusable Pads — Healing Periods. Healing the Planet.',
+    default: 'Saukhyam Reusable Pads: Healing Periods. Healing the Planet.',
     template: '%s | Saukhyam Reusable Pads',
   },
   description:
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     'reusable sanitary napkins', 'cloth pads India',
   ],
   openGraph: {
-    title: 'Saukhyam Reusable Pads — Healing Periods. Healing the Planet.',
+    title: 'Saukhyam Reusable Pads: Healing Periods. Healing the Planet.',
     description:
       'Handcrafted reusable sanitary pads made with banana fiber. Chemical-free, eco-friendly, and empowering rural women across India.',
     url: 'https://saukhyampads.org',

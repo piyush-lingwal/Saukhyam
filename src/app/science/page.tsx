@@ -1,599 +1,704 @@
 'use client';
 
+import { useState, useMemo, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
-  Microscope, Layers, Droplets, Shield, Heart, Leaf,
-  ShoppingBag, Sparkles, Sun, Wind, Ban, Recycle,
-  FlaskConical, Globe, AlertTriangle, Flag,
-  BookOpen, ExternalLink, FileText, ChevronRight,
-  XCircle, CheckCircle2, Beaker, Brain, Activity,
-  ShieldAlert, Atom,
+  Microscope,
+  BookOpen,
+  Layers,
+  Globe,
+  ShieldAlert,
+  FlaskConical,
+  Beaker,
+  Atom,
+  Wind,
+  Droplets,
+  Leaf,
+  CircleDot,
+  Sparkles,
+  CheckCircle2,
+  ShoppingBag,
+  ChevronRight,
+  X,
+  ExternalLink,
+  Brain,
 } from 'lucide-react';
 import {
-  hiddenDangersStudies,
   recentResearchStudies,
-  keyFindings,
   chemicalsFound,
-  researchConclusion,
+  type ResearchStudy,
 } from '@/data/research';
 import styles from './page.module.css';
+import { AnimatePresence } from 'framer-motion';
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
-const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
-const staggerFast = { visible: { transition: { staggerChildren: 0.06 } } };
+const stagger = { visible: { transition: { staggerChildren: 0.08 } } };
+const staggerFast = { visible: { transition: { staggerChildren: 0.05 } } };
 
-const padLayers = [
-  { num: 1, name: 'Top Layer — Soft Cotton', desc: '100% cotton surface for comfort and breathability', icon: Heart },
-  { num: 2, name: 'Absorbent Core — Banana Fiber', desc: 'Natural banana fiber with antimicrobial properties (3g–9g)', icon: Leaf },
-  { num: 3, name: 'Moisture Barrier — PU Layer', desc: 'Polyurethane leak-proof layer prevents any seepage', icon: Shield },
-  { num: 4, name: 'Base Layer — Cotton Back', desc: 'Breathable cotton back with snap-button wings', icon: Wind },
+const chemicalIcons: Record<string, typeof Beaker> = {
+  Phthalates: Beaker,
+  Dioxins: FlaskConical,
+  'VOCs (Toluene etc.)': Wind,
+  'BPA (Bisphenol A)': Atom,
+  'Heavy Metals': ShieldAlert,
+  Parabens: Droplets,
+  'Pesticide Residues': Leaf,
+  Microplastics: CircleDot,
+  Fragrances: Sparkles,
+  'SAP (Super Absorbent Polymers)': Layers,
+};
+
+const allStudies: ResearchStudy[] = recentResearchStudies;
+
+const heroGlassStats = [
+  { value: '11', label: 'Scientific Publications' },
+  { value: 'Plant-Based', label: 'Banana Fiber Technology' },
+  { value: 'Free From', label: 'Synthetic Additives' },
 ];
 
-const comparisonData = [
-  { feature: 'Material', saukhyam: 'Banana Fiber + Cotton', disposable: 'Wood Pulp + Plastic + SAP Gel' },
-  { feature: 'Chemicals', saukhyam: 'Zero — 100% Chemical Free', disposable: 'Dioxins, Phthalates, VOCs, Chlorine' },
-  { feature: 'Lifespan', saukhyam: '2-3 Years (100+ cycles)', disposable: 'Single Use (4-8 hours)' },
-  { feature: 'Cost / Year', saukhyam: '₹200-400 / year', disposable: '₹2,400-4,000 / year' },
-  { feature: 'Waste Generated', saukhyam: '0 kg (biodegradable)', disposable: '125+ kg lifetime waste' },
-  { feature: 'Decomposition', saukhyam: '6 months (compostable)', disposable: '500-800 years' },
-  { feature: 'Skin Safety', saukhyam: 'Hypoallergenic, no irritation', disposable: 'Rashes, allergies, hormonal disruption' },
-  { feature: 'Absorbency', saukhyam: 'High (natural fiber wicking)', disposable: 'High (chemical SAP gel)' },
+function AnimatedStat({
+  value,
+  suffix = '',
+  duration = 2,
+}: {
+  value: number;
+  suffix?: string;
+  duration?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let frameId: number;
+    const startTime = performance.now();
+    const animate = (now: number) => {
+      const progress = Math.min((now - startTime) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(value * eased));
+      if (progress < 1) frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [isInView, value, duration]);
+
+  return (
+    <span ref={ref}>
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
+const featuredAreas = [
+  { id: 'materials', label: 'Menstrual Product Materials', icon: Layers, desc: 'Exploring constituent safety and plastic-free alternatives.' },
+  { id: 'hormonal', label: 'Hormonal Health Research', icon: Brain, desc: 'Epidemiological studies on EDCs and menstrual wellness.' },
+  { id: 'endocrine', label: 'Endocrine Disruption Studies', icon: FlaskConical, desc: 'Mechanistic and exposure pathways of chemical absorption.' },
+  { id: 'sustainable', label: 'Sustainable Period Care', icon: Leaf, desc: 'Lifecycle impacts and biodegradable banana fiber cores.' },
 ];
 
-const healthBenefits = [
-  { icon: Heart, title: 'Reduced Period Pain', desc: 'Users report up to 60% reduction in cramps after switching. Banana fiber\'s therapeutic properties may help naturally.' },
-  { icon: Shield, title: 'No Chemical Exposure', desc: 'Zero dioxins, phthalates, or synthetic polymers touching your skin. 100% chemical-free every cycle.' },
-  { icon: Droplets, title: 'Better Skin Health', desc: 'Breathable cotton + natural fiber means no rashes, no itching, no dryness. Your skin can breathe.' },
-  { icon: Sun, title: 'Natural Disinfection', desc: 'Sunlight drying naturally kills 99.9% bacteria — no need for chemical sanitizers or UV sterilizers.' },
-  { icon: Wind, title: 'Breathable Design', desc: 'Natural materials allow air circulation, preventing the humid environment that causes infections with plastic pads.' },
-  { icon: Recycle, title: 'Planet Healing', desc: 'One woman switching saves 125+ kg of non-biodegradable waste. Each pad is fully compostable at end-of-life.' },
+function getCategoryTag(category: string): string {
+  switch (category) {
+    case 'chemicals': return 'Material Safety';
+    case 'vocs': return 'Toxicology';
+    case 'heavy-metals': return 'Environmental Exposure';
+    case 'phthalates': return 'Endocrine Research';
+    case 'safety': return 'Material Safety';
+    case 'pcos': return 'Hormonal Health';
+    case 'mechanistic': return 'Endocrine Research';
+    default: return 'Material Safety';
+  }
+}
+
+const evidenceCards = [
+  {
+    value: 11,
+    display: null as string | null,
+    subtitle: 'Peer-Reviewed Studies',
+    desc: 'Published in leading journals including BJOG, Environment International, and PLOS ONE',
+    icon: BookOpen,
+    animate: true,
+  },
+  {
+    value: 7,
+    display: null,
+    subtitle: 'Countries Tested',
+    desc: 'Heavy metals identified in pads from China, Japan, South Korea, USA, UK, Australia, and Germany',
+    icon: Globe,
+    animate: true,
+  },
+  {
+    value: 22,
+    display: null,
+    subtitle: 'Human Studies on BPA-PCOS/PMOS Link',
+    desc: 'Most reporting higher BPA exposure among women with PCOS/PMOS',
+    icon: Microscope,
+    animate: true,
+  },
+  {
+    value: null,
+    display: 'Higher',
+    subtitle: 'Chemical Load in Indian Pads',
+    desc: 'Indian brands reported higher concentrations of certain chemicals compared with products studied from the US, EU, and Japan',
+    icon: ShieldAlert,
+    animate: false,
+  },
 ];
 
-const iconMap: Record<string, typeof FlaskConical> = {
-  FlaskConical,
-  Globe,
-  AlertTriangle,
-  Flag,
-};
-
-const categoryIcons: Record<string, typeof FlaskConical> = {
-  chemicals: FlaskConical,
-  'india-specific': Flag,
-  reproductive: Activity,
-  'heavy-metals': ShieldAlert,
-  phthalates: Beaker,
-  vocs: Atom,
-  safety: Shield,
-  pcos: Brain,
-  mechanistic: Microscope,
-};
-
-const categoryLabels: Record<string, string> = {
-  chemicals: 'Chemical Analysis',
-  'india-specific': 'India Specific',
-  reproductive: 'Reproductive Health',
-  'heavy-metals': 'Heavy Metals',
-  phthalates: 'Phthalates',
-  vocs: 'VOCs',
-  safety: 'Safety Assessment',
-  pcos: 'PCOS Link',
-  mechanistic: 'Mechanistic',
-};
+function studiesForChemical(name: string): ResearchStudy[] {
+  const key = name.split(' ')[0].toLowerCase();
+  return allStudies.filter(
+    s =>
+      s.title.toLowerCase().includes(key) ||
+      s.summary.toLowerCase().includes(key) ||
+      (key === 'voc' && (s.summary.includes('VOC') || s.title.includes('VOC'))) ||
+      (key === 'bpa' && s.summary.toLowerCase().includes('bpa')) ||
+      (key === 'sap' && s.summary.toLowerCase().includes('absorbent')) ||
+      (name.includes('Heavy') && s.category === 'heavy-metals') ||
+      (name.includes('Phthalate') && s.category === 'phthalates')
+  );
+}
 
 export default function SciencePage() {
+  const [chemicalModal, setChemicalModal] = useState<string | null>(null);
+  const [selectedArea, setSelectedArea] = useState<string>('All');
+  const [expandedStudies, setExpandedStudies] = useState<Record<string, boolean>>({});
+
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+  const heroBgY = useTransform(heroScroll, [0, 1], [0, 70]);
+  const heroContentY = useTransform(heroScroll, [0, 1], [0, 35]);
+
+  const toggleSummary = (id: string) => {
+    setExpandedStudies(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const modalStudies = useMemo(
+    () => (chemicalModal ? studiesForChemical(chemicalModal) : []),
+    [chemicalModal]
+  );
+
+  const filteredStudies = useMemo(() => {
+    if (selectedArea === 'All') return allStudies;
+    if (selectedArea === 'materials') {
+      return allStudies.filter(s => ['chemicals', 'vocs', 'heavy-metals', 'safety'].includes(s.category));
+    }
+    if (selectedArea === 'hormonal') {
+      return allStudies.filter(s => ['pcos', 'mechanistic'].includes(s.category));
+    }
+    if (selectedArea === 'endocrine') {
+      return allStudies.filter(s => ['phthalates', 'pcos', 'mechanistic'].includes(s.category));
+    }
+    if (selectedArea === 'sustainable') {
+      return allStudies.filter(s => ['chemicals', 'safety'].includes(s.category));
+    }
+    return allStudies;
+  }, [selectedArea]);
+
   return (
     <div className={styles.sciencePage}>
-      {/* ── Hero ── */}
-      <section className={styles.hero}>
-        <div className={styles.heroGrid} aria-hidden="true" />
-        <div className="container">
-          <motion.div className={styles.heroContent} initial="hidden" animate="visible" variants={stagger}>
-            <motion.div variants={fadeInUp} className={styles.heroBreadcrumb}>
+      {/* ═══ SECTION 1, HERO ═══ */}
+      <section
+        ref={heroRef}
+        className={styles.hero}
+        aria-labelledby="science-hero-heading"
+      >
+        <motion.div className={styles.heroBgLayer} style={{ y: heroBgY }} aria-hidden="true">
+          <Image
+            src="/science/hero-lab.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroBgImg}
+          />
+        </motion.div>
+        <div className={styles.heroOverlay} aria-hidden="true" />
+        <div className={styles.heroGrain} aria-hidden="true" />
+
+        <div className={`container ${styles.heroContainer}`}>
+          <motion.div
+            className={styles.heroContent}
+            style={{ y: heroContentY }}
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+          >
+            <motion.nav
+              variants={fadeInUp}
+              className={styles.heroBreadcrumb}
+              aria-label="Breadcrumb"
+            >
               <Link href="/">Home</Link>
-              <ChevronRight size={14} />
-              <span>Science</span>
-            </motion.div>
-            <motion.div variants={fadeInUp} className={styles.heroLabel}>
-              <Microscope size={14} />
-              The Science Behind Saukhyam
-            </motion.div>
-            <motion.h1 variants={fadeInUp} className={styles.heroTitle}>
-              Why <span className={styles.heroAccent}>Banana Fiber</span>
-              <br />
-              Changes Everything
+              <span className={styles.breadcrumbSep} aria-hidden="true">
+                {' '}
+                &gt;{' '}
+              </span>
+              <span className={styles.breadcrumbCurrent}>Science</span>
+            </motion.nav>
+
+            <motion.span variants={fadeInUp} className={styles.heroSecondaryPill}>
+              About Disposable Pads
+            </motion.span>
+
+            <motion.h1
+              id="science-hero-heading"
+              variants={fadeInUp}
+              className={styles.heroTitle}
+            >
+              The Science Behind Safer Period Care
             </motion.h1>
-            <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              India&apos;s first banana fiber absorbent technology — naturally antimicrobial,
-              chemical free, and scientifically proven to be better for your body.
-              Backed by 16+ peer-reviewed studies.
+
+            <motion.p variants={fadeInUp} className={styles.heroBody}>
+              Scientific studies identify chemicals in disposable sanitary pads that may be absorbed through intimate tissues and interfere with endocrine function.
             </motion.p>
-            <motion.div variants={fadeInUp} className={styles.heroActions}>
-              <Link href="/products" className={styles.heroBtnPrimary}>
-                <ShoppingBag size={18} />
-                Switch Now
-              </Link>
-              <a href="#research" className={styles.heroBtnSecondary}>
-                <BookOpen size={18} />
-                Read the Research
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* ── Pad Anatomy ── */}
-      <section className={styles.section}>
-        <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
-              <Layers size={14} />
-              What&apos;s Inside a Saukhyam Pad
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
-              4 Layers of Natural Protection
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={styles.sectionDesc}>
-              Each layer is carefully engineered — natural, functional, and skin-safe.
-              Zero chemicals. Zero compromise.
-            </motion.p>
-          </motion.div>
-
-          <div className={styles.layersGrid}>
-            <motion.div
-              className={styles.layersVisual}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-            >
-              {padLayers.map(layer => {
-                const LayerIcon = layer.icon;
-                return (
-                  <motion.div key={layer.num} variants={fadeInUp} className={styles.layer}>
-                    <div className={styles.layerNum}>{layer.num}</div>
-                    <div className={styles.layerInfo}>
-                      <h4>{layer.name}</h4>
-                      <p>{layer.desc}</p>
-                    </div>
-                    <div className={styles.layerIcon}>
-                      <LayerIcon size={18} />
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-
-            <motion.div
-              className={styles.layersSummary}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-            >
-              <motion.div variants={fadeInUp} className={styles.summaryHighlight}>
-                <Leaf size={20} />
-                <div>
-                  <strong>The Magic of Layer 2</strong>
-                  <p>
-                    Unlike tree-based cellulose used in disposable pads (which requires
-                    deforestation and chemical processing), banana fiber is sourced from
-                    <strong> agricultural waste</strong>. Banana trees fruit only once, then
-                    are cut — we transform that waste into a powerful absorbent material
-                    with natural antimicrobial properties.
-                  </p>
-                </div>
-              </motion.div>
-              <motion.p variants={fadeInUp}>
-                Research shows banana fiber contains <strong>pathogenesis-related (PR) proteins</strong> —
-                naturally occurring antimicrobial compounds. This means the absorbent core actively resists
-                bacterial growth, making it inherently hygienic without any chemical treatment.
-              </motion.p>
-              <motion.p variants={fadeInUp}>
-                The <strong>PU (polyurethane) leak-proof layer</strong> is breathable yet impermeable,
-                preventing leakage while allowing air flow — eliminating the &quot;greenhouse effect&quot;
-                created by plastic-backed disposable pads.
-              </motion.p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Comparison ── */}
-      <section className={`${styles.section} ${styles.sectionAlt}`}>
-        <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
-              <Ban size={14} />
-              The Comparison
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
-              Saukhyam vs. Disposable Pads
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={styles.sectionDesc}>
-              See how natural banana fiber compares to chemically-processed disposable pads.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className={styles.comparisonTableWrap}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <table className={styles.comparisonTable}>
-              <thead>
-                <tr>
-                  <th>Feature</th>
-                  <th><span className={styles.thGood}>🌿 Saukhyam Reusable</span></th>
-                  <th><span className={styles.thBad}>🚫 Disposable Pads</span></th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonData.map(row => (
-                  <tr key={row.feature}>
-                    <td><strong>{row.feature}</strong></td>
-                    <td className={styles.highlight}>
-                      <CheckCircle2 size={14} className={styles.inlineIcon} />
-                      {row.saukhyam}
-                    </td>
-                    <td className={styles.danger}>
-                      <XCircle size={14} className={styles.inlineIcon} />
-                      {row.disposable}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Health Benefits: Why Switch ── */}
-      <section className={styles.section}>
-        <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-            className={styles.sectionCenter}
-          >
-            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
-              <Sparkles size={14} />
-              Why Switch
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
-              How Switching Heals Your Body
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={`${styles.sectionDesc} ${styles.sectionDescCenter}`}>
-              Thousands of women report measurable health improvements
-              after switching to Saukhyam.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className={styles.benefitsGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {healthBenefits.map(b => {
-              const Icon = b.icon;
-              return (
-                <motion.div key={b.title} variants={fadeInUp} className={styles.benefitCard}>
-                  <div className={styles.benefitIcon}><Icon size={24} /></div>
-                  <h3>{b.title}</h3>
-                  <p>{b.desc}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════ */}
-      {/*  THE EVIDENCE — Research & Data                   */}
-      {/* ══════════════════════════════════════════════════ */}
-
-      {/* ── Key Findings Stats ── */}
-      <section id="research" className={styles.statsBar}>
-        <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-            className={styles.sectionCenter}
-          >
-            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
-              <FlaskConical size={14} />
-              The Evidence
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
-              The Hidden Dangers in Disposable Pads
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={`${styles.sectionDesc} ${styles.sectionDescCenter}`}>
-              Recent peer-reviewed research confirms that disposable sanitary napkins
-              contain harmful chemicals linked to reproductive health disorders.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className={styles.statsGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {keyFindings.map((finding) => {
-              const Icon = iconMap[finding.icon] || FlaskConical;
-              return (
-                <motion.div key={finding.label} variants={fadeInUp} className={styles.statCard}>
-                  <div className={styles.statIcon}>
-                    <Icon size={22} />
-                  </div>
-                  <div className={styles.statValue}>{finding.stat}</div>
-                  <div className={styles.statLabel}>{finding.label}</div>
-                  <p className={styles.statDesc}>{finding.description}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Chemicals Found ── */}
-      <section className={styles.section}>
-        <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
-              <ShieldAlert size={14} />
-              What&apos;s Inside Your Disposable Pad
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
-              Chemicals Found in Disposable Pads
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={styles.sectionDesc}>
-              Research from 16+ studies reveals these hazardous substances in commercial
-              sanitary napkins — many of which are endocrine disruptors.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className={styles.chemicalsGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerFast}
-          >
-            {chemicalsFound.map((chem) => (
-              <motion.div
-                key={chem.name}
-                variants={fadeInUp}
-                className={`${styles.chemicalCard} ${styles[chem.severity]}`}
-              >
-                <div className={styles.chemicalHeader}>
-                  <XCircle size={18} className={styles.chemicalDanger} />
-                  <h4>{chem.name}</h4>
-                  <span className={`${styles.severityBadge} ${styles[chem.severity]}`}>
-                    {chem.severity === 'high' ? 'High Risk' : 'Moderate Risk'}
+            <motion.div variants={fadeInUp} className={styles.heroGlassStats}>
+              {heroGlassStats.map(stat => (
+                <div key={stat.label} className={styles.heroGlassCard}>
+                  <span className={styles.heroGlassValue}>
+                    {stat.value === '11' ? <AnimatedStat value={11} /> : stat.value}
                   </span>
+                  <span className={styles.heroGlassLabel}>{stat.label}</span>
                 </div>
-                <p>{chem.effect}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Research Section 1: Hidden Dangers ── */}
-      <section className={`${styles.section} ${styles.sectionDark}`}>
-        <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeInUp} className={`${styles.sectionLabel} ${styles.sectionLabelLight}`}>
-              <FileText size={14} />
-              Research Compilation — 2024
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitleLight}>
-              The Hidden Dangers in Disposable Sanitary Napkins
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={styles.sectionDescLight}>
-              We compiled these studies in 2024 when we first started approaching doctors.
-              Doctors were more willing to believe us after we shared this research with them.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className={styles.studiesStack}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {hiddenDangersStudies.map((study) => {
-              const CategoryIcon = categoryIcons[study.category] || FlaskConical;
-              return (
-                <motion.div key={study.id} variants={fadeInUp} className={styles.studyCard}>
-                  <div className={styles.studyNumber}>{study.number}</div>
-                  <div className={styles.studyContent}>
-                    <div className={styles.studyMeta}>
-                      <span className={styles.studyCategoryBadge}>
-                        <CategoryIcon size={12} />
-                        {categoryLabels[study.category]}
-                      </span>
-                      <span className={styles.studyYear}>{study.year}</span>
-                    </div>
-                    <h3 className={styles.studyTitle}>{study.title}</h3>
-                    <p className={styles.studySummary}>{study.summary}</p>
-                    <div className={styles.studyCitation}>
-                      <span className={styles.citationAuthors}>{study.authors}</span>
-                      <span className={styles.citationJournal}>{study.journal}, {study.year}</span>
-                    </div>
-                    {study.paperUrl && (
-                      <a
-                        href={study.paperUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.studyLink}
-                      >
-                        <ExternalLink size={14} />
-                        Read Full Paper
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Research Section 2: Recent Studies ── */}
-      <section className={styles.section}>
-        <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeInUp} className={styles.sectionLabel}>
-              <Beaker size={14} />
-              Research Compilation — 2025
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>
-              11 Recent Peer-Reviewed Papers
-            </motion.h2>
-            <motion.p variants={fadeInUp} className={styles.sectionDesc}>
-              High-quality journal publications on chemicals/toxins in disposable
-              menstrual products and related health impacts — including evidence around PCOS.
-            </motion.p>
-          </motion.div>
-
-          <div className={styles.researchColumns}>
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-            >
-              <h3 className={styles.columnTitle}>
-                <FlaskConical size={18} />
-                Chemicals in Menstrual Products
-              </h3>
-              <div className={styles.compactStudies}>
-                {recentResearchStudies.slice(0, 7).map((study) => {
-                  const CategoryIcon = categoryIcons[study.category] || FlaskConical;
-                  return (
-                    <motion.div key={study.id} variants={fadeInUp} className={styles.compactStudyCard}>
-                      <div className={styles.compactStudyNum}>{study.number}</div>
-                      <div className={styles.compactStudyBody}>
-                        <h4>{study.title}</h4>
-                        <div className={styles.compactMeta}>
-                          <span className={styles.compactJournal}>{study.journal}</span>
-                          <span className={styles.compactYear}>{study.year}</span>
-                        </div>
-                        <p>{study.summary}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-            >
-              <h3 className={styles.columnTitle}>
-                <Brain size={18} />
-                EDCs Linked to PCOS
-              </h3>
-              <div className={styles.compactStudies}>
-                {recentResearchStudies.slice(7).map((study) => {
-                  const CategoryIcon = categoryIcons[study.category] || FlaskConical;
-                  return (
-                    <motion.div key={study.id} variants={fadeInUp} className={`${styles.compactStudyCard} ${styles.pcosCard}`}>
-                      <div className={`${styles.compactStudyNum} ${styles.pcosNum}`}>{study.number}</div>
-                      <div className={styles.compactStudyBody}>
-                        <h4>{study.title}</h4>
-                        <div className={styles.compactMeta}>
-                          <span className={styles.compactJournal}>{study.journal}</span>
-                          <span className={styles.compactYear}>{study.year}</span>
-                        </div>
-                        <p>{study.summary}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              {/* PCOS callout */}
-              <motion.div variants={fadeInUp} className={styles.pcosCallout}>
-                <AlertTriangle size={20} />
-                <div>
-                  <strong>The PCOS Connection</strong>
-                  <p>
-                    Human studies increasingly link higher endocrine-disrupting
-                    chemical (EDC) exposures with PCOS. Animal studies confirm
-                    BPA can induce PCOS-like syndrome — establishing causation.
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Research Conclusion ── */}
-      <section className={`${styles.section} ${styles.sectionConclusion}`}>
-        <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-            className={styles.conclusionContent}
-          >
-            <motion.span variants={fadeInUp} className={`${styles.sectionLabel} ${styles.sectionLabelLight}`}>
-              <BookOpen size={14} />
-              Summary
-            </motion.span>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitleLight}>
-              {researchConclusion.headline}
-            </motion.h2>
-            <motion.div className={styles.conclusionPoints} variants={stagger}>
-              {researchConclusion.points.map((point, i) => (
-                <motion.div key={i} variants={fadeInUp} className={styles.conclusionPoint}>
-                  <CheckCircle2 size={20} className={styles.conclusionCheckGreen} />
-                  <p>{point}</p>
-                </motion.div>
               ))}
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className={styles.ctaSection}>
+      {/* ═══ SECTION 2, CHEMICAL EXPOSURE ═══ */}
+      <section className={styles.chemicalsSection}>
         <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.h2 variants={fadeInUp}>The Science Is Clear. Make the Switch.</motion.h2>
-            <motion.p variants={fadeInUp}>
-              16+ peer-reviewed studies. 7 countries tested. The evidence is
-              overwhelming — chemical-free banana fiber pads are the healthier choice.
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className={styles.centerHeader}
+          >
+            <motion.span variants={fadeInUp} className={styles.pillCenter}>
+              Chemical Exposure
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className={styles.h2Center}>
+              What&apos;s Inside Your Disposable Pad?
+            </motion.h2>
+            <motion.p variants={fadeInUp} className={styles.subCenter}>
+              Research from 11 studies reports the presence of multiple chemicals in commercial
+              sanitary napkins, several classified as endocrine-disrupting or biologically active
+              compounds.
             </motion.p>
-            <motion.div variants={fadeInUp} className={styles.ctaButtons}>
-              <Link href="/products" className={styles.ctaBtn}>
-                <ShoppingBag size={20} />
+          </motion.div>
+
+          <motion.div
+            className={styles.chemicalGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerFast}
+          >
+            {chemicalsFound.map(chem => {
+              const Icon = chemicalIcons[chem.name] || FlaskConical;
+              const related = studiesForChemical(chem.name);
+              return (
+                <motion.article
+                  key={chem.name}
+                  variants={fadeInUp}
+                  className={`${styles.chemCard} ${chem.severity === 'high' ? styles.chemHigh : styles.chemMod}`}
+                >
+                  <div className={styles.chemIcon}>
+                    <Icon size={22} aria-hidden="true" />
+                  </div>
+                  <h3 className={styles.chemName}>{chem.name}</h3>
+                  <span
+                    className={`${styles.riskBadge} ${chem.severity === 'high' ? styles.riskHigh : styles.riskMod}`}
+                  >
+                    {chem.severity === 'high' ? 'High Risk' : 'Moderate Risk'}
+                  </span>
+                  <p className={styles.chemEffect}>{chem.effect}</p>
+                  {related.length > 0 && (
+                    <button
+                      type="button"
+                      className={styles.chemTooltip}
+                      onClick={() => setChemicalModal(chem.name)}
+                    >
+                      View related studies
+                      <ChevronRight size={14} aria-hidden="true" />
+                    </button>
+                  )}
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ═══ SECTION 3, THE EVIDENCE ═══ */}
+      <section id="evidence" className={styles.evidenceLuxury}>
+        <div className={styles.evidenceLuxuryBg} aria-hidden="true" />
+        <div className={styles.evidenceLuxuryPattern} aria-hidden="true" />
+        <div className={styles.evidenceLuxuryInner}>
+          <motion.header
+            className={styles.evidenceLuxuryHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+          >
+            <motion.span variants={fadeInUp} className={styles.evidenceLuxuryTag}>
+              <FlaskConical size={14} aria-hidden="true" />
+              The Evidence
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className={styles.evidenceLuxuryTitle}>
+              The Hidden Dangers in Disposable Pads
+            </motion.h2>
+            <motion.p variants={fadeInUp} className={styles.evidenceLuxuryDesc}>
+              Recent scientific research explores chemicals in disposable sanitary napkins and their possible role in endocrine and reproductive health concerns.
+            </motion.p>
+          </motion.header>
+
+          <motion.div
+            className={styles.evidenceLuxuryGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={stagger}
+          >
+            {evidenceCards.map(card => {
+              const CardIcon = card.icon;
+              return (
+                <motion.article
+                  key={card.subtitle}
+                  variants={fadeInUp}
+                  className={styles.evidenceLuxuryCard}
+                >
+                  <div className={styles.evidenceLuxuryIconWrap}>
+                    <CardIcon size={22} aria-hidden="true" />
+                  </div>
+                  <h3 className={styles.evidenceLuxuryCardStat}>
+                    {card.animate && card.value !== null ? (
+                      <AnimatedStat value={card.value} />
+                    ) : (
+                      card.display
+                    )}
+                  </h3>
+                  <p className={styles.evidenceLuxuryCardLabel}>{card.subtitle}</p>
+                  <p className={styles.evidenceLuxuryCardDesc}>{card.desc}</p>
+                  <div className={styles.evidenceCardGlow} aria-hidden="true" />
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Chemical studies modal */}
+      {chemicalModal && (
+        <div
+          className={styles.modalOverlay}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="chem-modal-title"
+          onClick={() => setChemicalModal(null)}
+        >
+          <motion.div
+            className={styles.modal}
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className={styles.modalClose}
+              onClick={() => setChemicalModal(null)}
+              aria-label="Close"
+            >
+              <X size={22} />
+            </button>
+            <h3 id="chem-modal-title" className={styles.modalTitle}>
+              Studies related to {chemicalModal}
+            </h3>
+            <ul className={styles.modalList}>
+              {modalStudies.map(study => (
+                <li key={study.id}>
+                  <strong>{study.title}</strong>
+                  <span>
+                    {study.journal}, {study.year}
+                  </span>
+                  <p>{study.summary}</p>
+                  {study.paperUrl && (
+                    <a href={study.paperUrl} target="_blank" rel="noopener noreferrer">
+                      Read Full Paper <ExternalLink size={14} />
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      )}
+
+      {/* ═══ SECTION 4, RESEARCH LIBRARY ═══ */}
+      <section id="research" className={styles.librarySection}>
+        <div className="container">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className={styles.libraryIntro}
+          >
+            <motion.span variants={fadeInUp} className={styles.libraryLabel}>
+              Research Database
+            </motion.span>
+            <motion.h2 variants={fadeInUp} className={styles.h2Center}>
+              Research &amp; Scientific Literature
+            </motion.h2>
+            <motion.p variants={fadeInUp} className={styles.subCenter}>
+              A curated collection of published studies exploring menstrual product materials, endocrine-active compounds, intimate wellness, and reproductive health.
+            </motion.p>
+          </motion.div>
+
+          {/* Featured Research Areas (Filter block) */}
+          <motion.div
+            className={styles.featuredBlock}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            <motion.h3 variants={fadeInUp} className={styles.featuredHeading}>
+              Featured Research Areas
+            </motion.h3>
+            <motion.div variants={fadeInUp} className={styles.featuredGrid}>
+              <button
+                type="button"
+                onClick={() => setSelectedArea('All')}
+                className={`${styles.featuredCard} ${selectedArea === 'All' ? styles.featuredActive : ''}`}
+              >
+                <div className={styles.featuredIconWrap}>
+                  <BookOpen size={20} />
+                </div>
+                <div className={styles.featuredText}>
+                  <h4 className={styles.featuredTitle}>All Literature</h4>
+                  <p className={styles.featuredDesc}>View all 11 scientific publications.</p>
+                </div>
+              </button>
+              {featuredAreas.map(area => {
+                const AreaIcon = area.icon;
+                return (
+                  <button
+                    key={area.id}
+                    type="button"
+                    onClick={() => setSelectedArea(area.id)}
+                    className={`${styles.featuredCard} ${selectedArea === area.id ? styles.featuredActive : ''}`}
+                  >
+                    <div className={styles.featuredIconWrap}>
+                      <AreaIcon size={20} />
+                    </div>
+                    <div className={styles.featuredText}>
+                      <h4 className={styles.featuredTitle}>{area.label}</h4>
+                      <p className={styles.featuredDesc}>{area.desc}</p>
+                    </div>
+                  </button>
+                );
+              })}
+            </motion.div>
+          </motion.div>
+
+          {/* Research papers grid */}
+          <motion.div
+            className={styles.libraryGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerFast}
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredStudies.map((study) => {
+                const isExpanded = expandedStudies[study.id];
+                const displayNum = study.number;
+                
+                // Mapped tag
+                const tag = getCategoryTag(study.category);
+                
+                // Fallback to Google Scholar if no paperUrl
+                const viewUrl = study.paperUrl || `https://scholar.google.com/scholar?q=${encodeURIComponent(study.title)}`;
+
+                return (
+                  <motion.article
+                    layout
+                    key={study.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.45 }}
+                    className={styles.paperCard}
+                  >
+                    <div className={styles.paperHeader}>
+                      <span className={styles.paperCategoryBadge}>{tag}</span>
+                      <span className={styles.paperYearBadge}>{study.year}</span>
+                    </div>
+
+                    <h4 className={styles.paperTitle}>{study.title}</h4>
+                    <p className={styles.paperJournal}>{study.journal}</p>
+                    <p className={styles.paperAuthors}>{study.authors}</p>
+
+                    <div className={styles.paperActions}>
+                      <button
+                        type="button"
+                        onClick={() => toggleSummary(study.id)}
+                        className={styles.btnSummary}
+                        aria-expanded={isExpanded}
+                      >
+                        Research Summary
+                      </button>
+                      <a
+                        href={viewUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.btnView}
+                      >
+                        View Study
+                        <ExternalLink size={13} aria-hidden="true" />
+                      </a>
+                    </div>
+
+                    <AnimatePresence initial={false}>
+                      {isExpanded && (
+                        <motion.div
+                          className={styles.expandedSummary}
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                          <div className={styles.summaryContent}>
+                            <h5>Study Abstract &amp; Finding:</h5>
+                            <p>{study.summary}</p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.article>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ═══ SECTION 5, HORMONAL HEALTH ═══ */}
+      <section className={styles.hormonalSection}>
+        <div className={styles.hormonalBg} aria-hidden="true">
+          <Image
+            src="/science/pcos-wellness.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className={styles.hormonalBgImg}
+          />
+        </div>
+        <div className={styles.hormonalOverlay} aria-hidden="true" />
+        <div className={styles.hormonalGrain} aria-hidden="true" />
+        <div className="container">
+          <div className={styles.hormonalGrid}>
+            <motion.div
+              className={styles.hormonalContent}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-40px' }}
+              variants={stagger}
+            >
+              <motion.span variants={fadeInUp} className={styles.hormonalLabel}>
+                Research &amp; Hormonal Health
+              </motion.span>
+              <motion.h2 variants={fadeInUp} className={styles.hormonalTitle}>
+                The PCOS/PMOS &amp; Hormonal Health Conversation
+              </motion.h2>
+              <motion.p variants={fadeInUp} className={styles.hormonalDesc}>
+                Emerging scientific research continues to explore the relationship between endocrine-active compounds and hormonal health. Studies across human and laboratory models are encouraging deeper conversations around ingredient transparency, intimate wellness, and long-term reproductive health.
+              </motion.p>
+
+              {/* Supporting info cards */}
+              <motion.div variants={fadeInUp} className={styles.infoCardsGrid}>
+                <div className={styles.infoCard}>
+                  <div className={styles.infoCardIcon}>
+                    <Microscope size={18} />
+                  </div>
+                  <div className={styles.infoCardText}>
+                    <h4>Human &amp; Laboratory Studies</h4>
+                    <p>Epidemiological and in-vivo models exploring chemical pathways.</p>
+                  </div>
+                </div>
+                <div className={styles.infoCard}>
+                  <div className={styles.infoCardIcon}>
+                    <FlaskConical size={18} />
+                  </div>
+                  <div className={styles.infoCardText}>
+                    <h4>Ongoing Hormonal Health Research</h4>
+                    <p>Active investigation into endocrine disruption and intimate wellness.</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeInUp} className={styles.hormonalCtaWrap}>
+                <a href="#research" className={styles.btnHormonalCta}>
+                  Learn About the Research
+                  <ChevronRight size={16} aria-hidden="true" />
+                </a>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      <section className={styles.ctaSection}>
+        <div className={styles.ctaWave} aria-hidden="true">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <path
+              d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,0 L0,0 Z"
+              fill="var(--science-cream)"
+            />
+          </svg>
+        </div>
+        <div className={styles.ctaParticles} aria-hidden="true">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span key={i} style={{ '--i': i } as React.CSSProperties} />
+          ))}
+        </div>
+        <div className="container">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+            className={styles.ctaInner}
+          >
+            <motion.div variants={fadeInUp} className={styles.ctaHeadlines}>
+              <h2 className={styles.ctaTitle}>The Science Is Clear.</h2>
+              <h2 className={styles.ctaTitle}>Make the Switch</h2>
+            </motion.div>
+            <motion.p variants={fadeInUp} className={styles.ctaSub}>
+              11 peer-reviewed studies. 7 countries tested. The evidence is overwhelming.
+              Chemical-free banana fiber pads are the healthier choice.
+            </motion.p>
+            <motion.div variants={fadeInUp} className={styles.ctaActions}>
+              <Link href="/products" className={styles.ctaPrimary}>
+                <ShoppingBag size={20} aria-hidden="true" />
                 Shop Now
               </Link>
-              <Link href="/faq" className={styles.ctaBtnOutline}>
-                <BookOpen size={20} />
+              <Link href="/faq" className={styles.ctaSecondary}>
                 Learn More
               </Link>
             </motion.div>

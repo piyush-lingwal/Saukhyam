@@ -79,7 +79,7 @@ const scienceSteps = [
   {
     step: '03',
     title: 'Hormonal Disruption',
-    desc: 'These endocrine disruptors mimic estrogen and interfere with the hypothalamic-pituitary-ovarian (HPO) axis - the body\'s core hormonal regulator. This is strongly linked to PCOS, irregular cycles, heavy bleeding, severe cramps, acne, and in some cases, fertility challenges.',
+    desc: 'These endocrine disruptors mimic estrogen and interfere with the hypothalamic-pituitary-ovarian (HPO) axis - the body\'s core hormonal regulator. This is strongly linked to PCOS/PMOS, irregular cycles, heavy bleeding, severe cramps, acne, and in some cases, fertility challenges.',
   },
   {
     step: '04',
@@ -92,9 +92,9 @@ const healingStories = [
   {
     name: 'Laxmi Thrylokya',
     role: 'HEAL Challenge Participant',
-    condition: 'PCOS',
+    condition: 'PCOS/PMOS',
     initial: 'L',
-    quote: 'She didn\'t know she had PCOS. Irregular periods, stubborn acne, fatigue, unexpected weight gain. Doctors said "lose weight". Friends said "just hormones." Until someone told her to check what was in her sanitary napkin. She switched to a reusable pad. Within 3 months, something shifted. Periods became more regular. Skin cleared. Energy returned.',
+    quote: 'She didn\'t know she had PCOS/PMOS. Irregular periods, stubborn acne, fatigue, unexpected weight gain. Doctors said "lose weight". Friends said "just hormones." Until someone told her to check what was in her sanitary napkin. She switched to a reusable pad. Within 3 months, something shifted. Periods became more regular. Skin cleared. Energy returned.',
     outcome: '3 months - Cycles regularised, acne cleared, energy returned',
   },
   {
@@ -175,8 +175,8 @@ const faqItems = [
     a: 'Structural conditions will not completely resolve from a pad switch alone - and we are honest about this. However, your overall period experience (pain levels, regularity, discomfort) is very likely to improve. The experience gets better even if the underlying condition needs separate medical attention.',
   },
   {
-    q: 'What role do environmental toxins play in PCOS?',
-    a: 'Nobody knows the exact cause of PCOS. What science does confirm is that endocrine-disrupting chemicals (dioxins, phthalates, VOCs) interfere with the hormonal systems that regulate the menstrual cycle. The vaginal route of absorption is especially significant because these chemicals bypass the liver and enter the bloodstream directly. Even small trace amounts can have a disproportionate hormonal effect.',
+    q: 'What role do environmental toxins play in PCOS/PMOS?',
+    a: 'Nobody knows the exact cause of PCOS/PMOS. What science does confirm is that endocrine-disrupting chemicals (dioxins, phthalates, VOCs) interfere with the hormonal systems that regulate the menstrual cycle. The vaginal route of absorption is especially significant because these chemicals bypass the liver and enter the bloodstream directly. Even small trace amounts can have a disproportionate hormonal effect.',
   },
   {
     q: 'Do I need to make a 100% shift from day one?',
@@ -226,7 +226,7 @@ export default function HealPage() {
           />
         </div>
 
-        {/* ── Logo — absolute top-left of hero section ── */}
+        {/* ── Logo, absolute top-left of hero section ── */}
         <div className={heal.heroLogoInline}>
           <Image
             src="/HealLogo/HEAL logo RGB_Horizontal with tag line.png"
@@ -536,7 +536,7 @@ export default function HealPage() {
               </div>
               <h2 className={heal.scienceTitle}>Why Switching Heals</h2>
               <p className={heal.scienceSubtitle}>
-                PCOS is a silent pandemic affecting 6 crore Indian women. One of its most
+                PCOS/PMOS is a silent pandemic affecting 6 crore Indian women. One of its most
                 overlooked triggers is the daily exposure to hormone-disrupting chemicals
                 through disposable pads. Here is the chain:
               </p>
@@ -592,7 +592,7 @@ export default function HealPage() {
                     the body&apos;s core hormonal regulator.
                   </p>
                   <div className={heal.scienceChips}>
-                    {['PCOS', 'Irregular Cycles', 'Heavy Bleeding', 'Severe Cramps', 'Infertility'].map(c => (
+                    {['PCOS/PMOS', 'Irregular Cycles', 'Heavy Bleeding', 'Severe Cramps', 'Infertility'].map(c => (
                       <span key={c} className={`${heal.scienceChip} ${heal.scienceChipWarning}`}>{c}</span>
                     ))}
                   </div>
@@ -620,7 +620,7 @@ export default function HealPage() {
             </motion.div>
 
 
-            {/* ── PCOS Callout ── */}
+            {/* ── PCOS/PMOS Callout ── */}
             <motion.div variants={fadeInUp} className={heal.pcosCallout}>
               <div className={heal.pcosCalloutLeft}>
                 <div className={heal.pcosCalloutIcon}>
@@ -629,15 +629,15 @@ export default function HealPage() {
                 <div>
                   <div className={heal.pcosCalloutEyebrow}>Clinical Insight</div>
                   <h3 className={heal.pcosCalloutTitle}>
-                    Fertility &amp; PCOS -<br />What Doctors Are Now Seeing
+                    Fertility &amp; PCOS/PMOS -<br />What Doctors Are Now Seeing
                   </h3>
                 </div>
               </div>
               <p className={heal.pcosCalloutDesc}>
-                70–80% of women with ovulation-related infertility have PCOS. Fertility doctors
+                70–80% of women with ovulation-related infertility have PCOS/PMOS. Fertility doctors
                 working with Saukhyam Foundation are now prescribing reusable menstrual products
                 as a first-line intervention - before pills or procedures - and reporting real results:
-                more regular periods, PCOS symptoms reducing, and in many cases, natural conception.
+                more regular periods, PCOS/PMOS symptoms reducing, and in many cases, natural conception.
               </p>
               <div className={heal.pcosCalloutStat}>
                 <span className={heal.pcosCalloutStatNum}>₹10<small>/mo</small></span>

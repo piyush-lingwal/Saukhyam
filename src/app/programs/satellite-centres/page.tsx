@@ -81,7 +81,7 @@ export default function SatelliteCentresPage() {
             {[
               { step: '01', title: 'Community Partnership', desc: 'We partner with local NGOs, self-help groups, and panchayats to identify villages with the greatest need.' },
               { step: '02', title: 'Training & Setup', desc: 'Women are trained in pad-making, quality control, and menstrual health education over a 2-week intensive program.' },
-              { step: '03', title: 'Production Begins', desc: 'The centre starts producing Saukhyam pads locally — reducing transportation costs and creating local employment.' },
+              { step: '03', title: 'Production Begins', desc: 'The centre starts producing Saukhyam pads locally, reducing transportation costs and creating local employment.' },
               { step: '04', title: 'Awareness Drives', desc: 'Trained women conduct workshops in surrounding villages, breaking taboos and driving adoption.' },
             ].map((item) => (
               <motion.div key={item.step} variants={fadeInUp} className={styles.stepCard}>

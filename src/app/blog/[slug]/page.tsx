@@ -11,7 +11,7 @@ import {
   ShoppingBag, Leaf,
 } from 'lucide-react';
 
-/* Brand/social icons — lucide-react no longer ships brand logos,
+/* Brand/social icons, lucide-react no longer ships brand logos,
    so we define them locally with the same `size` prop convention. */
 function TwitterIcon({ size = 15 }: { size?: number }) {
   return (
@@ -59,7 +59,7 @@ function formatDate(iso: string) {
 }
 
 /* ──────────────────────────────────────────────────────────────
-   Block renderer — every BlogBlock type has a component here.
+   Block renderer, every BlogBlock type has a component here.
    To add a new block type: extend BlogBlock in content.ts and
    add a case below. That is the full extension point.
    ────────────────────────────────────────────────────────────── */
@@ -99,7 +99,7 @@ function BlockRenderer({ block, isFirst }: { block: BlogBlock; isFirst: boolean 
           <QuoteIcon size={28} className={styles.quoteIcon} aria-hidden="true" />
           <p className={styles.quoteText}>&ldquo;{block.text}&rdquo;</p>
           {block.attribution && (
-            <cite className={styles.quoteAttr}>— {block.attribution}</cite>
+            <cite className={styles.quoteAttr}>,  {block.attribution}</cite>
           )}
         </blockquote>
       );
@@ -140,7 +140,7 @@ export default function BlogDetailPage() {
   const slug = typeof params.slug === 'string' ? params.slug : '';
   const post = blogPosts.find((p) => p.slug === slug);
 
-  // Hooks must be called unconditionally — keep these above the early return.
+  // Hooks must be called unconditionally, keep these above the early return.
   const [progress, setProgress] = useState(0);
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
@@ -175,7 +175,7 @@ export default function BlogDetailPage() {
   }, [post]);
 
   if (!post) {
-    // Invalid slug — surface a themed 404 instead of Next's default.
+    // Invalid slug, surface a themed 404 instead of Next's default.
     if (typeof window !== 'undefined') {
       notFound();
     }
@@ -208,7 +208,7 @@ export default function BlogDetailPage() {
 
   const shareTwitter = `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`;
   const shareFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-  const shareWhatsApp = `https://wa.me/?text=${encodeURIComponent(`${post.title} — ${shareUrl}`)}`;
+  const shareWhatsApp = `https://wa.me/?text=${encodeURIComponent(`${post.title}, ${shareUrl}`)}`;
 
   return (
     <article className={styles.blogDetail}>

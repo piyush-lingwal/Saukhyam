@@ -1,0 +1,39 @@
+.visual {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.softGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(111, 166, 122, 0.2), transparent 65%);
+  filter: blur(30px);
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.float {
+  animation: gentle 8s ease-in-out infinite;
+}
+
+.mol {
+  animation: gentle 6s ease-in-out infinite reverse;
+}
+
+@keyframes gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .mol {
+    animation: none;
+  }
+}

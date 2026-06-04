@@ -33,7 +33,7 @@ const approachSteps = [
   {
     icon: HandHeart,
     title: 'Sustained Livelihoods',
-    desc: 'Each centre becomes self-sustaining — local women earn dignified income while producing chemical-free pads for their own communities.',
+    desc: 'Each centre becomes self-sustaining, local women earn dignified income while producing chemical-free pads for their own communities.',
   },
 ];
 
@@ -58,7 +58,7 @@ const impactAreas = [
     title: 'Environmental Impact',
     points: [
       'Eliminating disposable pad waste from villages and water bodies',
-      '100% biodegradable banana fiber — zero plastic, zero chemicals',
+      '100% biodegradable banana fiber, zero plastic, zero chemicals',
       'Each woman who switches prevents 125+ kg of pad waste over her lifetime',
     ],
   },
@@ -79,7 +79,7 @@ export default function ReachPage() {
               <span className={styles.heroAccent}>Community Health</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              Bringing safe, chemical-free menstrual hygiene to rural India —
+              Bringing safe, chemical-free menstrual hygiene to rural India , 
               while creating dignified livelihoods for women in every village we touch.
             </motion.p>
           </motion.div>
@@ -115,7 +115,7 @@ export default function ReachPage() {
             </motion.h2>
             <motion.p variants={fadeInUp} className={styles.sectionDesc}>
               In rural India, millions of women still use cloth rags, leaves, or sand during their periods.
-              Disposable pads — when available — are expensive, environmentally devastating, and loaded with
+              Disposable pads, when available, are expensive, environmentally devastating, and loaded with
               harmful chemicals. REACH creates a better path.
             </motion.p>
           </motion.div>
@@ -124,8 +124,8 @@ export default function ReachPage() {
             {[
               { step: '62%', title: 'No Access', desc: 'Of rural Indian women have no access to safe menstrual hygiene products, relying on cloth, ash, or nothing at all.' },
               { step: '23%', title: 'School Dropouts', desc: 'Of girls drop out of school when they begin menstruating due to lack of products, facilities, and stigma.' },
-              { step: '12B+', title: 'Annual Pad Waste', desc: 'Disposable pads are dumped into landfills and water bodies every year in India — taking 500-800 years to decompose.' },
-              { step: '✓', title: 'REACH Solution', desc: 'Saukhyam satellite centres give villages the tools to manufacture, distribute, and educate — locally and sustainably.' },
+              { step: '12B+', title: 'Annual Pad Waste', desc: 'Disposable pads are dumped into landfills and water bodies every year in India, taking 500-800 years to decompose.' },
+              { step: '✓', title: 'REACH Solution', desc: 'Saukhyam satellite centres give villages the tools to manufacture, distribute, and educate, locally and sustainably.' },
             ].map((item) => (
               <motion.div key={item.step} variants={fadeInUp} className={styles.stepCard}>
                 <span className={styles.stepNumber}>{item.step}</span>

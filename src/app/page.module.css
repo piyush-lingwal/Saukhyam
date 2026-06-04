@@ -300,7 +300,7 @@
   padding: var(--space-6) var(--space-4) var(--space-6);
 }
 
-/* Headline — animated gradient like CareSakhi */
+/* Headline: animated gradient like CareSakhi */
 .heroTitle {
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5.5vw, 3.75rem);
@@ -542,7 +542,7 @@
 }
 
 /* =============================================
-   PRODUCTS — Premium Showcase
+   PRODUCTS: Premium Showcase
    ============================================= */
 .productsSection {
   position: relative;
@@ -551,7 +551,7 @@
     radial-gradient(circle at top left, rgba(134, 239, 172, 0.16), transparent 28%),
     radial-gradient(circle at 82% 18%, rgba(251, 191, 36, 0.14), transparent 24%),
     radial-gradient(circle at bottom right, rgba(251, 146, 60, 0.12), transparent 24%),
-    linear-gradient(180deg, #fcfbf7 0%, #f7f1e7 46%, #ffffff 100%);
+    linear-gradient(180deg, #ffffff 0%, #ecfdf5 46%, #ffffff 100%);
   overflow: hidden;
 }
 
@@ -650,7 +650,7 @@
   font-weight: 800;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #8a5a10;
+  color: #166534;
   padding: 0;
   background: transparent;
   border: 0;
@@ -676,8 +676,8 @@
 .productCard {
   --product-accent: rgba(22, 163, 74, 0.18);
   --product-accent-strong: rgba(22, 163, 74, 0.32);
-  --product-stage-start: #edf7ef;
-  --product-stage-end: #f4e9d4;
+  --product-stage-start: #f0fdf4;
+  --product-stage-end: #dcfce7;
   --product-stage-highlight: rgba(255, 255, 255, 0.95);
   --product-chip-bg: rgba(255, 255, 255, 0.9);
   --product-chip-text: var(--green-900);
@@ -729,27 +729,27 @@
 }
 
 .productCard:nth-child(4n + 2) {
-  --product-accent: rgba(251, 191, 36, 0.2);
-  --product-accent-strong: rgba(202, 138, 4, 0.3);
-  --product-stage-start: #fff7df;
-  --product-stage-end: #f6ead8;
-  --product-chip-text: #8a5a10;
+  --product-accent: rgba(34, 197, 94, 0.2);
+  --product-accent-strong: rgba(22, 163, 74, 0.3);
+  --product-stage-start: #ecfdf5;
+  --product-stage-end: #bbf7d0;
+  --product-chip-text: #14532d;
 }
 
 .productCard:nth-child(4n + 3) {
-  --product-accent: rgba(251, 146, 60, 0.18);
-  --product-accent-strong: rgba(194, 65, 12, 0.28);
-  --product-stage-start: #fff1ea;
-  --product-stage-end: #f7eadf;
-  --product-chip-text: #9a3412;
+  --product-accent: rgba(22, 101, 52, 0.18);
+  --product-accent-strong: rgba(20, 83, 45, 0.28);
+  --product-stage-start: #f0fdf4;
+  --product-stage-end: #d1fae5;
+  --product-chip-text: #166534;
 }
 
 .productCard:nth-child(4n + 4) {
-  --product-accent: rgba(20, 184, 166, 0.16);
-  --product-accent-strong: rgba(13, 148, 136, 0.26);
-  --product-stage-start: #edf8f6;
-  --product-stage-end: #f0ebe1;
-  --product-chip-text: #115e59;
+  --product-accent: rgba(74, 222, 128, 0.16);
+  --product-accent-strong: rgba(34, 197, 94, 0.26);
+  --product-stage-start: #ecfdf5;
+  --product-stage-end: #dcfce7;
+  --product-chip-text: #15803d;
 }
 
 .productCard:hover {
@@ -1170,7 +1170,7 @@
 }
 
 /* =============================================
-   NEXT-GEN BENTO GRID — Split Card Layout
+   NEXT-GEN BENTO GRID: Split Card Layout
    ============================================= */
 
 .bentoSection {
@@ -1298,7 +1298,7 @@
 }
 
 /* ═════════════════════════════════════
-   AMMA — Large Photo Card (2 rows)
+   AMMA: Large Photo Card (2 rows)
    ═════════════════════════════════════ */
 .bAmma {
   grid-area: amma;
@@ -1410,7 +1410,7 @@
 }
 
 /* ═════════════════════════════════════
-   LOGO CARDS — Small Square with Theme BG
+   LOGO CARDS: Small Square with Theme BG
    ═════════════════════════════════════ */
 .bHealLogo,
 .bReachLogo,
@@ -1483,7 +1483,7 @@
 }
 
 /* ═════════════════════════════════════
-   INFO CARDS — Wider content cards
+   INFO CARDS: Wider content cards
    ═════════════════════════════════════ */
 .bHealInfo,
 .bReachInfo,
@@ -1498,7 +1498,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
-/* ── HEAL — Rose/Crimson (accent) ── */
+/* ── HEAL, Rose/Crimson (accent) ── */
 .bHealInfo {
   grid-area: hinfo;
   border: 1px solid rgba(160, 26, 107, 0.12);
@@ -1514,7 +1514,7 @@
   background: radial-gradient(ellipse at top left, rgba(160, 26, 107, 0.06), transparent 70%);
 }
 
-/* ── REACH — Emerald Teal (accent) ── */
+/* ── REACH, Emerald Teal (accent) ── */
 .bReachInfo {
   grid-area: rinfo;
   border: 1px solid rgba(13, 148, 136, 0.12);
@@ -1530,7 +1530,7 @@
   background: radial-gradient(ellipse at top right, rgba(13, 148, 136, 0.06), transparent 70%);
 }
 
-/* ── CARE — Deep Violet (accent) ── */
+/* ── CARE, Deep Violet (accent) ── */
 .bCareInfo {
   grid-area: cinfo;
   border: 1px solid rgba(220, 20, 100, 0.12);
@@ -1599,7 +1599,7 @@
 .bReachInfo .bInfoMetrics { border-top: 1px solid rgba(13, 148, 136, 0.18); }
 .bCareInfo .bInfoMetrics  { border-top: 1px solid rgba(220, 20, 100, 0.18); }
 
-/* HEAL & REACH have 4 KPIs — reflow into a 2×2 grid */
+/* HEAL & REACH have 4 KPIs, reflow into a 2×2 grid */
 .bHealInfo .bInfoMetrics,
 .bReachInfo .bInfoMetrics {
   flex-wrap: wrap;
@@ -1612,7 +1612,7 @@
   min-width: 120px;
 }
 
-/* CARE has 3 KPIs — tighter gap so labels breathe */
+/* CARE has 3 KPIs, tighter gap so labels breathe */
 .bCareInfo .bInfoMetrics {
   flex-wrap: wrap;
   gap: 0.75rem 1.1rem;
@@ -2025,7 +2025,7 @@
   }
 }
 
-/* ── Testimonials — Animated Marquee ── */
+/* ── Testimonials, Animated Marquee ── */
 .testimonialsSection {
   padding: var(--space-16) 0 var(--space-12);
   background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
@@ -2387,7 +2387,7 @@
 }
 
 /* =============================================
-   PRESS & MEDIA — Infinite Marquee
+   PRESS & MEDIA, Infinite Marquee
    ============================================= */
 .pressSection {
   padding: var(--space-24) 0 var(--space-20);
@@ -2601,7 +2601,7 @@
   line-height: 1.7;
 }
 
-/* Impact amount pills — compact single row */
+/* Impact amount pills, compact single row */
 .donateImpactGrid {
   display: flex;
   justify-content: center;

@@ -65,7 +65,7 @@ export default function BlogPage() {
               <span className={styles.heroAccent}>Real Change.</span>
             </h1>
             <p className={styles.heroDesc}>
-              From tribal villages to college campuses — impact stories, health insights,
+              From tribal villages to college campuses, featuring impact stories, health insights,
               and the voices of women we&apos;re proud to serve.
             </p>
           </motion.div>
@@ -251,7 +251,7 @@ export default function BlogPage() {
         <div className="container">
           <div className={styles.ctaContent}>
             <h3>Have a story to share?</h3>
-            <p>We feature voices from our community — write to us and inspire others.</p>
+            <p>We feature voices from our community, write to us and inspire others.</p>
             <Link href="/contact" className={styles.ctaBtn}>
               Share Your Story <ArrowRight size={16} />
             </Link>

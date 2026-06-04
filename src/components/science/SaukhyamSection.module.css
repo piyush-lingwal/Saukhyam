@@ -1,0 +1,351 @@
+/* Saukhyam Pads, hero, layers, comparison */
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 6vw, 5rem);
+  background: linear-gradient(to right, var(--green-900), var(--green-800), var(--green-700));
+  overflow: hidden;
+  color: white;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 800;
+  color: white;
+  line-height: 1.15;
+  margin-bottom: var(--space-6);
+  letter-spacing: -0.02em;
+}
+
+.heroSubtitle {
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 42rem;
+  line-height: 1.75;
+  margin-bottom: var(--space-8);
+}
+
+.heroActions {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--green-500);
+  color: white;
+  font-weight: 600;
+  font-size: var(--text-base);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
+}
+
+.btnPrimary:hover {
+  background: var(--green-600);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  font-weight: 600;
+  font-size: var(--text-base);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out);
+}
+
+.btnSecondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: white;
+}
+
+/* ── Layers section ── */
+.layersSection {
+  padding: var(--section-gap) 0;
+}
+
+.layersHeader {
+  max-width: 72rem;
+  margin: 0 auto var(--space-10);
+  padding: 0 var(--container-padding);
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.sectionSubtitle {
+  font-size: var(--text-lg);
+  color: var(--gray-700);
+  max-width: 40rem;
+  line-height: 1.7;
+}
+
+.layersGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.cardsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.layerCard {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: 1.25rem;
+  transition: box-shadow var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
+}
+
+.layerCard:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.layerCardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.layerNum {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  background: var(--green-500);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+}
+
+.layerTitle {
+  font-weight: 600;
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  line-height: 1.35;
+}
+
+.layerDesc {
+  font-size: var(--text-sm);
+  color: var(--gray-600);
+  line-height: 1.6;
+  padding-left: calc(2rem + var(--space-4));
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.magicBox {
+  background: var(--green-50);
+  border: 1px solid var(--green-200);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.magicTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--green-900);
+  margin-bottom: var(--space-4);
+}
+
+.magicList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.magicList li {
+  font-size: var(--text-base);
+  color: var(--gray-700);
+  line-height: 1.6;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.magicList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-500);
+}
+
+.extraText {
+  font-size: var(--text-base);
+  color: var(--gray-700);
+  line-height: 1.8;
+}
+
+.extraText strong {
+  color: var(--green-800);
+  font-weight: 600;
+}
+
+/* ── Comparison ── */
+.comparisonSection {
+  padding: var(--section-gap) 0;
+  background: var(--green-50);
+}
+
+.comparisonInner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.comparisonHeader {
+  margin-bottom: var(--space-10);
+}
+
+.tableCard {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparisonTable thead th {
+  background: var(--green-100);
+  color: var(--green-900);
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  font-size: var(--text-sm);
+}
+
+.comparisonTable thead th:first-child {
+  text-align: left;
+}
+
+.comparisonTable thead th:not(:first-child) {
+  text-align: center;
+}
+
+.comparisonTable tbody tr:nth-child(odd) td {
+  background: white;
+}
+
+.comparisonTable tbody tr:nth-child(even) td {
+  background: var(--gray-50);
+}
+
+.comparisonTable tbody td {
+  padding: 1rem 1.5rem;
+  font-size: var(--text-sm);
+  color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.comparisonTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.comparisonTable tbody td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.comparisonTable tbody td:not(:first-child) {
+  text-align: center;
+}
+
+.cellGood {
+  color: var(--green-700);
+  font-weight: 500;
+}
+
+.cellBad {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.thGood {
+  color: var(--green-800);
+}
+
+.thBad {
+  color: #dc2626;
+}
+
+@media (max-width: 900px) {
+  .layersGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .layerDesc {
+    padding-left: 0;
+    margin-top: var(--space-2);
+  }
+}
+
+@media (max-width: 640px) {
+  .comparisonTableWrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .comparisonTable {
+    min-width: 520px;
+  }
+}

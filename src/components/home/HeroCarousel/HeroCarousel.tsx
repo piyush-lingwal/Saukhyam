@@ -23,7 +23,7 @@ const slides = [
       'Period pain (less cramping)',
       'Skin issues (less irritation, no rashes)',
       'General menstrual comfort',
-      'PCOS symptoms, if any',
+      'PCOS/PMOS symptoms, if any',
     ],
     cta: { label: 'Learn More', href: '/science' },
   },

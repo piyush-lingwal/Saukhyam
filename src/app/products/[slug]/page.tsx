@@ -155,7 +155,7 @@ export default function ProductDetailPage() {
             <motion.div variants={fadeInUp} className={styles.actionButtons}>
               <button className={styles.btnAddToCart} onClick={handleAddToCart}>
                 <ShoppingBag size={20} />
-                Add to Cart — ₹{product.price * quantity}
+                Add to Cart, ₹{product.price * quantity}
               </button>
               <Link href="/cart" className={styles.btnBuyNow}>
                 <Zap size={20} />

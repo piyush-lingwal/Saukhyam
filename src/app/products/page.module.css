@@ -172,6 +172,29 @@
   border-color: var(--color-primary);
 }
 
+.filterTabLink {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--green-800);
+  border: 1.5px solid var(--green-400);
+  border-radius: var(--radius-full);
+  background: var(--green-50);
+  text-decoration: none;
+  transition: var(--transition-all);
+  white-space: nowrap;
+}
+
+.filterTabLink:hover {
+  background: var(--green-100);
+  border-color: var(--green-500);
+  color: var(--green-900);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+}
+
 .resultCount {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
@@ -729,4 +752,89 @@
   .benefitsBanner {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+/* ── Why Banana Fiber Navigation Button ── */
+.fiberNavWrap {
+  padding: var(--space-10) 0 var(--space-6);
+  background: var(--color-bg-warm);
+}
+
+.fiberNavInner {
+  display: flex;
+  justify-content: center;
+}
+
+.fiberNavBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #26332b;
+  text-decoration: none;
+  background: linear-gradient(135deg, #fdfbfa 0%, #f7f2e8 100%);
+  border: 1px solid #e8d8bf;
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 12px rgba(38, 51, 43, 0.06);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.fiberNavBtn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(198, 167, 105, 0.08) 0%, rgba(107, 138, 107, 0.06) 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.fiberNavBtn:hover {
+  transform: translateY(-2px);
+  border-color: #c6a769;
+  box-shadow: 0 6px 24px rgba(38, 51, 43, 0.1);
+  color: #26332b;
+}
+
+.fiberNavBtn:hover::before {
+  opacity: 1;
+}
+
+.fiberNavIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: rgba(107, 138, 107, 0.12);
+  color: #6b8a6b;
+  position: relative;
+  z-index: 1;
+  transition: background 0.35s ease;
+}
+
+.fiberNavBtn:hover .fiberNavIcon {
+  background: rgba(107, 138, 107, 0.2);
+}
+
+.fiberNavLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.fiberNavArrow {
+  position: relative;
+  z-index: 1;
+  color: #c6a769;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fiberNavBtn:hover .fiberNavArrow {
+  transform: translateX(3px);
 }

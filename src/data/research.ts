@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════
-//  RESEARCH DATA — Peer-Reviewed Studies on
+//  RESEARCH DATA, Peer-Reviewed Studies on
 //  Chemicals in Disposable Menstrual Products
 // ═══════════════════════════════════════════════════
 
@@ -24,71 +24,11 @@ export interface ResearchSection {
   studies: ResearchStudy[];
 }
 
-// ── Section 1: The Hidden Dangers (2024 compilation) ──
-// These studies were first compiled when Saukhyam started approaching doctors.
-// Doctors were more willing to listen after reviewing this evidence.
-
-export const hiddenDangersStudies: ResearchStudy[] = [
-  {
-    id: 'hd-1',
-    number: 1,
-    title: 'Toxic Chemicals Are Present And Can Be Absorbed',
-    authors: 'Marroquin, Joanna, et al.',
-    journal: 'BJOG: An International Journal of Obstetrics & Gynaecology',
-    year: 2024,
-    summary: 'Conducted a systematic review revealing the widespread presence of endocrine-disrupting chemicals like phthalates, volatile organic compounds, dioxins and fragrances in commercial menstrual products. These toxins can be absorbed through the skin or mucosal tissues, especially in the highly permeable vaginal area.',
-    category: 'chemicals',
-    paperUrl: 'https://doi.org/10.1111/1471-0528.17670',
-  },
-  {
-    id: 'hd-2',
-    number: 2,
-    title: 'India-Specific Evidence: Health and Environmental Concerns',
-    authors: 'Kumar, Binay, et al.',
-    journal: 'Environmental Science and Pollution Research',
-    year: 2024,
-    summary: 'Focused on the Indian market, reporting high levels of toxic compounds in popular sanitary napkin brands, including pesticide residues and heavy metals like lead, cadmium and mercury. Links exposure to these chemicals with hormonal imbalances, infertility and chronic inflammation. Furthermore, Indian sanitary pads contain higher concentrations of these hazardous chemicals compared to products sold in developed countries like the USA, Europe, and Japan.',
-    category: 'india-specific',
-    paperUrl: 'https://doi.org/10.1007/s11356-024-33552-0',
-  },
-  {
-    id: 'hd-3',
-    number: 3,
-    title: 'Direct Impact on Reproductive Health',
-    authors: 'Gaikwad, Mayuri K., et al. & Avhad, Pooja, et al.',
-    journal: 'Research Journal of Pharmacology and Pharmacodynamics',
-    year: 2023,
-    summary: 'Emphasized how repeated exposure to endocrine-disrupting chemicals in sanitary products disrupts the endocrine system, affecting ovulation and menstrual cycles. Findings show potential links to delayed menarche, irregular periods, painful cramps and PCOS-like symptoms in long-term users.',
-    category: 'reproductive',
-  },
-  {
-    id: 'hd-4',
-    number: 4,
-    title: 'Heavy Metals Across Global Brands',
-    authors: 'Ma, Jiayi, et al.',
-    journal: 'Environmental Technology & Innovation',
-    year: 2024,
-    summary: 'Tested sanitary napkins from seven countries (China, Japan, South Korea, USA, UK, Australia and Germany) and found dangerous levels of heavy metals, including arsenic and lead. These metals are known to accumulate in the body and have been linked to neurotoxicity and reproductive system damage.',
-    category: 'heavy-metals',
-    paperUrl: 'https://doi.org/10.1016/j.eti.2024.103606',
-  },
-  {
-    id: 'hd-5',
-    number: 5,
-    title: 'Phthalates: A Silent Threat',
-    authors: 'Tang, Zhenwu, et al.',
-    journal: 'Environmental Science & Technology',
-    year: 2019,
-    summary: 'Identified phthalates (plasticizers commonly used in pad backings and adhesives) in sanitary napkins from six countries (Japan, South Korea, USA, UK, Australia and Germany). Phthalates are known endocrine disruptors linked to early puberty, irregular cycles, and even ovarian dysfunction.',
-    category: 'phthalates',
-    paperUrl: 'https://doi.org/10.1021/acs.est.9b04714',
-  },
-];
 
 // ── Section 2: More Research Papers (2025 compilation) ──
 // 11 recent, peer-reviewed papers from high-quality journals on
 // chemicals/toxins in disposable menstrual products and related health impacts
-// (including evidence around PCOS).
+// (including evidence around PCOS/PMOS).
 
 export const recentResearchStudies: ResearchStudy[] = [
   {
@@ -98,7 +38,7 @@ export const recentResearchStudies: ResearchStudy[] = [
     authors: 'Various authors',
     journal: 'Environment International',
     year: 2025,
-    summary: 'Broad survey of chemicals present across product types — phthalates, parabens, phenols. Highlights potential for endocrine exposure and a need for transparency in menstrual product composition.',
+    summary: 'Broad survey of chemicals present across product types, phthalates, parabens, phenols. Highlights potential for endocrine exposure and a need for transparency in menstrual product composition.',
     category: 'chemicals',
   },
   {
@@ -164,41 +104,41 @@ export const recentResearchStudies: ResearchStudy[] = [
   {
     id: 'rr-8',
     number: 8,
-    title: 'Bisphenol A (BPA) and PCOS in humans: systematic review',
+    title: 'Bisphenol A (BPA) and PCOS/PMOS in humans: systematic review',
     authors: 'Various authors',
     journal: 'International Journal of Gynecology & Obstetrics',
     year: 2024,
-    summary: 'Across 22 human studies, most showed higher BPA exposure among women with PCOS. Establishes a clear epidemiological association between BPA exposure and polycystic ovary syndrome.',
+    summary: 'Across 22 human studies, most showed higher BPA exposure among women with PCOS/PMOS. Establishes a clear epidemiological association between BPA exposure and polycystic ovary syndrome.',
     category: 'pcos',
   },
   {
     id: 'rr-9',
     number: 9,
-    title: 'Phthalates & PCOS: systematic literature review',
+    title: 'Phthalates & PCOS/PMOS: systematic literature review',
     authors: 'Various authors',
     journal: 'PubMed Indexed Review',
     year: 2023,
-    summary: 'Summarizes human data suggesting associations between prenatal or higher phthalate exposure and PCOS features. Emphasizes the need for better-designed longitudinal studies.',
+    summary: 'Summarizes human data suggesting associations between prenatal or higher phthalate exposure and PCOS/PMOS features. Emphasizes the need for better-designed longitudinal studies.',
     category: 'pcos',
   },
   {
     id: 'rr-10',
     number: 10,
-    title: 'BPA exposure and PCOS-like phenotypes (mechanistic)',
+    title: 'BPA exposure and PCOS/PMOS-like phenotypes (mechanistic)',
     authors: 'Various authors',
     journal: 'Reproductive BioMedicine Online',
     year: 2025,
-    summary: 'Adolescent BPA exposure induced PCOS-like syndrome and fertility effects in rats. Supports biological plausibility of endocrine-disrupting chemical mechanisms — not just correlational but causal.',
+    summary: 'Adolescent BPA exposure induced PCOS/PMOS-like syndrome and fertility effects in rats. Supports biological plausibility of endocrine-disrupting chemical mechanisms, not just correlational but causal.',
     category: 'mechanistic',
   },
   {
     id: 'rr-11',
     number: 11,
-    title: 'Metabolomics in BPA-exposed PCOS patients',
+    title: 'Metabolomics in BPA-exposed PCOS/PMOS patients',
     authors: 'Various authors',
     journal: 'Environmental Science and Pollution Research',
     year: 2023,
-    summary: 'Metabolomics analysis suggests disrupted steroid and lipid pathways in BPA-exposed PCOS patients. Reveals the molecular mechanisms through which endocrine disruptors affect hormonal health.',
+    summary: 'Metabolomics analysis suggests disrupted steroid and lipid pathways in BPA-exposed PCOS/PMOS patients. Reveals the molecular mechanisms through which endocrine disruptors affect hormonal health.',
     category: 'mechanistic',
   },
 ];
@@ -214,28 +154,28 @@ export interface KeyFinding {
 
 export const keyFindings: KeyFinding[] = [
   {
-    icon: 'FlaskConical',
-    stat: '16+',
+    icon: 'BookOpen',
+    stat: '11',
     label: 'Peer-Reviewed Studies',
-    description: 'Published in top journals including BJOG, Environment International, and PLOS ONE',
+    description: 'Published in leading journals including BJOG, Environment International and PLOS ONE.',
   },
   {
     icon: 'Globe',
     stat: '7',
     label: 'Countries Tested',
-    description: 'Heavy metals found in pads from China, Japan, South Korea, USA, UK, Australia & Germany',
+    description: 'Heavy metals and chemical compounds studied across global products.',
   },
   {
-    icon: 'AlertTriangle',
+    icon: 'Microscope',
     stat: '22',
-    label: 'Human Studies on BPA-PCOS Link',
-    description: 'Most showing higher BPA exposure among women with PCOS',
+    label: 'Human Studies',
+    description: 'Most reporting higher BPA exposure among women with PCOS/PMOS.',
   },
   {
-    icon: 'Flag',
+    icon: 'ShieldAlert',
     stat: 'Higher',
-    label: 'Chemical Load in Indian Pads',
-    description: 'Indian brands contain higher concentrations of hazardous chemicals than US, EU, Japan brands',
+    label: 'Chemical Load',
+    description: 'Indian pads reported higher concentrations than products in several developed regions.',
   },
 ];
 
@@ -243,8 +183,8 @@ export const chemicalsFound = [
   { name: 'Phthalates', effect: 'Endocrine disruptors linked to early puberty, irregular cycles, ovarian dysfunction', severity: 'high' },
   { name: 'Dioxins', effect: 'Carcinogenic compounds from chlorine bleaching of pad materials', severity: 'high' },
   { name: 'VOCs (Toluene etc.)', effect: 'Volatile organic compounds causing headaches, dizziness, hormonal disruption', severity: 'high' },
-  { name: 'BPA (Bisphenol A)', effect: 'Linked to PCOS in 22 human studies; induces PCOS-like syndrome in animal models', severity: 'high' },
-  { name: 'Heavy Metals', effect: 'Lead, cadmium, arsenic, mercury — neurotoxic, accumulate in body over time', severity: 'high' },
+  { name: 'BPA (Bisphenol A)', effect: 'Linked to PCOS/PMOS in 22 human studies; induces PCOS/PMOS-like syndrome in animal models', severity: 'high' },
+  { name: 'Heavy Metals', effect: 'Lead, cadmium, arsenic, mercury, neurotoxic, accumulate in body over time', severity: 'high' },
   { name: 'Parabens', effect: 'Preservatives that mimic estrogen; linked to hormonal imbalance', severity: 'medium' },
   { name: 'Pesticide Residues', effect: 'Found in Indian brands; linked to chronic inflammation and infertility', severity: 'medium' },
   { name: 'Microplastics', effect: 'Shed from pad surfaces during use; long-term effects under study', severity: 'medium' },
@@ -256,7 +196,7 @@ export const researchConclusion = {
   headline: 'The Scientific Consensus Is Clear',
   points: [
     'Pads/tampons contain EDCs (endocrine disrupting chemicals) such as phthalates and parabens, VOCs, metals and shed microplastics.',
-    'Human studies increasingly link higher EDC exposures with PCOS.',
+    'Human studies increasingly link higher EDC exposures with PCOS/PMOS.',
     'Indian pads contain higher chemical concentrations than products in developed nations.',
     'The highly permeable vaginal area makes chemical absorption more efficient than skin contact elsewhere.',
     'The consensus: reduce unnecessary chemical exposures, improve product disclosure/testing, and study real-world exposures more rigorously.',

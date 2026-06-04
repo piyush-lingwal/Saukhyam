@@ -32,18 +32,18 @@ const trustItems = [
 ];
 
 const reusablePoints = [
-  '100% chemical free — no dioxins, phthalates, or bleach',
+  '100% chemical free: no dioxins, phthalates, or bleach',
   'Banana fiber with natural antimicrobial properties',
   'Lasts 2-3 years with proper care',
   'Saves ₹3,000+ per year vs disposables',
-  'Biodegradable — zero landfill waste',
+  'Biodegradable, leading to zero landfill waste',
   'Handcrafted by empowered rural women',
 ];
 
 const disposablePoints = [
   'Contains dioxins, phthalates, and VOCs',
   'Synthetic superabsorbent polymers next to skin',
-  'Single use — 12,000+ pads in a lifetime',
+  'Single use: 12,000+ pads in a lifetime',
   'Costs ₹3,000-5,000 per year recurring',
   'Takes 500-800 years to decompose',
   'Mass-produced in chemical factories',
@@ -137,6 +137,9 @@ export default function ProductsPage() {
 
         <div className={styles.toolbar}>
           <div className={styles.filterTabs}>
+            <Link href="/saukhyam-pads" className={styles.filterTabLink}>
+              Saukhyam Pads
+            </Link>
             {availableCategories.map(cat => (
               <button
                 key={cat}
@@ -287,6 +290,27 @@ export default function ProductsPage() {
             <span className={styles.statLabel}>Pad Lifespan</span>
           </motion.div>
         </motion.div>
+      </div>
+
+      {/* ── Why Banana Fiber Navigation ── */}
+      <div className={styles.fiberNavWrap}>
+        <div className="container">
+          <motion.div
+            className={styles.fiberNavInner}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+          >
+            <Link href="/why-banana-fiber" className={styles.fiberNavBtn}>
+              <span className={styles.fiberNavIcon}>
+                <Leaf size={15} />
+              </span>
+              <span className={styles.fiberNavLabel}>Why Banana Fiber</span>
+              <ChevronRight size={16} className={styles.fiberNavArrow} />
+            </Link>
+          </motion.div>
+        </div>
       </div>
 
       {/* ── Why Switch ── */}
