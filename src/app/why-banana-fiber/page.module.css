@@ -1,0 +1,1557 @@
+/* ═══════════════════════════════════════════════════
+   WHY BANANA FIBER PAGE STYLES (Soft Luxury & Science)
+   ═══════════════════════════════════════════════════ */
+
+/* ── Custom Theme Palette: white · light green · dark green ── */
+.whyBananaFiberPage {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #ecfdf5;
+  --color-accent-green: #166534;
+  --color-accent-light: #86efac;
+  --color-accent-gold: #15803d;
+  --color-text-dark: #052e16;
+  --color-text-muted: #4d7c59;
+  --color-glass-white: rgba(255, 255, 255, 0.72);
+  --color-glass-border: rgba(22, 101, 52, 0.18);
+
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-dark);
+  font-family: var(--font-body), sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.grainOverlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+/* ── Section Transition & Organic Dividers ── */
+.sectionDivider {
+  height: 100px;
+  background: linear-gradient(to bottom, var(--color-bg-primary), var(--color-bg-secondary));
+  position: relative;
+  overflow: hidden;
+}
+
+.sectionDividerAlt {
+  height: 100px;
+  background: linear-gradient(to bottom, var(--color-bg-secondary), var(--color-bg-primary));
+  position: relative;
+  overflow: hidden;
+}
+
+.organicBackground {
+  position: relative;
+}
+
+.organicBackground::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: radial-gradient(var(--color-accent-green) 1px, transparent 0);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* SECTION 1: HERO */
+.heroSection {
+  position: relative;
+  min-height: clamp(80vh, 90vh, 100vh);
+  display: flex;
+  align-items: center;
+  padding: calc(var(--navbar-height) + var(--space-12)) 0 var(--space-16);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.heroBgLayer {
+  position: absolute;
+  inset: -8% 0 -8% 0;
+  z-index: 0;
+}
+
+.heroBgImg {
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(105deg,
+      rgba(5, 46, 22, 0.84) 0%,
+      rgba(20, 83, 45, 0.58) 38%,
+      rgba(236, 253, 245, 0.42) 68%,
+      rgba(255, 255, 255, 0.12) 100%
+    );
+}
+
+.heroLightLeak {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 75% 35%, rgba(134, 239, 172, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(22, 101, 52, 0.14) 0%, transparent 50%);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 640px;
+}
+
+.heroBreadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-8);
+  font-weight: 500;
+}
+
+.heroBreadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.heroBreadcrumb a:hover {
+  color: var(--color-accent-light);
+}
+
+.heroBreadcrumb svg {
+  color: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.breadcrumbPill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(220, 252, 231, 0.92) 100%);
+  border: 1px solid rgba(22, 101, 52, 0.35);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 12px rgba(5, 46, 22, 0.12);
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-6);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.2);
+}
+
+.heroLead {
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.75;
+  margin-bottom: var(--space-10);
+  max-width: 560px;
+}
+
+.heroCTAs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.heroBtnPrimary,
+.heroBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heroBtnPrimary {
+  color: var(--white);
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  border: 1px solid rgba(134, 239, 172, 0.4);
+  box-shadow: 0 4px 20px rgba(5, 46, 22, 0.25);
+}
+
+.heroBtnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(5, 46, 22, 0.35);
+  color: var(--white);
+  background: linear-gradient(135deg, #166534 0%, #14532d 100%);
+}
+
+.heroBtnSecondary {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.heroBtnSecondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+/* SECTION 2: A PLANT WITH ITS OWN STORY — editorial, no images */
+.plantStorySection {
+  position: relative;
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 0%, rgba(216, 180, 138, 0.08) 0%, transparent 55%),
+    linear-gradient(180deg, #F8F3EE 0%, #faf7f2 50%, #F8F3EE 100%);
+}
+
+.plantStoryWatermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: #3E5C4A;
+  opacity: 0.045;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  line-height: 1.1;
+}
+
+.plantStoryGrain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.plantStoryEditorial {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.plantStoryEditorial .sectionBadge {
+  justify-content: center;
+  width: 100%;
+}
+
+.plantStoryTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  color: #2a3d32;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.plantStoryCluster {
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.plantStoryClusterAlt {
+  text-align: left;
+  padding: var(--space-8) var(--space-7);
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 20px;
+  border: 1px solid rgba(216, 180, 138, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.plantStoryCluster p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: #4a5c52;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.plantStoryLead {
+  font-size: var(--text-lg) !important;
+  font-weight: 500;
+  color: #2a3d32 !important;
+}
+
+.plantStoryHighlight {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2vw, 1.2rem) !important;
+  font-weight: 700 !important;
+  color: #3E5C4A !important;
+  margin-top: var(--space-2) !important;
+}
+
+.plantStoryEmphasis {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 500;
+  color: #3E5C4A !important;
+  margin-top: var(--space-2) !important;
+}
+
+.plantStoryMicroHead {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  color: #2a3d32;
+  margin-bottom: var(--space-3);
+  line-height: 1.3;
+}
+
+.plantStoryTagline {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em;
+  color: #3E5C4A !important;
+  margin-top: var(--space-2) !important;
+}
+
+.plantStoryClosing {
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(216, 180, 138, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.plantStoryClosing p {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: #2a3d32;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.plantStoryClosing p:last-child {
+  color: #3E5C4A;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.sectionBadge {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-accent-green);
+  background: rgba(22, 101, 52, 0.08);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-6);
+}
+
+.sectionText {
+  font-size: var(--text-base);
+  color: var(--color-text-dark);
+  opacity: 0.9;
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* SECTION 3: RESOURCE & INDIA STORY */
+.resourceSection {
+  padding: var(--section-gap) 0;
+  background-color: var(--color-bg-primary);
+  position: relative;
+}
+
+.resourceGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+  margin-bottom: var(--space-16);
+}
+
+.flowTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-8);
+  text-align: center;
+  position: relative;
+}
+
+.processFlow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding: var(--space-4) 0;
+}
+
+.processFlow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: var(--space-8);
+  right: var(--space-8);
+  height: 2px;
+  background: linear-gradient(to right, var(--color-bg-secondary) 0%, var(--color-accent-green) 50%, var(--color-bg-secondary) 100%);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.flowStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.flowIconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-primary);
+  border: 2px solid var(--color-accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent-green);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-3);
+  transition: var(--transition-all);
+}
+
+.flowStep:hover .flowIconWrap {
+  transform: scale(1.1);
+  background: var(--color-bg-secondary);
+  border-color: var(--color-accent-green);
+}
+
+.flowLabel {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+/* SECTION 4: ABSORBENCY */
+.absorbencySection {
+  padding: var(--section-gap) 0;
+  background: radial-gradient(ellipse at center, rgba(134, 239, 172, 0.12) 0%, var(--color-bg-secondary) 100%);
+  display: flex;
+  align-items: center;
+}
+
+.centeredLayout {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.glassCard {
+  background: var(--color-glass-white);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-12) var(--space-8);
+  box-shadow: var(--shadow-xl);
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: var(--space-8);
+  text-align: left;
+  margin-top: var(--space-8);
+}
+
+.metricBig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.metricNum {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 10vw, 6.5rem);
+  font-weight: 800;
+  color: var(--color-accent-gold);
+  line-height: 1;
+}
+
+.metricLabel {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-dark);
+  margin-top: -5px;
+}
+
+.absorbencyContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.absorbencyContent p {
+  color: var(--color-text-dark);
+  opacity: 0.85;
+  margin: 0;
+}
+
+/* ── JOURNEY: FROM BANANA STEM TO DIGNITY ── */
+.journeySection {
+  position: relative;
+  background: linear-gradient(180deg, var(--color-bg-primary) 0%, #f0fdf4 100%);
+  overflow: hidden;
+}
+
+.journeyHero {
+  position: relative;
+  min-height: clamp(420px, 62vh, 560px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.journeyHeroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.journeyHeroImg {
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+.journeyHeroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(105deg,
+      rgba(5, 46, 22, 0.88) 0%,
+      rgba(20, 83, 45, 0.72) 42%,
+      rgba(20, 83, 45, 0.45) 100%
+    );
+}
+
+.journeyHeroInner {
+  position: relative;
+  z-index: 2;
+  padding: calc(var(--navbar-height) + var(--space-12)) 0 var(--space-16);
+}
+
+.journeyEyebrow {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+  margin-bottom: var(--space-4);
+}
+
+.journeyHeroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.12;
+  max-width: 720px;
+  margin-bottom: var(--space-5);
+}
+
+.journeyHeroSub {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: var(--space-8);
+}
+
+.journeyHeroBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--white);
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  border: 1px solid rgba(134, 239, 172, 0.35);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(5, 46, 22, 0.3);
+}
+
+.journeyHeroBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(5, 46, 22, 0.4);
+  color: var(--white);
+}
+
+.journeyIntro {
+  text-align: center;
+  max-width: 720px;
+  margin: clamp(4rem, 8vw, 6rem) auto var(--space-12);
+}
+
+.journeyIntroLead {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: var(--space-5);
+}
+
+.journeyIntroText {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  margin-bottom: var(--space-3);
+}
+
+.journeyTimelineHeader {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.journeyTimeline {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 6vw, 5rem);
+  margin-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+.journeyStep {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.journeyStepReverse {
+  direction: rtl;
+}
+
+.journeyStepReverse > * {
+  direction: ltr;
+}
+
+.journeyStepVisual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.journeyStepImageWrap {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px -20px rgba(5, 46, 22, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+.journeyStepImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.journeyStepCaption {
+  font-size: var(--text-xs);
+  font-style: italic;
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+  padding-left: var(--space-2);
+}
+
+.journeyStepContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-4) 0;
+}
+
+.journeyStepNum {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-accent-green);
+  opacity: 0.7;
+  margin-bottom: var(--space-3);
+}
+
+.journeyStepTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-weight: 800;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+}
+
+.journeyStepBody {
+  font-size: var(--text-base);
+  color: var(--color-text-dark);
+  opacity: 0.88;
+  line-height: 1.72;
+  margin-bottom: var(--space-4);
+}
+
+.journeyStepQuote {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--color-accent-green);
+  line-height: 1.55;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-accent-light);
+  margin: var(--space-2) 0 var(--space-4);
+}
+
+.journeyStepTagline {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.journeyEmotionalQuote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  text-align: center;
+  line-height: 1.55;
+  max-width: 820px;
+  margin: 0 auto clamp(4rem, 8vw, 6rem);
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(134, 239, 172, 0.12) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(236, 253, 245, 0.85) 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(22, 101, 52, 0.12);
+  box-shadow: 0 20px 50px -24px rgba(5, 46, 22, 0.15);
+  position: relative;
+}
+
+.journeyEmotionalQuote::before {
+  content: '🌿';
+  position: absolute;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  opacity: 0.5;
+}
+
+.journeyCta {
+  text-align: center;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  background: linear-gradient(135deg, #052e16 0%, #14532d 100%);
+  border-radius: 24px;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.journeyCta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(134, 239, 172, 0.14) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.journeyCtaTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800;
+  margin-bottom: var(--space-6);
+  position: relative;
+}
+
+.journeyCtaList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) var(--space-6);
+  margin-bottom: var(--space-8);
+  position: relative;
+}
+
+.journeyCtaList li {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(134, 239, 172, 0.2);
+  border-radius: var(--radius-full);
+}
+
+.journeyCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-dark);
+  background: linear-gradient(135deg, #ffffff 0%, #dcfce7 100%);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.journeyCtaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+  color: var(--color-text-dark);
+}
+
+/* ── USER EXPERIENCES ── */
+.userExperiencesSection {
+  position: relative;
+  padding: clamp(5rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.userExperiencesBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 20%, rgba(216, 180, 138, 0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 75%, rgba(62, 92, 74, 0.07) 0%, transparent 50%),
+    linear-gradient(165deg, #F8F3EE 0%, #faf7f2 45%, #f5efe8 100%);
+}
+
+.userExperiencesGlow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 100%, rgba(216, 180, 138, 0.2) 0%, transparent 45%);
+  filter: blur(40px);
+}
+
+.userExperiencesGrain {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.userExperiencesHeader {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--space-16);
+}
+
+.userExperiencesPill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3E5C4A;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(216, 180, 138, 0.35);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-5);
+  backdrop-filter: blur(8px);
+}
+
+.userExperiencesTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
+  color: #2a3d32;
+  line-height: 1.12;
+  margin-bottom: var(--space-6);
+}
+
+.userExperiencesIntro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.userExperiencesIntro p {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: #5c6b62;
+  line-height: 1.7;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.userExperiencesGrid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+  margin-bottom: var(--space-16);
+}
+
+.experienceCardsCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.experienceCard {
+  margin: 0;
+  padding: var(--space-7) var(--space-7);
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow:
+    0 16px 40px -16px rgba(62, 92, 74, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.experienceCard:nth-child(2) {
+  margin-left: var(--space-8);
+}
+
+.experienceCard:nth-child(3) {
+  margin-left: var(--space-4);
+}
+
+.experienceCard:nth-child(4) {
+  margin-left: var(--space-6);
+}
+
+.experienceCard:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 50px -18px rgba(62, 92, 74, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98);
+}
+
+.experienceCardQuote {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 1.7vw, 1.15rem);
+  font-style: italic;
+  font-weight: 500;
+  color: #2a3d32;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.experienceStatsCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+}
+
+.experienceStatCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-7) var(--space-6);
+  background: rgba(255, 255, 255, 0.52);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(216, 180, 138, 0.22);
+  border-radius: 20px;
+  box-shadow: 0 12px 36px -14px rgba(62, 92, 74, 0.08);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.experienceStatCard::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(216, 180, 138, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.experienceStatCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px -16px rgba(5, 46, 22, 0.16);
+}
+
+.experienceStatValue {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #3E5C4A;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 32px rgba(216, 180, 138, 0.35);
+}
+
+.experienceStatLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #5c6b62;
+  margin-top: var(--space-3);
+  line-height: 1.45;
+}
+
+.scienceHandoff {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding-top: var(--space-8);
+}
+
+.scienceHandoffLine {
+  width: 1px;
+  height: 64px;
+  margin: 0 auto var(--space-6);
+  background: linear-gradient(to bottom, transparent, var(--color-accent-green), transparent);
+  opacity: 0.4;
+}
+
+.scienceHandoffText {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.scienceHandoffLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: #3E5C4A;
+  text-decoration: none;
+  transition: gap 0.3s ease, color 0.3s ease;
+}
+
+.scienceHandoffLink:hover {
+  gap: var(--space-3);
+  color: #2a3d32;
+}
+
+.scienceTransitionFade {
+  height: 100px;
+  background: linear-gradient(to bottom, #f5efe8 0%, rgba(248, 243, 238, 0.7) 50%, var(--color-bg-primary) 100%);
+  position: relative;
+}
+
+.scienceTransitionFade::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(22, 101, 52, 0.06) 0%, transparent 70%);
+}
+
+/* SECTION 5 (legacy dark transition – kept for philosophy badges) */
+.transitionSection {
+  display: none;
+}
+
+.darkBadge {
+  color: var(--color-accent-light);
+  background: rgba(134, 239, 172, 0.12);
+  border: 1px solid rgba(134, 239, 172, 0.3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+  display: inline-flex;
+}
+
+.darkTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--white);
+  margin-bottom: var(--space-6);
+  line-height: var(--leading-tight);
+}
+
+.darkText {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.darkMetric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-12) var(--space-6);
+  position: relative;
+  backdrop-filter: blur(4px);
+}
+
+.darkMetricValue {
+  font-family: var(--font-heading);
+  font-size: clamp(5rem, 12vw, 8rem);
+  font-weight: 800;
+  color: var(--color-accent-light);
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(134, 239, 172, 0.25);
+}
+
+.darkMetricLabel {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: var(--space-2);
+  text-align: center;
+}
+
+/* SECTION 6: INSIDE THE FIBER */
+.insideSection {
+  padding: var(--section-gap) 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(22, 101, 52, 0.06) 0%, var(--color-bg-primary) 60%);
+  position: relative;
+}
+
+.moleculeOverlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 20% 30%, var(--color-accent-green) 1px, transparent 1px),
+                    radial-gradient(circle at 80% 60%, var(--color-accent-light) 1px, transparent 1px);
+  background-size: 48px 48px, 64px 64px;
+}
+
+.scienceCardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.scienceCard {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(22, 101, 52, 0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--space-10) var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  color: var(--color-accent-green);
+  min-height: 160px;
+}
+
+.scienceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent-green);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.scienceCardTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--color-text-dark);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.compoundsIntro {
+  margin-top: var(--space-4);
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* SECTION 7: WHAT SCIENCE FOUND */
+.findingsSection {
+  padding: var(--section-gap) 0 clamp(4rem, 8vw, 6rem);
+  background-color: var(--color-bg-secondary);
+}
+
+.findingsIntro {
+  text-align: center;
+  max-width: var(--container-narrow);
+  margin: 0 auto var(--space-12);
+}
+
+.findingsIntro p {
+  font-size: var(--text-base);
+  color: var(--color-text-dark);
+  opacity: 0.9;
+}
+
+.compoundsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+  max-width: 1100px;
+  margin: 0 auto var(--space-12);
+}
+
+.compoundCard {
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(22, 101, 52, 0.22);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-all);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.compoundCard:hover {
+  background: var(--white);
+  border-color: var(--color-accent-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.compoundName {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.findingsDisclaimer {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 4px solid var(--color-accent-gold);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: var(--space-4) var(--space-6);
+  text-align: left;
+  box-shadow: var(--shadow-xs);
+}
+
+.findingsDisclaimer p {
+  font-size: var(--text-sm);
+  color: var(--color-text-dark);
+  line-height: var(--leading-relaxed);
+  max-width: 100%;
+}
+
+/* SECTION 8: SCIENCE CONTINUES */
+.continuesSection {
+  padding: var(--section-gap) 0;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.continuesContainer {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.continuesText {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  opacity: 0.95;
+}
+
+/* SECTION 9: SAUKHYAM PHILOSOPHY */
+.philosophySection {
+  padding: clamp(6rem, 12vw, 10rem) 0;
+  background: linear-gradient(135deg, #052e16 0%, #14532d 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophyGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, rgba(134, 239, 172, 0.16) 0%, transparent 65%),
+              radial-gradient(circle at 20% 80%, rgba(22, 163, 74, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.philosophyGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.philosophyContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.philosophyTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  color: var(--white);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-6);
+}
+
+.philosophyText {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: var(--space-10);
+}
+
+.philosophyQuoteBlock {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-8);
+  width: 100%;
+}
+
+.philosophyQuote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-style: italic;
+  color: var(--color-accent-light);
+  line-height: var(--leading-snug);
+  max-width: 600px;
+}
+
+.philosophyImageWrap {
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+.philosophyImageWrap img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ── Mobile Layout Adjustments ── */
+@media (max-width: 992px) {
+  .heroSection {
+    min-height: 85vh;
+    padding-top: calc(var(--navbar-height) + var(--space-8));
+  }
+
+  .heroOverlay {
+    background:
+      linear-gradient(180deg,
+        rgba(5, 46, 22, 0.86) 0%,
+        rgba(20, 83, 45, 0.68) 55%,
+        rgba(236, 253, 245, 0.35) 100%
+      );
+  }
+
+  .heroContent {
+    max-width: 100%;
+  }
+
+  .plantStoryGrid, .resourceGrid, .philosophyGrid,
+  .journeyStep, .userExperiencesGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .experienceStatsCol {
+    grid-template-columns: 1fr 1fr;
+    padding-top: 0;
+  }
+
+  .experienceCard:nth-child(2),
+  .experienceCard:nth-child(3),
+  .experienceCard:nth-child(4) {
+    margin-left: 0;
+  }
+
+  .plantStoryClusterAlt {
+    text-align: center;
+  }
+
+  .journeyStepReverse {
+    direction: ltr;
+  }
+
+  .glassCard {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .scienceCardGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processFlow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-8) var(--space-6);
+  }
+
+  .processFlow::before {
+    display: none;
+  }
+
+  .flowStep {
+    flex: 0 0 40%;
+  }
+
+  .philosophyContent {
+    order: 2;
+  }
+
+  .philosophyImageWrap {
+    order: 1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .heroCTAs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .heroBtnPrimary,
+  .heroBtnSecondary {
+    width: 100%;
+  }
+
+  .flowStep {
+    flex: 0 0 100%;
+  }
+
+  .experienceStatsCol {
+    grid-template-columns: 1fr;
+  }
+
+  .compoundsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .journeyHeroTitle {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+
+  .experienceStatValue {
+    font-size: clamp(2.8rem, 12vw, 3.5rem);
+  }
+}

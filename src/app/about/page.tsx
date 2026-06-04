@@ -33,7 +33,7 @@ const timelineEvents = [
   {
     year: '2017',
     title: 'Banana Fiber Discovery',
-    desc: 'After extensive R&D, the team developed India\'s first banana fiber absorbent core - 100% chemical free, biodegradable, and antimicrobial.',
+    desc: 'After extensive R&D, the team developed India\'s first banana fiber absorbent core: 100% chemical free, biodegradable, and antimicrobial.',
     image: null,
   },
   {
@@ -69,7 +69,7 @@ const timelineEvents = [
   {
     year: '2026',
     title: '30 Lakh Lives Changed',
-    desc: 'Today, Saukhyam stands as India\'s most impactful menstrual health movement - built by women, for women, healing the planet.',
+    desc: 'Today, Saukhyam stands as India\'s most impactful menstrual health movement, built by women, for women, healing the planet.',
     image: null,
   },
 ];
@@ -79,7 +79,7 @@ const pillars = [
   { icon: Heart, label: "Women's Health", desc: 'Chemical-free, healing periods for all', color: '#dc1464' },
   { icon: Users, label: 'Empower Makers', desc: 'Rural women earning dignified livelihoods', color: '#0d9488' },
   { icon: Globe, label: 'Climate Action', desc: 'Eliminating 125+ kg of pad waste per woman', color: '#7c3aed' },
-  { icon: Shield, label: 'Toxin-Free', desc: 'No dioxins, phthalates, or bleach - ever', color: '#b45309' },
+  { icon: Shield, label: 'Toxin-Free', desc: 'No dioxins, phthalates, or bleach, ever', color: '#b45309' },
   { icon: Recycle, label: 'Circular Economy', desc: 'From agricultural waste to healing product', color: '#0284c7' },
 ];
 
@@ -110,7 +110,7 @@ export default function AboutPage() {
               <span className={styles.heroTitleGreen}>Healing the Planet.</span>
             </motion.h1>
             <motion.p variants={fadeUp} className={styles.heroSubtitle}>
-              Born from a vision to make menstrual hygiene safe, sustainable, and empowering - 
+              Born from a vision to make menstrual hygiene safe, sustainable, and empowering , 
               Saukhyam is India&apos;s first reusable pad made from banana fiber, handcrafted by rural women.
             </motion.p>
             <motion.div variants={fadeUp} className={styles.heroStats}>
@@ -146,7 +146,7 @@ export default function AboutPage() {
             >
               <img
                 src="/amma.png"
-                alt="Mata Amritanandamayi (Amma) - Spiritual Guide of Saukhyam"
+                alt="Mata Amritanandamayi (Amma), Spiritual Guide of Saukhyam"
                 className={styles.ammaImage}
                 loading="lazy"
               />
@@ -173,10 +173,10 @@ export default function AboutPage() {
                 <p className={styles.ammaQuoteText}>
                   When we take care of nature, nature takes care of us.
                 </p>
-                <span className={styles.ammaQuoteAuthor}>- Amma</span>
+                <span className={styles.ammaQuoteAuthor}>,  Amma</span>
               </motion.div>
               <motion.p variants={fadeUp} className={styles.bodyText}>
-                Saukhyam was born from <strong>Amma&apos;s compassionate vision</strong> - a world where every woman
+                Saukhyam was born from <strong>Amma&apos;s compassionate vision</strong>, a world where every woman
                 has access to safe, non-polluting menstrual care. Under her guidance, Anju Bist
                 embarked on a journey that would transform the lives of millions.
               </motion.p>
@@ -211,7 +211,7 @@ export default function AboutPage() {
                 The Founder
               </span>
               <h2 className={styles.sectionTitle}>
-                Anju Bist -<br />
+                Anju Bist,<br />
                 <span className={styles.titleAccentGreen}>The Padwoman of India</span>
               </h2>
               <p className={styles.bodyText}>
@@ -221,7 +221,7 @@ export default function AboutPage() {
               </p>
               <p className={styles.bodyText}>
                 After years of R&amp;D at Amritapuri Ashram, she discovered the extraordinary
-                potential of <strong>banana fiber</strong> - the agricultural waste of a tree that
+                potential of <strong>banana fiber</strong>, the agricultural waste of a tree that
                 bears fruit once and is then discarded. From that waste she created India&apos;s
                 first banana fiber reusable sanitary napkin.
               </p>
@@ -232,7 +232,7 @@ export default function AboutPage() {
               <div className={styles.founderBadges}>
                 <div className={styles.founderBadge}>
                   <CheckCircle2 size={16} className={styles.founderBadgeIcon} />
-                  NITI Aayog - Women Transforming India
+                  NITI Aayog: Women Transforming India
                 </div>
                 <div className={styles.founderBadge}>
                   <CheckCircle2 size={16} className={styles.founderBadgeIcon} />
@@ -252,7 +252,7 @@ export default function AboutPage() {
               <div className={styles.founderPhotoFrame}>
                 <img
                   src="/anju-bist.png"
-                  alt="Anju Bist - Founder & Managing Director, Saukhyam"
+                  alt="Anju Bist, Founder & Managing Director, Saukhyam"
                   className={styles.founderPhoto}
                   loading="lazy"
                 />
@@ -297,10 +297,10 @@ export default function AboutPage() {
             variants={stagger}
           >
             {[
-              { step: '01', title: 'Banana Harvest', desc: 'Banana trees bear fruit once, then are cut down. Their fibrous trunk - normally agricultural waste - is our raw material.', img: 'https://saukhyampads.org/cdn/shop/files/6_d1942f75-768a-4d32-bb23-666a71990a71_2048x2048.png?v=1746945194' },
+              { step: '01', title: 'Banana Harvest', desc: 'Banana trees bear fruit once, then are cut down. Their fibrous trunk, normally agricultural waste, which is our raw material.', img: 'https://saukhyampads.org/cdn/shop/files/6_d1942f75-768a-4d32-bb23-666a71990a71_2048x2048.png?v=1746945194' },
               { step: '02', title: 'Fiber Extraction', desc: 'The pseudostem is processed to extract long, strong fibers with natural antimicrobial pathogenesis-related proteins.', img: '/Blog_Images/IMG_8023_1024x1024.webp' },
               { step: '03', title: 'Handcrafted by Women', desc: 'Trained rural women in our satellite centres layer cotton, banana fiber, and PU to handcraft each pad with care.', img: '/Blog_Images/1.webp' },
-              { step: '04', title: 'Reaches You', desc: 'Each pad lasts 2-3 years, replaces 200+ disposables, and arrives ready to heal your periods and the planet.', img: '/bentogrid_photo.jpeg' },
+              { step: '04', title: 'Reaches You', desc: 'Each pad lasts 2–3 years, replaces 200+ disposables, and arrives ready to heal your periods and the planet.', img: '/bentogrid_photo.jpeg' },
             ].map((item) => (
               <motion.div key={item.step} variants={fadeUp} className={styles.howMadeCard}>
                 <div className={styles.howMadeImageWrap}>
@@ -351,7 +351,7 @@ export default function AboutPage() {
               <div className={styles.vmLabel}>Our Vision</div>
               <h3 className={styles.vmHeadline}>
                 Reusables providing a wholesome period experience become the first choice
-                for every menstruator - everywhere.
+                for every menstruator, everywhere.
               </h3>
               <p className={styles.vmDesc}>
                 A world where no woman compromises her health due to harmful chemicals, and where
@@ -366,7 +366,7 @@ export default function AboutPage() {
               </div>
               <div className={styles.vmLabel}>Our Mission</div>
               <h3 className={styles.vmHeadline}>
-                Combat climate change, empower women, and transform lives - through
+                Combat climate change, empower women, and transform lives, through
                 beautiful reusable menstrual pads.
               </h3>
               <p className={styles.vmDesc}>
@@ -418,7 +418,7 @@ export default function AboutPage() {
               Milestones Along the Way
             </motion.h2>
             <motion.p variants={fadeUp} className={styles.sectionDesc}>
-              From a single ashram in Kerala to 30 lakh lives across India - a decade of
+              From a single ashram in Kerala to 30 lakh lives across India: a decade of
               compassion in action.
             </motion.p>
           </motion.div>
@@ -570,7 +570,7 @@ export default function AboutPage() {
               Join the Reusable Revolution
             </motion.h2>
             <motion.p variants={fadeUp} className={styles.ctaDesc}>
-              Every pad you buy creates a wave of change - for your health, for rural women, and for
+              Every pad you buy creates a wave of change, for your health, for rural women, and for
               the planet. Be part of something bigger.
             </motion.p>
             <motion.div variants={fadeUp} className={styles.ctaButtons}>

@@ -21,10 +21,10 @@ const programs = [
     title: 'HEAL',
     subtitle: 'Health, Environment, Active Living',
     description:
-      'Supporting girls and women facing menstrual disorders such as PCOS through lifestyle shifts, guidance, and reusable menstrual products. A holistic approach combining chemical-free pads with nutrition, movement, and stress management.',
+      'Supporting girls and women facing menstrual disorders such as PCOS/PMOS through lifestyle shifts, guidance, and reusable menstrual products. A holistic approach combining chemical-free pads with nutrition, movement, and stress management.',
     stats: [
       { label: 'Healing Stories', value: '14+' },
-      { label: 'PCOS Improvements', value: '70%' },
+      { label: 'PCOS/PMOS Improvements', value: '70%' },
       { label: 'Pain Reduction', value: '85%' },
     ],
     color: 'green' as const,
@@ -35,7 +35,7 @@ const programs = [
     title: 'REACH',
     subtitle: 'Rural Empowerment & Community Health',
     description:
-      'Bringing safe, chemical-free menstrual hygiene to rural India through satellite centres. Training rural women to manufacture pads locally - creating livelihoods while transforming community health.',
+      'Bringing safe, chemical-free menstrual hygiene to rural India through satellite centres. Training rural women to manufacture pads locally, creating livelihoods while transforming community health.',
     stats: [
       { label: 'Satellite Centres', value: '25+' },
       { label: 'States Covered', value: '20+' },
@@ -78,7 +78,7 @@ export default function ProgramsPage() {
               Empowering <span className={styles.heroAccent}>Communities</span> Across India
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              From rural villages to sports academies - our programs create lasting change
+              From rural villages to sports academies, our programs create lasting change
               through education, livelihood, and menstrual health awareness.
             </motion.p>
           </motion.div>
@@ -126,19 +126,6 @@ export default function ProgramsPage() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── State Pages ── */}
-      <section className={styles.section}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h2 className={styles.sectionTitle}>REACH & CARE across India</h2>
-          <p style={{ color: 'var(--color-text-muted)', maxWidth: 520, margin: '0 auto 1.5rem' }}>
-            11 dedicated state impact pages with live stats, campaigns, timelines, and volunteer opportunities.
-          </p>
-          <Link href="/programs/states" className={styles.programLink} style={{ display: 'inline-flex', marginTop: '0.5rem' }}>
-            <MapPin size={18} /> Explore state pages <ArrowRight size={16} />
-          </Link>
         </div>
       </section>
 

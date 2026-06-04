@@ -13,7 +13,7 @@ type ConditionFilter = 'all' | Testimonial['condition'];
 type CohortFilter = 'all' | 1 | 2;
 
 const conditionLabels: Record<Testimonial['condition'], string> = {
-  pcos: 'PCOS',
+  pcos: 'PCOS/PMOS',
   cramps: 'Period Cramps',
   irregular: 'Irregular Periods',
   'heavy-flow': 'Heavy Flow',

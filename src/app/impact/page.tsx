@@ -16,12 +16,6 @@ const stagger = {
 };
 
 export default function ImpactPage() {
-  const getPressUrl = (title: string, publication: string, url: string) => {
-    if (url && url !== '#') return url;
-    const query = encodeURIComponent(`${title} ${publication} Saukhyam`);
-    return `https://www.google.com/search?q=${query}`;
-  };
-
   return (
     <div className={styles.impactPage}>
       {/* ── Hero ── */}
@@ -40,7 +34,7 @@ export default function ImpactPage() {
               Recognized by <span className={styles.heroAccent}>India & the World</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              From NITI Aayog to the UN Climate Conference - Saukhyam&apos;s impact
+              From NITI Aayog to the UN Climate Conference, Saukhyam&apos;s impact
               has been acknowledged across national and international platforms.
             </motion.p>
           </motion.div>
@@ -121,7 +115,7 @@ export default function ImpactPage() {
                 key={item.id}
                 variants={fadeInUp}
                 className={styles.pressCard}
-                href={getPressUrl(item.title, item.publication, item.url)}
+                href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -25,7 +25,7 @@ export default function BuddyProgramPage() {
               Peer Mentoring for <span className={styles.heroAccent}>Period Health</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              Trained Saukhyam Buddies become community ambassadors - conducting workshops,
+              Trained Saukhyam Buddies become community ambassadors, conducting workshops,
               supporting first-time switchers, and normalizing conversations around menstruation.
             </motion.p>
           </motion.div>
@@ -64,7 +64,7 @@ export default function BuddyProgramPage() {
           <motion.div className={styles.stepsGrid} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             {[
               { step: '01', title: 'Community Workshops', desc: 'Conduct engaging, taboo-breaking workshops in schools, colleges, and self-help groups on menstrual health and hygiene.' },
-              { step: '02', title: 'One-on-One Mentoring', desc: 'Guide first-time switchers through the transition from disposables - answering questions and offering personal support.' },
+              { step: '02', title: 'One-on-One Mentoring', desc: 'Guide first-time switchers through the transition from disposables, answering questions and offering personal support.' },
               { step: '03', title: 'Product Demonstrations', desc: 'Show how to use, wash, and care for Saukhyam pads with hands-on demonstrations that build confidence.' },
               { step: '04', title: 'Feedback Loop', desc: 'Collect real user feedback and share it with the Saukhyam team to continuously improve products and programs.' },
             ].map((item) => (

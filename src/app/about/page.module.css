@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   ABOUT / OUR STORY PAGE - Redesigned
+   ABOUT / OUR STORY PAGE: Redesigned
    ═══════════════════════════════════════════════════ */
 
 .aboutPage {
@@ -707,14 +707,14 @@
 }
 
 /* ══════════════════════════════════════════
-   ── TIMELINE - Alternating Left / Right
+   ── TIMELINE, Alternating Left / Right
    ══════════════════════════════════════════ */
 .timelineSection {
   padding: clamp(4rem, 8vw, 7rem) 0;
   background: var(--color-bg);
 }
 
-/* Outer wrapper - relative so the centre line can be absolute */
+/* Outer wrapper, relative so the centre line can be absolute */
 .timeline {
   position: relative;
   margin-top: clamp(2rem, 4vw, 3rem);
