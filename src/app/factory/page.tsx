@@ -14,6 +14,7 @@ import {
 import styles from './page.module.css';
 import MissionStorySection from '@/components/factory/MissionStorySection';
 import ManufacturingHubShowcase from '@/components/factory/ManufacturingHubShowcase';
+import ManufacturingJourneySection from '@/components/factory/ManufacturingJourneySection';
 import ProductionProcess from '@/components/factory/ProductionProcess';
 
 const fadeUp = {
@@ -147,6 +148,8 @@ export default function FactoryPage() {
       <MissionStorySection />
 
       <ManufacturingHubShowcase />
+
+      <ManufacturingJourneySection />
 
       <ProductionProcess />
     </main>
