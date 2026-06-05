@@ -227,6 +227,33 @@ const internsData: InternProfile[] = [
     testimonial: 'Interning at Saukhyam has been a truly enriching experience. Working on menstrual health data has given me more than just analytical experience. It has given me a window into the lived realities of women and girls across India and shown me how deeply data can reflect human stories. The internship has not only sharpened my analytical skills but also deepened my understanding of how data can be a powerful tool for social change. The team has been incredibly supportive and motivating, making this a space where I could learn, grow, and contribute meaningfully. I am grateful for every opportunity this internship has offered me.',
   },
   {
+    name: 'Dr. Eyazhini R',
+    role: 'Public Health Intern',
+    institution: 'Indian Institute of Public Health Gandhinagar',
+    degree: 'Master of Public Health (MPH) – First Year Completed · BDS',
+    image: '/images/interns/eyazhini-r.png',
+    initials: 'ER',
+    color: '#6d28d9',
+    sections: [
+      {
+        label: 'Educational Background',
+        preview: 'BDS completed; pursuing MPH at IIPH Gandhinagar with first year completed.',
+        full: 'Dr. Eyazhini R has completed her Bachelor of Dental Surgery (BDS) and is currently pursuing a Master of Public Health (MPH) at the Indian Institute of Public Health Gandhinagar, with the first year successfully completed.',
+      },
+      {
+        label: 'Internship Alongside Studies',
+        preview: 'Exploring menstrual health and community public health beyond the classroom.',
+        full: 'While pursuing her MPH degree, Dr. Eyazhini joined Saukhyam Foundation as an intern. The experience has allowed her to explore menstrual health, sustainability, and community-driven public health initiatives beyond the classroom, providing valuable practical exposure alongside her academic studies.',
+      },
+      {
+        label: 'Area of Work',
+        preview: 'Planning, stakeholder engagement, awareness activities, and research support.',
+        full: 'At Saukhyam Foundation, she contributes to planning and coordination of meetings, stakeholder communication and engagement, organizing invitations and discussions, learning and supporting menstrual health initiatives, public health awareness activities, social media engagement, and research and documentation projects.',
+      },
+    ],
+    testimonial: 'My internship at Saukhyam Foundation has been a wonderful learning experience. Through this journey, I have gained valuable insights into menstrual health, sustainability, and community-based health initiatives. I have had the opportunity to interact with professionals, researchers, NGOs, and organizations working towards meaningful social impact. One of the most enriching aspects of this internship has been learning about Saukhyam\'s HEAL and CARE initiatives and witnessing their efforts to promote health awareness and sustainable practices among young people and communities. The experience has broadened my understanding of public health beyond academics and highlighted the importance of collaboration, advocacy, and community engagement in creating lasting change. I am grateful for the exposure, mentorship, and opportunities provided by Saukhyam Foundation, and I look forward to contributing further to its mission of creating healthier and more sustainable communities.',
+  },
+  {
     name: 'Trisha Shetty',
     role: 'Tech Intern',
     institution: 'Pimpri Chinchwad University, Pune',
