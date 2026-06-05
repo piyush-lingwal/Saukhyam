@@ -2,9 +2,68 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import InteractiveIndiaNetworkMap from '@/components/satellite/InteractiveIndiaNetworkMap';
+import { ArrowRight, GitBranch, Layers3, MapPin, ShieldCheck } from 'lucide-react';
+import IndiaStateMap, { type HighlightState } from '@/components/satellite/IndiaStateMap';
 import styles from './page.module.css';
+
+const stats = [
+  { icon: GitBranch, value: 'Hub & Spoke', label: 'Production Network' },
+  { icon: MapPin, value: 'Multiple', label: 'Satellite Centres' },
+  { icon: Layers3, value: 'District-Level', label: 'Manufacturing' },
+  { icon: ShieldCheck, value: 'Quality-Controlled', label: 'Production System' },
+];
+
+type NetworkRegion = {
+  state: string;
+  slug: HighlightState;
+  district: string;
+  description: string;
+};
+
+const networkRegions: NetworkRegion[] = [
+  {
+    state: 'Madhya Pradesh',
+    slug: 'madhya-pradesh',
+    district: 'Burhanpur District',
+    description:
+      'Two satellite production centres operate in Burhanpur District through collaborations with local livelihood initiatives and community organizations.',
+  },
+  {
+    state: 'Maharashtra',
+    slug: 'maharashtra',
+    district: 'Nandurbar District',
+    description:
+      'Production teams in Nandurbar have been trained to manufacture reusable menstrual products through district-level partnerships and community-led initiatives.',
+  },
+  {
+    state: 'Odisha',
+    slug: 'odisha',
+    district: 'Kalahandi & Angul Districts',
+    description:
+      'New satellite production centres are being established to strengthen local manufacturing capacity and expand access to sustainable menstrual products.',
+  },
+  {
+    state: 'Uttarakhand',
+    slug: 'uttarakhand',
+    district: 'Expansion Region',
+    description:
+      'Collaborations are underway to develop district-level production systems capable of serving larger rural populations.',
+  },
+  {
+    state: 'Telangana',
+    slug: 'telangana',
+    district: 'Emerging Production Network',
+    description:
+      'Partnerships are supporting the development of new satellite production centres within the state.',
+  },
+  {
+    state: 'Haryana',
+    slug: 'haryana',
+    district: 'Future Expansion',
+    description:
+      'Regional collaborations are helping establish production ecosystems designed for scalable manufacturing and distribution.',
+  },
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
@@ -12,6 +71,7 @@ const fadeUp = {
 };
 
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
+const cardStagger = { visible: { transition: { staggerChildren: 0.12 } } };
 
 export default function SatelliteCentresPage() {
   return (
@@ -58,7 +118,39 @@ export default function SatelliteCentresPage() {
         </div>
       </section>
 
-      {/* Interactive India Map */}
+      {/* Statistics */}
+      <section className={styles.statsSection} aria-label="Satellite production statistics">
+        <div className="container">
+          <motion.div
+            className={styles.statsGrid}
+            variants={cardStagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+          >
+            {stats.map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <motion.article
+                  key={stat.label}
+                  className={styles.statCard}
+                  variants={fadeUp}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className={styles.statIcon} aria-hidden="true">
+                    <Icon size={20} strokeWidth={1.75} />
+                  </div>
+                  <span className={styles.statValue}>{stat.value}</span>
+                  <span className={styles.statLabel}>{stat.label}</span>
+                </motion.article>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Satellite Production Network */}
       <section
         id="satellite-network"
         className={styles.section}
@@ -86,7 +178,7 @@ export default function SatelliteCentresPage() {
               hub-and-spoke manufacturing model.
             </motion.p>
             <motion.div className={styles.headerActions} variants={fadeUp}>
-              <a href="#india-map" className={styles.btnPrimary}>
+              <a href="#state-list" className={styles.btnPrimary}>
                 Explore the Network
                 <ArrowRight size={16} aria-hidden="true" className={styles.btnArrow} />
               </a>
@@ -96,9 +188,34 @@ export default function SatelliteCentresPage() {
             </motion.div>
           </motion.header>
 
-          <div id="india-map">
-            <InteractiveIndiaNetworkMap />
-          </div>
+          <motion.div
+            id="state-list"
+            className={styles.stateList}
+            variants={cardStagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+          >
+            {networkRegions.map((region, index) => (
+              <motion.article
+                key={region.state}
+                className={styles.stateRow}
+                variants={fadeUp}
+              >
+                {index > 0 && <div className={styles.stateDivider} aria-hidden="true" />}
+                <div className={styles.stateRowInner}>
+                  <div className={styles.mapWrap}>
+                    <IndiaStateMap highlight={region.slug} />
+                  </div>
+                  <div className={styles.stateContent}>
+                    <h3 className={styles.stateName}>{region.state}</h3>
+                    <p className={styles.stateDistrict}>{region.district}</p>
+                    <p className={styles.stateDesc}>{region.description}</p>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
         </div>
       </section>
     </main>
