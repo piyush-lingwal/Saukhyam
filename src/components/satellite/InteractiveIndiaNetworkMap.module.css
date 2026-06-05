@@ -52,6 +52,21 @@
   pointer-events: none;
 }
 
+.connectionLine {
+  opacity: 0.22;
+}
+
+.connectionActive {
+  opacity: 0.75;
+  animation: dashFlow 1.8s linear infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
 .pulseRing {
   transform-origin: center;
   animation: hubPulse 2.4s ease-in-out infinite;

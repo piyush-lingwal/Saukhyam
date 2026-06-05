@@ -99,24 +99,28 @@ export default function InteractiveIndiaNetworkMap({
 
             {/* Connection lines from hub to satellites */}
             <g className={styles.connections} aria-hidden="true">
-              {stateInfoList.map((state, index) => (
-                <motion.path
-                  key={`line-${state.id}`}
-                  d={connectionPath(HUB_POSITION, state.centroid)}
-                  fill="none"
-                  stroke="#2E7D32"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 4"
-                  opacity={displayId === state.id || displayId === 'kerala' ? 0.7 : 0.25}
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: displayId === state.id ? 0.7 : 0.25 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    pathLength: { duration: 1.2, delay: 0.2 + index * 0.1, ease: [0.16, 1, 0.3, 1] },
-                    opacity: { duration: 0.3 },
-                  }}
-                />
-              ))}
+              {stateInfoList.map((state, index) => {
+                const isActive = displayId === state.id || displayId === 'kerala';
+                return (
+                  <motion.path
+                    key={`line-${state.id}`}
+                    d={connectionPath(HUB_POSITION, state.centroid)}
+                    fill="none"
+                    stroke="#2E7D32"
+                    strokeWidth={isActive ? 2 : 1.5}
+                    strokeDasharray="6 4"
+                    className={isActive ? styles.connectionActive : styles.connectionLine}
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: isActive ? 0.75 : 0.22 }}
+                    animate={{ opacity: isActive ? 0.75 : 0.22 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      pathLength: { duration: 1.2, delay: 0.2 + index * 0.1, ease: [0.16, 1, 0.3, 1] },
+                      opacity: { duration: 0.35 },
+                    }}
+                  />
+                );
+              })}
             </g>
 
             {/* Satellite & hub state regions */}
