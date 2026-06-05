@@ -115,18 +115,25 @@ export default function SatelliteCentresPage() {
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
           >
+            <motion.span className={styles.eyebrow} variants={fadeUp}>
+              Satellite Production Centres
+            </motion.span>
             <motion.h2 id="network-heading" className={styles.title} variants={fadeUp}>
-              Satellite Production Centers
+              Expanding Sustainable Manufacturing Across India
             </motion.h2>
             <motion.p className={styles.subtitle} variants={fadeUp}>
-              Satellite Production Centers provide rural women with a means of employment close to
-              their homes.
+              A growing network of satellite production centres connected through Saukhyam&apos;s
+              hub-and-spoke manufacturing model.
             </motion.p>
-            <motion.p className={styles.subtitle} variants={fadeUp}>
-              In India, the khadi industry provides income to about 5 lakh rural households.
-              Similarly, the large-scale manufacturing of reusable menstrual pads has the potential
-              to create lakhs of jobs.
-            </motion.p>
+            <motion.div className={styles.headerActions} variants={fadeUp}>
+              <a href="#interactive-map" className={styles.btnPrimary}>
+                Explore the Network
+                <ArrowRight size={16} aria-hidden="true" className={styles.btnArrow} />
+              </a>
+              <Link href="/contact" className={styles.btnSecondary}>
+                Apply for a Satellite Centre
+              </Link>
+            </motion.div>
           </motion.header>
 
           <div id="interactive-map">
