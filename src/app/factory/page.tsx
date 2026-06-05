@@ -54,8 +54,8 @@ export default function FactoryPage() {
       <section className={styles.hero} aria-labelledby="factory-hero-title">
         <div className={styles.heroBgImage} aria-hidden="true">
           <Image
-            src="/Blog_Images/IMG_8023_1024x1024.webp"
-            alt=""
+            src="/images/factory/factory-hero-manufacturing-journey.png"
+            alt="Saukhyam Factory manufacturing journey — from raw banana fiber through processing and quality inspection to finished biodegradable menstrual pads"
             fill
             sizes="100vw"
             className={styles.heroBgImg}

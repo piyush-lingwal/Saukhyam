@@ -31,8 +31,8 @@
 
 .heroBgImg {
   object-fit: cover;
-  object-position: center 35%;
-  filter: saturate(0.88) brightness(0.48);
+  object-position: center center;
+  filter: saturate(0.92) brightness(0.52);
 }
 
 .heroBgOverlay {
