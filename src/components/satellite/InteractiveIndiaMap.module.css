@@ -1,0 +1,262 @@
+/* ═══════════════════════════════════════════════════
+   INTERACTIVE INDIA MAP
+   ═══════════════════════════════════════════════════ */
+
+.mapLayout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: clamp(2rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.mapColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mapShell {
+  position: relative;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    0 12px 40px rgba(22, 101, 52, 0.08),
+    0 4px 14px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.floatNode1,
+.floatNode2 {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floatNode1 {
+  width: 120px;
+  height: 120px;
+  top: 8%;
+  right: 6%;
+  background: radial-gradient(circle, rgba(74, 222, 128, 0.2) 0%, transparent 70%);
+}
+
+.floatNode2 {
+  width: 90px;
+  height: 90px;
+  bottom: 12%;
+  left: 5%;
+  background: radial-gradient(circle, rgba(22, 163, 74, 0.14) 0%, transparent 70%);
+}
+
+.mapSvg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.statePath {
+  transition:
+    fill 0.3s ease,
+    transform 0.3s var(--ease-out),
+    filter 0.3s ease;
+}
+
+.stateInteractive {
+  cursor: pointer;
+}
+
+.stateInteractive:hover,
+.stateHovered {
+  transform: scale(1.02);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.stateActive {
+  transform: scale(1.03);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.connections {
+  pointer-events: none;
+}
+
+.hubPulse {
+  transform-origin: center;
+  animation: hubPulse 2.8s ease-in-out infinite;
+}
+
+.hubPulse2 {
+  transform-origin: center;
+  animation: hubPulse 2.8s ease-in-out infinite 0.4s;
+}
+
+@keyframes hubPulse {
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50% { transform: scale(1.35); opacity: 0.28; }
+}
+
+.hubBadge {
+  position: absolute;
+  z-index: 3;
+  transform: translate(-50%, calc(-100% - 14px));
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.55rem 0.9rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--green-200);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hubBadgeTitle {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-700);
+}
+
+.hubBadgeLocation {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  padding: 0 0.25rem;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendSatellite {
+  background: #2e7d32;
+}
+
+.legendHub {
+  background: #14532d;
+}
+
+.legendOther {
+  background: #9ca3af;
+}
+
+.panelColumn {
+  position: sticky;
+  top: calc(var(--navbar-height) + 1.5rem);
+}
+
+.infoPanel {
+  padding: clamp(1.75rem, 3vw, 2.25rem);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--green-100);
+  border-radius: 24px;
+  box-shadow:
+    0 12px 40px rgba(22, 101, 52, 0.08),
+    0 4px 14px rgba(0, 0, 0, 0.04);
+  min-height: 220px;
+}
+
+.infoState {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.infoDistrict {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green-600);
+  margin: 0 0 1rem;
+}
+
+.infoDesc {
+  font-size: clamp(0.92rem, 1.05vw, 1rem);
+  color: var(--color-text-secondary);
+  line-height: 1.78;
+  margin: 0;
+}
+
+.mapLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-2xl);
+}
+
+@media (max-width: 960px) {
+  .mapLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .panelColumn {
+    position: static;
+  }
+
+  .hubBadge {
+    transform: translate(-50%, calc(-100% - 8px));
+    padding: 0.45rem 0.75rem;
+  }
+
+  .hubBadgeTitle {
+    font-size: 0.62rem;
+  }
+
+  .hubBadgeLocation {
+    font-size: 0.72rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hubPulse,
+  .hubPulse2 {
+    animation: none;
+  }
+
+  .statePath {
+    transition: fill 0.2s ease;
+  }
+}
