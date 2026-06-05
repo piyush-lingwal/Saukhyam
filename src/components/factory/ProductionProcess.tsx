@@ -2,8 +2,6 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Globe2, Layers, Package, ShieldCheck } from 'lucide-react';
-import CountUp from '@/components/science/CountUp';
 import styles from './ProductionProcess.module.css';
 
 export type ProductionStep = {
@@ -65,52 +63,10 @@ const productionSteps: ProductionStep[] = [
     step: '06',
     title: 'Quality Control',
     description:
-      'Every reusable pad undergoes rigorous inspection before dispatch. Through continuous process refinement and strict quality standards, the factory maintains a reject rate of less than 2%.',
-    badge: 'Less Than 2% Reject Rate',
+      'Every reusable pad undergoes rigorous inspection before dispatch. Each product is evaluated for comfort, durability, and absorbency to ensure it meets Saukhyam quality standards.',
+    badge: 'Final Quality Inspection',
     image: '/images/factory/step-06-quality-control.png',
     imageAlt: 'Quality inspector examining finished reusable pads',
-  },
-];
-
-type FactoryMetric = {
-  icon: typeof Layers;
-  value: string;
-  label: string;
-  support: string;
-  animate?: boolean;
-};
-
-const factoryMetrics: FactoryMetric[] = [
-  {
-    icon: Layers,
-    value: '6',
-    label: 'Production Stages',
-    support:
-      'Six integrated stages from raw fiber to finished pad, each refined for consistency at manufacturing scale.',
-    animate: true,
-  },
-  {
-    icon: Package,
-    value: '10 Lakh+',
-    label: 'Annual Capacity',
-    support:
-      'Over one million reusable pads produced every year, meeting growing demand across communities worldwide.',
-    animate: true,
-  },
-  {
-    icon: Globe2,
-    value: 'Hub & Satellite',
-    label: 'Network',
-    support:
-      'A central hub factory supported by satellite units that extend production reach and local livelihood impact.',
-  },
-  {
-    icon: ShieldCheck,
-    value: '<2%',
-    label: 'Quality Reject Rate',
-    support:
-      'Rigorous inspection at every stage keeps defects below 2%, ensuring trusted quality in every dispatch.',
-    animate: true,
   },
 ];
 
@@ -212,8 +168,9 @@ export default function ProductionProcess() {
             <span className={styles.titleAccent}>Reusable Innovation</span>
           </motion.h2>
           <motion.p className={styles.subtitle} variants={fadeUp}>
-            Discover how natural banana fiber is transformed into high-quality reusable menstrual
-            pads through a carefully designed manufacturing process led by skilled women artisans.
+            Follow each stage of how products are made — from material preparation and fiber
+            processing through product assembly, quality inspection, and packaging and
+            distribution — led by skilled women artisans across the Saukhyam Factory.
           </motion.p>
         </motion.header>
 
@@ -223,41 +180,6 @@ export default function ProductionProcess() {
             <JourneyStep key={step.step} step={step} index={index} />
           ))}
         </div>
-
-        <motion.div
-          className={styles.metricsGrid}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          variants={stagger}
-        >
-          {factoryMetrics.map((metric) => {
-            const Icon = metric.icon;
-            return (
-              <motion.article
-                key={`${metric.value}-${metric.label}`}
-                className={styles.metricCard}
-                variants={fadeUp}
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className={styles.metricCardGlow} aria-hidden="true" />
-                <div className={styles.metricIcon} aria-hidden="true">
-                  <Icon size={22} strokeWidth={1.75} />
-                </div>
-                <div className={styles.metricValueWrap}>
-                  {metric.animate ? (
-                    <CountUp value={metric.value} className={styles.metricValue} />
-                  ) : (
-                    <span className={styles.metricValue}>{metric.value}</span>
-                  )}
-                  <span className={styles.metricLabel}>{metric.label}</span>
-                </div>
-                <p className={styles.metricSupport}>{metric.support}</p>
-              </motion.article>
-            );
-          })}
-        </motion.div>
       </div>
     </section>
   );

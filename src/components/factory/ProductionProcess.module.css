@@ -4,7 +4,7 @@
 
 .section {
   position: relative;
-  padding: clamp(5rem, 10vw, 8.5rem) 0 clamp(5.5rem, 11vw, 9rem);
+  padding: clamp(5rem, 10vw, 8.5rem) 0 clamp(6rem, 12vw, 10rem);
   isolation: isolate;
   overflow: hidden;
   background: #fafcf9;
@@ -49,7 +49,7 @@
   text-align: center;
   gap: 0.85rem;
   max-width: 720px;
-  margin: 0 auto clamp(3.5rem, 7vw, 5rem);
+  margin: 0 auto clamp(5rem, 9vw, 7.5rem);
 }
 
 .eyebrow {
@@ -95,7 +95,10 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: clamp(3.5rem, 7vw, 5.5rem);
+  gap: clamp(4.5rem, 9vw, 7rem);
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .journeyLine {
@@ -120,8 +123,8 @@
 .journeyStep {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 52px 1fr;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-columns: 1fr 56px 1fr;
+  gap: clamp(2.25rem, 4.5vw, 3.75rem);
   align-items: center;
 }
 
@@ -208,7 +211,8 @@
   position: relative;
   z-index: 1;
   aspect-ratio: 4 / 3;
-  border-radius: 22px;
+  min-height: clamp(260px, 32vw, 380px);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow:
@@ -305,130 +309,6 @@
   margin: 0;
 }
 
-/* Factory metrics — glassmorphism cards */
-.metricsGrid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1rem, 2vw, 1.35rem);
-  margin-top: clamp(3.5rem, 7vw, 5rem);
-  align-items: stretch;
-}
-
-.metricCard {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.65rem;
-  min-height: 240px;
-  height: 100%;
-  padding: clamp(1.5rem, 2.5vw, 2rem) clamp(1.15rem, 2vw, 1.5rem);
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.82) 0%,
-    rgba(240, 253, 244, 0.65) 55%,
-    rgba(236, 253, 245, 0.78) 100%
-  );
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(187, 247, 208, 0.55);
-  border-radius: var(--radius-2xl);
-  box-shadow:
-    0 12px 40px rgba(22, 101, 52, 0.08),
-    0 4px 14px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85);
-  overflow: hidden;
-  transition:
-    transform 0.35s var(--ease-out),
-    box-shadow 0.35s var(--ease-out),
-    border-color 0.35s ease;
-}
-
-.metricCardGlow {
-  position: absolute;
-  inset: -40% -20% auto;
-  height: 70%;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74, 222, 128, 0.18) 0%, transparent 70%);
-  pointer-events: none;
-  opacity: 0.7;
-  transition: opacity 0.35s ease;
-}
-
-.metricCard:hover {
-  border-color: rgba(74, 222, 128, 0.55);
-  box-shadow:
-    0 0 0 1px rgba(74, 222, 128, 0.25),
-    0 0 28px rgba(74, 222, 128, 0.18),
-    0 22px 56px rgba(22, 101, 52, 0.14),
-    0 8px 24px rgba(0, 0, 0, 0.06);
-}
-
-.metricCard:hover .metricCardGlow {
-  opacity: 1;
-}
-
-.metricIcon {
-  position: relative;
-  z-index: 1;
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--green-700);
-  background: linear-gradient(135deg, var(--green-50) 0%, rgba(187, 247, 208, 0.45) 100%);
-  border: 1px solid var(--green-200);
-  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.1);
-  flex-shrink: 0;
-}
-
-.metricValueWrap {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.2rem;
-}
-
-.metricValue {
-  font-family: var(--font-heading);
-  font-size: clamp(1.35rem, 2vw, 1.65rem);
-  font-weight: 800;
-  color: var(--green-800);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-.metricLabel {
-  font-family: var(--font-body), sans-serif;
-  font-size: clamp(0.78rem, 0.95vw, 0.88rem);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--green-700);
-  line-height: 1.35;
-}
-
-.metricSupport {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  display: flex;
-  align-items: flex-start;
-  font-family: var(--font-body), sans-serif;
-  font-size: clamp(0.82rem, 0.95vw, 0.9rem);
-  font-weight: 400;
-  color: var(--color-text-secondary);
-  line-height: 1.65;
-  margin: 0.35rem 0 0;
-  max-width: 26ch;
-}
-
 /* ─────────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────────── */
@@ -463,9 +343,6 @@
     font-size: clamp(4rem, 18vw, 6rem);
   }
 
-  .metricsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 640px) {
@@ -477,18 +354,4 @@
     border-radius: 18px;
   }
 
-  .metricsGrid {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .metricCard {
-    min-height: auto;
-  }
-
-  .metricSupport {
-    max-width: none;
-  }
 }

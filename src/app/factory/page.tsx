@@ -12,7 +12,6 @@ import {
   Users,
 } from 'lucide-react';
 import styles from './page.module.css';
-import MissionStorySection from '@/components/factory/MissionStorySection';
 import ManufacturingHubShowcase from '@/components/factory/ManufacturingHubShowcase';
 import ManufacturingJourneySection from '@/components/factory/ManufacturingJourneySection';
 import ProductionProcess from '@/components/factory/ProductionProcess';
@@ -91,7 +90,7 @@ export default function FactoryPage() {
             </motion.p>
 
             <motion.div className={styles.heroCtas} variants={fadeUp}>
-              <a href="#process" className={styles.heroBtnPrimary}>
+              <a href="#manufacturing-journey" className={styles.heroBtnPrimary}>
                 Explore Our Process
                 <ArrowRight size={16} aria-hidden="true" />
               </a>
@@ -144,12 +143,9 @@ export default function FactoryPage() {
         </div>
       </section>
 
-      {/* Where Innovation Meets Impact */}
-      <MissionStorySection />
+      <ManufacturingJourneySection />
 
       <ManufacturingHubShowcase />
-
-      <ManufacturingJourneySection />
 
       <ProductionProcess />
     </main>
