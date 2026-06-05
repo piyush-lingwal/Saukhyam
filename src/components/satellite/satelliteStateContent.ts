@@ -1,57 +1,54 @@
-import type { IndiaStateId, SatelliteStateId } from './indiaMapTypes';
+import type { IndiaStateId } from './indiaMapTypes';
 
-export type StateInfo = {
-  state: string;
-  district: string;
+export type FeaturedStateId = 'madhya-pradesh' | 'maharashtra' | 'odisha';
+
+export const FEATURED_STATE_IDS = [
+  'madhya-pradesh',
+  'maharashtra',
+  'odisha',
+] as const satisfies readonly FeaturedStateId[];
+
+export const STATE_COLORS: Record<FeaturedStateId, string> = {
+  'madhya-pradesh': '#4CAF50',
+  maharashtra: '#2196F3',
+  odisha: '#FF9800',
+};
+
+export const DEFAULT_GREY = '#E0E0E0';
+
+export type StateSection = {
+  id: FeaturedStateId;
+  name: string;
   description: string;
 };
 
-export const SATELLITE_STATE_CONTENT: Record<SatelliteStateId, StateInfo> = {
-  'madhya-pradesh': {
-    state: 'Madhya Pradesh',
-    district: 'Burhanpur District',
-    description:
-      'Two satellite production centres operate in Burhanpur District through collaborations with local livelihood initiatives and community organizations.',
-  },
-  maharashtra: {
-    state: 'Maharashtra',
-    district: 'Nandurbar District',
-    description:
-      'Production teams in Nandurbar have been trained to manufacture reusable menstrual products through district-level partnerships and community-led initiatives.',
-  },
-  odisha: {
-    state: 'Odisha',
-    district: 'Kalahandi & Angul Districts',
-    description:
-      'New satellite production centres are being established to strengthen local manufacturing capacity and expand access to sustainable menstrual products.',
-  },
-  uttarakhand: {
-    state: 'Uttarakhand',
-    district: 'Expansion Region',
-    description:
-      'Collaborations are underway to develop district-level production systems capable of serving larger rural populations.',
-  },
-  telangana: {
-    state: 'Telangana',
-    district: 'Emerging Production Network',
-    description:
-      'Partnerships are supporting the development of new satellite production centres within the state.',
-  },
-  haryana: {
-    state: 'Haryana',
-    district: 'Future Expansion',
-    description:
-      'Regional collaborations are helping establish production ecosystems designed for scalable manufacturing and distribution.',
-  },
+export const PANEL_INTRO = {
+  heading: 'Saukhyam – Reusable Pads Satellite Production Centers',
+  subtitle:
+    'Providing rural women employment close to home through decentralized manufacturing units.',
 };
 
-export const KERALA_HUB_CONTENT: StateInfo = {
-  state: 'Kerala',
-  district: 'Manufacturing Hub · Kuzhithura, Kerala',
-  description:
-    'The central Saukhyam Factory processes banana fiber and prepares semi-finished materials, supplying satellite production centres across India through the hub-and-spoke model.',
-};
+export const STATE_SECTIONS: StateSection[] = [
+  {
+    id: 'madhya-pradesh',
+    name: 'Madhya Pradesh',
+    description:
+      'Two satellite centers operate in Burhanpur District. Women working here are part of self-help groups under Ajeevika, State Rural Livelihood Mission of MP.',
+  },
+  {
+    id: 'maharashtra',
+    name: 'Maharashtra',
+    description:
+      'In tribal Nandurbar district, training was provided to a group of 10 women, who continue producing Saukhyam pads under a Farmers Producer Company and NGO BAIF.',
+  },
+  {
+    id: 'odisha',
+    name: 'Odisha',
+    description:
+      'New satellite production centers are being set up in Kalahandi and Angul districts in partnership with Amrita Jan Shikshan Sansthan, Government of India.',
+  },
+];
 
-export function isSatelliteState(id: IndiaStateId): id is SatelliteStateId {
-  return id in SATELLITE_STATE_CONTENT;
+export function isFeaturedState(id: IndiaStateId): id is FeaturedStateId {
+  return (FEATURED_STATE_IDS as readonly string[]).includes(id);
 }
