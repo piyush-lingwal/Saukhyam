@@ -243,95 +243,6 @@
   margin-top: 0.5rem;
 }
 
-/* State list */
-.stateList {
-  position: relative;
-  z-index: 1;
-  max-width: 900px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--green-100);
-  border-radius: var(--radius-2xl);
-  box-shadow:
-    0 8px 32px rgba(22, 101, 52, 0.06),
-    0 2px 8px rgba(0, 0, 0, 0.03);
-  overflow: hidden;
-}
-
-.stateRow {
-  position: relative;
-}
-
-.stateDivider {
-  height: 1px;
-  margin: 0 clamp(1.5rem, 3vw, 2rem);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--green-200) 20%,
-    var(--green-200) 80%,
-    transparent
-  );
-}
-
-.stateRowInner {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  align-items: center;
-  padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2rem);
-  transition: background 0.3s ease;
-}
-
-.stateRow:hover .stateRowInner {
-  background: rgba(240, 253, 244, 0.45);
-}
-
-.mapWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background: #fff;
-  border: 1px solid var(--green-100);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
-}
-
-.stateContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.stateName {
-  font-family: var(--font-heading);
-  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
-  font-weight: 800;
-  color: var(--color-text);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.stateDistrict {
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--green-600);
-  margin: 0;
-}
-
-.stateDesc {
-  font-size: clamp(0.9rem, 1.05vw, 0.98rem);
-  color: var(--color-text-secondary);
-  line-height: 1.72;
-  margin: 0;
-}
-
 /* Buttons */
 .btnPrimary {
   display: inline-flex;
@@ -408,15 +319,5 @@
   .btnSecondary {
     width: 100%;
     justify-content: center;
-  }
-
-  .stateRowInner {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .mapWrap {
-    max-width: 180px;
-    margin: 0 auto;
   }
 }

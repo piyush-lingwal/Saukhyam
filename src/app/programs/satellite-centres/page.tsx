@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, GitBranch, Layers3, MapPin, ShieldCheck } from 'lucide-react';
-import IndiaStateMap, { type HighlightState } from '@/components/satellite/IndiaStateMap';
+import InteractiveIndiaMap from '@/components/satellite/InteractiveIndiaMap';
 import styles from './page.module.css';
 
 const stats = [
@@ -11,58 +11,6 @@ const stats = [
   { icon: MapPin, value: 'Multiple', label: 'Satellite Centres' },
   { icon: Layers3, value: 'District-Level', label: 'Manufacturing' },
   { icon: ShieldCheck, value: 'Quality-Controlled', label: 'Production System' },
-];
-
-type NetworkRegion = {
-  state: string;
-  slug: HighlightState;
-  district: string;
-  description: string;
-};
-
-const networkRegions: NetworkRegion[] = [
-  {
-    state: 'Madhya Pradesh',
-    slug: 'madhya-pradesh',
-    district: 'Burhanpur District',
-    description:
-      'Two satellite production centres operate in Burhanpur District through collaborations with local livelihood initiatives and community organizations.',
-  },
-  {
-    state: 'Maharashtra',
-    slug: 'maharashtra',
-    district: 'Nandurbar District',
-    description:
-      'Production teams in Nandurbar have been trained to manufacture reusable menstrual products through district-level partnerships and community-led initiatives.',
-  },
-  {
-    state: 'Odisha',
-    slug: 'odisha',
-    district: 'Kalahandi & Angul Districts',
-    description:
-      'New satellite production centres are being established to strengthen local manufacturing capacity and expand access to sustainable menstrual products.',
-  },
-  {
-    state: 'Uttarakhand',
-    slug: 'uttarakhand',
-    district: 'Expansion Region',
-    description:
-      'Collaborations are underway to develop district-level production systems capable of serving larger rural populations.',
-  },
-  {
-    state: 'Telangana',
-    slug: 'telangana',
-    district: 'Emerging Production Network',
-    description:
-      'Partnerships are supporting the development of new satellite production centres within the state.',
-  },
-  {
-    state: 'Haryana',
-    slug: 'haryana',
-    district: 'Future Expansion',
-    description:
-      'Regional collaborations are helping establish production ecosystems designed for scalable manufacturing and distribution.',
-  },
 ];
 
 const fadeUp = {
@@ -150,7 +98,7 @@ export default function SatelliteCentresPage() {
         </div>
       </section>
 
-      {/* Satellite Production Network */}
+      {/* Interactive India Map */}
       <section
         id="satellite-network"
         className={styles.section}
@@ -178,7 +126,7 @@ export default function SatelliteCentresPage() {
               hub-and-spoke manufacturing model.
             </motion.p>
             <motion.div className={styles.headerActions} variants={fadeUp}>
-              <a href="#state-list" className={styles.btnPrimary}>
+              <a href="#interactive-map" className={styles.btnPrimary}>
                 Explore the Network
                 <ArrowRight size={16} aria-hidden="true" className={styles.btnArrow} />
               </a>
@@ -188,34 +136,9 @@ export default function SatelliteCentresPage() {
             </motion.div>
           </motion.header>
 
-          <motion.div
-            id="state-list"
-            className={styles.stateList}
-            variants={cardStagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-          >
-            {networkRegions.map((region, index) => (
-              <motion.article
-                key={region.state}
-                className={styles.stateRow}
-                variants={fadeUp}
-              >
-                {index > 0 && <div className={styles.stateDivider} aria-hidden="true" />}
-                <div className={styles.stateRowInner}>
-                  <div className={styles.mapWrap}>
-                    <IndiaStateMap highlight={region.slug} />
-                  </div>
-                  <div className={styles.stateContent}>
-                    <h3 className={styles.stateName}>{region.state}</h3>
-                    <p className={styles.stateDistrict}>{region.district}</p>
-                    <p className={styles.stateDesc}>{region.description}</p>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
+          <div id="interactive-map">
+            <InteractiveIndiaMap />
+          </div>
         </div>
       </section>
     </main>
