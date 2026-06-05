@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { motion } from 'framer-motion';
 import {
   INDIA_MAP_DATA_URL,
   type IndiaMapState,
@@ -10,9 +10,9 @@ import {
 import {
   DEFAULT_GREY,
   FEATURED_STATE_IDS,
-  HIGHLIGHT_GREEN,
+  PANEL_INTRO,
+  STATE_COLORS,
   STATE_SECTIONS,
-  getStateCaption,
   type FeaturedStateId,
   isFeaturedState,
 } from './satelliteStateContent';
@@ -24,8 +24,16 @@ type MapData = {
   states: IndiaMapState[];
 };
 
-function getStateFill(id: IndiaStateId, active: FeaturedStateId): string {
-  return id === active ? HIGHLIGHT_GREEN : DEFAULT_GREY;
+function getStateFill(
+  id: IndiaStateId,
+  active: FeaturedStateId | null,
+  hovered: IndiaStateId | null,
+): string {
+  if (!isFeaturedState(id)) return DEFAULT_GREY;
+  const base = STATE_COLORS[id];
+  if (active === id) return base;
+  if (hovered === id) return base;
+  return base;
 }
 
 export default function InteractiveIndiaMap() {
@@ -33,6 +41,7 @@ export default function InteractiveIndiaMap() {
   const [active, setActive] = useState<FeaturedStateId>('madhya-pradesh');
   const [hovered, setHovered] = useState<IndiaStateId | null>(null);
   const sectionRefs = useRef<Partial<Record<FeaturedStateId, HTMLDivElement | null>>>({});
+  const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch(INDIA_MAP_DATA_URL)
@@ -61,7 +70,6 @@ export default function InteractiveIndiaMap() {
 
   const { viewBox, states } = mapData;
   const hoveredState = hovered ? states.find((s) => s.id === hovered) : null;
-  const activeSection = STATE_SECTIONS.find((s) => s.id === active);
 
   return (
     <div className={styles.mapLayout}>
@@ -77,7 +85,7 @@ export default function InteractiveIndiaMap() {
             className={styles.mapSvg}
             viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
             role="img"
-            aria-label={`Map of India highlighting ${activeSection?.name ?? 'a satellite production centre'}`}
+            aria-label="Interactive map of India showing Saukhyam satellite production centres"
           >
             {states.map((state) => {
               const featured = isFeaturedState(state.id);
@@ -88,9 +96,9 @@ export default function InteractiveIndiaMap() {
                 <path
                   key={state.id}
                   d={state.d}
-                  fill={getStateFill(state.id, active)}
-                  stroke="#ffffff"
-                  strokeWidth={1}
+                  fill={getStateFill(state.id, active, hovered)}
+                  stroke="rgba(255,255,255,0.45)"
+                  strokeWidth={isActive ? 1.5 : 1}
                   className={[
                     styles.statePath,
                     featured ? styles.stateFeatured : '',
@@ -99,6 +107,11 @@ export default function InteractiveIndiaMap() {
                   ]
                     .filter(Boolean)
                     .join(' ')}
+                  style={
+                    isActive && featured
+                      ? { filter: `drop-shadow(0 0 6px ${STATE_COLORS[state.id]}88)` }
+                      : undefined
+                  }
                   onMouseEnter={() => setHovered(state.id)}
                   onMouseLeave={() => setHovered(null)}
                   onClick={() => handleStateClick(state.id)}
@@ -131,19 +144,6 @@ export default function InteractiveIndiaMap() {
           )}
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.figcaption
-            key={active}
-            className={styles.mapCaption}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {getStateCaption(active)}
-          </motion.figcaption>
-        </AnimatePresence>
-
         <div className={styles.legend} aria-label="Map legend">
           {FEATURED_STATE_IDS.map((id) => {
             const section = STATE_SECTIONS.find((s) => s.id === id);
@@ -154,7 +154,10 @@ export default function InteractiveIndiaMap() {
                 className={`${styles.legendItem} ${active === id ? styles.legendItemActive : ''}`}
                 onClick={() => handleStateClick(id)}
               >
-                <span className={`${styles.legendDot} ${styles.legendHighlight}`} />
+                <span
+                  className={styles.legendDot}
+                  style={{ background: STATE_COLORS[id] }}
+                />
                 {section?.name}
               </button>
             );
@@ -166,7 +169,7 @@ export default function InteractiveIndiaMap() {
         </div>
       </motion.div>
 
-      <div className={styles.panelColumn}>
+      <div className={styles.panelColumn} ref={panelRef}>
         <motion.div
           className={styles.infoPanel}
           initial={{ opacity: 0, x: 20 }}
@@ -174,9 +177,15 @@ export default function InteractiveIndiaMap() {
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         >
+          <header className={styles.panelHeader}>
+            <h2 className={styles.panelHeading}>{PANEL_INTRO.heading}</h2>
+            <p className={styles.panelSubtitle}>{PANEL_INTRO.subtitle}</p>
+          </header>
+
           <div className={styles.sections}>
             {STATE_SECTIONS.map((section) => {
               const isActive = active === section.id;
+              const color = STATE_COLORS[section.id];
 
               return (
                 <motion.div
@@ -186,6 +195,13 @@ export default function InteractiveIndiaMap() {
                   }}
                   id={`state-section-${section.id}`}
                   className={`${styles.stateSection} ${isActive ? styles.stateSectionActive : ''}`}
+                  style={
+                    isActive
+                      ? ({
+                          '--state-accent': color,
+                        } as CSSProperties)
+                      : undefined
+                  }
                   onClick={() => handleSectionClick(section.id)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -199,11 +215,18 @@ export default function InteractiveIndiaMap() {
                   layout
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <h3 className={styles.stateSectionTitle}>{section.name}</h3>
+                  <div className={styles.stateSectionHeader}>
+                    <span
+                      className={styles.stateSectionDot}
+                      style={{ background: color }}
+                      aria-hidden="true"
+                    />
+                    <h3 className={styles.stateSectionTitle}>{section.name}</h3>
+                  </div>
                   <motion.p
                     className={styles.stateSectionDesc}
                     initial={false}
-                    animate={{ opacity: isActive ? 1 : 0.88 }}
+                    animate={{ opacity: isActive ? 1 : 0.85 }}
                     transition={{ duration: 0.25 }}
                   >
                     {section.description}
