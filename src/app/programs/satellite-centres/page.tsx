@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, GitBranch, Layers3, MapPin, ShieldCheck } from 'lucide-react';
-import InteractiveIndiaMap from '@/components/satellite/InteractiveIndiaMap';
+import SatelliteCentresShowcase from '@/components/satellite/SatelliteCentresShowcase';
 import styles from './page.module.css';
 
 const stats = [
@@ -98,7 +98,7 @@ export default function SatelliteCentresPage() {
         </div>
       </section>
 
-      {/* Interactive India Map */}
+      {/* Satellite Centres by State */}
       <section
         id="satellite-network"
         className={styles.section}
@@ -116,17 +116,17 @@ export default function SatelliteCentresPage() {
             viewport={{ once: true, margin: '-60px' }}
           >
             <motion.span className={styles.eyebrow} variants={fadeUp}>
-              Satellite Production Centres
+              Our Network
             </motion.span>
             <motion.h2 id="network-heading" className={styles.title} variants={fadeUp}>
               Expanding Sustainable Manufacturing Across India
             </motion.h2>
             <motion.p className={styles.subtitle} variants={fadeUp}>
-              A growing network of satellite production centres connected through Saukhyam&apos;s
-              hub-and-spoke manufacturing model.
+              Decentralized production centres bringing employment and sustainable menstrual
+              products closer to rural communities.
             </motion.p>
             <motion.div className={styles.headerActions} variants={fadeUp}>
-              <a href="#interactive-map" className={styles.btnPrimary}>
+              <a href="#centre-madhya-pradesh" className={styles.btnPrimary}>
                 Explore the Network
                 <ArrowRight size={16} aria-hidden="true" className={styles.btnArrow} />
               </a>
@@ -136,9 +136,7 @@ export default function SatelliteCentresPage() {
             </motion.div>
           </motion.header>
 
-          <div id="interactive-map">
-            <InteractiveIndiaMap />
-          </div>
+          <SatelliteCentresShowcase />
         </div>
       </section>
     </main>
