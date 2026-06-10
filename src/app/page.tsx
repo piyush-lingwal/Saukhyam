@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   Leaf, ShieldCheck, Droplets, Wind, Heart, ArrowRight,
@@ -14,6 +15,7 @@ import {
 import { products } from '@/data/products';
 import { testimonials } from '@/data/content';
 import { useCart } from '@/context/CartContext';
+import IndiaImpactMap from '@/components/home/IndiaImpactMap/IndiaImpactMap';
 import styles from './page.module.css';
 
 const tickerMessages = [
@@ -115,10 +117,10 @@ export default function HomePage() {
 
         {/* Side women images, visible on wide screens only */}
         <div className={styles.heroSideLeft} aria-hidden="true">
-          <img src="/hero-woman-left.png" alt="" />
+          <Image src="/hero-woman-left.png" alt="" width={520} height={800} quality={75} priority />
         </div>
         <div className={styles.heroSideRight} aria-hidden="true">
-          <img src="/hero-woman-right.png" alt="" />
+          <Image src="/hero-woman-right.png" alt="" width={520} height={800} quality={75} priority />
         </div>
 
         <div className={`container ${styles.heroContainer}`}>
@@ -156,9 +158,9 @@ export default function HomePage() {
             transition={{ duration: 0.5, delay: 0.35 }}
           >
             <div className={styles.heroPillAvatars}>
-              <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100" alt="" className={styles.heroPillImg} />
-              <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100" alt="" className={styles.heroPillImg} />
-              <img src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=100" alt="" className={styles.heroPillImg} />
+              <Image src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100" alt="" width={24} height={24} className={styles.heroPillImg} />
+              <Image src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100" alt="" width={24} height={24} className={styles.heroPillImg} />
+              <Image src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=100" alt="" width={24} height={24} className={styles.heroPillImg} />
             </div>
             <Sparkles size={16} className={styles.heroPillSparkle} />
             <span>5,00,000+ Women Healed</span>
@@ -229,7 +231,7 @@ export default function HomePage() {
                       <div className={styles.productImageWrap}>
                         <div className={styles.productImageHalo} aria-hidden="true" />
                         {product.images[0] ? (
-                          <img src={product.images[0]} alt={product.name} loading="lazy" />
+                          <Image src={product.images[0]} alt={product.name} width={400} height={400} loading="lazy" />
                         ) : (
                           <Leaf size={48} className={styles.productPlaceholder} />
                         )}
@@ -331,7 +333,7 @@ export default function HomePage() {
             {/* Amma, Large Photo Card (spans 2 rows) */}
             <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bAmma}`}>
               <div className={styles.bAmmaPhoto}>
-                <img src="/amma.png" alt="Mata Amritanandamayi (Amma)" className={styles.bAmmaImg} loading="lazy" />
+                <Image src="/amma.png" alt="Mata Amritanandamayi (Amma)" width={300} height={400} className={styles.bAmmaImg} loading="lazy" />
               </div>
               <div className={styles.bAmmaBody}>
                 <span className={styles.bAmmaTag}>Inspired by Amma</span>
@@ -351,7 +353,7 @@ export default function HomePage() {
 
             {/* HEAL Logo Card (small square) */}
             <motion.a href="/programs/heal" variants={fadeInUp} className={`${styles.bCard} ${styles.bHealLogo}`}>
-              <img src="/HealLogo/HEAL logo RGB_Vertical.png" alt="HEAL" className={styles.bLogoImage} />
+              <Image src="/HealLogo/HEAL logo RGB_Vertical.png" alt="HEAL — Health, Environment & Active Living" width={200} height={200} className={styles.bLogoImage} />
             </motion.a>
 
             {/* HEAL Info Card (wider) */}
@@ -406,13 +408,13 @@ export default function HomePage() {
 
             {/* CARE Logo Card (small square) */}
             <motion.a href="/programs/care" variants={fadeInUp} className={`${styles.bCard} ${styles.bCareLogo}`}>
-              <img src="/CareLogo/CARE logo_Vertical.png" alt="CARE" className={styles.bLogoImage} />
+              <Image src="/CareLogo/CARE logo_Vertical.png" alt="CARE — Campus Action for Reusable Essentials" width={200} height={200} className={styles.bLogoImage} />
             </motion.a>
 
             {/* REACH Logo Card (small square) */}
             <motion.a href="/programs/reach" variants={fadeInUp} className={`${styles.bCard} ${styles.bReachLogo}`}>
-              {/* Note: The REACH logo asset lives in /ReachLogo/, filename reflects original asset naming */}
-              <img src="/ReachLogo/HEAL logo RGB_Vertical.png" alt="REACH, Rural Empowerment and Community Health" className={styles.bLogoImage} />
+              {/* REACH logo — files in /ReachLogo/ are named after the HEAL branding template */}
+              <Image src="/ReachLogo/HEAL logo RGB_Vertical.png" alt="REACH — Rural Empowerment and Community Health" width={200} height={200} className={styles.bLogoImage} />
             </motion.a>
 
             {/* REACH Info Card (Row 3) */}
@@ -444,7 +446,7 @@ export default function HomePage() {
 
             {/* Community Photo Card */}
             <motion.div variants={fadeInUp} className={`${styles.bCard} ${styles.bCommunity}`}>
-              <img src="/bentogrid_photo.jpeg" alt="Saukhyam community, women empowered across rural India" className={styles.bCommunityImg} loading="lazy" />
+              <Image src="/bentogrid_photo.jpeg" alt="Saukhyam community, women empowered across rural India" width={600} height={400} className={styles.bCommunityImg} loading="lazy" />
               <div className={styles.bCommunityOverlay}>
                 <span className={styles.bCommunityNum}>30L+</span>
                 <span className={styles.bCommunityLabel}>Women &amp; Girls Empowered</span>
@@ -480,12 +482,13 @@ export default function HomePage() {
           <div className={styles.pressTrack} aria-hidden="false">
             {[...pressLogos, ...pressLogos].map((logo, idx) => (
               <div key={`${logo}-${idx}`} className={styles.pressItem}>
-                <img
+                <Image
                   src={`/Press_And_Media/${logo}`}
                   alt=""
+                  width={120}
+                  height={60}
                   className={styles.pressLogo}
                   loading="lazy"
-                  decoding="async"
                 />
               </div>
             ))}
@@ -559,7 +562,7 @@ export default function HomePage() {
                   <div className={styles.testimonialAuthor}>
                     <div className={styles.testimonialAvatar}>
                       {t.avatar ? (
-                        <img src={t.avatar} alt={t.name} className={styles.testimonialAvatarImg} loading="lazy" />
+                        <Image src={t.avatar} alt={t.name} width={40} height={40} className={styles.testimonialAvatarImg} loading="lazy" />
                       ) : (
                         t.name.charAt(0)
                       )}
@@ -620,6 +623,9 @@ export default function HomePage() {
 
         </div>
       </section>
+
+      {/* ── Interactive India Impact Map ── */}
+      <IndiaImpactMap />
 
       {/* ── Donate Section ── */}
       <section className={styles.donateSection}>

@@ -2,15 +2,16 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
-  ShoppingBag, Leaf, Star, ChevronRight, Minus, Plus,
+  ShoppingBag, Leaf, Star, ChevronRight, ChevronLeft, Minus, Plus,
   Truck, Shield, RefreshCw, CheckCircle2, Heart, Zap,
-  ShieldCheck, Wind,
 } from 'lucide-react';
-import { products, getProductBySlug } from '@/data/products';
+import { products, getProductBySlug, getAdjacentProducts } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import { SciencePageLink } from '@/components/products/ScienceSectionNav';
 import styles from './page.module.css';
 
 
@@ -52,6 +53,8 @@ export default function ProductDetailPage() {
     );
   }
 
+  const { prev: prevProduct, next: nextProduct } = getAdjacentProducts(slug);
+
   const relatedProducts = products
     .filter(p => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
@@ -73,6 +76,9 @@ export default function ProductDetailPage() {
           <ChevronRight size={14} />
           <span>{product.name}</span>
         </nav>
+        <p className={styles.detailScienceLink}>
+          <SciencePageLink className={styles.detailScienceLinkAnchor} />
+        </p>
 
         {/* Product Layout */}
         <div className={styles.productLayout}>
@@ -86,7 +92,7 @@ export default function ProductDetailPage() {
             <div className={styles.mainImage}>
               {product.badge && <span className={styles.imageBadge}>{product.badge}</span>}
               {product.images[0] ? (
-                <img src={product.images[0]} alt={product.name} />
+                <Image src={product.images[0]} alt={product.name} width={600} height={600} priority />
               ) : (
                 <Leaf size={96} className={styles.imagePlaceholder} />
               )}
@@ -155,7 +161,7 @@ export default function ProductDetailPage() {
             <motion.div variants={fadeInUp} className={styles.actionButtons}>
               <button className={styles.btnAddToCart} onClick={handleAddToCart}>
                 <ShoppingBag size={20} />
-                Add to Cart, ₹{product.price * quantity}
+                Add to Cart - ₹{product.price * quantity}
               </button>
               <Link href="/cart" className={styles.btnBuyNow}>
                 <Zap size={20} />
@@ -208,6 +214,33 @@ export default function ProductDetailPage() {
           </motion.div>
         </div>
 
+        {(prevProduct || nextProduct) && (
+          <nav className={styles.productPager} aria-label="Browse products">
+            {prevProduct ? (
+              <Link href={`/products/${prevProduct.slug}`} className={styles.pagerLink}>
+                <ChevronLeft size={18} aria-hidden="true" />
+                <span className={styles.pagerText}>
+                  <span className={styles.pagerLabel}>Previous</span>
+                  <span className={styles.pagerName}>{prevProduct.name}</span>
+                </span>
+              </Link>
+            ) : (
+              <span className={styles.pagerPlaceholder} />
+            )}
+            {nextProduct ? (
+              <Link href={`/products/${nextProduct.slug}`} className={`${styles.pagerLink} ${styles.pagerLinkNext}`}>
+                <span className={styles.pagerText}>
+                  <span className={styles.pagerLabel}>Next</span>
+                  <span className={styles.pagerName}>{nextProduct.name}</span>
+                </span>
+                <ChevronRight size={18} aria-hidden="true" />
+              </Link>
+            ) : (
+              <span className={styles.pagerPlaceholder} />
+            )}
+          </nav>
+        )}
+
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <section className={styles.relatedSection}>
@@ -217,7 +250,7 @@ export default function ProductDetailPage() {
                 <Link key={p.id} href={`/products/${p.slug}`} className={styles.relatedCard}>
                   <div className={styles.relatedCardImage}>
                     {p.images[0] ? (
-                      <img src={p.images[0]} alt={p.name} loading="lazy" />
+                      <Image src={p.images[0]} alt={p.name} width={300} height={300} loading="lazy" />
                     ) : (
                       <Leaf size={40} className={styles.imagePlaceholder} />
                     )}

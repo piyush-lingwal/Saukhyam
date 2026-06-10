@@ -10,6 +10,7 @@ import {
   Send,
   Leaf,
   Sparkles,
+  Globe,
 } from 'lucide-react';
 import styles from './page.module.css';
 import ContactMap from '@/components/contact/ContactMap';
@@ -57,8 +58,15 @@ const contactCards = [
   },
   {
     icon: Clock,
-    title: 'Open Hours',
-    lines: ['Monday to Friday', '09:00 AM to 05:00 PM'],
+    title: 'Working Hours',
+    lines: ['Mon - Sat: 9:00 AM - 6:00 PM', 'Sunday: Closed'],
+  },
+  {
+    icon: Globe,
+    title: 'Website',
+    lines: ['saukhyampads.org'],
+    isLink: true,
+    prefix: 'https://',
   },
 ];
 
