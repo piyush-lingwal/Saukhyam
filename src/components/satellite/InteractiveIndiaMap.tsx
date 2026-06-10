@@ -108,7 +108,7 @@ export default function InteractiveIndiaMap() {
                     .filter(Boolean)
                     .join(' ')}
                   style={
-                    isActive && featured
+                    isActive && isFeaturedState(state.id)
                       ? { filter: `drop-shadow(0 0 6px ${STATE_COLORS[state.id]}88)` }
                       : undefined
                   }
