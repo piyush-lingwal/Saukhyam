@@ -6,6 +6,7 @@ import {
   Globe, ArrowRight, Heart, Users, MapPin,
   Leaf, BookOpen, HandHeart, Megaphone,
 } from 'lucide-react';
+import IndiaImpactMap from '@/components/home/IndiaImpactMap/IndiaImpactMap';
 import styles from '../program.module.css';
 
 const fadeInUp = {
@@ -187,6 +188,9 @@ export default function ReachPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Interactive India Impact Map */}
+      <IndiaImpactMap embedded />
 
       {/* CTA */}
       <section className={styles.cta}>
