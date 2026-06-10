@@ -1,0 +1,133 @@
+/* ═══════════════════════════════════════════════════
+   SATELLITE CENTRES SHOWCASE
+   ═══════════════════════════════════════════════════ */
+
+.showcase {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.intro {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.introTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.introText {
+  font-size: clamp(0.95rem, 1.15vw, 1.06rem);
+  color: var(--color-text-secondary);
+  line-height: 1.78;
+  margin: 0;
+}
+
+.stateList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.stateRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.stateRowReverse {
+  direction: rtl;
+}
+
+.stateRowReverse > * {
+  direction: ltr;
+}
+
+.stateContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: clamp(1rem, 2vw, 1.5rem) 0;
+}
+
+.stateName {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.stateDesc {
+  font-size: clamp(0.92rem, 1.05vw, 1rem);
+  color: var(--color-text-secondary);
+  line-height: 1.78;
+  margin: 0;
+}
+
+.mapFigure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.mapFrame {
+  padding: clamp(1rem, 2vw, 1.5rem);
+  background: #fff;
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    0 8px 32px rgba(22, 101, 52, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.mapImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+}
+
+.mapCaption {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--green-700);
+  padding: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .stateRow,
+  .stateRowReverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .stateContent {
+    order: 2;
+    text-align: center;
+    padding: 0;
+  }
+
+  .mapFigure {
+    order: 1;
+  }
+}

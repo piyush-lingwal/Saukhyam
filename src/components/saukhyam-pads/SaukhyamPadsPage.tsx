@@ -250,10 +250,10 @@ export default function SaukhyamPadsPage() {
                   <tr>
                     <th>Feature</th>
                     <th>
-                      <span className={styles.thGood}>🌿 Saukhyam</span>
+                      <span className={styles.thGood}>Saukhyam</span>
                     </th>
                     <th>
-                      <span className={styles.thBad}>🚫 Disposable</span>
+                      <span className={styles.thBad}>Disposable</span>
                     </th>
                   </tr>
                 </thead>

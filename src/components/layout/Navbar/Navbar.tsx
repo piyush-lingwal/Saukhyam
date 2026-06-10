@@ -4,13 +4,12 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import { ShoppingBag, Menu, X, Search, Heart, ArrowRight } from 'lucide-react';
+import { ShoppingBag, Menu, X, Search, Heart, ArrowRight, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import styles from './Navbar.module.css';
 
 const navItems = [
   { label: 'Our Story', href: '/about' },
-  { label: 'Products', href: '/products' },
   { label: 'Blog', href: '/blog' },
   { label: 'Science', href: '/science' },
   { label: 'Awards', href: '/impact' },
@@ -101,7 +100,36 @@ export default function Navbar() {
 
           {/* Desktop Nav Links, hidden when search is open */}
           <div className={`${styles.navLinks} ${isSearchOpen ? styles.navLinksHidden : ''}`}>
-            {navItems.map((item) => (
+            {/* Our Story */}
+            <Link
+              href="/about"
+              className={`${styles.navLink} ${isActive('/about') ? styles.active : ''}`}
+            >
+              Our Story
+            </Link>
+
+            {/* Products with dropdown */}
+            <div className={styles.dropdown}>
+              <Link
+                href="/products"
+                className={`${styles.navLink} ${styles.dropdownTrigger} ${isActive('/products') ? styles.active : ''}`}
+              >
+                Products
+                <ChevronDown size={13} className={styles.dropdownIcon} aria-hidden="true" />
+              </Link>
+              <div className={styles.dropdownMenu}>
+                <Link href="/products" className={styles.dropdownItem}>
+                  All Products
+                </Link>
+                <Link href="/why-banana-fiber" className={`${styles.dropdownItem} ${styles.dropdownItemStack}`}>
+                  <span className={styles.dropdownItemMain}>Why Banana Fiber?</span>
+                  <span className={styles.dropdownItemSub}>The Story Behind the Fiber</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Remaining nav items */}
+            {navItems.slice(1).map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -209,7 +237,34 @@ export default function Navbar() {
           </button>
         </div>
 
-        {navItems.map((item) => (
+        {/* Our Story */}
+        <Link
+          href="/about"
+          className={styles.mobileNavLink}
+          onClick={() => setIsMobileOpen(false)}
+        >
+          Our Story
+        </Link>
+
+        {/* Products group */}
+        <Link
+          href="/products"
+          className={styles.mobileNavLink}
+          onClick={() => setIsMobileOpen(false)}
+        >
+          Products
+        </Link>
+        <Link
+          href="/why-banana-fiber"
+          className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`}
+          onClick={() => setIsMobileOpen(false)}
+        >
+          Why Banana Fiber?
+          <span className={styles.mobileNavSubLabel}>The Story Behind the Fiber</span>
+        </Link>
+
+        {/* Rest of items */}
+        {navItems.slice(1).map((item) => (
           <Link
             key={item.label}
             href={item.href}

@@ -1,0 +1,357 @@
+/* ═══════════════════════════════════════════════════
+   PRODUCTION PROCESS — Zig-zag Factory Journey
+   ═══════════════════════════════════════════════════ */
+
+.section {
+  position: relative;
+  padding: clamp(5rem, 10vw, 8.5rem) 0 clamp(6rem, 12vw, 10rem);
+  isolation: isolate;
+  overflow: hidden;
+  background: #fafcf9;
+  scroll-margin-top: calc(var(--navbar-height) + 1rem);
+}
+
+.sectionBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, #fafcf9 0%, #f5fdf7 30%, #ecfdf5 55%, #fafcf9 100%);
+}
+
+.sectionPattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2315803d' stroke-width='0.55'%3E%3Cpath d='M10 20 Q40 5 70 20 T110 20'/%3E%3Cpath d='M0 45 Q30 30 60 45 T120 45'/%3E%3Cpath d='M5 70 Q35 55 65 70 T115 70'/%3E%3Cpath d='M20 0 Q20 40 20 80 T20 120'/%3E%3Cpath d='M100 0 Q100 38 100 76 T100 120'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+.sectionGlow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 40% at 10% 20%, rgba(74, 222, 128, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 45% at 90% 80%, rgba(22, 163, 74, 0.06) 0%, transparent 55%);
+}
+
+/* Header */
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.85rem;
+  max-width: 720px;
+  margin: 0 auto clamp(5rem, 9vw, 7.5rem);
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 0.38rem 1rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-700);
+  background: var(--green-50);
+  border: 1px solid var(--green-200);
+  border-radius: var(--radius-full);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.titleAccent {
+  color: var(--green-700);
+  font-style: italic;
+}
+
+.subtitle {
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  color: var(--color-text-secondary);
+  line-height: 1.78;
+  margin: 0;
+}
+
+/* Journey track */
+.journeyTrack {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4.5rem, 9vw, 7rem);
+  max-width: 1320px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.journeyLine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--green-300) 8%,
+    var(--green-500) 50%,
+    var(--green-300) 92%,
+    transparent 100%
+  );
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+.journeyStep {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 56px 1fr;
+  gap: clamp(2.25rem, 4.5vw, 3.75rem);
+  align-items: center;
+}
+
+.journeyStepReversed .journeyImageCol {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.journeyStepReversed .journeyContentCol {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.journeyStepReversed .journeySpine {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.journeyImageCol {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+}
+
+.journeyContentCol {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.journeySpine {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.journeyDot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--green-800);
+  background: #fff;
+  border: 2px solid var(--green-400);
+  border-radius: var(--radius-full);
+  box-shadow:
+    0 0 0 6px rgba(240, 253, 244, 0.95),
+    0 6px 20px rgba(22, 163, 74, 0.15);
+}
+
+.stepBgNum {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 14vw, 11rem);
+  font-weight: 800;
+  color: var(--green-600);
+  opacity: 0.045;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Image column */
+.journeyImageGlow {
+  position: absolute;
+  inset: -8% -6%;
+  z-index: 0;
+  background: radial-gradient(ellipse 70% 65% at 50% 50%, rgba(74, 222, 128, 0.2) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.journeyImageWrap {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 3;
+  min-height: clamp(260px, 32vw, 380px);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 20px 50px rgba(22, 101, 52, 0.12),
+    0 6px 20px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.35s var(--ease-out);
+}
+
+.journeyImageWrap:hover {
+  box-shadow:
+    0 28px 60px rgba(22, 101, 52, 0.16),
+    0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.journeyImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.journeyBadge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 2;
+  padding: 0.5rem 0.9rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(0.68rem, 0.85vw, 0.76rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--green-900);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Content card */
+.journeyCard {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.5rem, 2.8vw, 2.25rem);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    0 8px 32px rgba(22, 101, 52, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    border-color 0.35s ease;
+}
+
+.journeyCard:hover {
+  border-color: var(--green-200);
+  box-shadow:
+    0 16px 48px rgba(22, 101, 52, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.journeyStepLabel {
+  display: inline-block;
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-600);
+  margin-bottom: 0.65rem;
+}
+
+.journeyTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 800;
+  color: var(--color-text);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.85rem;
+}
+
+.journeyDesc {
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(0.92rem, 1.08vw, 1rem);
+  color: var(--color-text-secondary);
+  line-height: 1.78;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .journeyLine {
+    display: none;
+  }
+
+  .journeyStep,
+  .journeyStepReversed {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .journeyStepReversed .journeyImageCol,
+  .journeyStepReversed .journeyContentCol,
+  .journeyImageCol,
+  .journeyContentCol {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .journeySpine {
+    display: none;
+  }
+
+  .stepBgNum {
+    top: 1rem;
+    left: auto;
+    right: 0.5rem;
+    transform: none;
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
+
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: clamp(1.75rem, 8vw, 2.35rem);
+  }
+
+  .journeyImageWrap {
+    border-radius: 18px;
+  }
+
+}

@@ -1,38 +1,60 @@
 'use client';
 
+import { useState, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import {
-  MapPin, Phone, Mail, Clock, Send,
-  MessageSquare, Globe,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Send,
+  Leaf,
+  Sparkles,
+  Globe,
 } from 'lucide-react';
 import styles from './page.module.css';
+import ContactMap from '@/components/contact/ContactMap';
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } },
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -28 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 28 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
-const contactInfo = [
+const contactCards = [
   {
     icon: MapPin,
-    title: 'Visit Us',
-    lines: ['Amritapuri Ashram, Clappana P.O.,', 'Kollam, Kerala 690525, India'],
-  },
-  {
-    icon: Mail,
-    title: 'Email',
-    lines: ['info@saukhyampads.org', 'orders@saukhyampads.org'],
-    isLink: true,
-    prefix: 'mailto:',
+    title: 'Address',
+    lines: [
+      'Saukhyam Reusable Pads',
+      'Saukhyam House,',
+      'Mata Amritanandamayi Math',
+      'Amritapuri PO,',
+      'Kollam, Kerala 690546',
+    ],
   },
   {
     icon: Phone,
     title: 'Phone',
-    lines: ['+91 9876 543 210', '+91 4762 897 578'],
-    isLink: true,
-    prefix: 'tel:',
+    lines: ['+91 6282 103 073'],
+    href: 'tel:+916282103073',
+  },
+  {
+    icon: Mail,
+    title: 'Email',
+    lines: ['info@saukhyampads.org'],
+    href: 'mailto:info@saukhyampads.org',
   },
   {
     icon: Clock,
@@ -49,119 +71,214 @@ const contactInfo = [
 ];
 
 export default function ContactPage() {
-  return (
-    <div className={styles.contactPage}>
-      <section className={styles.hero}>
-        <div className="container">
-          <motion.h1
-            className={styles.heroTitle}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Get in Touch
-          </motion.h1>
-          <motion.p
-            className={styles.heroDesc}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
-            We&apos;d love to hear from you! Whether it&apos;s questions, feedback, or partnership inquiries.
-          </motion.p>
-        </div>
-      </section>
+  const [submitted, setSubmitted] = useState(false);
 
-      <div className="container">
-        <div className={styles.contactLayout}>
-          {/* Info Cards */}
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
+    const email = (form.elements.namedItem('email') as HTMLInputElement).value.trim();
+    const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value.trim();
+
+    const subject = encodeURIComponent(`Message from ${name}`);
+    const body = encodeURIComponent(`${message}\n\nFrom: ${name}\nEmail: ${email}`);
+    window.location.href = `mailto:info@saukhyampads.org?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+  };
+
+  return (
+    <div className={styles.page}>
+      {/* Hero */}
+      <section className={styles.hero}>
+        <div className={styles.heroOrb1} aria-hidden />
+        <div className={styles.heroOrb2} aria-hidden />
+        <div className={styles.heroOrb3} aria-hidden />
+        <div className={styles.heroGrain} aria-hidden />
+
+        <div className="container">
           <motion.div
-            className={styles.contactInfo}
+            className={styles.heroInner}
             initial="hidden"
             animate="visible"
             variants={stagger}
           >
-            {contactInfo.map(info => {
-              const Icon = info.icon;
-              return (
-                <motion.div key={info.title} variants={fadeInUp} className={styles.infoCard}>
-                  <div className={styles.infoIcon}><Icon size={20} /></div>
-                  <div className={styles.infoContent}>
-                    <h3>{info.title}</h3>
-                    {info.lines.map(line => (
-                      <p key={line}>
-                        {info.isLink ? (
-                          <a href={`${info.prefix}${line.replace(/\s/g, '')}`}>{line}</a>
-                        ) : line}
-                      </p>
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            className={styles.formCard}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h2 className={styles.formTitle}>
-              <MessageSquare size={20} style={{ display: 'inline', marginRight: '8px', color: 'var(--color-primary)' }} />
-              Send us a Message
-            </h2>
-            <form className={styles.formGrid} onSubmit={(e) => e.preventDefault()}>
-              <div className={styles.formGroup}>
-                <label htmlFor="name">Your Name</label>
-                <input id="name" type="text" placeholder="Full name" required />
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="email">Email Address</label>
-                <input id="email" type="email" placeholder="you@example.com" required />
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="phone">Phone (Optional)</label>
-                <input id="phone" type="tel" placeholder="+91 XXXXX XXXXX" />
-              </div>
-              <div className={styles.formGroup}>
-                <label htmlFor="subject">Subject</label>
-                <select id="subject">
-                  <option value="">Select a topic</option>
-                  <option value="order">Order Inquiry</option>
-                  <option value="product">Product Question</option>
-                  <option value="partnership">Partnership</option>
-                  <option value="satellite">Satellite Centre</option>
-                  <option value="media">Media / Press</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
-                <label htmlFor="message">Your Message</label>
-                <textarea id="message" placeholder="Tell us how we can help..." rows={5} required />
-              </div>
-              <button type="submit" className={styles.submitBtn}>
-                <Send size={18} />
-                Send Message
-              </button>
-            </form>
+            <motion.span className={styles.heroLabel} variants={fadeUp}>
+              <Leaf size={13} /> Get in Touch
+            </motion.span>
+            <motion.h1 className={styles.heroTitle} variants={fadeUp}>
+              Contact Us
+            </motion.h1>
+            <motion.p className={styles.heroSubtitle} variants={fadeUp}>
+              We&apos;re here to help. Reach out to learn more about Saukhyam, our reusable pads,
+              policies, or your order.
+            </motion.p>
           </motion.div>
         </div>
+      </section>
 
-        {/* Map */}
-        <div className={styles.mapSection}>
-          <h2 className={styles.mapTitle}>Find Us</h2>
-          <div className={styles.mapWrap}>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3942.6!2d76.48!3d9.08!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMDQnNDguMCJOIDc2wrAyOCc0OC4wIkU!5e0!3m2!1sen!2sin!4v1234567890"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Saukhyam Location"
-            />
+      {/* Main two-column layout */}
+      <section className={styles.mainSection}>
+        <div className={styles.mainGlow} aria-hidden />
+        <div className="container">
+          <div className={styles.mainGrid}>
+            {/* Left: Contact info cards */}
+            <motion.div
+              className={styles.infoColumn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={stagger}
+            >
+              <motion.p className={styles.infoEyebrow} variants={fadeLeft}>
+                Reach Us Directly
+              </motion.p>
+              <motion.h2 className={styles.infoHeading} variants={fadeLeft}>
+                Contact <span className={styles.accent}>Information</span>
+              </motion.h2>
+
+              <div className={styles.infoCards}>
+                {contactCards.map((card) => {
+                  const Icon = card.icon;
+                  return (
+                    <motion.div
+                      key={card.title}
+                      className={styles.infoCard}
+                      variants={fadeLeft}
+                      whileHover={{ y: -4 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <div className={styles.infoIconWrap}>
+                        <Icon size={20} />
+                      </div>
+                      <div className={styles.infoBody}>
+                        <h3 className={styles.infoTitle}>{card.title}</h3>
+                        {card.lines.map((line) =>
+                          card.href && card.lines.length === 1 ? (
+                            <a key={line} href={card.href} className={styles.infoLink}>
+                              {line}
+                            </a>
+                          ) : (
+                            <p key={line} className={styles.infoLine}>
+                              {line}
+                            </p>
+                          ),
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* Right: Contact form */}
+            <motion.div
+              className={styles.formColumn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={fadeRight}
+            >
+              <div className={styles.formCard}>
+                <div className={styles.formHeader}>
+                  <h2 className={styles.formTitle}>Send Us a Message</h2>
+                  <p className={styles.formSubtext}>We&apos;d love to hear from you.</p>
+                </div>
+
+                {submitted ? (
+                  <motion.div
+                    className={styles.successBox}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <Sparkles size={28} className={styles.successIcon} />
+                    <h3>Thank you for reaching out</h3>
+                    <p>Your email client should open shortly. We&apos;ll get back to you as soon as we can.</p>
+                    <button
+                      type="button"
+                      className={styles.successReset}
+                      onClick={() => setSubmitted(false)}
+                    >
+                      Send another message
+                    </button>
+                  </motion.div>
+                ) : (
+                  <form className={styles.form} onSubmit={handleSubmit} noValidate>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="name">Your Name</label>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Full name"
+                        autoComplete="name"
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="email">Your Email</label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        autoComplete="email"
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="message">Your Message</label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Tell us how we can help..."
+                        rows={6}
+                        required
+                      />
+                    </div>
+                    <button type="submit" className={styles.submitBtn}>
+                      Send Message
+                      <Send size={17} />
+                    </button>
+                  </form>
+                )}
+              </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Interactive map */}
+      <section className={styles.mapSection} aria-labelledby="find-us-heading">
+        <div className="container">
+          <motion.div
+            className={styles.mapHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+          >
+            <motion.span className={styles.mapLabel} variants={fadeUp}>
+              <MapPin size={13} /> Location
+            </motion.span>
+            <motion.h2 id="find-us-heading" className={styles.mapTitle} variants={fadeUp}>
+              <span className={styles.mapTitleText}>
+                Find Us on the <span className={styles.accent}>Map</span>
+              </span>
+              <span className={styles.mapTitleLine} aria-hidden />
+            </motion.h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <ContactMap />
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -2,139 +2,143 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { MapPin, ArrowRight, Heart, Users, Leaf, Globe } from 'lucide-react';
-import styles from '../program.module.css';
+import { ArrowRight, GitBranch, Layers3, MapPin, ShieldCheck } from 'lucide-react';
+import SatelliteCentresShowcase from '@/components/satellite/SatelliteCentresShowcase';
+import styles from './page.module.css';
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
-};
-const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
-
-const centres = [
-  { state: 'Kerala', villages: 12, women: 60, established: '2017' },
-  { state: 'Uttarakhand', villages: 8, women: 45, established: '2019' },
-  { state: 'Tamil Nadu', villages: 10, women: 50, established: '2019' },
-  { state: 'Karnataka', villages: 9, women: 40, established: '2020' },
-  { state: 'Maharashtra', villages: 11, women: 55, established: '2020' },
-  { state: 'Uttar Pradesh', villages: 7, women: 35, established: '2021' },
-  { state: 'Madhya Pradesh', villages: 6, women: 30, established: '2021' },
-  { state: 'Rajasthan', villages: 8, women: 40, established: '2022' },
-  { state: 'Odisha', villages: 5, women: 25, established: '2022' },
-  { state: 'West Bengal', villages: 7, women: 35, established: '2023' },
-  { state: 'Jharkhand', villages: 6, women: 30, established: '2023' },
-  { state: 'Assam', villages: 4, women: 20, established: '2024' },
+const stats = [
+  { icon: GitBranch, value: 'Hub & Spoke', label: 'Production Network' },
+  { icon: MapPin, value: 'Multiple', label: 'Satellite Centres' },
+  { icon: Layers3, value: 'District-Level', label: 'Manufacturing' },
+  { icon: ShieldCheck, value: 'Quality-Controlled', label: 'Production System' },
 ];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 36 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
+};
+
+const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
+const cardStagger = { visible: { transition: { staggerChildren: 0.12 } } };
 
 export default function SatelliteCentresPage() {
   return (
-    <div className={styles.programPage}>
+    <main className={styles.page}>
       {/* Hero */}
-      <section className={`${styles.hero} ${styles.heroGreen}`}>
+      <section className={styles.hero} aria-labelledby="satellite-hero-title">
+        <div className={styles.heroBg} aria-hidden="true" />
+        <div className={styles.heroPattern} aria-hidden="true" />
         <div className="container">
-          <motion.div className={styles.heroContent} initial="hidden" animate="visible" variants={stagger}>
-            <motion.span variants={fadeInUp} className={styles.heroLabel}>
-              <MapPin size={16} /> Satellite Centres
+          <motion.div
+            className={styles.heroInner}
+            variants={stagger}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.span className={styles.heroLabel} variants={fadeUp}>
+              Satellite Production Centres
             </motion.span>
-            <motion.h1 variants={fadeInUp} className={styles.heroTitle}>
-              Manufacturing Pads, <span className={styles.heroAccent}>Building Livelihoods</span>
+            <motion.h1 id="satellite-hero-title" className={styles.heroTitle} variants={fadeUp}>
+              Manufacturing Closer to Communities
             </motion.h1>
-            <motion.p variants={fadeInUp} className={styles.heroDesc}>
-              Decentralized production centres across 20+ states where rural women learn,
-              earn, and lead the menstrual hygiene revolution in their own communities.
+            <motion.p className={styles.heroSubtitle} variants={fadeUp}>
+              Saukhyam&apos;s satellite production centres extend the reach of our manufacturing
+              ecosystem beyond the central factory in Kerala. Through a hub-and-spoke model,
+              semi-processed materials are supplied from the manufacturing hub and transformed into
+              finished reusable menstrual products by trained production teams across multiple
+              regions.
             </motion.p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Stats Bar */}
-      <section className={styles.statsBar}>
-        <div className="container">
-          <div className={styles.statsRow}>
-            {[
-              { icon: MapPin, value: '25+', label: 'Active Centres' },
-              { icon: Globe, value: '20+', label: 'States' },
-              { icon: Users, value: '500+', label: 'Women Employed' },
-              { icon: Leaf, value: '101', label: 'Villages Covered' },
-            ].map((s) => (
-              <div key={s.label} className={styles.statBox}>
-                <s.icon size={20} className={styles.statIcon} />
-                <span className={styles.statValue}>{s.value}</span>
-                <span className={styles.statLabel}>{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className={styles.section}>
-        <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger}>
-            <motion.h2 variants={fadeInUp} className={styles.sectionTitle}>How It Works</motion.h2>
-            <motion.p variants={fadeInUp} className={styles.sectionDesc}>
-              Each satellite centre is set up in partnership with local organizations to create
-              a self-sustaining unit of production, training, and distribution.
+            <motion.p className={styles.heroSubtitle} variants={fadeUp}>
+              This decentralized approach enables consistent product quality, efficient operations,
+              and scalable production while bringing manufacturing closer to the communities it
+              serves.
             </motion.p>
-          </motion.div>
-          <motion.div className={styles.stepsGrid} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            {[
-              { step: '01', title: 'Community Partnership', desc: 'We partner with local NGOs, self-help groups, and panchayats to identify villages with the greatest need.' },
-              { step: '02', title: 'Training & Setup', desc: 'Women are trained in pad-making, quality control, and menstrual health education over a 2-week intensive program.' },
-              { step: '03', title: 'Production Begins', desc: 'The centre starts producing Saukhyam pads locally, reducing transportation costs and creating local employment.' },
-              { step: '04', title: 'Awareness Drives', desc: 'Trained women conduct workshops in surrounding villages, breaking taboos and driving adoption.' },
-            ].map((item) => (
-              <motion.div key={item.step} variants={fadeInUp} className={styles.stepCard}>
-                <span className={styles.stepNumber}>{item.step}</span>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </motion.div>
-            ))}
+            <motion.div className={styles.heroActions} variants={fadeUp}>
+              <a href="#satellite-network" className={styles.btnPrimary}>
+                Explore the Hub &amp; Spoke Model
+                <ArrowRight size={16} aria-hidden="true" className={styles.btnArrow} />
+              </a>
+              <Link href="/contact" className={styles.btnSecondary}>
+                Apply for a Satellite Centre
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Centres Table */}
-      <section className={`${styles.section} ${styles.sectionAlt}`}>
+      {/* Statistics */}
+      <section className={styles.statsSection} aria-label="Satellite production statistics">
         <div className="container">
-          <motion.h2 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp} className={styles.sectionTitle}>
-            Our Centres Across India
-          </motion.h2>
-          <motion.div className={styles.tableWrap} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>State</th>
-                  <th>Villages</th>
-                  <th>Women Employed</th>
-                  <th>Est.</th>
-                </tr>
-              </thead>
-              <tbody>
-                {centres.map((c) => (
-                  <tr key={c.state}>
-                    <td><strong>{c.state}</strong></td>
-                    <td>{c.villages}</td>
-                    <td>{c.women}+</td>
-                    <td>{c.established}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <motion.div
+            className={styles.statsGrid}
+            variants={cardStagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+          >
+            {stats.map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <motion.article
+                  key={stat.label}
+                  className={styles.statCard}
+                  variants={fadeUp}
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className={styles.statIcon} aria-hidden="true">
+                    <Icon size={20} strokeWidth={1.75} />
+                  </div>
+                  <span className={styles.statValue}>{stat.value}</span>
+                  <span className={styles.statLabel}>{stat.label}</span>
+                </motion.article>
+              );
+            })}
           </motion.div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className={styles.cta}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <h2>Want to Start a Centre in Your Village?</h2>
-          <p>We&apos;re always looking for community partners to expand our reach.</p>
-          <Link href="/contact" className={styles.ctaBtn}>
-            <Heart size={18} /> Get in Touch <ArrowRight size={18} />
-          </Link>
+      {/* Satellite Centres by State */}
+      <section
+        id="satellite-network"
+        className={styles.section}
+        aria-labelledby="network-heading"
+      >
+        <div className={styles.sectionBg} aria-hidden="true" />
+        <div className={styles.sectionPattern} aria-hidden="true" />
+        <div className={styles.sectionGlow} aria-hidden="true" />
+        <div className="container">
+          <motion.header
+            className={styles.header}
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+          >
+            <motion.span className={styles.eyebrow} variants={fadeUp}>
+              Our Network
+            </motion.span>
+            <motion.h2 id="network-heading" className={styles.title} variants={fadeUp}>
+              Expanding Sustainable Manufacturing Across India
+            </motion.h2>
+            <motion.p className={styles.subtitle} variants={fadeUp}>
+              Decentralized production centres bringing employment and sustainable menstrual
+              products closer to rural communities.
+            </motion.p>
+            <motion.div className={styles.headerActions} variants={fadeUp}>
+              <a href="#centre-madhya-pradesh" className={styles.btnPrimary}>
+                Explore the Network
+                <ArrowRight size={16} aria-hidden="true" className={styles.btnArrow} />
+              </a>
+              <Link href="/contact" className={styles.btnSecondary}>
+                Apply for a Satellite Centre
+              </Link>
+            </motion.div>
+          </motion.header>
+
+          <SatelliteCentresShowcase />
         </div>
       </section>
-    </div>
+    </main>
   );
 }
