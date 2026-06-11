@@ -99,13 +99,6 @@ const supportServices = [
   { label: 'Community Health Worker Training', icon: Stethoscope },
 ];
 
-const trustedByBadges = [
-  { label: 'Schools & Colleges', icon: GraduationCap },
-  { label: 'NGOs & Foundations', icon: HeartHandshake },
-  { label: 'CSR Initiatives', icon: Briefcase },
-  { label: 'Community Organizations', icon: Globe2 },
-];
-
 const programSupportOptions = [
   'Menstrual Health Awareness Session',
   'Community Workshop',
@@ -450,10 +443,6 @@ export default function WholesalePage() {
                   Request Partnership Support
                   <ArrowRight size={18} aria-hidden />
                 </button>
-                <p className={styles.trustMessage}>
-                  Your information will only be used to respond to your inquiry and discuss suitable
-                  program options.
-                </p>
               </form>
             )}
           </motion.div>
@@ -551,31 +540,8 @@ export default function WholesalePage() {
               women and girls through education, awareness, and access to reusable menstrual
               products.
             </motion.p>
-            <motion.div className={styles.trustedBy} variants={fadeUp}>
-              <p className={styles.trustedByHeading}>Trusted By</p>
-              <div className={styles.trustedByBadges}>
-                {trustedByBadges.map((badge) => {
-                  const Icon = badge.icon;
-                  return (
-                    <button
-                      key={badge.label}
-                      type="button"
-                      className={styles.trustedBadge}
-                      onClick={scrollToForm}
-                    >
-                      <Icon size={15} aria-hidden />
-                      {badge.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </motion.div>
             <motion.div className={styles.ctaButtons} variants={fadeUp}>
-              <Link href="/products" className={styles.ctaBtnPrimary}>
-                Explore Our Products
-                <ArrowRight size={17} aria-hidden />
-              </Link>
-              <Link href="/contact" className={styles.ctaBtnSecondary}>
+              <Link href="/contact" className={styles.ctaBtnPrimary}>
                 Contact Us
               </Link>
             </motion.div>
