@@ -13,27 +13,21 @@ import {
   Landmark,
   Handshake,
   Hospital,
-  Home,
-  Globe2,
   CheckCircle2,
   Sparkles,
   BookOpen,
+  Phone,
+  Heart,
+  Globe2,
+  Stethoscope,
+  Users,
+  Building2,
 } from 'lucide-react';
 import styles from './page.module.css';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
-};
-
-const fadeLeft = {
-  hidden: { opacity: 0, x: -28 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
-};
-
-const fadeRight = {
-  hidden: { opacity: 0, x: 28 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
@@ -76,18 +70,6 @@ const organizations = [
     image: '/science/hero-doctor.png',
     alt: 'Healthcare professional supporting menstrual health',
   },
-  {
-    title: 'Hostels & Residential Institutions',
-    icon: Home,
-    image: '/images/internships/hero-interns.png',
-    alt: 'Students in a residential institution',
-  },
-  {
-    title: 'Community Organizations',
-    icon: Globe2,
-    image: '/images/blog/li-23-reach-distribution.png',
-    alt: 'Community distribution of reusable menstrual health kits',
-  },
 ];
 
 const programCards = [
@@ -95,24 +77,34 @@ const programCards = [
     title: 'HEAL Program',
     desc: 'Holistic menstrual health education and awareness initiatives for schools and communities.',
     href: '/programs/heal',
+    icon: Heart,
   },
   {
     title: 'CARE Program',
     desc: 'Campus-based menstrual health advocacy, leadership, and peer education initiatives.',
     href: '/programs/care',
+    icon: GraduationCap,
   },
   {
     title: 'REACH Program',
     desc: 'Community-focused outreach and menstrual health access programs in underserved regions.',
     href: '/programs/reach',
+    icon: Globe2,
   },
 ];
 
 const supportServices = [
-  'Menstrual Health Awareness Sessions',
-  'Community Workshops',
-  'Training of Trainers',
-  'Community Health Worker Training',
+  { label: 'Menstrual Health Awareness Sessions', icon: Leaf },
+  { label: 'Community Workshops', icon: Handshake },
+  { label: 'Training of Trainers', icon: GraduationCap },
+  { label: 'Community Health Worker Training', icon: Stethoscope },
+];
+
+const trustedByBadges = [
+  { label: 'Schools & Colleges', icon: GraduationCap },
+  { label: 'NGOs & Foundations', icon: HeartHandshake },
+  { label: 'CSR Initiatives', icon: Briefcase },
+  { label: 'Community Organizations', icon: Users },
 ];
 
 const programSupportOptions = [
@@ -128,6 +120,15 @@ const programSupportOptions = [
 
 export default function WholesalePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [formHighlighted, setFormHighlighted] = useState(false);
+
+  const scrollToForm = () => {
+    const section = document.getElementById('partnership-form');
+    if (!section) return;
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setFormHighlighted(true);
+    window.setTimeout(() => setFormHighlighted(false), 2200);
+  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -191,10 +192,12 @@ export default function WholesalePage() {
               your initiative.
             </motion.p>
             <motion.div className={styles.heroCtas} variants={fadeUp}>
-              <Link href="/contact" className={styles.heroBtnPrimary}>
-                Request a Bulk Order
-              </Link>
+              <button type="button" className={styles.heroBtnPrimary} onClick={scrollToForm}>
+                Share Your Requirement
+                <ArrowRight size={17} aria-hidden />
+              </button>
               <Link href="/contact" className={styles.heroBtnSecondary}>
+                <Phone size={17} aria-hidden />
                 Talk to Our Team
               </Link>
             </motion.div>
@@ -203,8 +206,8 @@ export default function WholesalePage() {
       </section>
 
       {/* ── Section 2: Who We Work With ── */}
-      <section className={styles.section} aria-labelledby="partners-heading">
-        <div className="container">
+      <section className={styles.partnersSection} aria-labelledby="partners-heading">
+        <div className={styles.partnersContainer}>
           <motion.div
             className={styles.sectionHeader}
             initial="hidden"
@@ -234,26 +237,23 @@ export default function WholesalePage() {
             {organizations.map((org) => {
               const Icon = org.icon;
               return (
-                <motion.article
-                  key={org.title}
-                  className={styles.orgCard}
-                  variants={fadeUp}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <motion.article key={org.title} className={styles.orgCard} variants={fadeUp}>
                   <div className={styles.orgThumb}>
                     <Image
                       src={org.image}
                       alt={org.alt}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className={styles.orgThumbImg}
                     />
-                    <div className={styles.orgIconOverlay}>
-                      <Icon size={18} aria-hidden />
+                    <div className={styles.orgThumbOverlay} aria-hidden />
+                    <div className={styles.orgIconBadge}>
+                      <Icon size={16} aria-hidden />
                     </div>
                   </div>
-                  <h3 className={styles.orgTitle}>{org.title}</h3>
+                  <div className={styles.orgBody}>
+                    <h3 className={styles.orgTitle}>{org.title}</h3>
+                  </div>
                 </motion.article>
               );
             })}
@@ -263,13 +263,13 @@ export default function WholesalePage() {
 
       {/* ── Section 3: Requirement Form ── */}
       <section
-        id="requirement-form"
-        className={`${styles.section} ${styles.sectionAlt} ${styles.requirementSection}`}
+        id="partnership-form"
+        className={`${styles.sectionAlt} ${styles.requirementSection}`}
         aria-labelledby="requirement-heading"
       >
         <div className={styles.requirementWrap}>
           <motion.div
-            className={styles.requirementCard}
+            className={`${styles.requirementCard} ${formHighlighted ? styles.requirementCardHighlight : ''}`}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
@@ -490,30 +490,42 @@ export default function WholesalePage() {
             viewport={{ once: true, margin: '-40px' }}
             variants={staggerFast}
           >
-            {programCards.map((program) => (
-              <motion.article key={program.title} className={styles.programCompactCard} variants={fadeUp}>
-                <h3 className={styles.programCompactTitle}>{program.title}</h3>
-                <p className={styles.programCompactDesc}>{program.desc}</p>
-                <Link href={program.href} className={styles.programCompactLink}>
-                  Learn More <ArrowRight size={14} aria-hidden />
-                </Link>
-              </motion.article>
-            ))}
+            {programCards.map((program) => {
+              const Icon = program.icon;
+              return (
+                <motion.article key={program.title} className={styles.programCompactCard} variants={fadeUp}>
+                  <div className={styles.programCardIcon}>
+                    <Icon size={22} aria-hidden />
+                  </div>
+                  <h3 className={styles.programCompactTitle}>{program.title}</h3>
+                  <p className={styles.programCompactDesc}>{program.desc}</p>
+                  <Link href={program.href} className={styles.programCompactLink}>
+                    Learn More <ArrowRight size={14} aria-hidden />
+                  </Link>
+                </motion.article>
+              );
+            })}
           </motion.div>
 
           <motion.div
-            className={styles.supportGrid}
+            className={styles.supportSection}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-40px' }}
-            variants={staggerFast}
+            variants={fadeUp}
           >
-            {supportServices.map((service) => (
-              <motion.div key={service} className={styles.supportItem} variants={fadeUp}>
-                <CheckCircle2 size={18} className={styles.supportCheck} aria-hidden />
-                <span>{service}</span>
-              </motion.div>
-            ))}
+            <h3 className={styles.supportSectionLabel}>Additional Program Support</h3>
+            <div className={styles.supportChipsGrid}>
+              {supportServices.map((service) => {
+                const Icon = service.icon;
+                return (
+                  <span key={service.label} className={styles.supportChip}>
+                    <Icon size={18} className={styles.supportChipIcon} aria-hidden />
+                    {service.label}
+                  </span>
+                );
+              })}
+            </div>
           </motion.div>
         </div>
       </section>
@@ -521,60 +533,50 @@ export default function WholesalePage() {
       {/* ── Section 5: Final CTA ── */}
       <section className={styles.ctaBanner} aria-labelledby="final-cta-heading">
         <div className={styles.ctaLeafPattern} aria-hidden />
-        <div className={styles.ctaContainer}>
-          <div className={styles.ctaGrid}>
-            <motion.div
-              className={styles.ctaContent}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={stagger}
-            >
-              <motion.h2 id="final-cta-heading" className={styles.ctaTitle} variants={fadeLeft}>
-                Let&apos;s Build Healthier Communities Together
-              </motion.h2>
-              <motion.p className={styles.ctaText} variants={fadeLeft}>
-                Partner with Saukhyam to create sustainable menstrual health programs for your
-                beneficiaries.
-              </motion.p>
-              <motion.div className={styles.ctaButtons} variants={fadeLeft}>
-                <Link href="/products" className={styles.ctaBtnPrimary}>
-                  Explore Our Products
-                  <ArrowRight size={17} aria-hidden />
-                </Link>
-                <Link href="/contact" className={styles.ctaBtnSecondary}>
-                  Contact Us
-                </Link>
-              </motion.div>
+        <div className={styles.ctaInner}>
+          <motion.div
+            className={styles.ctaContent}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-60px' }}
+            variants={stagger}
+          >
+            <motion.span className={styles.ctaBadge} variants={fadeUp}>
+              <Building2 size={13} aria-hidden />
+              Partner with Saukhyam
+            </motion.span>
+            <motion.h2 id="final-cta-heading" className={styles.ctaTitle} variants={fadeUp}>
+              Let&apos;s Build Healthier Communities Together
+            </motion.h2>
+            <motion.p className={styles.ctaText} variants={fadeUp}>
+              Partner with Saukhyam to create sustainable menstrual health programs that empower
+              women and girls through education, awareness, and access to reusable menstrual
+              products.
+            </motion.p>
+            <motion.div className={styles.ctaButtons} variants={fadeUp}>
+              <Link href="/products" className={styles.ctaBtnPrimary}>
+                Explore Our Products
+                <ArrowRight size={17} aria-hidden />
+              </Link>
+              <Link href="/contact" className={styles.ctaBtnSecondary}>
+                Contact Us
+              </Link>
             </motion.div>
-
-            <motion.div
-              className={styles.ctaVisual}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={fadeRight}
-            >
-              <div className={styles.ctaImageWrap}>
-                <Image
-                  src="/images/factory/manufacturing-hub-team.png"
-                  alt="Saukhyam team supporting schools, NGOs, and community organizations"
-                  fill
-                  sizes="(max-width: 960px) 100vw, 50vw"
-                  className={styles.ctaImage}
-                />
-              </div>
-              <div className={styles.ctaFloatCard}>
-                <p className={styles.ctaFloatTitle}>Trusted by</p>
-                <ul className={styles.ctaFloatList}>
-                  <li>Schools</li>
-                  <li>NGOs</li>
-                  <li>CSR Programs</li>
-                  <li>Community Organizations</li>
-                </ul>
+            <motion.div className={styles.trustedBy} variants={fadeUp}>
+              <p className={styles.trustedByHeading}>Trusted By</p>
+              <div className={styles.trustedByBadges}>
+                {trustedByBadges.map((badge) => {
+                  const Icon = badge.icon;
+                  return (
+                    <span key={badge.label} className={styles.trustedBadge}>
+                      <Icon size={15} aria-hidden />
+                      {badge.label}
+                    </span>
+                  );
+                })}
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

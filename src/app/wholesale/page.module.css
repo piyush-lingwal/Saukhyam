@@ -113,27 +113,30 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   padding: 16px 32px;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--hero-green);
-  background: #fff;
-  border: 1px solid #fff;
+  color: #fff;
+  background: linear-gradient(135deg, var(--green-600) 0%, var(--green-800) 100%);
+  border: none;
   border-radius: 999px;
-  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(22, 163, 74, 0.35);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .heroBtnPrimary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  color: var(--hero-green);
+  box-shadow: 0 10px 28px rgba(22, 163, 74, 0.45);
+  color: #fff;
 }
 
 .heroBtnSecondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   padding: 16px 32px;
   font-size: 1rem;
   font-weight: 600;
@@ -213,36 +216,45 @@
 /* ─────────────────────────────────────────────
    2. WHO WE WORK WITH — Org cards grid
 ───────────────────────────────────────────── */
+.partnersSection {
+  padding: 80px 0;
+  background: #fafcf9;
+}
+
+.partnersContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 1.5rem);
+}
+
 .orgGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1rem, 2vw, 1.35rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
 .orgCard {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  padding: clamp(1.1rem, 2vw, 1.35rem);
-  background: linear-gradient(160deg, #f0fdf4 0%, #fff 55%, #fafcf9 100%);
-  border: 1px solid var(--green-100);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 2px 12px rgba(22, 101, 52, 0.04);
-  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), border-color 0.35s;
+  background: #fff;
+  border: 1px solid var(--gray-100);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(22, 101, 52, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   cursor: default;
 }
 
 .orgCard:hover {
-  transform: scale(1.03);
-  border-color: var(--green-200);
-  box-shadow: 0 14px 36px rgba(22, 101, 52, 0.1);
+  transform: translateY(-8px);
+  border-color: var(--green-300);
+  box-shadow: 0 16px 40px rgba(22, 101, 52, 0.12);
 }
 
 .orgThumb {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  border-radius: var(--radius-lg);
+  height: 220px;
   overflow: hidden;
   background: var(--green-50);
 }
@@ -253,32 +265,42 @@
 }
 
 .orgCard:hover .orgThumbImg {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
-.orgIconOverlay {
+.orgThumbOverlay {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  pointer-events: none;
+}
+
+.orgIconBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
   width: 36px;
   height: 36px;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid var(--green-100);
+  border-radius: 10px;
+  background: var(--green-600);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--green-700);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.orgBody {
+  padding: 1.25rem 1.35rem 1.35rem;
 }
 
 .orgTitle {
   font-family: var(--font-heading);
-  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--color-text);
   margin: 0;
-  line-height: 1.3;
+  line-height: 1.35;
 }
 
 /* ─────────────────────────────────────────────
@@ -304,6 +326,30 @@
     0 8px 32px rgba(22, 101, 52, 0.08),
     0 2px 8px rgba(0, 0, 0, 0.04);
   overflow: hidden;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    transform 0.4s ease;
+}
+
+.requirementCardHighlight {
+  border-color: var(--green-400);
+  box-shadow:
+    0 0 0 4px rgba(34, 197, 94, 0.15),
+    0 12px 40px rgba(22, 101, 52, 0.14);
+  animation: formPulse 2.2s ease;
+}
+
+@keyframes formPulse {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .requirementLeafTop,
@@ -598,17 +644,30 @@
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
-  padding: 1.35rem 1.5rem;
+  padding: 1.5rem;
   background: #fff;
   border: 1px solid var(--sand-200);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 2px 12px rgba(22, 101, 52, 0.04);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(22, 101, 52, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .programCompactCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(22, 101, 52, 0.08);
+  transform: translateY(-4px);
+  border-color: var(--green-400);
+  box-shadow: 0 12px 32px rgba(22, 101, 52, 0.1);
+}
+
+.programCardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--green-50);
+  border: 1px solid var(--green-200);
+  color: var(--green-700);
 }
 
 .programCompactTitle {
@@ -644,30 +703,63 @@
   color: var(--green-800);
 }
 
-.supportGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem 1.5rem;
-  margin-top: 48px;
-  padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.65);
-  border: 1px solid var(--sand-200);
-  border-radius: var(--radius-xl);
+.supportSection {
+  margin-top: 40px;
 }
 
-.supportItem {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-size: 0.92rem;
-  font-weight: 600;
+.supportSectionLabel {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--color-text);
-  line-height: 1.4;
+  margin: 0 0 1rem;
+  text-align: center;
 }
 
-.supportCheck {
+.supportChipsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.supportChip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 14px 24px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(34, 139, 84, 0.15);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+  cursor: default;
+}
+
+.supportChipIcon {
   color: var(--green-600);
   flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.supportChip:hover {
+  background: #0f6b3d;
+  color: #fff;
+  border-color: #0f6b3d;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(15, 107, 61, 0.25);
+}
+
+.supportChip:hover .supportChipIcon {
+  color: #fff;
 }
 
 /* ─────────────────────────────────────────────
@@ -675,71 +767,82 @@
 ───────────────────────────────────────────── */
 .ctaBanner {
   position: relative;
-  padding: 80px 0;
+  padding: 100px 0;
   overflow: hidden;
   isolation: isolate;
-  background: linear-gradient(135deg, #0d6b3d 0%, #1c8c56 100%);
+  background: linear-gradient(135deg, #0d6b3d 0%, #1b8c56 100%);
 }
 
 .ctaLeafPattern {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 64 64' fill='%23ffffff'%3E%3Cpath d='M32 4C20 20 8 28 8 40c0 8 6 14 14 14 6 0 12-4 16-10 4 6 10 10 16 10 8 0 14-6 14-14 0-12-12-20-24-36z'/%3E%3C/svg%3E");
   background-size: 120px 120px;
 }
 
-.ctaContainer {
-  max-width: 1200px;
+.ctaInner {
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 1.5rem);
-}
-
-.ctaGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 4vw, 3rem);
-  align-items: center;
 }
 
 .ctaContent {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.85rem, 1.4vw, 1.1rem);
-  max-width: 550px;
+  align-items: center;
+  text-align: center;
+}
+
+.ctaBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green-800);
+  background: var(--green-100);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
 }
 
 .ctaTitle {
   font-family: var(--font-heading);
-  font-size: clamp(1.85rem, 3vw, 2.65rem);
-  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
   color: #fff;
-  line-height: 1.12;
-  letter-spacing: -0.025em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   margin: 0;
+  margin-top: 1rem;
 }
 
 .ctaText {
   font-size: clamp(1rem, 1.15vw, 1.1rem);
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.88);
   line-height: 1.65;
-  margin: 0;
+  margin: 24px auto 0;
+  max-width: 650px;
 }
 
 .ctaButtons {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.85rem;
   flex-wrap: wrap;
-  margin-top: 0.5rem;
+  margin-top: 32px;
 }
 
 .ctaBtnPrimary {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.9rem 1.75rem;
+  padding: 16px 32px;
   font-size: 1rem;
   font-weight: 700;
   color: var(--green-800);
@@ -760,7 +863,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.9rem 1.75rem;
+  padding: 16px 32px;
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
@@ -777,55 +880,51 @@
   color: #fff;
 }
 
-.ctaVisual {
-  position: relative;
+.trustedBy {
+  margin-top: 48px;
+  width: 100%;
 }
 
-.ctaImageWrap {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  aspect-ratio: 4 / 3;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
-}
-
-.ctaImage {
-  object-fit: cover;
-}
-
-.ctaFloatCard {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  padding: 0.85rem 1.1rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(8px);
-}
-
-.ctaFloatTitle {
-  font-size: 0.72rem;
+.trustedByHeading {
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--green-700);
-  margin: 0 0 0.35rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 1rem;
 }
 
-.ctaFloatList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.trustedByBadges {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0.75rem;
+  justify-content: center;
+  gap: 16px;
 }
 
-.ctaFloatList li {
-  font-size: 0.82rem;
+.trustedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-text);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trustedBadge svg {
+  color: var(--green-700);
+  flex-shrink: 0;
+}
+
+.trustedBadge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* ─────────────────────────────────────────────
@@ -836,6 +935,12 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .supportChipsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
   .programCardsGrid {
     grid-template-columns: 1fr;
   }
@@ -844,18 +949,6 @@
 @media (max-width: 960px) {
   .hero {
     padding: 100px 0;
-  }
-
-  .ctaGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .ctaVisual {
-    order: -1;
-  }
-
-  .ctaContent {
-    max-width: none;
   }
 }
 
@@ -866,7 +959,7 @@
 
   .formGrid,
   .checkboxGrid,
-  .supportGrid {
+  .supportChipsGrid {
     grid-template-columns: 1fr;
   }
 
@@ -894,8 +987,20 @@
   }
 
   .requirementSection,
+  .partnersSection,
   .holisticSection,
   .ctaBanner {
     padding: 60px 0;
+  }
+
+  .trustedByBadges {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .trustedBadge {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
   }
 }
