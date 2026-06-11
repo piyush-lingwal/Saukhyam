@@ -20,7 +20,6 @@ import {
   Heart,
   Globe2,
   Stethoscope,
-  Users,
   Building2,
 } from 'lucide-react';
 import styles from './page.module.css';
@@ -104,7 +103,7 @@ const trustedByBadges = [
   { label: 'Schools & Colleges', icon: GraduationCap },
   { label: 'NGOs & Foundations', icon: HeartHandshake },
   { label: 'CSR Initiatives', icon: Briefcase },
-  { label: 'Community Organizations', icon: Users },
+  { label: 'Community Organizations', icon: Globe2 },
 ];
 
 const programSupportOptions = [
@@ -532,7 +531,6 @@ export default function WholesalePage() {
 
       {/* ── Section 5: Final CTA ── */}
       <section className={styles.ctaBanner} aria-labelledby="final-cta-heading">
-        <div className={styles.ctaLeafPattern} aria-hidden />
         <div className={styles.ctaInner}>
           <motion.div
             className={styles.ctaContent}
@@ -553,6 +551,25 @@ export default function WholesalePage() {
               women and girls through education, awareness, and access to reusable menstrual
               products.
             </motion.p>
+            <motion.div className={styles.trustedBy} variants={fadeUp}>
+              <p className={styles.trustedByHeading}>Trusted By</p>
+              <div className={styles.trustedByBadges}>
+                {trustedByBadges.map((badge) => {
+                  const Icon = badge.icon;
+                  return (
+                    <button
+                      key={badge.label}
+                      type="button"
+                      className={styles.trustedBadge}
+                      onClick={scrollToForm}
+                    >
+                      <Icon size={15} aria-hidden />
+                      {badge.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </motion.div>
             <motion.div className={styles.ctaButtons} variants={fadeUp}>
               <Link href="/products" className={styles.ctaBtnPrimary}>
                 Explore Our Products
@@ -561,20 +578,6 @@ export default function WholesalePage() {
               <Link href="/contact" className={styles.ctaBtnSecondary}>
                 Contact Us
               </Link>
-            </motion.div>
-            <motion.div className={styles.trustedBy} variants={fadeUp}>
-              <p className={styles.trustedByHeading}>Trusted By</p>
-              <div className={styles.trustedByBadges}>
-                {trustedByBadges.map((badge) => {
-                  const Icon = badge.icon;
-                  return (
-                    <span key={badge.label} className={styles.trustedBadge}>
-                      <Icon size={15} aria-hidden />
-                      {badge.label}
-                    </span>
-                  );
-                })}
-              </div>
             </motion.div>
           </motion.div>
         </div>
