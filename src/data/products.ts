@@ -20,7 +20,7 @@ export const products: Product[] = [
   {
     id: 'sampler-pack',
     slug: 'sampler-pack-of-reusable-sanitary-napkins',
-    name: 'Sampler Pack',
+    name: 'Saukhyam Sampler Pack',
     nameHi: 'सैम्पलर पैक',
     price: 450,
     description: 'Try different pad types to find your perfect fit. A great way to experience the Saukhyam difference.',
@@ -99,57 +99,9 @@ export const products: Product[] = [
     includes: ['4 Pantyliners'],
     badge: 'For Daily Use',
   },
-  {
-    id: 'first-period-kit',
-    slug: 'first-period-kit',
-    name: 'First Period Kit',
-    nameHi: 'फर्स्ट पीरियड किट',
-    price: 550,
-    description: 'A gentle, confidence-building kit for girls experiencing their first period. Soft fabric, beginner-friendly design, and a reassuring guide booklet.',
-    descriptionHi: 'पहले पीरियड्स के लिए डिज़ाइन की गई कोमल किट - मुलायम कपड़ा, शुरुआती-अनुकूल डिज़ाइन और एक आश्वस्त करने वाली गाइड।',
-    category: 'teen',
-    images: [
-      'https://saukhyampads.org/cdn/shop/files/Saukhyam_Starter_Pack_6_11zon.webp?v=1749644512&width=600'
-    ],
-    features: ['Extra Soft Fabric', 'Beginner Friendly', 'Discreet Wet Bag', 'Guide Booklet'],
-    includes: ['2 Day Pads', '1 Night Pad', '1 Pantyliner', '1 Wet Bag', '1 Guide Booklet'],
-    badge: 'For Teens',
-    isNew: true,
-  },
-  {
-    id: 'postpartum-recovery-kit',
-    slug: 'postpartum-recovery-kit',
-    name: 'Postpartum Recovery Kit',
-    nameHi: 'पोस्टपार्टम रिकवरी किट',
-    price: 1250,
-    description: 'Designed for the heavy flow and sensitive recovery phase after childbirth. Maximum absorbency with ultra-gentle organic cotton for sensitive skin.',
-    descriptionHi: 'प्रसव के बाद भारी प्रवाह और संवेदनशील रिकवरी चरण के लिए - अधिकतम अवशोषण और संवेदनशील त्वचा के लिए कोमल ऑर्गेनिक कपास।',
-    category: 'heavy',
-    images: [
-      'https://saukhyampads.org/cdn/shop/files/Night_Pack_Heavy_flow_2_11zon.webp?v=1749644616&width=600'
-    ],
-    features: ['Maximum Absorbency', 'Organic Cotton', 'Skin-Sensitive', 'Night + Heavy Flow'],
-    includes: ['4 Heavy Flow Pads', '3 Night Pads', '2 Day Pads', '1 Wet Bag'],
-    badge: 'For New Mothers',
-    isNew: true,
-  },
-  {
-    id: 'perimenopause-transition-kit',
-    slug: 'perimenopause-transition-kit',
-    name: 'Perimenopause Transition Kit',
-    nameHi: 'पेरिमेनोपॉज़ ट्रांज़िशन किट',
-    price: 950,
-    description: 'Flexible protection for the unpredictable flow of perimenopause - from light spotting to heavy days. A complete range in one thoughtful kit.',
-    descriptionHi: 'पेरिमेनोपॉज़ के अप्रत्याशित प्रवाह के लिए लचीली सुरक्षा - हल्के स्पॉटिंग से भारी दिनों तक।',
-    category: 'value',
-    images: [
-      'https://saukhyampads.org/cdn/shop/files/Super_pack_with_wet_bag_Pouch_8_11zon.webp?v=1749644449&width=600'
-    ],
-    features: ['All Flow Types', 'Unpredictable Cycle Ready', 'Comfortable Fit', 'Travel Wet Bag'],
-    includes: ['2 Heavy Flow Pads', '2 Day Pads', '2 Night Pads', '3 Pantyliners', '1 Wet Bag'],
-    badge: 'Midlife Care',
-    isNew: true,
-  },
+
+
+
   {
     id: 'starter-pack',
     slug: 'starter-pack-with-wet-bag',
@@ -196,23 +148,6 @@ export const products: Product[] = [
     ],
     features: ['Mix of Pad Types', 'Pantyliner Included', 'Chemical Free', 'Great Value'],
     includes: ['1 Day Pad', '1 Night Pad', '1 Pantyliner', '1 Insert'],
-  },
-  {
-    id: 'heal-with-saukhyam',
-    slug: 'heal-with-saukhyam',
-    name: 'Heal with Saukhyam',
-    nameHi: 'सौख्यम के साथ उपचार',
-    price: 690,
-    description: 'Join our 3-month Period Healing Challenge. Experience improvement in period pain, skin issues, and overall menstrual health.',
-    descriptionHi: 'हमारे 3 महीने के पीरियड हीलिंग चैलेंज में शामिल हों।',
-    category: 'value',
-    images: [
-      'https://saukhyampads.org/cdn/shop/files/Saukhyam_Value_Pack_7_11zon_c7cbaec5-7fd8-4d07-a79e-61138389fb07.webp?v=1749644402&width=600'
-    ],
-    features: ['3-Month Challenge', 'Healing Protocol', 'Community Support', 'Health Tracking'],
-    includes: ['3 Day Pads', '2 Night Pads', '1 Wet Bag', 'Healing Guide'],
-    isNew: true,
-    badge: 'New',
   },
 ];
 

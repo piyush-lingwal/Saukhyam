@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState } from 'react';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -18,13 +18,7 @@ import { useCart } from '@/context/CartContext';
 
 import styles from './page.module.css';
 
-const heroImages = [
-  '/Main_page-HeroImages/38aa9a04-d661-4fd4-9a4c-4ecaa0580c57_CD654FFD-1947-4DF4-93EC-7C8F6809E074.jpg',
-  '/Main_page-HeroImages/6b714a66-c884-4680-8cec-c49397c0d899_75EE52F7-514D-4C05-8347-704F0FD187A3.jpg',
-  '/Main_page-HeroImages/7d4b6b28-179d-403f-9412-f8ef1e47643f_FEEEA20E-A921-4BD3-9E90-1F9BD2EEA9F2.jpg',
-  '/Main_page-HeroImages/b19fd338-5efe-4ebb-a107-b12211b1b20f_52B9E64C-0816-485E-9234-FB7DD4C30714.jpg',
-  '/Main_page-HeroImages/ca77dbd6-0b9c-4657-957a-53da4ac95c6a_2FE0AB63-0573-488D-9D76-2FA8AAD3BD0B.jpg',
-];
+
 
 const tickerMessages = [
   '5 Lakh+ women have switched to Saukhyam',
@@ -89,15 +83,7 @@ export default function HomePage() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [recentlyAdded, setRecentlyAdded] = useState<Record<string, boolean>>({});
   const [wishlist, setWishlist] = useState<Record<string, boolean>>({});
-  const [heroIndex, setHeroIndex] = useState(0);
 
-  // Auto-rotate hero carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHeroIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   const scrollTestimonials = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -126,29 +112,8 @@ export default function HomePage() {
 
       {/* ── Hero Section ── */}
       <section className={styles.hero}>
-        {/* Background image carousel */}
-        <div className={styles.heroCarousel} aria-hidden="true">
-          {heroImages.map((src, i) => (
-            <div
-              key={src}
-              className={`${styles.heroSlide} ${i === heroIndex ? styles.heroSlideActive : ''}`}
-              style={{ backgroundImage: `url(${src})` }}
-            />
-          ))}
-        </div>
-
-        {/* Carousel indicators */}
-        <div className={styles.heroIndicators}>
-          {heroImages.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              className={`${styles.heroIndicator} ${i === heroIndex ? styles.heroIndicatorActive : ''}`}
-              onClick={() => setHeroIndex(i)}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
+        {/* Static background image */}
+        <div className={styles.heroBgImage} aria-hidden="true" />
 
         <div className={`container ${styles.heroContainer}`}>
           {/* Headline */}

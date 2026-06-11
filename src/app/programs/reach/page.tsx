@@ -92,10 +92,10 @@ export default function ReachPage() {
         <div className="container">
           <div className={styles.statsRow}>
             {[
-              { icon: MapPin, value: '25+', label: 'Satellite Centres' },
-              { icon: Globe, value: '20+', label: 'States Covered' },
-              { icon: Users, value: '500+', label: 'Women Employed' },
-              { icon: Leaf, value: '101', label: 'Villages Reached' },
+              { icon: MapPin, value: '5', label: 'Satellite Centres' },
+              { icon: Globe, value: '11', label: 'States Covered' },
+              { icon: Users, value: '280+', label: 'Women Employed' },
+              { icon: Leaf, value: '4137', label: 'Villages Reached' },
             ].map((s) => (
               <div key={s.label} className={styles.statBox}>
                 <s.icon size={20} className={styles.statIcon} />
