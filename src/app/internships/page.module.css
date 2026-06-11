@@ -900,7 +900,7 @@
 
 .internAvatarImg {
   object-fit: cover;
-  object-position: center top;
+  object-position: center center;
   transition: transform 0.5s var(--ease-out);
 }
 
