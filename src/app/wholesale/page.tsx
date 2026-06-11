@@ -1,16 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Leaf,
-  Recycle,
-  Users,
   ArrowRight,
-  Phone,
-  Building2,
   GraduationCap,
   HeartHandshake,
   Briefcase,
@@ -19,20 +15,9 @@ import {
   Hospital,
   Home,
   Globe2,
-  Building,
-  User,
-  MapPin,
-  Hash,
-  UserCircle,
-  Calendar,
-  Presentation,
   CheckCircle2,
   Sparkles,
-  Send,
   BookOpen,
-  Mic,
-  Map,
-  LeafyGreen,
 } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -105,37 +90,21 @@ const organizations = [
   },
 ];
 
-const requirementFields = [
-  { label: 'Organization Name', icon: Building },
-  { label: 'Contact Person', icon: User },
-  { label: 'Location', icon: MapPin },
-  { label: 'Number of Beneficiaries', icon: Hash },
-  { label: 'Beneficiary Type', icon: UserCircle },
-  { label: 'Tentative Timeline', icon: Calendar },
-  { label: 'Awareness Session Requirement', icon: Presentation },
-];
-
-const linkedPrograms = [
+const programCards = [
   {
-    title: 'HEAL Program Implementation',
-    desc: 'Holistic menstrual health education and awareness for schools and communities.',
-    image: '/HEAL Page Photos/Photo3.png',
+    title: 'HEAL Program',
+    desc: 'Holistic menstrual health education and awareness initiatives for schools and communities.',
     href: '/programs/heal',
-    reverse: false,
   },
   {
-    title: 'CARE Program Implementation',
-    desc: 'Campus-based menstrual health advocacy and peer education for colleges.',
-    image: '/CARE Page Photos/hero image.png',
+    title: 'CARE Program',
+    desc: 'Campus-based menstrual health advocacy, leadership, and peer education initiatives.',
     href: '/programs/care',
-    reverse: true,
   },
   {
-    title: 'REACH Program Implementation',
-    desc: 'Grassroots distribution and community engagement across underserved regions.',
-    image: '/images/blog/li-23-reach-distribution.png',
+    title: 'REACH Program',
+    desc: 'Community-focused outreach and menstrual health access programs in underserved regions.',
     href: '/programs/reach',
-    reverse: false,
   },
 ];
 
@@ -146,88 +115,19 @@ const supportServices = [
   'Community Health Worker Training',
 ];
 
-const impactStats = [
-  {
-    icon: Users,
-    value: '30+',
-    suffix: ' Lakh',
-    label: 'Women & Girls Reached Across India',
-    animate: true,
-    target: 30,
-  },
-  {
-    icon: Mic,
-    value: '1000+',
-    label: 'Awareness Sessions Conducted',
-    animate: true,
-    target: 1000,
-  },
-  {
-    icon: Map,
-    value: '20+',
-    label: 'States Across India',
-    animate: true,
-    target: 20,
-  },
-  {
-    icon: LeafyGreen,
-    value: '2–3 Years',
-    label: 'Sustainable Alternative to Disposable Pads',
-    animate: false,
-  },
+const programSupportOptions = [
+  'Menstrual Health Awareness Session',
+  'Community Workshop',
+  'Training of Trainers',
+  'HEAL Program',
+  'CARE Program',
+  'REACH Program',
+  'Community Health Worker Training',
+  'Product Distribution Only',
 ];
-
-function AnimatedStatValue({
-  target,
-  prefix = '',
-  suffix = '',
-  trailingPlus = false,
-}: {
-  target: number;
-  prefix?: string;
-  suffix?: string;
-  trailingPlus?: boolean;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
-  const prefersReducedMotion = useReducedMotion();
-  const [display, setDisplay] = useState(0);
-
-  useEffect(() => {
-    if (!isInView || prefersReducedMotion) {
-      setDisplay(target);
-      return;
-    }
-
-    const duration = 1600;
-    const start = performance.now();
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(Math.round(target * eased));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-
-    requestAnimationFrame(tick);
-  }, [isInView, target, prefersReducedMotion]);
-
-  return (
-    <span ref={ref}>
-      {prefix}
-      {display}
-      {trailingPlus ? '+' : ''}
-      {suffix}
-    </span>
-  );
-}
 
 export default function WholesalePage() {
   const [submitted, setSubmitted] = useState(false);
-
-  const scrollToForm = () => {
-    document.getElementById('requirement-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -239,13 +139,17 @@ export default function WholesalePage() {
     const location = (form.elements.namedItem('location') as HTMLInputElement).value.trim();
     const beneficiaries = (form.elements.namedItem('beneficiaries') as HTMLInputElement).value.trim();
     const beneficiaryType = (form.elements.namedItem('beneficiaryType') as HTMLSelectElement).value;
-    const timeline = (form.elements.namedItem('timeline') as HTMLInputElement).value.trim();
+    const timeline = (form.elements.namedItem('timeline') as HTMLSelectElement).value;
     const awareness = (form.elements.namedItem('awareness') as HTMLSelectElement).value;
     const notes = (form.elements.namedItem('notes') as HTMLTextAreaElement).value.trim();
 
-    const subject = encodeURIComponent(`Bulk Order Request — ${orgName}`);
+    const supportChecked = Array.from(
+      form.querySelectorAll<HTMLInputElement>('input[name="programSupport"]:checked'),
+    ).map((el) => el.value);
+
+    const subject = encodeURIComponent(`Partnership Support Request — ${orgName}`);
     const body = encodeURIComponent(
-      `Organization: ${orgName}\nContact Person: ${contactPerson}\nEmail: ${email}\nPhone: ${phone}\nLocation: ${location}\nNumber of Beneficiaries: ${beneficiaries}\nBeneficiary Type: ${beneficiaryType}\nTentative Timeline: ${timeline}\nAwareness Session Required: ${awareness}\n\nAdditional Notes:\n${notes}`,
+      `Organization: ${orgName}\nContact Person: ${contactPerson}\nEmail: ${email}\nPhone: ${phone}\nLocation: ${location}\nNumber of Beneficiaries: ${beneficiaries}\nBeneficiary Type: ${beneficiaryType}\nTentative Timeline: ${timeline}\nAwareness Session: ${awareness}\nProgram Support Required: ${supportChecked.join(', ') || 'None selected'}\n\nAdditional Details:\n${notes}`,
     );
     window.location.href = `mailto:info@saukhyampads.org?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -255,78 +159,46 @@ export default function WholesalePage() {
     <div className={styles.page}>
       {/* ── Section 1: Hero ── */}
       <section className={styles.hero} aria-labelledby="wholesale-hero-heading">
-        <div className={styles.heroOrb1} aria-hidden />
-        <div className={styles.heroOrb2} aria-hidden />
-        <div className={styles.heroGrain} aria-hidden />
+        <div className={styles.heroBg} aria-hidden>
+          <Image
+            src="/images/wholesale/hero-bulk-orders.png"
+            alt=""
+            fill
+            sizes="100vw"
+            className={styles.heroBgImage}
+            priority
+          />
+        </div>
+        <div className={styles.heroOverlay} aria-hidden />
 
         <div className="container">
-          <div className={styles.heroGrid}>
-            <motion.div
-              className={styles.heroContent}
-              initial="hidden"
-              animate="visible"
-              variants={stagger}
-            >
-              <motion.span className={styles.heroLabel} variants={fadeUp}>
-                <Building2 size={13} /> Bulk & Institutional Partnerships
-              </motion.span>
-              <motion.h1 id="wholesale-hero-heading" className={styles.heroTitle} variants={fadeUp}>
-                Looking to Place a Bulk Order?
-              </motion.h1>
-              <motion.p className={styles.heroSubtitle} variants={fadeUp}>
-                Whether you are a school, college, NGO, CSR team, government department, self-help
-                group, hospital, hostel, or community organization, we would be delighted to support
-                your initiative.
-              </motion.p>
-              <motion.div className={styles.impactBadge} variants={fadeUp}>
-                <Users size={18} className={styles.impactBadgeIcon} aria-hidden />
-                30+ Lakh Women & Girls Reached Across India
-              </motion.div>
-              <motion.p className={styles.heroSupport} variants={fadeUp}>
-                Saukhyam reusable pads are helping create healthier periods while reducing menstrual
-                waste through sustainable menstrual health programs.
-              </motion.p>
-              <motion.div className={styles.heroCtas} variants={fadeUp}>
-                <button type="button" className={styles.btnPrimary} onClick={scrollToForm}>
-                  Request a Bulk Order
-                  <ArrowRight size={17} aria-hidden />
-                </button>
-                <a href="tel:+916282103073" className={styles.btnSecondary}>
-                  <Phone size={17} aria-hidden />
-                  Talk to Our Team
-                </a>
-              </motion.div>
+          <motion.div
+            className={styles.heroContent}
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+          >
+            <motion.span className={styles.heroBadge} variants={fadeUp}>
+              <Leaf size={14} aria-hidden />
+              Bulk & Institutional Partnerships
+            </motion.span>
+            <motion.h1 id="wholesale-hero-heading" className={styles.heroTitle} variants={fadeUp}>
+              Looking to Place a Bulk Order?
+            </motion.h1>
+            <motion.p className={styles.heroSubtitle} variants={fadeUp}>
+              Whether you are a school, college, NGO, CSR team, government department, self-help
+              group, hospital, hostel, or community organization, we would be delighted to support
+              your initiative.
+            </motion.p>
+            <motion.div className={styles.heroCtas} variants={fadeUp}>
+              <Link href="/contact" className={styles.heroBtnPrimary}>
+                Request a Bulk Order
+              </Link>
+              <Link href="/contact" className={styles.heroBtnSecondary}>
+                Talk to Our Team
+              </Link>
             </motion.div>
-
-            <motion.div
-              className={styles.heroVisual}
-              initial="hidden"
-              animate="visible"
-              variants={fadeRight}
-            >
-              <div className={styles.heroImageWrap}>
-                <Image
-                  src="/images/blog/li-23-reach-distribution.png"
-                  alt="Women, students, and community organizations receiving Saukhyam menstrual health kits"
-                  fill
-                  sizes="(max-width: 960px) 100vw, 50vw"
-                  className={styles.heroImage}
-                  priority
-                />
-              </div>
-              <div className={styles.floatingBadges}>
-                <span className={styles.floatBadge}>
-                  <Leaf size={14} aria-hidden /> Sustainable
-                </span>
-                <span className={styles.floatBadge}>
-                  <Recycle size={14} aria-hidden /> Reusable for 2–3 Years
-                </span>
-                <span className={styles.floatBadge}>
-                  <Users size={14} aria-hidden /> 30+ Lakh Women Reached
-                </span>
-              </div>
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -395,8 +267,7 @@ export default function WholesalePage() {
         className={`${styles.section} ${styles.sectionAlt} ${styles.requirementSection}`}
         aria-labelledby="requirement-heading"
       >
-        <div className={styles.requirementGlow} aria-hidden />
-        <div className="container">
+        <div className={styles.requirementWrap}>
           <motion.div
             className={styles.requirementCard}
             initial="hidden"
@@ -404,29 +275,18 @@ export default function WholesalePage() {
             viewport={{ once: true, margin: '-60px' }}
             variants={fadeUp}
           >
+            <div className={styles.requirementLeafTop} aria-hidden />
+            <div className={styles.requirementLeafBottom} aria-hidden />
+
             <div className={styles.requirementHeader}>
               <h2 id="requirement-heading" className={styles.requirementTitle}>
                 Tell Us About Your Requirement
               </h2>
               <p className={styles.requirementSub}>
-                Share a few details and our team will respond with product options, pricing, and
-                program support tailored to your organization.
+                Share a few details about your initiative and our team will recommend the most
+                suitable products, program support, and implementation approach for your
+                organization.
               </p>
-            </div>
-
-            <div className={styles.checklistGrid} aria-label="Information we need">
-              {requirementFields.map((field) => {
-                const Icon = field.icon;
-                return (
-                  <div key={field.label} className={styles.checkItem}>
-                    <span className={styles.checkIcon}>
-                      <Icon size={15} aria-hidden />
-                    </span>
-                    <CheckCircle2 size={16} className={styles.checkMark} aria-hidden />
-                    {field.label}
-                  </div>
-                );
-              })}
             </div>
 
             {submitted ? (
@@ -451,108 +311,161 @@ export default function WholesalePage() {
                 </button>
               </motion.div>
             ) : (
-              <form className={styles.formGrid} onSubmit={handleSubmit} noValidate>
-                <div className={styles.formGroup}>
-                  <label htmlFor="orgName">Organization Name</label>
-                  <input id="orgName" name="orgName" type="text" placeholder="Your organization" required />
+              <form onSubmit={handleSubmit} noValidate>
+                <div className={styles.formSection}>
+                  <h3 className={styles.formSectionTitle}>Organization Details</h3>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="orgName">Organization Name *</label>
+                      <input
+                        id="orgName"
+                        name="orgName"
+                        type="text"
+                        placeholder="Enter organization name"
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="contactPerson">Contact Person *</label>
+                      <input
+                        id="contactPerson"
+                        name="contactPerson"
+                        type="text"
+                        placeholder="Full name"
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="email">Email Address *</label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="name@organization.org"
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="phone">Phone Number *</label>
+                      <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        placeholder="+91 XXXXX XXXXX"
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="location">Location *</label>
+                      <input
+                        id="location"
+                        name="location"
+                        type="text"
+                        placeholder="City, State"
+                        required
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="contactPerson">Contact Person</label>
-                  <input
-                    id="contactPerson"
-                    name="contactPerson"
-                    type="text"
-                    placeholder="Full name"
-                    required
-                  />
+
+                <div className={styles.formSection}>
+                  <h3 className={styles.formSectionTitle}>Program Details</h3>
+                  <div className={styles.formGrid}>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="beneficiaries">Number of Beneficiaries *</label>
+                      <input
+                        id="beneficiaries"
+                        name="beneficiaries"
+                        type="text"
+                        placeholder="Approximate number of women or girls"
+                        required
+                      />
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="beneficiaryType">Beneficiary Type *</label>
+                      <select id="beneficiaryType" name="beneficiaryType" required defaultValue="">
+                        <option value="" disabled>Select beneficiary type</option>
+                        <option value="School Students">School Students</option>
+                        <option value="College Students">College Students</option>
+                        <option value="Self Help Groups (SHGs)">Self Help Groups (SHGs)</option>
+                        <option value="Rural Communities">Rural Communities</option>
+                        <option value="Urban Communities">Urban Communities</option>
+                        <option value="Factory Workers">Factory Workers</option>
+                        <option value="Hospital Staff">Hospital Staff</option>
+                        <option value="Community Health Workers">Community Health Workers</option>
+                        <option value="NGO Beneficiaries">NGO Beneficiaries</option>
+                        <option value="Mixed Groups">Mixed Groups</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="timeline">Tentative Timeline *</label>
+                      <select id="timeline" name="timeline" required defaultValue="">
+                        <option value="" disabled>Select timeline</option>
+                        <option value="Immediate (Within 1 Month)">Immediate (Within 1 Month)</option>
+                        <option value="1–3 Months">1–3 Months</option>
+                        <option value="3–6 Months">3–6 Months</option>
+                        <option value="6–12 Months">6–12 Months</option>
+                        <option value="Planning Stage">Planning Stage</option>
+                      </select>
+                    </div>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="awareness">Awareness Session Requirement *</label>
+                      <select id="awareness" name="awareness" required defaultValue="">
+                        <option value="" disabled>Select option</option>
+                        <option value="Yes, Required">Yes, Required</option>
+                        <option value="No, Products Only">No, Products Only</option>
+                        <option value="Need More Information">Need More Information</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="you@organization.org"
-                    required
-                  />
+
+                <div className={styles.formSection}>
+                  <h3 className={styles.formSectionTitle}>Program Support Required</h3>
+                  <div className={styles.checkboxGrid}>
+                    {programSupportOptions.map((option) => (
+                      <label key={option} className={styles.checkboxItem}>
+                        <input type="checkbox" name="programSupport" value={option} />
+                        <span className={styles.checkboxBox} aria-hidden />
+                        <span className={styles.checkboxLabel}>{option}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="phone">Phone</label>
-                  <input id="phone" name="phone" type="tel" placeholder="+91" required />
+
+                <div className={styles.formSection}>
+                  <h3 className={styles.formSectionTitle}>Additional Details</h3>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="notes">Tell Us More</label>
+                    <textarea
+                      id="notes"
+                      name="notes"
+                      placeholder="Please share your program objectives, target community, expected budget range, preferred products, or any specific requirements. This helps us recommend the most suitable solution."
+                      rows={5}
+                    />
+                  </div>
                 </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="location">Location</label>
-                  <input id="location" name="location" type="text" placeholder="City, State" required />
-                </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="beneficiaries">Number of Beneficiaries</label>
-                  <input
-                    id="beneficiaries"
-                    name="beneficiaries"
-                    type="text"
-                    placeholder="e.g. 500 girls"
-                    required
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="beneficiaryType">Beneficiary Type</label>
-                  <select id="beneficiaryType" name="beneficiaryType" required defaultValue="">
-                    <option value="" disabled>Select type</option>
-                    <option value="School students">School students</option>
-                    <option value="College students">College students</option>
-                    <option value="Rural women">Rural women</option>
-                    <option value="SHG members">SHG members</option>
-                    <option value="Hospital patients">Hospital patients</option>
-                    <option value="Hostel residents">Hostel residents</option>
-                    <option value="Community members">Community members</option>
-                    <option value="Mixed / Other">Mixed / Other</option>
-                  </select>
-                </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="timeline">Tentative Timeline</label>
-                  <input
-                    id="timeline"
-                    name="timeline"
-                    type="text"
-                    placeholder="e.g. March 2026"
-                    required
-                  />
-                </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="awareness">Awareness Session Requirement</label>
-                  <select id="awareness" name="awareness" required defaultValue="">
-                    <option value="" disabled>Select option</option>
-                    <option value="Yes — awareness sessions needed">Yes — awareness sessions needed</option>
-                    <option value="No — product distribution only">No — product distribution only</option>
-                    <option value="Not sure yet">Not sure yet</option>
-                  </select>
-                </div>
-                <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
-                  <label htmlFor="notes">Additional Notes</label>
-                  <textarea
-                    id="notes"
-                    name="notes"
-                    placeholder="Tell us more about your program goals, budget considerations, or specific product needs..."
-                    rows={4}
-                  />
-                </div>
-                <div className={styles.formGroupFull}>
-                  <button type="submit" className={styles.submitBtn}>
-                    Submit Requirement
-                    <Send size={17} aria-hidden />
-                  </button>
-                </div>
+
+                <button type="submit" className={styles.submitBtn}>
+                  Request Partnership Support
+                  <ArrowRight size={18} aria-hidden />
+                </button>
+                <p className={styles.trustMessage}>
+                  Your information will only be used to respond to your inquiry and discuss suitable
+                  program options.
+                </p>
               </form>
             )}
           </motion.div>
         </div>
       </section>
 
-      {/* ── Section 4: Beyond Distribution ── */}
-      <section className={`${styles.section} ${styles.sectionBeige}`} aria-labelledby="beyond-heading">
-        <div className="container">
+      {/* ── Section 4: Holistic Programs ── */}
+      <section className={styles.holisticSection} aria-labelledby="beyond-heading">
+        <div className={styles.holisticContainer}>
           <motion.div
-            className={styles.beyondIntro}
+            className={styles.holisticHeader}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-60px' }}
@@ -561,126 +474,54 @@ export default function WholesalePage() {
             <motion.span className={styles.sectionEyebrow} variants={fadeUp}>
               <BookOpen size={13} aria-hidden /> Holistic Programs
             </motion.span>
-            <motion.h2 id="beyond-heading" className={styles.beyondTitle} variants={fadeUp}>
-              A Successful Menstrual Health Program Goes Beyond Distribution
+            <motion.h2 id="beyond-heading" className={styles.holisticTitle} variants={fadeUp}>
+              Beyond Product Distribution
             </motion.h2>
-            <motion.p className={styles.beyondText} variants={fadeUp}>
-              A lasting impact is created through awareness, education, and community engagement.
+            <motion.p className={styles.holisticSub} variants={fadeUp}>
+              Creating lasting impact through menstrual health education, awareness, and community
+              engagement.
             </motion.p>
           </motion.div>
 
           <motion.div
-            className={styles.programGrid}
+            className={styles.programCardsGrid}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-40px' }}
-            variants={stagger}
+            variants={staggerFast}
           >
-            {linkedPrograms.map((program) => (
-              <motion.article
-                key={program.title}
-                className={`${styles.programCard} ${program.reverse ? styles.programCardReverse : ''}`}
-                variants={fadeUp}
-              >
-                <div className={styles.programVisual}>
-                  <Image
-                    src={program.image}
-                    alt={program.title}
-                    fill
-                    sizes="(max-width: 960px) 100vw, 50vw"
-                    className={styles.programImg}
-                  />
-                </div>
-                <div className={styles.programBody}>
-                  <div className={styles.programCheck}>
-                    <CheckCircle2 size={18} aria-hidden />
-                  </div>
-                  <h3 className={styles.programName}>{program.title}</h3>
-                  <p className={styles.programDesc}>{program.desc}</p>
-                  <Link href={program.href} className={styles.programLink}>
-                    Learn more <ArrowRight size={14} aria-hidden />
-                  </Link>
-                </div>
+            {programCards.map((program) => (
+              <motion.article key={program.title} className={styles.programCompactCard} variants={fadeUp}>
+                <h3 className={styles.programCompactTitle}>{program.title}</h3>
+                <p className={styles.programCompactDesc}>{program.desc}</p>
+                <Link href={program.href} className={styles.programCompactLink}>
+                  Learn More <ArrowRight size={14} aria-hidden />
+                </Link>
               </motion.article>
             ))}
           </motion.div>
 
           <motion.div
-            className={styles.featureGrid}
+            className={styles.supportGrid}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-40px' }}
             variants={staggerFast}
           >
             {supportServices.map((service) => (
-              <motion.div key={service} className={styles.featureCard} variants={fadeUp}>
-                <div className={styles.featureCheck}>
-                  <CheckCircle2 size={16} aria-hidden />
-                </div>
-                <p className={styles.featureText}>{service}</p>
+              <motion.div key={service} className={styles.supportItem} variants={fadeUp}>
+                <CheckCircle2 size={18} className={styles.supportCheck} aria-hidden />
+                <span>{service}</span>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* ── Section 5: Impact Statistics ── */}
-      <section className={`${styles.section} ${styles.sectionAlt}`} aria-labelledby="impact-stats-heading">
-        <div className="container">
-          <motion.div
-            className={styles.sectionHeader}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={stagger}
-          >
-            <motion.span className={styles.sectionEyebrow} variants={fadeUp}>
-              <Sparkles size={13} aria-hidden /> Our Impact
-            </motion.span>
-            <motion.h2 id="impact-stats-heading" className={styles.sectionTitle} variants={fadeUp}>
-              Impact That <span className={styles.accent}>Speaks</span>
-            </motion.h2>
-          </motion.div>
-
-          <motion.div
-            className={styles.statsGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-            variants={staggerFast}
-          >
-            {impactStats.map((stat) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div key={stat.label} className={styles.statCard} variants={fadeUp}>
-                  <div className={styles.statIconWrap}>
-                    <Icon size={24} aria-hidden />
-                  </div>
-                  <p className={styles.statValue}>
-                    {stat.animate ? (
-                      <AnimatedStatValue
-                        target={stat.target!}
-                        suffix={stat.suffix}
-                        trailingPlus
-                      />
-                    ) : (
-                      stat.value
-                    )}
-                  </p>
-                  <p className={styles.statLabel}>{stat.label}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Section 6: Final CTA ── */}
+      {/* ── Section 5: Final CTA ── */}
       <section className={styles.ctaBanner} aria-labelledby="final-cta-heading">
-        <div className={styles.ctaOrb1} aria-hidden />
-        <div className={styles.ctaOrb2} aria-hidden />
-
-        <div className="container">
+        <div className={styles.ctaLeafPattern} aria-hidden />
+        <div className={styles.ctaContainer}>
           <div className={styles.ctaGrid}>
             <motion.div
               className={styles.ctaContent}
@@ -697,10 +538,10 @@ export default function WholesalePage() {
                 beneficiaries.
               </motion.p>
               <motion.div className={styles.ctaButtons} variants={fadeLeft}>
-                <button type="button" className={styles.ctaBtnPrimary} onClick={scrollToForm}>
-                  Request a Bulk Order
+                <Link href="/products" className={styles.ctaBtnPrimary}>
+                  Explore Our Products
                   <ArrowRight size={17} aria-hidden />
-                </button>
+                </Link>
                 <Link href="/contact" className={styles.ctaBtnSecondary}>
                   Contact Us
                 </Link>
@@ -717,11 +558,20 @@ export default function WholesalePage() {
               <div className={styles.ctaImageWrap}>
                 <Image
                   src="/images/factory/manufacturing-hub-team.png"
-                  alt="Saukhyam team with women, students, and community outreach partners"
+                  alt="Saukhyam team supporting schools, NGOs, and community organizations"
                   fill
-                  sizes="(max-width: 960px) 100vw, 45vw"
+                  sizes="(max-width: 960px) 100vw, 50vw"
                   className={styles.ctaImage}
                 />
+              </div>
+              <div className={styles.ctaFloatCard}>
+                <p className={styles.ctaFloatTitle}>Trusted by</p>
+                <ul className={styles.ctaFloatList}>
+                  <li>Schools</li>
+                  <li>NGOs</li>
+                  <li>CSR Programs</li>
+                  <li>Community Organizations</li>
+                </ul>
               </div>
             </motion.div>
           </div>
