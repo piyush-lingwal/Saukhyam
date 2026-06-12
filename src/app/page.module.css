@@ -147,7 +147,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url('/Main_page-HeroImages/38aa9a04-d661-4fd4-9a4c-4ecaa0580c57_CD654FFD-1947-4DF4-93EC-7C8F6809E074.jpg');
+  background-image: url('/Main_page-HeroImages/6b714a66-c884-4680-8cec-c49397c0d899_75EE52F7-514D-4C05-8347-704F0FD187A3.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -292,7 +292,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: 2px solid #16a34a;
   color: #166534;
   padding: var(--space-3) var(--space-8);
   border-radius: var(--radius-full);
