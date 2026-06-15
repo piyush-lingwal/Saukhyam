@@ -1,14 +1,17 @@
 'use client';
 
+import { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import {
   Heart, Leaf, Users, Trophy, ShoppingBag,
   Target, Globe, Award, Sparkles, ArrowRight,
   Recycle, Shield, CheckCircle2, Quote,
+  MapPin, Briefcase, Map,
 } from 'lucide-react';
 import { teamMembers, awards, pressItems } from '@/data/content';
+import { useAnimatedCounter } from '@/hooks/useAnimatedCounter';
 import styles from './page.module.css';
 
 const fadeUp = {
@@ -17,12 +20,49 @@ const fadeUp = {
 };
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
-const impactStats = [
-  { value: '30L+', label: 'Women & Girls Empowered', icon: Users },
-  { value: '4,137', label: 'Villages Reached', icon: Globe },
-  { value: '280+', label: 'Rural Livelihoods Created', icon: Heart },
-  { value: '20+', label: 'National & Global Awards', icon: Trophy },
+type ImpactStat = {
+  target: number;
+  label: string;
+  icon: typeof Users;
+  prefix?: string;
+  suffix?: string;
+  formatComma?: boolean;
+};
+
+const impactStats: ImpactStat[] = [
+  { target: 30, suffix: 'L+', label: 'Women & Girls Empowered', icon: Users },
+  { target: 4137, label: 'Villages Reached', icon: MapPin, formatComma: true },
+  { target: 280, suffix: '+', label: 'Rural Livelihoods Created', icon: Briefcase },
+  { target: 20, suffix: '+', label: 'National & Global Awards', icon: Trophy },
+  { target: 125, suffix: '+', label: 'KG Plastic Waste Prevented Per User', icon: Leaf },
+  { target: 22, suffix: '+', label: 'States Reached Across India', icon: Map },
 ];
+
+function HeroImpactStat({ stat }: { stat: ImpactStat }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  const prefersReducedMotion = useReducedMotion();
+  const count = useAnimatedCounter(stat.target, 1800, isInView && !prefersReducedMotion);
+  const Icon = stat.icon;
+  const displayValue = stat.formatComma
+    ? Math.round(count).toLocaleString()
+    : Math.round(count);
+  const staticDisplay = `${stat.prefix ?? ''}${
+    stat.formatComma ? stat.target.toLocaleString() : stat.target
+  }${stat.suffix ?? ''}`;
+
+  return (
+    <div ref={ref} className={styles.heroStat}>
+      <div className={styles.heroStatIcon}>
+        <Icon size={18} aria-hidden />
+      </div>
+      <div className={styles.heroStatValue}>
+        {prefersReducedMotion || !isInView ? staticDisplay : `${stat.prefix ?? ''}${displayValue}${stat.suffix ?? ''}`}
+      </div>
+      <div className={styles.heroStatLabel}>{stat.label}</div>
+    </div>
+  );
+}
 
 const timelineEvents = [
   {
@@ -87,6 +127,10 @@ const pillars = [
 const featuredPressItems = pressItems.slice(0, 6);
 
 export default function AboutPage() {
+  const scrollToJourney = () => {
+    document.getElementById('our-journey')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className={styles.aboutPage}>
 
@@ -94,41 +138,66 @@ export default function AboutPage() {
       <section className={styles.hero}>
         <div className={styles.heroBgImage} aria-hidden="true" />
         <div className={styles.heroOverlay} aria-hidden="true" />
+        <div className={styles.heroGlow} aria-hidden="true" />
+        <div className={styles.heroCornerPattern} aria-hidden="true" />
+        <div className={styles.heroLeafFloat1} aria-hidden="true" />
+        <div className={styles.heroLeafFloat2} aria-hidden="true" />
+
         <div className={`container ${styles.heroContainer}`}>
           <motion.div
-            className={styles.heroContent}
+            className={styles.heroInner}
             initial="hidden"
             animate="visible"
             variants={stagger}
           >
-            <motion.div variants={fadeUp} className={styles.heroBadge}>
-              <Heart size={14} />
+            <motion.span variants={fadeUp} className={styles.heroEyebrow}>
               Our Story
+            </motion.span>
+
+            <motion.div variants={fadeUp} className={styles.heroInnovationBadge}>
+              <Leaf size={14} aria-hidden />
+              India&apos;s First Banana Fiber Reusable Pad
             </motion.div>
+
             <motion.h1 variants={fadeUp} className={styles.heroTitle}>
-              Healing Periods.
-              <br />
-              <span className={styles.heroTitleGreen}>Healing the Planet.</span>
+              <span className={styles.heroTitleLine}>Healing Periods.</span>
+              <span className={styles.heroTitleGradient}>Healing the Planet.</span>
             </motion.h1>
+
             <motion.p variants={fadeUp} className={styles.heroSubtitle}>
-              Born from a vision to make menstrual hygiene safe, sustainable, and empowering , 
-              Saukhyam is India&apos;s first reusable pad made from banana fiber, handcrafted by rural women.
+              Born from a vision to make menstrual hygiene{' '}
+              <strong>safe</strong>, <strong>sustainable</strong>, and{' '}
+              <strong>empowering</strong>, Saukhyam is India&apos;s first reusable pad made from{' '}
+              <strong>banana fiber</strong>, handcrafted by <strong>rural women</strong>.
             </motion.p>
-            <motion.div variants={fadeUp} className={styles.heroStats}>
-              {impactStats.map((s) => {
-                const Icon = s.icon;
-                return (
-                  <div key={s.label} className={styles.heroStat}>
-                    <div className={styles.heroStatIcon}><Icon size={16} /></div>
-                    <div className={styles.heroStatValue}>{s.value}</div>
-                    <div className={styles.heroStatLabel}>{s.label}</div>
-                  </div>
-                );
-              })}
+
+            <motion.div variants={fadeUp} className={styles.heroCtas}>
+              <button type="button" className={styles.heroBtnPrimary} onClick={scrollToJourney}>
+                Explore Our Journey
+                <ArrowRight size={17} aria-hidden />
+              </button>
+              <Link href="/products" className={styles.heroBtnSecondary}>
+                <ShoppingBag size={17} aria-hidden />
+                Shop Reusable Pads
+              </Link>
             </motion.div>
           </motion.div>
+
+          <motion.div
+            className={styles.heroStats}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={stagger}
+          >
+            {impactStats.map((stat) => (
+              <motion.div key={stat.label} variants={fadeUp}>
+                <HeroImpactStat stat={stat} />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
-        {/* Scroll nudge */}
+
         <div className={styles.heroScroll} aria-hidden="true">
           <div className={styles.heroScrollDot} />
         </div>
@@ -271,57 +340,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── HOW IT'S MADE ── */}
-      <section className={styles.howMadeSection}>
-        <div className="container">
-          <motion.div
-            className="section-header"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            <motion.span variants={fadeUp} className={styles.sectionBadge}>
-              <Leaf size={14} />
-              The Innovation
-            </motion.span>
-            <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-              From Banana Farm to Healing Pad
-            </motion.h2>
-            <motion.p variants={fadeUp} className={styles.sectionDesc}>
-              A zero-waste journey that transforms agricultural residue into the world&apos;s most
-              natural menstrual care product.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className={styles.howMadeGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {[
-              { step: '01', title: 'Banana Harvest', desc: 'Banana trees bear fruit once, then are cut down. Their fibrous trunk, normally agricultural waste, which is our raw material.', img: 'https://saukhyampads.org/cdn/shop/files/6_d1942f75-768a-4d32-bb23-666a71990a71_2048x2048.png?v=1746945194' },
-              { step: '02', title: 'Fiber Extraction', desc: 'The pseudostem is processed to extract long, strong fibers with natural antimicrobial pathogenesis-related proteins.', img: '/Blog_Images/IMG_8023_1024x1024.webp' },
-              { step: '03', title: 'Handcrafted by Women', desc: 'Trained rural women in our satellite centres layer cotton, banana fiber, and PU to handcraft each pad with care.', img: '/Blog_Images/1.webp' },
-              { step: '04', title: 'Reaches You', desc: 'Each pad lasts 2–3 years, replaces 200+ disposables, and arrives ready to heal your periods and the planet.', img: '/bentogrid_photo.jpeg' },
-            ].map((item) => (
-              <motion.div key={item.step} variants={fadeUp} className={styles.howMadeCard}>
-                <div className={styles.howMadeImageWrap}>
-                  <Image src={item.img} alt={item.title} width={400} height={300} className={styles.howMadeImage} loading="lazy" />
-                  <div className={styles.howMadeStepBadge}>{item.step}</div>
-                </div>
-                <div className={styles.howMadeCardBody}>
-                  <h3 className={styles.howMadeTitle}>{item.title}</h3>
-                  <p className={styles.howMadeDesc}>{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
       {/* ── VISION & MISSION (dark section) ── */}
       <section className={styles.visionSection}>
         <div className={styles.visionBlobA} aria-hidden="true" />
@@ -407,7 +425,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── JOURNEY TIMELINE ── */}
-      <section className={styles.timelineSection}>
+      <section id="our-journey" className={styles.timelineSection}>
         <div className="container">
           <motion.div
             initial="hidden"
