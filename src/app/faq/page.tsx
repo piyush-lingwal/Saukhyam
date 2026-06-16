@@ -1,19 +1,45 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Search, X } from 'lucide-react';
 import {
   siteFaqItems,
   siteFaqCategories,
   getSiteFaqCategoryLabel,
   getSiteFaqSubsections,
   isValidSiteFaqCategory,
+  searchSiteFaqQuestions,
   type SiteFAQCategory,
   type SiteFAQItem,
 } from '@/data/siteFaq';
 import styles from './page.module.css';
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function HighlightText({ text, query }: { text: string; query: string }) {
+  const trimmed = query.trim();
+  if (!trimmed) return <>{text}</>;
+
+  const parts = text.split(new RegExp(`(${escapeRegExp(trimmed)})`, 'gi'));
+
+  return (
+    <>
+      {parts.map((part, index) =>
+        part.toLowerCase() === trimmed.toLowerCase() ? (
+          <mark key={index} className={styles.searchHighlight}>
+            {part}
+          </mark>
+        ) : (
+          <Fragment key={index}>{part}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
 
 function FaqAnswer({ item }: { item: SiteFAQItem }) {
   return (
@@ -37,10 +63,14 @@ function FaqAccordionItem({
   item,
   isOpen,
   onToggle,
+  searchQuery = '',
+  showCategory = false,
 }: {
   item: SiteFAQItem;
   isOpen: boolean;
   onToggle: () => void;
+  searchQuery?: string;
+  showCategory?: boolean;
 }) {
   return (
     <div className={`${styles.faqItem} ${isOpen ? styles.open : ''}`}>
@@ -51,7 +81,14 @@ function FaqAccordionItem({
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${item.id}`}
       >
-        <span className={styles.faqQuestionText}>{item.question}</span>
+        <span className={styles.faqQuestionCopy}>
+          {showCategory && (
+            <span className={styles.faqItemCategory}>{getSiteFaqCategoryLabel(item.category)}</span>
+          )}
+          <span className={styles.faqQuestionText}>
+            <HighlightText text={item.question} query={searchQuery} />
+          </span>
+        </span>
         <ChevronDown size={18} className={styles.faqIcon} aria-hidden="true" />
       </button>
       <AnimatePresence initial={false}>
@@ -74,8 +111,10 @@ function FaqAccordionItem({
 
 export default function FAQPage() {
   const [activeCategory, setActiveCategory] = useState<SiteFAQCategory>('usage-guide');
+  const [searchQuery, setSearchQuery] = useState('');
   const [openFaqId, setOpenFaqId] = useState<string | null>(null);
 
+  const isSearching = searchQuery.trim().length > 0;
   const activeCategoryLabel = getSiteFaqCategoryLabel(activeCategory);
 
   const activeItems = useMemo(
@@ -83,10 +122,18 @@ export default function FAQPage() {
     [activeCategory],
   );
 
+  const searchResults = useMemo(
+    () => searchSiteFaqQuestions(searchQuery),
+    [searchQuery],
+  );
+
   const subsections = useMemo(() => getSiteFaqSubsections(activeCategory), [activeCategory]);
 
-  const updateUrl = useCallback((category: SiteFAQCategory) => {
-    window.history.replaceState(null, '', `${window.location.pathname}?category=${category}`);
+  const updateUrl = useCallback((category: SiteFAQCategory, query: string) => {
+    const params = new URLSearchParams();
+    params.set('category', category);
+    if (query.trim()) params.set('q', query.trim());
+    window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`);
   }, []);
 
   useEffect(() => {
@@ -95,27 +142,40 @@ export default function FAQPage() {
     if (category && isValidSiteFaqCategory(category)) {
       setActiveCategory(category);
     }
+    const q = params.get('q');
+    if (q) setSearchQuery(q);
   }, []);
 
   const selectCategory = (category: SiteFAQCategory) => {
     setActiveCategory(category);
     setOpenFaqId(null);
-    updateUrl(category);
+    setSearchQuery('');
+    updateUrl(category, '');
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setOpenFaqId(null);
+    updateUrl(activeCategory, value);
+  };
+
+  const clearSearch = () => {
+    handleSearchChange('');
   };
 
   const toggleItem = (id: string) => {
     setOpenFaqId(prev => (prev === id ? null : id));
   };
 
-  const renderActiveItems = () => {
-    if (activeItems.length === 0) {
+  const renderCategoryItems = (items: SiteFAQItem[]) => {
+    if (items.length === 0) {
       return <div className={styles.emptyState}>No FAQs in this category yet.</div>;
     }
 
     if (subsections.length === 0) {
       return (
         <div className={styles.faqList}>
-          {activeItems.map(item => (
+          {items.map(item => (
             <FaqAccordionItem
               key={item.id}
               item={item}
@@ -130,7 +190,7 @@ export default function FAQPage() {
     return subsections
       .map(section => ({
         ...section,
-        items: activeItems.filter(item => item.subsection === section.id),
+        items: items.filter(item => item.subsection === section.id),
       }))
       .filter(group => group.items.length > 0)
       .map(group => (
@@ -162,90 +222,126 @@ export default function FAQPage() {
         </div>
 
         <div className={styles.heroInner}>
-          <motion.span
-            className={styles.heroBadge}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-          >
-            FAQ
-          </motion.span>
-
-          <motion.h1
-            id="faq-hero-heading"
-            className={styles.heroTitle}
+          <motion.div
+            className={styles.heroHeadingRow}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.06 }}
+            transition={{ duration: 0.5 }}
           >
-            Frequently Asked Questions
-          </motion.h1>
+            <span className={styles.heroBadge}>FAQ</span>
+            <h1 id="faq-hero-heading" className={styles.heroTitle}>
+              Frequently Asked Questions
+            </h1>
+          </motion.div>
 
           <motion.p
             className={styles.heroDesc}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.12 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             Everything you need to know about Saukhyam reusable pads, covering usage and washing to science and impact.
           </motion.p>
         </div>
       </section>
 
-      <nav className={styles.mobileNav} aria-label="FAQ categories">
-        <div className={styles.mobileNavScroll}>
-          {siteFaqCategories.map(cat => (
-            <button
-              key={cat.id}
-              type="button"
-              className={`${styles.mobileNavTab} ${activeCategory === cat.id ? styles.mobileNavTabActive : ''}`}
-              onClick={() => selectCategory(cat.id)}
-              aria-current={activeCategory === cat.id ? 'true' : undefined}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
-      </nav>
+      <div className={styles.mainShell}>
+        <section className={styles.searchSection} aria-label="Search FAQs">
+          <div className={styles.searchWrap}>
+            <Search size={20} className={styles.searchIcon} aria-hidden="true" />
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={e => handleSearchChange(e.target.value)}
+              placeholder="Search questions about periods, reusable pads, washing, banana fiber, HEAL, products, and more..."
+              className={styles.searchInput}
+              aria-label="Search FAQ questions"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                className={styles.searchClear}
+                onClick={clearSearch}
+                aria-label="Clear search"
+              >
+                <X size={18} />
+              </button>
+            )}
+          </div>
+        </section>
 
-      <div className={styles.kbShell}>
-        <div className={styles.kbLayout}>
-          <aside className={styles.sidebar} aria-label="FAQ category navigation">
-            <div className={styles.sidebarInner}>
-              <p className={styles.sidebarLabel}>Categories</p>
-              <nav className={styles.sidebarNav}>
+        {!isSearching && (
+          <section className={styles.categoriesSection} aria-labelledby="faq-categories-heading">
+            <h2 id="faq-categories-heading" className={styles.categoriesHeading}>
+              Categories
+            </h2>
+            <nav className={styles.categoryPills} aria-label="FAQ categories">
+              <div className={styles.categoryPillsScroll}>
                 {siteFaqCategories.map(cat => (
                   <button
                     key={cat.id}
                     type="button"
-                    className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
+                    className={`${styles.categoryPill} ${activeCategory === cat.id ? styles.categoryPillActive : ''}`}
                     onClick={() => selectCategory(cat.id)}
                     aria-current={activeCategory === cat.id ? 'true' : undefined}
                   >
                     {cat.label}
                   </button>
                 ))}
-              </nav>
-            </div>
-          </aside>
+              </div>
+            </nav>
+          </section>
+        )}
 
-          <main className={styles.content}>
-            <AnimatePresence mode="wait">
+        <section className={styles.questionsSection} aria-label="FAQ questions">
+          <AnimatePresence mode="wait">
+            {isSearching ? (
+              <motion.div
+                key={`search-${searchQuery}`}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
+              >
+                <p className={styles.searchMeta}>
+                  {searchResults.length} result{searchResults.length === 1 ? '' : 's'} for &ldquo;
+                  {searchQuery.trim()}&rdquo;
+                </p>
+                {searchResults.length === 0 ? (
+                  <div className={styles.emptyState}>
+                    No questions matched your search. Try a different keyword.
+                  </div>
+                ) : (
+                  <div className={styles.faqList}>
+                    {searchResults.map(item => (
+                      <FaqAccordionItem
+                        key={item.id}
+                        item={item}
+                        isOpen={openFaqId === item.id}
+                        onToggle={() => toggleItem(item.id)}
+                        searchQuery={searchQuery}
+                        showCategory
+                      />
+                    ))}
+                  </div>
+                )}
+              </motion.div>
+            ) : (
               <motion.div
                 key={activeCategory}
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.25 }}
               >
                 <div className={styles.categorySectionHeader}>
                   <h2 className={styles.categorySectionTitle}>{activeCategoryLabel}</h2>
                 </div>
-                {renderActiveItems()}
+                {renderCategoryItems(activeItems)}
               </motion.div>
-            </AnimatePresence>
-          </main>
-        </div>
+            )}
+          </AnimatePresence>
+        </section>
 
         <section className={styles.contactCta} aria-labelledby="faq-cta-heading">
           <div className={styles.contactCtaDecor} aria-hidden="true">

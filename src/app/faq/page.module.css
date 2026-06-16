@@ -9,8 +9,8 @@
   min-height: 500px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
   position: relative;
   overflow: hidden;
   border-radius: 0 0 32px 32px;
@@ -94,14 +94,24 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: clamp(3rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem);
+  text-align: left;
+}
+
+.heroHeadingRow {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 20px);
+  flex-wrap: nowrap;
+  margin-bottom: 24px;
 }
 
 .heroBadge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   padding: 10px 18px;
-  margin-bottom: 28px;
+  margin-bottom: 0;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.15);
@@ -115,154 +125,170 @@
 
 .heroTitle {
   font-family: var(--font-heading);
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(1.75rem, 3.8vw, 3.5rem);
   font-weight: 800;
   line-height: 1.1;
   color: #ffffff;
-  margin: 0 auto 24px;
-  max-width: 900px;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .heroDesc {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0;
   font-size: 1.2rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.92);
+  text-align: left;
 }
 
-/* ── Mobile category nav ── */
-.mobileNav {
-  display: none;
-  position: sticky;
-  top: var(--navbar-height);
-  z-index: 20;
-  background: rgba(247, 250, 248, 0.96);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-border-light);
-  padding: 12px 0;
+/* ── Main shell ── */
+.mainShell {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2rem) 0;
 }
 
-.mobileNavScroll {
+/* ── Search ── */
+.searchSection {
+  padding: 40px 0 32px;
   display: flex;
+  justify-content: center;
+}
+
+.searchWrap {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--green-600);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 64px;
+  padding: 0 56px 0 58px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 4px rgba(34, 197, 94, 0.15),
+    0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.searchInput::placeholder {
+  color: #9ca3af;
+}
+
+.searchClear {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 999px;
+  background: var(--green-50);
+  color: var(--green-700);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.searchClear:hover {
+  background: var(--green-100);
+}
+
+.searchMeta {
+  margin: 0 0 20px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.searchHighlight {
+  background: rgba(34, 197, 94, 0.22);
+  color: var(--green-800);
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+/* ── Categories ── */
+.categoriesSection {
+  margin-bottom: 32px;
+}
+
+.categoriesHeading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 800;
+  color: var(--green-800);
+  margin: 0 0 16px;
+}
+
+.categoryPills {
+  position: sticky;
+  top: calc(var(--navbar-height) + 8px);
+  z-index: 15;
+  padding-bottom: 8px;
+  background: linear-gradient(#f7faf8 80%, rgba(247, 250, 248, 0));
+}
+
+.categoryPillsScroll {
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  overflow-x: auto;
-  padding: 0 16px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
 }
 
-.mobileNavScroll::-webkit-scrollbar {
-  display: none;
-}
-
-.mobileNavTab {
-  padding: 10px 16px;
+.categoryPill {
+  padding: 10px 18px;
   border-radius: 999px;
   border: 1px solid var(--color-border-light);
   background: #ffffff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--color-text-secondary);
   white-space: nowrap;
-  flex-shrink: 0;
   cursor: pointer;
   transition: var(--transition-all);
 }
 
-.mobileNavTab:hover {
+.categoryPill:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
 }
 
-.mobileNavTabActive {
+.categoryPillActive {
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #ffffff;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.25);
 }
 
-/* ── Knowledge base layout ── */
-.kbShell {
-  padding: 40px 0 0;
-}
-
-.kbLayout {
-  display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  gap: 32px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 3vw, 2rem);
-  align-items: start;
-}
-
-/* ── Sidebar ── */
-.sidebar {
-  position: sticky;
-  top: calc(var(--navbar-height) + 24px);
-}
-
-.sidebarInner {
-  background: #ffffff;
-  border: 1px solid var(--color-border-light);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-  padding: 22px 20px;
-}
-
-.sidebarLabel {
-  margin: 0 0 14px;
-  padding: 0 8px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.sidebarNav {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.sidebarItem {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  background: transparent;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--color-text);
-  cursor: pointer;
-  transition:
-    background 0.22s ease,
-    border-color 0.22s ease,
-    color 0.22s ease,
-    box-shadow 0.22s ease;
-}
-
-.sidebarItem:hover {
-  background: var(--green-50);
-  border-color: rgba(34, 197, 94, 0.15);
-  color: var(--green-800);
-}
-
-.sidebarItemActive {
-  background: linear-gradient(90deg, rgba(34, 197, 94, 0.12), rgba(34, 197, 94, 0.04));
-  border-color: rgba(34, 197, 94, 0.25);
-  border-left: 4px solid var(--color-primary);
-  padding-left: 11px;
-  color: var(--green-800);
-  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.08);
-}
-
-/* ── Content ── */
-.content {
-  min-width: 0;
+/* ── Questions ── */
+.questionsSection {
+  padding-bottom: 24px;
 }
 
 .categorySectionHeader {
@@ -278,6 +304,27 @@
   color: var(--green-800);
   margin: 0;
   line-height: 1.2;
+}
+
+.faqQuestionCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.faqItemCategory {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--green-50);
+  color: var(--green-700);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .faqSubsection + .faqSubsection {
@@ -488,22 +535,39 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1024px) {
-  .kbLayout {
-    grid-template-columns: 1fr;
-    gap: 0;
+@media (max-width: 768px) {
+  .searchSection {
+    padding: 28px 0 24px;
   }
 
-  .sidebar {
+  .searchInput {
+    height: 56px;
+    padding-left: 52px;
+    font-size: 15px;
+  }
+
+  .searchIcon {
+    left: 18px;
+  }
+
+  .categoryPillsScroll {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .categoryPillsScroll::-webkit-scrollbar {
     display: none;
   }
 
-  .mobileNav {
-    display: block;
+  .categoryPill {
+    flex-shrink: 0;
+    font-size: 13px;
+    padding: 9px 14px;
   }
-}
 
-@media (max-width: 768px) {
   .hero {
     min-height: 420px;
     border-radius: 0 0 24px 24px;
@@ -514,12 +578,14 @@
     padding-bottom: 2.5rem;
   }
 
-  .heroBadge {
-    margin-bottom: 20px;
+  .heroHeadingRow {
+    flex-wrap: wrap;
+    margin-bottom: 18px;
   }
 
   .heroTitle {
-    margin-bottom: 18px;
+    white-space: normal;
+    font-size: clamp(1.5rem, 6vw, 2rem);
   }
 
   .heroDesc {
@@ -559,8 +625,12 @@
 }
 
 @media (max-width: 520px) {
-  .mobileNavTab {
-    font-size: 12px;
-    padding: 9px 14px;
+  .searchInput {
+    height: 52px;
+    font-size: 14px;
+  }
+
+  .searchInput::placeholder {
+    font-size: 13px;
   }
 }

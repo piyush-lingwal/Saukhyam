@@ -274,3 +274,11 @@ export function getSiteFaqSubsections(category: SiteFAQCategory) {
   if (category === 'banana-fiber') return bananaFiberSubsections;
   return [];
 }
+
+/** Search FAQ questions only (not answer body text). */
+export function searchSiteFaqQuestions(query: string): SiteFAQItem[] {
+  const trimmed = query.trim().toLowerCase();
+  if (!trimmed) return [];
+
+  return siteFaqItems.filter(item => item.question.toLowerCase().includes(trimmed));
+}
