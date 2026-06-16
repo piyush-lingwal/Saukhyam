@@ -1,20 +1,13 @@
 export type HealFAQCategory =
+  | 'why-reusable'
+  | 'usage-guide'
+  | 'washing-care'
+  | 'banana-fiber'
   | 'about'
-  | 'menstrual-health'
-  | 'cycle'
-  | 'period-problems'
-  | 'pcos'
-  | 'hormones'
   | 'products'
-  | 'heal-challenge'
-  | 'concerns'
-  | 'stories'
-  | 'medical'
-  | 'environment'
-  | 'community'
-  | 'research'
-  | 'platform'
-  | 'vision';
+  | 'internship'
+  | 'heal-platform'
+  | 'heal-challenge';
 
 export interface HealFAQItem {
   id: string;
@@ -24,24 +17,16 @@ export interface HealFAQItem {
   bullets?: string[];
 }
 
-export const healFaqCategories: { id: HealFAQCategory | 'all'; label: string }[] = [
-  { id: 'all', label: 'All Questions' },
+export const healFaqCategories: { id: HealFAQCategory; label: string }[] = [
   { id: 'heal-challenge', label: 'HEAL Challenge' },
+  { id: 'why-reusable', label: 'Why Choose Reusable Pads' },
+  { id: 'usage-guide', label: 'Usage Guide' },
+  { id: 'washing-care', label: 'Washing & Care' },
+  { id: 'banana-fiber', label: 'Banana Fiber & Technology' },
   { id: 'about', label: 'About Saukhyam' },
-  { id: 'menstrual-health', label: 'Menstrual Health' },
-  { id: 'cycle', label: 'Your Cycle' },
-  { id: 'period-problems', label: 'Period Problems' },
-  { id: 'pcos', label: 'PCOS & Hormones' },
-  { id: 'hormones', label: 'Endocrine Disruption' },
-  { id: 'products', label: 'Disposable vs Reusable' },
-  { id: 'concerns', label: 'Concerns & Myths' },
-  { id: 'stories', label: 'User Stories' },
-  { id: 'medical', label: 'Medical Help' },
-  { id: 'environment', label: 'Environment' },
-  { id: 'community', label: 'Community' },
-  { id: 'research', label: 'Research' },
-  { id: 'platform', label: 'HEAL Platform' },
-  { id: 'vision', label: 'Data & Vision' },
+  { id: 'products', label: 'Products' },
+  { id: 'internship', label: 'Internship Program' },
+  { id: 'heal-platform', label: 'HEAL Platform' },
 ];
 
 export const healFaqItems: HealFAQItem[] = [
@@ -103,7 +88,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'hc-1b',
-    category: 'heal-challenge',
+    category: 'about',
     question: 'What is the impact of the HEAL Challenge to date?',
     paragraphs: ['Documented outcomes from 2+ years of the HEAL Challenge include:'],
     bullets: [
@@ -321,7 +306,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Menstrual Health ── */
   {
     id: 'mh-1',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'What is menstruation?',
     paragraphs: [
       'Menstruation is the monthly shedding of the uterine lining when pregnancy does not occur. Every month, the body prepares for the possibility of pregnancy by building a soft, nutrient-rich lining inside the uterus. If fertilization does not happen, the body releases this lining — that release is what we experience as a period.',
@@ -330,7 +315,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-2',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'Understanding the menstrual cycle',
     paragraphs: [
       'The menstrual cycle is not just "bleeding days." It is a continuous hormonal cycle that typically lasts 21–35 days with four phases:',
@@ -344,7 +329,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-3',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'Why do periods happen every month?',
     paragraphs: [
       'Periods happen because the body is preparing for pregnancy every month. If pregnancy does not occur, hormone levels drop, the uterine lining is no longer needed, and the body sheds it. Menstruation is a sign of an active reproductive system, not a malfunction.',
@@ -352,7 +337,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-4',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'At what age do periods usually start?',
     paragraphs: [
       'Most girls begin menstruating between 10 and 15 years of age. This first period is called menarche. However, an early start (before 10) or late start (after 15–16) may need attention, especially if accompanied by other symptoms.',
@@ -360,7 +345,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-5',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'When do periods stop (menopause)?',
     paragraphs: [
       'Periods usually stop between 45 and 55 years of age. This stage is called menopause, when ovaries stop releasing eggs and hormone levels decline. Before menopause, many women experience perimenopause, where cycles become irregular.',
@@ -368,7 +353,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-6',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'Is it normal to feel different during periods?',
     paragraphs: [
       'Yes — and this is often misunderstood. Hormonal fluctuations can affect mood, energy levels, appetite, and sleep. This is not "imaginary" — it is biological. However, extreme emotional distress or severe symptoms may need attention.',
@@ -376,7 +361,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-7',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'Why do some girls have more problems than others?',
     paragraphs: ['Menstrual health varies due to:'],
     bullets: [
@@ -388,7 +373,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-8',
-    category: 'menstrual-health',
+    category: 'why-reusable',
     question: 'Are periods supposed to be painful?',
     paragraphs: [
       'This is one of the biggest misconceptions. Mild discomfort is common. Severe pain is not normal.',
@@ -398,7 +383,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-9',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'What is a healthy period?',
     paragraphs: ['A healthy period is typically:'],
     bullets: [
@@ -410,7 +395,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'mh-10',
-    category: 'menstrual-health',
+    category: 'usage-guide',
     question: 'Can periods tell us about overall health?',
     paragraphs: [
       'Yes — periods are often called a "monthly report card" of health. Changes in your cycle can indicate hormonal imbalance, nutritional deficiencies, stress levels, or underlying conditions like PCOS.',
@@ -421,7 +406,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Your Cycle ── */
   {
     id: 'cy-1',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'What is a normal menstrual cycle length?',
     paragraphs: [
       'A normal menstrual cycle is typically between 21 and 35 days long. Day 1 is the first day of bleeding, and the cycle ends the day before the next period begins. Variation is normal, but persistent irregularity would require attention.',
@@ -429,7 +414,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-1b',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'Is a 28-day cycle the only normal cycle?',
     paragraphs: [
       'No. Menstrual cycles between 21 and 35 days are generally considered normal. Many people assume 28 days is standard, but the key is predictability over time, not perfection.',
@@ -437,7 +422,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-2',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'What are the four phases of the menstrual cycle?',
     paragraphs: ['The menstrual cycle includes four interconnected phases:'],
     bullets: [
@@ -449,7 +434,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-3',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'What is ovulation and why is it important?',
     paragraphs: [
       'Ovulation is when the ovary releases an egg. It is the central event of the cycle. Regular ovulation indicates healthy hormonal function.',
@@ -458,7 +443,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-4',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'How do hormones affect my cycle?',
     paragraphs: [
       'Estrogen builds the uterine lining, increases energy and mood, and is dominant in the first half of the cycle. Progesterone stabilizes the lining, supports calmness, and is dominant in the second half.',
@@ -467,7 +452,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-5',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'Why does my cycle change sometimes?',
     paragraphs: [
       'Cycle changes can happen due to stress, travel, illness, sleep disruption, or dietary changes. Occasional variation is normal, but frequent changes indicate underlying imbalance.',
@@ -475,7 +460,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-6',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'How do I calculate my cycle length?',
     paragraphs: [
       'Mark Day 1 as the first day of bleeding. Count until the day before your next period. That number is your cycle length. For example: Day 1 on Jan 1, next period on Jan 29 = 28-day cycle. Tracking this over months reveals patterns.',
@@ -483,7 +468,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-7',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'What is considered a regular vs irregular cycle?',
     paragraphs: [
       'A regular cycle has consistent length (within 2–3 days variation) and predictable timing. An irregular cycle is unpredictable, frequently missed, or widely varying in length.',
@@ -492,7 +477,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-8',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'How does stress affect my cycle?',
     paragraphs: [
       'Stress affects the cycle through the brain-hormone connection. The hypothalamus controls hormone release and ovulation timing. When stress increases, cortisol rises and hormonal signals get disrupted.',
@@ -501,7 +486,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cy-9',
-    category: 'cycle',
+    category: 'usage-guide',
     question: 'Why tracking your cycle changes everything',
     paragraphs: [
       'Tracking is not just recording dates. It helps you understand patterns, triggers, and improvements — such as pain reducing over months, cycles becoming regular, or mood stabilizing.',
@@ -512,7 +497,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Period Problems ── */
   {
     id: 'pp-1',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'Why are my periods irregular?',
     paragraphs: [
       'Irregular periods can occur due to hormonal imbalances, stress, lifestyle factors, PCOS/PMOS, and other health conditions. Cycles that are unpredictable, inconsistent in timing, or sometimes skipped altogether are often early signs that something is off internally.',
@@ -520,7 +505,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pp-1b',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'My periods come after 40 days. Is that normal?',
     paragraphs: [
       'Menstrual cycles longer than 35 days would be considered irregular and would warrant further evaluation, especially if this happens repeatedly.',
@@ -528,7 +513,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pp-3',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'Why are my periods painful?',
     paragraphs: [
       'Period pain can have many causes. It is also extremely common — in our studies, nearly 3 out of 4 menstruators reported experiencing moderate to severe cramps.',
@@ -538,7 +523,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pp-3b',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'I get severe cramps every month. What should I do?',
     paragraphs: [
       'Extremely severe cramps may be a sign of dysmenorrhea or another underlying condition. If your pain is severe, please consult a healthcare professional.',
@@ -547,7 +532,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pp-2',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'Why are my periods delayed?',
     paragraphs: ['Common reasons include:'],
     bullets: [
@@ -560,7 +545,7 @@ export const healFaqItems: HealFAQItem[] = [
 
   {
     id: 'pp-4',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'What causes heavy or prolonged bleeding?',
     paragraphs: [
       'Heavy bleeding may include soaking pads every 1–2 hours, bleeding beyond 7 days, or large clots. Possible causes include hormonal imbalance, fibroids, thyroid issues, or PCOS.',
@@ -569,7 +554,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pp-5',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'Why do I feel weak or tired during periods?',
     paragraphs: ['Fatigue during periods can happen due to:'],
     bullets: [
@@ -581,7 +566,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pp-6',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'Why are my periods suddenly different?',
     paragraphs: [
       'Many girls say "My periods were fine earlier… now something has changed." Changes can be triggered by lifestyle shifts, stress, diet, or environmental exposure. The body is dynamic, but sudden and sustained changes are signals, not coincidences.',
@@ -589,7 +574,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pp-7',
-    category: 'period-problems',
+    category: 'why-reusable',
     question: 'Why do we sometimes miss periods?',
     paragraphs: [
       'Missing a period can happen due to stress, hormonal imbalance, extreme weight changes, PCOS, or illness. If occasional, it is not always concerning. If frequent, it needs deeper understanding.',
@@ -599,7 +584,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── PCOS ── */
   {
     id: 'pc-1',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'What is PCOS?',
     paragraphs: [
       'PCOS, now known as PMOS, is a hormonal condition that can lead to irregular periods and other menstrual health problems. The full form of PCOS is Polycystic Ovary Syndrome. PMOS is Polyendocrine Metabolic Ovarian Syndrome.',
@@ -608,7 +593,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-1b',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'What is PMOS?',
     paragraphs: [
       'PMOS is the new name of PCOS. It is a hormonal condition that can lead to irregular periods and other menstrual health problems. The full form of PMOS is Polyendocrine Metabolic Ovarian Syndrome.',
@@ -617,7 +602,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-2',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'What are early signs of PCOS/PMOS?',
     paragraphs: ['Common early signs include:'],
     bullets: [
@@ -632,7 +617,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-3',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'Why is PCOS so common today?',
     paragraphs: ['Possible contributing factors include:'],
     bullets: [
@@ -644,7 +629,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-4',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'Can PCOS/PMOS be cured?',
     paragraphs: [
       'Doctors say there is no single "cure" for PCOS/PMOS. But many girls and women are able to successfully manage their symptoms and improve their menstrual health through lifestyle changes and interventions like the HEAL Challenge.',
@@ -653,7 +638,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-4b',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'Does PCOS/PMOS always mean ovarian cysts?',
     paragraphs: [
       'No. Not everyone with PCOS/PMOS has ovarian cysts. PCOS/PMOS is a hormonal condition. Many girls with PCOS/PMOS have irregular periods or other symptoms even when ovarian cysts are not present.',
@@ -661,7 +646,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-5',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'Can PCOS improve naturally?',
     paragraphs: ['Symptoms may improve with:'],
     bullets: [
@@ -673,7 +658,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-6',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'Is irregular period always PCOS?',
     paragraphs: [
       'No. Irregular periods can be caused by stress, lifestyle changes, thyroid issues, or temporary hormonal fluctuations. PCOS is just one possible cause, not the only one.',
@@ -681,7 +666,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-7',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'What role do environmental toxins play in PCOS/PMOS?',
     paragraphs: [
       'Nobody knows the exact cause of PCOS/PMOS. What science does confirm is that endocrine-disrupting chemicals (dioxins, phthalates, VOCs) interfere with the hormonal systems that regulate the menstrual cycle.',
@@ -691,7 +676,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pc-8',
-    category: 'pcos',
+    category: 'why-reusable',
     question: 'What lifestyle changes help PCOS?',
     paragraphs: ['Key areas include:'],
     bullets: [
@@ -706,7 +691,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Endocrine Disruption ── */
   {
     id: 'ho-1',
-    category: 'hormones',
+    category: 'banana-fiber',
     question: 'What are hormones?',
     paragraphs: [
       'Hormones are chemical messengers in the body. They travel through the bloodstream and tell different organs what to do. Estrogen and progesterone regulate the menstrual cycle; insulin regulates blood sugar; cortisol responds to stress.',
@@ -715,7 +700,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'ho-2',
-    category: 'hormones',
+    category: 'banana-fiber',
     question: 'What are endocrine disruptors?',
     paragraphs: [
       'Endocrine disruptors are chemicals that interfere with normal hormone function. They mimic hormones, block hormone signals, or alter the way hormones are produced, transported, or used by the body.',
@@ -724,7 +709,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'ho-2b',
-    category: 'hormones',
+    category: 'banana-fiber',
     question: 'Do disposable pads contain chemicals?',
     paragraphs: [
       'Yes. Many studies have detected chemicals such as phthalates, volatile organic compounds (VOCs), and dioxins in disposable sanitary napkins. Many of these chemicals are known endocrine disruptors.',
@@ -733,7 +718,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'ho-2c',
-    category: 'hormones',
+    category: 'banana-fiber',
     question: 'Can disposable pads affect hormones?',
     paragraphs: [
       'Many chemicals found in sanitary napkins are known endocrine disruptors. Studies suggest that repeated exposure to these endocrine-disrupting chemicals would affect hormonal balance over time.',
@@ -741,7 +726,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'ho-3',
-    category: 'hormones',
+    category: 'banana-fiber',
     question: 'Where do these chemicals come from?',
     paragraphs: [
       'Endocrine disruptors are present in everyday life: plastics, cosmetics, personal care products, food packaging, pesticides, and menstrual products. Exposure is often low-dose but continuous.',
@@ -749,7 +734,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'ho-4',
-    category: 'hormones',
+    category: 'banana-fiber',
     question: 'How do these chemicals enter the body?',
     paragraphs: ['There are multiple pathways:'],
     bullets: [
@@ -761,7 +746,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'ho-5',
-    category: 'hormones',
+    category: 'banana-fiber',
     question: 'Can reducing exposure improve health?',
     paragraphs: [
       'In many cases, reducing exposure can support hormonal balance, reduce unnecessary stress on the body, and allow natural regulatory systems to function better. This does not mean instant change, but over time the body may respond positively.',
@@ -769,7 +754,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'ho-6',
-    category: 'hormones',
+    category: 'banana-fiber',
     question: 'How long does it take for hormones to rebalance?',
     paragraphs: [
       'There is no fixed timeline. Hormonal systems take time because they operate in cycles and changes are gradual. For menstrual health, one cycle is roughly one month, and meaningful patterns are often seen over 3–6 cycles. This is why programs like HEAL are designed for 6 months.',
@@ -830,7 +815,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Concerns & Myths ── */
   {
     id: 'cm-1',
-    category: 'concerns',
+    category: 'products',
     question: 'Are reusable pads hygienic?',
     paragraphs: [
       'Absolutely. Reusable pads offer the safest, most comfortable, and totally hygienic way to manage periods. Saukhyam pads are used by more than 30 lakh girls and women across India. Most users say that washing and caring for them is much easier than they initially expected.',
@@ -839,7 +824,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cm-2',
-    category: 'concerns',
+    category: 'washing-care',
     question: 'How do I wash reusable pads?',
     paragraphs: ['It\'s very simple:'],
     bullets: [
@@ -852,7 +837,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cm-2b',
-    category: 'concerns',
+    category: 'washing-care',
     question: 'What if I feel uncomfortable washing reusable pads?',
     paragraphs: [
       'That\'s completely normal. Menstrual blood is what nourished us when we were in our mother\'s womb. It is not a waste product like urine or feces. It does not smell.',
@@ -861,7 +846,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cm-3',
-    category: 'concerns',
+    category: 'washing-care',
     question: 'Do reusable pads smell?',
     paragraphs: [
       'No. In fact, this is one of the biggest surprises for new users.',
@@ -870,7 +855,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cm-4',
-    category: 'concerns',
+    category: 'products',
     question: 'Are reusable pads expensive?',
     paragraphs: [
       'Quite the opposite. While reusable pads cost more upfront, they help reduce recurring spending on menstrual products by up to 90%.',
@@ -879,7 +864,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cm-4b',
-    category: 'concerns',
+    category: 'washing-care',
     question: 'Is drying reusable pads in sunlight safe?',
     paragraphs: [
       'Absolutely. Sunlight offers one of the best ways to dry reusable pads. But if direct sunlight is not available, drying them in a well-ventilated area works fine. The most important thing is to ensure the pad is completely dry before storing or reusing it.',
@@ -887,7 +872,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cm-5',
-    category: 'concerns',
+    category: 'products',
     question: 'Are disposables more convenient?',
     paragraphs: [
       'Yes — disposables are designed for immediate convenience with no washing or reuse. But convenience comes with recurring cost, waste, repeated exposure, and rashes. Reusable products trade short-term convenience for long-term benefits.',
@@ -895,7 +880,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'cm-6',
-    category: 'concerns',
+    category: 'products',
     question: 'Do reusables really work?',
     paragraphs: [
       'Many users report improved comfort, reduced irritation, and better overall experience. Many also observe improvements in cycle patterns. Results are gradual and vary by individual.',
@@ -905,7 +890,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── User Stories (detailed case studies version) ── */
   {
     id: 'us-1',
-    category: 'stories',
+    category: 'products',
     question: 'Have people actually seen improvements with HEAL?',
     paragraphs: [
       'Most girls and women who have completed the HEAL Challenge report benefits such as reduced pain, improved cycle regularity, fewer rashes, and more comfortable periods. The key is to make a 100% shift to reusable menstrual products and stay consistent.',
@@ -914,7 +899,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'us-5',
-    category: 'stories',
+    category: 'products',
     question: 'How long does it take to notice changes?',
     paragraphs: [
       'Some girls notice improvements within a few months, while for others it can take 4–6 months. The key is to make a 100% shift to reusable menstrual products and stay consistent. The sooner you make the switch, the sooner your healing begins.',
@@ -923,7 +908,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'us-2',
-    category: 'stories',
+    category: 'why-reusable',
     question: 'Can period pain really reduce?',
     paragraphs: [
       'Many users began with severe, life-disrupting pain — some required hospital injections or 3–4 painkillers per day. After switching, pain reduced significantly and in some cases disappeared completely.',
@@ -932,7 +917,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'us-3',
-    category: 'stories',
+    category: 'why-reusable',
     question: 'Can periods become regular again?',
     paragraphs: [
       'Users with gaps of months between cycles reported that within 6 months, periods became completely regular without medication. In long-term users, regularity was sustained over years.',
@@ -940,7 +925,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'us-4',
-    category: 'stories',
+    category: 'why-reusable',
     question: 'Are there PCOS improvement stories?',
     paragraphs: [
       'Several users with PCOS shared long-term outcomes including reduced pain, improved cycle frequency, and reduction in symptoms like acne and hair fall. In one case, cysts reduced significantly and eventually became cyst-free on ultrasound.',
@@ -949,7 +934,7 @@ export const healFaqItems: HealFAQItem[] = [
 
   {
     id: 'us-6',
-    category: 'stories',
+    category: 'why-reusable',
     question: 'What about users who didn\'t see full change?',
     paragraphs: [
       'Not every user reported complete elimination of all symptoms. Some still have pain but find it manageable, or underlying conditions still exist. But even then, comfort improved significantly and dependency on medication reduced.',
@@ -960,7 +945,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Medical Help ── */
   {
     id: 'md-1',
-    category: 'medical',
+    category: 'why-reusable',
     question: 'When should I see a doctor?',
     paragraphs: [
       'While many menstrual concerns can improve with awareness and lifestyle changes, some situations require medical evaluation. Consider seeing a doctor if your periods are consistently irregular, you experience severe pain, or symptoms interfere with daily life.',
@@ -968,7 +953,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'md-2',
-    category: 'medical',
+    category: 'why-reusable',
     question: 'What symptoms are considered serious?',
     paragraphs: ['Certain symptoms should not be ignored:'],
     bullets: [
@@ -980,7 +965,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'md-3',
-    category: 'medical',
+    category: 'why-reusable',
     question: 'Can I combine HEAL with medical treatment?',
     paragraphs: [
       'Yes. HEAL can complement medical care by improving awareness, supporting lifestyle changes, and enabling tracking. It is not a replacement — it is a support system.',
@@ -988,7 +973,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'md-4',
-    category: 'medical',
+    category: 'why-reusable',
     question: 'What is the role of a doctor vs self-care?',
     paragraphs: [
       'Doctors help with diagnosis, treatment, and medical management. Self-care (like HEAL) helps with awareness, daily habits, and consistency. The best outcomes often come from combining both.',
@@ -996,7 +981,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'md-4b',
-    category: 'medical',
+    category: 'why-reusable',
     question: 'I have severe bleeding and feel dizzy. What should I do?',
     paragraphs: [
       'Severe bleeding and dizziness would require urgent medical attention. You should contact a healthcare professional immediately.',
@@ -1006,7 +991,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Environment ── */
   {
     id: 'en-1',
-    category: 'environment',
+    category: 'why-reusable',
     question: 'How much menstrual waste does one person create?',
     paragraphs: [
       'A menstruator may use approximately 8,000–12,000 disposable sanitary napkins during their lifetime. This translates to over 100 kg of menstrual waste.',
@@ -1014,7 +999,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'en-2',
-    category: 'environment',
+    category: 'why-reusable',
     question: 'How long do disposable pads take to decompose?',
     paragraphs: [
       'Disposable pads can take hundreds of years to decompose because plastic does not break down easily and materials are layered and processed. Pads used today may remain in landfills for generations.',
@@ -1022,7 +1007,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'en-3',
-    category: 'environment',
+    category: 'why-reusable',
     question: 'What is the carbon footprint of sanitary pads?',
     paragraphs: [
       'The environmental impact comes from raw material extraction, manufacturing, packaging, transportation, and disposal. Each stage contributes to carbon emissions.',
@@ -1031,7 +1016,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'en-4',
-    category: 'environment',
+    category: 'why-reusable',
     question: 'Can one person really make a difference by switching?',
     paragraphs: [
       'Your periods are yours. If switching helps you experience more comfortable periods and freedom from period problems, then that one decision can make a big difference over your menstruating lifetime.',
@@ -1040,7 +1025,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'en-5b',
-    category: 'environment',
+    category: 'why-reusable',
     question: 'Are reusable products better for the environment?',
     paragraphs: [
       'Yes. Reusable menstrual products are a climate-positive solution. A single reusable pad can replace hundreds of disposable sanitary napkins over its lifetime, significantly reducing the amount of waste sent to landfills.',
@@ -1049,7 +1034,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'en-5',
-    category: 'environment',
+    category: 'why-reusable',
     question: 'How does HEAL connect health and climate?',
     paragraphs: [
       'HEAL sits at the intersection of personal health and environmental sustainability. By shifting products and habits, individual health may improve while environmental impact reduces — creating a dual benefit system.',
@@ -1059,7 +1044,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Community ── */
   {
     id: 'co-1',
-    category: 'community',
+    category: 'why-reusable',
     question: 'Can I connect with other users?',
     paragraphs: [
       'Yes. One of the most powerful parts of this journey is realizing you are not alone. Many users share similar concerns, face similar challenges, and go through similar transitions.',
@@ -1067,7 +1052,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'co-2',
-    category: 'community',
+    category: 'why-reusable',
     question: 'Is there a support community?',
     paragraphs: [
       'Yes. HEAL offers WhatsApp-based community support where users can ask questions and share experiences. As part of CARE, we also regularly do offline workshops on college campuses.',
@@ -1075,7 +1060,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'co-3',
-    category: 'community',
+    category: 'why-reusable',
     question: 'Can I ask questions anonymously?',
     paragraphs: [
       'Yes. Users can send questions to our doctors. Answers will be provided in your DMs. You can also send your question or experience to the admin who will post it anonymously in the community.',
@@ -1083,7 +1068,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'co-4',
-    category: 'community',
+    category: 'why-reusable',
     question: 'Can I share my story?',
     paragraphs: [
       'Absolutely. Sharing your story helps others relate, builds trust, and inspires action. Many movements grow through shared experience, not just information.',
@@ -1093,7 +1078,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Research ── */
   {
     id: 'rs-1',
-    category: 'research',
+    category: 'banana-fiber',
     question: 'What does research say about menstrual products?',
     paragraphs: [
       'Recent peer-reviewed studies have consistently found that disposable menstrual products contain multiple chemical compounds including phthalates, parabens, volatile organic compounds (VOCs), heavy metals, and microplastics.',
@@ -1102,7 +1087,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'rs-2',
-    category: 'research',
+    category: 'banana-fiber',
     question: 'What kinds of chemicals are found?',
     paragraphs: ['Research has identified:'],
     bullets: [
@@ -1115,7 +1100,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'rs-2b',
-    category: 'research',
+    category: 'banana-fiber',
     question: 'What high-risk chemicals are found in disposable pads?',
     paragraphs: ['Research from 11 peer-reviewed studies reports:'],
     bullets: [
@@ -1128,7 +1113,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'rs-2c',
-    category: 'research',
+    category: 'banana-fiber',
     question: 'What moderate-risk chemicals are found in disposable pads?',
     paragraphs: ['Additional compounds identified in research include:'],
     bullets: [
@@ -1141,7 +1126,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'rs-6',
-    category: 'research',
+    category: 'banana-fiber',
     question: 'What does the scientific evidence show?',
     paragraphs: ['Recent scientific research on disposable sanitary napkins includes:'],
     bullets: [
@@ -1153,7 +1138,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'rs-3',
-    category: 'research',
+    category: 'banana-fiber',
     question: 'What does India-specific research show?',
     paragraphs: [
       'India-focused studies highlight the presence of pesticide residues and heavy metals, with higher concentrations of certain chemicals compared to global benchmarks. These have been associated with hormonal imbalance, inflammation, and reproductive health concerns.',
@@ -1161,7 +1146,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'rs-4',
-    category: 'research',
+    category: 'banana-fiber',
     question: 'Are these effects proven conclusively?',
     paragraphs: [
       'Current scientific position: there is strong evidence of exposure, established endocrine disruption mechanisms, and growing association with reproductive issues. However, direct causal clinical proof specific to pads is still evolving.',
@@ -1170,7 +1155,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'rs-5',
-    category: 'research',
+    category: 'banana-fiber',
     question: 'What is the precautionary principle?',
     paragraphs: [
       'The precautionary principle suggests that if something may pose a risk, it is reasonable to reduce exposure even if full scientific certainty is not yet established. This principle is widely used in public health and environmental policy.',
@@ -1180,7 +1165,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── HEAL Platform ── */
   {
     id: 'pl-1',
-    category: 'platform',
+    category: 'heal-platform',
     question: 'What does the HEAL platform do?',
     paragraphs: [
       'HEAL is your period wellness companion. Many of us know more about skincare routines than about what makes for healthy, comfortable periods. HEAL is here to help change that.',
@@ -1189,7 +1174,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pl-2',
-    category: 'platform',
+    category: 'heal-platform',
     question: 'What features are available?',
     paragraphs: ['Key features include:'],
     bullets: [
@@ -1200,7 +1185,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pl-3',
-    category: 'platform',
+    category: 'heal-platform',
     question: 'Is the platform easy to use?',
     paragraphs: [
       'Yes — it is on WhatsApp, a platform we are already used to. It focuses on simplicity, minimal inputs, and intuitive flow. Users report feeling guided, not overwhelmed.',
@@ -1208,7 +1193,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pl-4',
-    category: 'platform',
+    category: 'heal-platform',
     question: 'Is my data safe?',
     paragraphs: [
       'We take data privacy very seriously. User data is securely stored, protected, and not shared without consent. You are safe and in control.',
@@ -1217,7 +1202,7 @@ export const healFaqItems: HealFAQItem[] = [
 
   {
     id: 'pl-5',
-    category: 'platform',
+    category: 'heal-platform',
     question: 'Can HEAL help with nutrition advice?',
     paragraphs: [
       'Nutrition and lifestyle can influence menstrual health, but HEAL is not qualified to provide expert nutrition advice. For personalized recommendations, it is best to consult a qualified nutritionist or healthcare professional.',
@@ -1225,7 +1210,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'pl-6',
-    category: 'platform',
+    category: 'heal-challenge',
     question: 'What should I do after 2 months of the HEAL Challenge?',
     paragraphs: [
       'If you are following the 2-3-4 formula, Month 2 means using reusable pads for 3 days of your cycle. Continue building consistency — the full 6-month challenge includes transition time plus complete reusable use to give your body enough time to respond.',
@@ -1235,7 +1220,7 @@ export const healFaqItems: HealFAQItem[] = [
   /* ── Data & Vision ── */
   {
     id: 'dv-1',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'What data does HEAL collect?',
     paragraphs: [
       'HEAL collects structured, user-reported data such as:',
@@ -1251,7 +1236,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-2',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'How is this data used?',
     paragraphs: ['Data is used to:'],
     bullets: [
@@ -1262,7 +1247,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-3',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'Can this data support research?',
     paragraphs: ['Yes. Aggregated data can help:'],
     bullets: [
@@ -1273,7 +1258,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-3b',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'Can this improve healthcare systems?',
     paragraphs: ['Over time, structured data can:'],
     bullets: [
@@ -1284,7 +1269,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-3c',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'How does HEAL scale impact?',
     paragraphs: [
       'Impact scales through more users, more data, and more awareness. Each participant contributes to a larger understanding. As participation grows, insights become stronger.',
@@ -1292,7 +1277,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-3d',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'Can this influence policy?',
     paragraphs: [
       'Yes — over time. Data can highlight trends, support advocacy, and inform policy decisions. This is especially relevant for menstrual health, product safety, and environmental impact.',
@@ -1300,7 +1285,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-3e',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'Can users contribute to research?',
     paragraphs: [
       'Yes. Every user who tracks consistently and participates in the program is contributing to a growing body of knowledge. This makes users participants, not just recipients.',
@@ -1308,7 +1293,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-4',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'What is the long-term vision of HEAL?',
     paragraphs: [
       'The long-term vision includes building one of the largest menstrual health datasets, improving awareness at scale, enabling preventive health systems, and ultimately changing how menstrual health is understood and managed.',
@@ -1316,7 +1301,7 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-5',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'What makes this approach different?',
     paragraphs: [
       'Most systems operate at the individual level or institutional level. HEAL connects both: individual experience → collective insight → systemic change.',
@@ -1325,10 +1310,14 @@ export const healFaqItems: HealFAQItem[] = [
   },
   {
     id: 'dv-6',
-    category: 'vision',
+    category: 'heal-platform',
     question: 'What begins as tracking your own cycle can become...',
     paragraphs: [
       'What begins as tracking your own cycle can become contributing to a larger shift in how we understand health, environment, and the connection between them.',
     ],
   },
 ];
+
+export function getHealFaqCount(category: HealFAQCategory): number {
+  return healFaqItems.filter(item => item.category === category).length;
+}
