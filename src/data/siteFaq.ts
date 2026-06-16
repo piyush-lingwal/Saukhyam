@@ -1,9 +1,15 @@
-import { healFaqItems, type HealFAQCategory, type HealFAQItem } from './healFaq';
+import { healFaqItems, type HealFAQItem } from './healFaq';
 import { internshipFaqItems } from './internshipFaq';
 
-export type SiteFAQCategory = HealFAQCategory;
-
-export type WhyReusableSubsection =
+export type SiteFAQCategory =
+  | 'usage-guide'
+  | 'washing-care'
+  | 'banana-fiber'
+  | 'about'
+  | 'products'
+  | 'internship'
+  | 'heal-platform'
+  | 'heal-challenge'
   | 'period-problems'
   | 'pcos-pmos'
   | 'results-medical'
@@ -12,19 +18,16 @@ export type WhyReusableSubsection =
 
 export type BananaFiberSubsection = 'science-hormones' | 'research-evidence';
 
-export type SiteFAQSubsection = WhyReusableSubsection | BananaFiberSubsection;
-
 export interface SiteFAQItem {
   id: string;
   category: SiteFAQCategory;
   question: string;
   paragraphs: string[];
   bullets?: string[];
-  subsection?: SiteFAQSubsection;
+  subsection?: BananaFiberSubsection;
 }
 
 export const siteFaqCategories: { id: SiteFAQCategory; label: string }[] = [
-  { id: 'why-reusable', label: 'Why Choose Reusable Pads' },
   { id: 'usage-guide', label: 'Usage Guide' },
   { id: 'washing-care', label: 'Washing & Care' },
   { id: 'banana-fiber', label: 'Banana Fiber & Technology' },
@@ -33,9 +36,6 @@ export const siteFaqCategories: { id: SiteFAQCategory; label: string }[] = [
   { id: 'internship', label: 'Internship Program' },
   { id: 'heal-platform', label: 'HEAL Platform' },
   { id: 'heal-challenge', label: 'HEAL Challenge' },
-];
-
-export const whyReusableSubsections: { id: WhyReusableSubsection; label: string }[] = [
   { id: 'period-problems', label: 'Period Problems' },
   { id: 'pcos-pmos', label: 'PCOS / PMOS' },
   { id: 'results-medical', label: 'Results & Medical Guidance' },
@@ -50,7 +50,19 @@ export const bananaFiberSubsections: { id: BananaFiberSubsection; label: string 
 
 const VALID_CATEGORIES = new Set<string>(siteFaqCategories.map(c => c.id));
 
-const subsectionById: Record<string, SiteFAQSubsection> = {
+const HEAL_SHARED_CATEGORIES = new Set<string>([
+  'usage-guide',
+  'washing-care',
+  'banana-fiber',
+  'about',
+  'products',
+  'internship',
+  'heal-platform',
+  'heal-challenge',
+]);
+
+/** Maps former why-reusable FAQ ids to independent top-level categories. */
+const formerWhyReusableCategoryById: Record<string, SiteFAQCategory> = {
   'mh-8': 'period-problems',
   'pp-1': 'period-problems',
   'pp-1b': 'period-problems',
@@ -90,6 +102,9 @@ const subsectionById: Record<string, SiteFAQSubsection> = {
   'co-2': 'community',
   'co-3': 'community',
   'co-4': 'community',
+};
+
+const bananaFiberSubsectionById: Record<string, BananaFiberSubsection> = {
   'ho-1': 'science-hormones',
   'ho-2': 'science-hormones',
   'ho-2b': 'science-hormones',
@@ -192,14 +207,25 @@ function normalizeQuestion(question: string): string {
     .trim();
 }
 
+function mapHealItemCategory(item: HealFAQItem): SiteFAQCategory {
+  if (item.category === 'why-reusable') {
+    return formerWhyReusableCategoryById[item.id] ?? 'period-problems';
+  }
+  if (HEAL_SHARED_CATEGORIES.has(item.category)) {
+    return item.category as SiteFAQCategory;
+  }
+  return 'about';
+}
+
 function toSiteItem(item: HealFAQItem): SiteFAQItem {
+  const category = mapHealItemCategory(item);
   return {
     id: item.id,
-    category: item.category,
+    category,
     question: item.question,
     paragraphs: item.paragraphs,
     bullets: item.bullets,
-    subsection: subsectionById[item.id],
+    subsection: bananaFiberSubsectionById[item.id],
   };
 }
 
@@ -240,37 +266,11 @@ export function isValidSiteFaqCategory(value: string): value is SiteFAQCategory 
   return VALID_CATEGORIES.has(value);
 }
 
-export function getSiteFaqCount(category: SiteFAQCategory): number {
-  return siteFaqItems.filter(item => item.category === category).length;
-}
-
 export function getSiteFaqCategoryLabel(category: SiteFAQCategory): string {
   return siteFaqCategories.find(c => c.id === category)?.label ?? category;
 }
 
-export function getSiteFaqSearchText(item: SiteFAQItem): string {
-  const parts = [
-    item.question,
-    ...item.paragraphs,
-    ...(item.bullets ?? []),
-    getSiteFaqCategoryLabel(item.category),
-  ];
-  return parts.join(' ').toLowerCase();
-}
-
-export function searchSiteFaq(query: string, category?: SiteFAQCategory): SiteFAQItem[] {
-  const trimmed = query.trim().toLowerCase();
-  const pool = category
-    ? siteFaqItems.filter(item => item.category === category)
-    : siteFaqItems;
-
-  if (!trimmed) return pool;
-
-  return pool.filter(item => getSiteFaqSearchText(item).includes(trimmed));
-}
-
 export function getSiteFaqSubsections(category: SiteFAQCategory) {
-  if (category === 'why-reusable') return whyReusableSubsections;
   if (category === 'banana-fiber') return bananaFiberSubsections;
   return [];
 }
