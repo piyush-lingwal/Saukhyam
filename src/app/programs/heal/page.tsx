@@ -1,10 +1,10 @@
 ﻿'use client';
 
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import {
   TbHeartbeat,
   TbCalendarStats,
@@ -25,14 +25,14 @@ import {
   TbCheck,
   TbArrowRight,
   TbPlus,
+  TbMinus,
 } from 'react-icons/tb';
 import styles from '../program.module.css';
 import heal from './heal.module.css';
 import {
-  healFaqItems,
-  healFaqCategories,
-  type HealFAQCategory,
-} from '@/data/healFaq';
+  healChallengeFaqItems,
+  healChallengeTrustItems,
+} from '@/data/healChallengeFaq';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -173,23 +173,18 @@ const refundCards = [
 /* ── Component ───────────────────────────────────────────────── */
 
 export default function HealPage() {
-  const [openFaq, setOpenFaq] = useState<Set<string>>(new Set());
-  const [faqCategory, setFaqCategory] = useState<HealFAQCategory | 'all'>('all');
-
-  const filteredFaqs = useMemo(() => {
-    return faqCategory === 'all'
-      ? healFaqItems
-      : healFaqItems.filter(item => item.category === faqCategory);
-  }, [faqCategory]);
+  const [openFaqId, setOpenFaqId] = useState<string | null>(null);
 
   const toggleFaq = (id: string) => {
-    setOpenFaq(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+    setOpenFaqId(prev => (prev === id ? null : id));
   };
+
+  const trustIcons = {
+    flask: TbFlask,
+    calendar: TbCalendarTime,
+    shield: TbShieldCheck,
+    heart: TbHeartbeat,
+  } as const;
 
   // Activate HEAL brand theme on <html> so Navbar & Footer update automatically.
   // Cleaned up when user navigates away.
@@ -829,58 +824,50 @@ export default function HealPage() {
           <motion.div
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
           >
-            <motion.div variants={fadeInUp} className="section-header">
-              <div className={heal.sectionBadge}><TbQuestionMark size={14} /> Questions</div>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
-              <p className={styles.sectionDesc}>
+            <motion.div variants={fadeInUp} className={heal.faqHeader}>
+              <div className={heal.faqBadge}>
+                <TbQuestionMark size={14} aria-hidden="true" />
+                Questions
+              </div>
+              <h2 className={heal.faqTitle}>Frequently Asked Questions</h2>
+              <p className={heal.faqSubtitle}>
                 Everything you need to know before taking the HEAL Challenge.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={heal.faqLayout}>
-              <nav className={heal.faqCategoryNav} aria-label="FAQ categories">
-                {healFaqCategories.map(cat => (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    className={`${heal.faqCategoryBtn} ${faqCategory === cat.id ? heal.faqCategoryActive : ''}`}
-                    onClick={() => setFaqCategory(cat.id)}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </nav>
-
-              <div className={heal.faqList}>
-                {filteredFaqs.map(item => (
+            <motion.div variants={fadeInUp} className={heal.faqList}>
+              {healChallengeFaqItems.map(item => {
+                const isOpen = openFaqId === item.id;
+                return (
                   <div
                     key={item.id}
-                    className={`${heal.faqItem} ${openFaq.has(item.id) ? heal.open : ''}`}
+                    className={`${heal.faqItem} ${isOpen ? heal.faqItemOpen : ''}`}
                   >
                     <button
+                      type="button"
                       className={heal.faqQuestion}
                       onClick={() => toggleFaq(item.id)}
-                      aria-expanded={openFaq.has(item.id)}
+                      aria-expanded={isOpen}
                       aria-controls={`faq-answer-${item.id}`}
                     >
-                      {item.question}
-                      <ChevronDown size={18} className={heal.faqChevron} />
+                      <span className={heal.faqQuestionText}>{item.question}</span>
+                      <span className={heal.faqToggleIcon} aria-hidden="true">
+                        {isOpen ? <TbMinus size={20} /> : <TbPlus size={20} />}
+                      </span>
                     </button>
                     <AnimatePresence initial={false}>
-                      {openFaq.has(item.id) && (
+                      {isOpen && (
                         <motion.div
                           id={`faq-answer-${item.id}`}
                           key="answer"
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                           style={{ overflow: 'hidden' }}
                         >
                           <div className={heal.faqAnswer}>
-                            {item.paragraphs.map((para, i) => (
-                              <p key={i}>{para}</p>
-                            ))}
+                            {item.paragraphs[0] && <p>{item.paragraphs[0]}</p>}
                             {item.bullets && item.bullets.length > 0 && (
                               <ul className={heal.faqBulletList}>
                                 {item.bullets.map((bullet, i) => (
@@ -888,13 +875,33 @@ export default function HealPage() {
                                 ))}
                               </ul>
                             )}
+                            {item.paragraphs.slice(1).map((para, i) => (
+                              <p key={i + 1}>{para}</p>
+                            ))}
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
                   </div>
-                ))}
-              </div>
+                );
+              })}
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className={heal.faqTrustBanner}>
+              {healChallengeTrustItems.map(item => {
+                const Icon = trustIcons[item.icon];
+                return (
+                  <div key={item.id} className={heal.faqTrustCard}>
+                    <span className={heal.faqTrustIconWrap} aria-hidden="true">
+                      <Icon size={22} />
+                    </span>
+                    <span className={heal.faqTrustCheck} aria-hidden="true">
+                      <TbCheck size={14} />
+                    </span>
+                    <span className={heal.faqTrustLabel}>{item.label}</span>
+                  </div>
+                );
+              })}
             </motion.div>
           </motion.div>
         </div>
