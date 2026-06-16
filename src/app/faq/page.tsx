@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
@@ -153,7 +152,15 @@ export default function FAQPage() {
 
   return (
     <div className={styles.faqPage}>
-      <section className={styles.hero}>
+      <section className={styles.hero} aria-labelledby="faq-hero-heading">
+        <div className={styles.heroBg} aria-hidden="true" />
+        <div className={styles.heroOverlay} aria-hidden="true" />
+        <div className={styles.heroDecor} aria-hidden="true">
+          <span className={styles.heroFiberTexture} />
+          <span className={styles.heroLeaf1} />
+          <span className={styles.heroLeaf2} />
+        </div>
+
         <div className={styles.heroInner}>
           <motion.span
             className={styles.heroBadge}
@@ -165,6 +172,7 @@ export default function FAQPage() {
           </motion.span>
 
           <motion.h1
+            id="faq-hero-heading"
             className={styles.heroTitle}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -179,26 +187,8 @@ export default function FAQPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.12 }}
           >
-            Find answers about reusable menstrual products, menstrual health, banana fiber technology, the HEAL
-            Challenge, and Saukhyam&apos;s mission to create healthier periods and a healthier planet.
+            Everything you need to know about Saukhyam reusable pads, covering usage and washing to science and impact.
           </motion.p>
-
-          <motion.div
-            className={styles.heroImageFrame}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.18 }}
-          >
-            <Image
-              src="/images/faq/faq-hero-pads.png"
-              alt="Saukhyam reusable menstrual pads displayed with natural banana fiber and cotton materials"
-              width={1200}
-              height={720}
-              priority
-              className={styles.heroImage}
-            />
-            <div className={styles.heroImageOverlay} aria-hidden="true" />
-          </motion.div>
         </div>
       </section>
 
