@@ -820,28 +820,35 @@ export default function HealPage() {
 
       {/* ── 8. FAQ ── */}
       <section id="faq" className={heal.faqSection}>
-        <div className="container">
+        <div className={heal.faqBgDecor} aria-hidden="true">
+          <span className={heal.faqBgBlob1} />
+          <span className={heal.faqBgBlob2} />
+          <span className={heal.faqBgBlob3} />
+        </div>
+
+        <div className={`container ${heal.faqContainer}`}>
           <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }} variants={stagger}
           >
             <motion.div variants={fadeInUp} className={heal.faqHeader}>
-              <div className={heal.faqBadge}>
-                <TbQuestionMark size={14} aria-hidden="true" />
-                Questions
-              </div>
+              <div className={heal.faqBadge}>HEAL CHALLENGE FAQ</div>
               <h2 className={heal.faqTitle}>Frequently Asked Questions</h2>
               <p className={heal.faqSubtitle}>
                 Everything you need to know before taking the HEAL Challenge.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={heal.faqList}>
-              {healChallengeFaqItems.map(item => {
+            <div className={heal.faqList}>
+              {healChallengeFaqItems.map((item, index) => {
                 const isOpen = openFaqId === item.id;
                 return (
-                  <div
+                  <motion.div
                     key={item.id}
                     className={`${heal.faqItem} ${isOpen ? heal.faqItemOpen : ''}`}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.45, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <button
                       type="button"
@@ -851,8 +858,8 @@ export default function HealPage() {
                       aria-controls={`faq-answer-${item.id}`}
                     >
                       <span className={heal.faqQuestionText}>{item.question}</span>
-                      <span className={heal.faqToggleIcon} aria-hidden="true">
-                        {isOpen ? <TbMinus size={20} /> : <TbPlus size={20} />}
+                      <span className={`${heal.faqToggleIcon} ${isOpen ? heal.faqToggleIconOpen : ''}`} aria-hidden="true">
+                        {isOpen ? <TbMinus size={18} /> : <TbPlus size={18} />}
                       </span>
                     </button>
                     <AnimatePresence initial={false}>
@@ -863,10 +870,16 @@ export default function HealPage() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                           style={{ overflow: 'hidden' }}
                         >
-                          <div className={heal.faqAnswer}>
+                          <motion.div
+                            className={heal.faqAnswer}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 6 }}
+                            transition={{ duration: 0.3, delay: 0.05 }}
+                          >
                             {item.paragraphs[0] && <p>{item.paragraphs[0]}</p>}
                             {item.bullets && item.bullets.length > 0 && (
                               <ul className={heal.faqBulletList}>
@@ -878,27 +891,35 @@ export default function HealPage() {
                             {item.paragraphs.slice(1).map((para, i) => (
                               <p key={i + 1}>{para}</p>
                             ))}
-                          </div>
+                          </motion.div>
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </motion.div>
+            </div>
 
-            <motion.div variants={fadeInUp} className={heal.faqTrustBanner}>
+            <motion.div
+              variants={fadeInUp}
+              className={heal.faqTrustBanner}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
               {healChallengeTrustItems.map(item => {
                 const Icon = trustIcons[item.icon];
                 return (
                   <div key={item.id} className={heal.faqTrustCard}>
+                    <span className={heal.faqTrustCheck} aria-hidden="true">
+                      <TbCheck size={12} strokeWidth={3} />
+                    </span>
                     <span className={heal.faqTrustIconWrap} aria-hidden="true">
                       <Icon size={22} />
                     </span>
-                    <span className={heal.faqTrustCheck} aria-hidden="true">
-                      <TbCheck size={14} />
-                    </span>
-                    <span className={heal.faqTrustLabel}>{item.label}</span>
+                    <strong className={heal.faqTrustTitle}>{item.title}</strong>
+                    <p className={heal.faqTrustDesc}>{item.description}</p>
                   </div>
                 );
               })}

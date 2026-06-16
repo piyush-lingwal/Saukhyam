@@ -64,8 +64,28 @@ export const healChallengeFaqItems: HealChallengeFAQItem[] = [
 ];
 
 export const healChallengeTrustItems = [
-  { id: 'trust-1', label: 'Science-Informed Approach', icon: 'flask' as const },
-  { id: 'trust-2', label: '6-Month Guided Challenge', icon: 'calendar' as const },
-  { id: 'trust-3', label: 'Full Refund Guarantee', icon: 'shield' as const },
-  { id: 'trust-4', label: 'Thousands of Women Impacted', icon: 'heart' as const },
+  {
+    id: 'trust-1',
+    title: 'Science-Informed',
+    description: 'Based on menstrual health research',
+    icon: 'flask' as const,
+  },
+  {
+    id: 'trust-2',
+    title: '6-Month Challenge',
+    description: 'Structured healing journey',
+    icon: 'calendar' as const,
+  },
+  {
+    id: 'trust-3',
+    title: 'Refund Promise',
+    description: 'Risk-free participation',
+    icon: 'shield' as const,
+  },
+  {
+    id: 'trust-4',
+    title: 'Community Impact',
+    description: 'Thousands of women empowered',
+    icon: 'heart' as const,
+  },
 ];
