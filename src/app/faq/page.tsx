@@ -1,39 +1,160 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, Mail, Phone, Search, X } from 'lucide-react';
 import {
-  ChevronDown, HelpCircle, Droplets, Sparkles, RefreshCw,
-  Building2, Mail, Phone,
-} from 'lucide-react';
-import { faqItems, type FAQItem } from '@/data/content';
+  siteFaqItems,
+  siteFaqCategories,
+  getSiteFaqCount,
+  getSiteFaqCategoryLabel,
+  getSiteFaqSubsections,
+  isValidSiteFaqCategory,
+  searchSiteFaq,
+  type SiteFAQCategory,
+  type SiteFAQItem,
+} from '@/data/siteFaq';
 import styles from './page.module.css';
-
-type Category = FAQItem['category'] | 'all';
-
-const categoryConfig: Record<Category, { label: string; icon: typeof HelpCircle }> = {
-  all: { label: 'All Questions', icon: HelpCircle },
-  general: { label: 'General', icon: Sparkles },
-  using: { label: 'How to Use', icon: Droplets },
-  washing: { label: 'Washing & Care', icon: RefreshCw },
-  compare: { label: 'Science & Fiber', icon: Sparkles },
-  organization: { label: 'About Saukhyam', icon: Building2 },
-};
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
+function FaqAnswer({ item }: { item: SiteFAQItem }) {
+  return (
+    <div className={styles.faqAnswerContent}>
+      {item.paragraphs[0] && <p>{item.paragraphs[0]}</p>}
+      {item.bullets && item.bullets.length > 0 && (
+        <ul className={styles.faqBulletList}>
+          {item.bullets.map((bullet, i) => (
+            <li key={i}>{bullet}</li>
+          ))}
+        </ul>
+      )}
+      {item.paragraphs.slice(1).map((para, i) => (
+        <p key={i + 1}>{para}</p>
+      ))}
+    </div>
+  );
+}
+
+function FaqAccordionItem({
+  item,
+  isOpen,
+  onToggle,
+  showCategory,
+}: {
+  item: SiteFAQItem;
+  isOpen: boolean;
+  onToggle: () => void;
+  showCategory?: boolean;
+}) {
+  return (
+    <motion.div
+      layout
+      className={`${styles.faqItem} ${isOpen ? styles.open : ''}`}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <button
+        type="button"
+        className={styles.faqQuestion}
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={`faq-answer-${item.id}`}
+      >
+        <span className={styles.faqQuestionCopy}>
+          {showCategory && (
+            <span className={styles.faqItemCategory}>{getSiteFaqCategoryLabel(item.category)}</span>
+          )}
+          <span className={styles.faqQuestionText}>{item.question}</span>
+        </span>
+        <ChevronDown size={18} className={styles.faqIcon} aria-hidden="true" />
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            id={`faq-answer-${item.id}`}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            style={{ overflow: 'hidden' }}
+          >
+            <FaqAnswer item={item} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 export default function FAQPage() {
-  const [activeCategory, setActiveCategory] = useState<Category>('all');
+  const [activeCategory, setActiveCategory] = useState<SiteFAQCategory>('about');
+  const [searchQuery, setSearchQuery] = useState('');
   const [openItems, setOpenItems] = useState<Set<string>>(new Set());
 
-  const filteredFaqs = useMemo(() => {
-    return activeCategory === 'all'
-      ? faqItems
-      : faqItems.filter(f => f.category === activeCategory);
-  }, [activeCategory]);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category');
+    if (category && isValidSiteFaqCategory(category)) {
+      setActiveCategory(category);
+    }
+    const q = params.get('q');
+    if (q) setSearchQuery(q);
+  }, []);
+
+  const isSearching = searchQuery.trim().length > 0;
+
+  const visibleFaqs = useMemo(() => {
+    if (isSearching) return searchSiteFaq(searchQuery);
+    return siteFaqItems.filter(item => item.category === activeCategory);
+  }, [activeCategory, isSearching, searchQuery]);
+
+  const subsections = useMemo(
+    () => (isSearching ? [] : getSiteFaqSubsections(activeCategory)),
+    [activeCategory, isSearching],
+  );
+
+  const groupedFaqs = useMemo(() => {
+    if (isSearching || subsections.length === 0) {
+      return [{ id: 'all', label: '', items: visibleFaqs }];
+    }
+
+    return subsections
+      .map(section => ({
+        id: section.id,
+        label: section.label,
+        items: visibleFaqs.filter(item => item.subsection === section.id),
+      }))
+      .filter(group => group.items.length > 0);
+  }, [isSearching, subsections, visibleFaqs]);
+
+  const updateUrl = (category: SiteFAQCategory, query: string) => {
+    const params = new URLSearchParams();
+    params.set('category', category);
+    if (query.trim()) params.set('q', query.trim());
+    const next = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState(null, '', next);
+  };
+
+  const selectCategory = (category: SiteFAQCategory) => {
+    setActiveCategory(category);
+    setOpenItems(new Set());
+    updateUrl(category, searchQuery);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    setOpenItems(new Set());
+    updateUrl(activeCategory, value);
+  };
+
+  const clearSearch = () => {
+    handleSearchChange('');
+  };
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => {
@@ -46,7 +167,6 @@ export default function FAQPage() {
 
   return (
     <div className={styles.faqPage}>
-      {/* ── Hero ── */}
       <section className={styles.hero}>
         <div className="container">
           <motion.h1
@@ -63,64 +183,96 @@ export default function FAQPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
           >
-            Everything you need to know about Saukhyam reusable pads, covering usage and washing to science and impact.
+            Your central knowledge hub for Saukhyam — menstrual health, reusable pads, the HEAL program, products, internships, and more.
           </motion.p>
         </div>
       </section>
 
       <div className="container">
-        <div className={styles.faqLayout}>
-          {/* ── Category Sidebar ── */}
-          <nav className={styles.categoryNav}>
-            {(Object.keys(categoryConfig) as Category[]).map(cat => {
-              const config = categoryConfig[cat];
-              const Icon = config.icon;
+        <motion.div
+          className={styles.searchWrap}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.2 }}
+        >
+          <Search size={18} className={styles.searchIcon} aria-hidden="true" />
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={e => handleSearchChange(e.target.value)}
+            placeholder="Search all FAQs..."
+            className={styles.searchInput}
+            aria-label="Search FAQs"
+          />
+          {searchQuery && (
+            <button type="button" className={styles.searchClear} onClick={clearSearch} aria-label="Clear search">
+              <X size={16} />
+            </button>
+          )}
+        </motion.div>
+
+        {!isSearching && (
+          <div className={styles.categoryTabs} role="tablist" aria-label="FAQ categories">
+            {siteFaqCategories.map(cat => {
+              const isActive = activeCategory === cat.id;
               return (
                 <button
-                  key={cat}
-                  className={`${styles.categoryBtn} ${activeCategory === cat ? styles.active : ''}`}
-                  onClick={() => setActiveCategory(cat)}
+                  key={cat.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`${styles.categoryTab} ${isActive ? styles.categoryTabActive : ''}`}
+                  onClick={() => selectCategory(cat.id)}
                 >
-                  <Icon size={16} className={styles.categoryIcon} />
-                  {config.label}
+                  {cat.label}
+                  <span className={styles.categoryCount}>{getSiteFaqCount(cat.id)}</span>
                 </button>
               );
             })}
-          </nav>
+          </div>
+        )}
 
-          {/* ── FAQ List ── */}
+        {isSearching && (
+          <p className={styles.searchMeta}>
+            {visibleFaqs.length} result{visibleFaqs.length === 1 ? '' : 's'} for &ldquo;{searchQuery.trim()}&rdquo;
+          </p>
+        )}
+
+        <AnimatePresence mode="wait">
           <motion.div
-            className={styles.faqList}
-            key={activeCategory}
-            initial="hidden"
-            animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+            key={isSearching ? `search-${searchQuery}` : activeCategory}
+            className={styles.faqContent}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            role="tabpanel"
           >
-            {filteredFaqs.map(faq => (
-              <motion.div
-                key={faq.id}
-                variants={fadeInUp}
-                className={`${styles.faqItem} ${openItems.has(faq.id) ? styles.open : ''}`}
-              >
-                <button
-                  className={styles.faqQuestion}
-                  onClick={() => toggleItem(faq.id)}
-                  aria-expanded={openItems.has(faq.id)}
-                >
-                  {faq.question}
-                  <ChevronDown size={18} className={styles.faqIcon} />
-                </button>
-                <div className={styles.faqAnswer}>
-                  <div className={styles.faqAnswerContent}>
-                    {faq.answer}
+            {visibleFaqs.length === 0 ? (
+              <div className={styles.emptyState}>
+                {isSearching ? 'No FAQs matched your search. Try different keywords.' : 'No FAQs in this category yet.'}
+              </div>
+            ) : (
+              groupedFaqs.map(group => (
+                <div key={group.id} className={styles.faqGroup}>
+                  {group.label && <h3 className={styles.subsectionTitle}>{group.label}</h3>}
+                  <div className={styles.faqList}>
+                    {group.items.map(item => (
+                      <FaqAccordionItem
+                        key={item.id}
+                        item={item}
+                        isOpen={openItems.has(item.id)}
+                        onToggle={() => toggleItem(item.id)}
+                        showCategory={isSearching}
+                      />
+                    ))}
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              ))
+            )}
           </motion.div>
-        </div>
+        </AnimatePresence>
 
-        {/* ── Contact CTA ── */}
         <div className={styles.contactCta}>
           <h3>Still have questions?</h3>
           <p>We&apos;re happy to help! Reach out to us and we&apos;ll respond within 24 hours.</p>
