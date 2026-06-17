@@ -3,7 +3,7 @@
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Search, X } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import {
   siteFaqItems,
   siteFaqCategories,
@@ -38,39 +38,6 @@ function HighlightText({ text, query }: { text: string; query: string }) {
         ),
       )}
     </>
-  );
-}
-
-function SearchBar({
-  value,
-  onChange,
-  onClear,
-  placeholder,
-  className,
-}: {
-  value: string;
-  onChange: (value: string) => void;
-  onClear: () => void;
-  placeholder: string;
-  className?: string;
-}) {
-  return (
-    <div className={`${styles.searchWrap} ${className ?? ''}`}>
-      <Search size={20} className={styles.searchIcon} aria-hidden="true" />
-      <input
-        type="search"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={placeholder}
-        className={styles.searchInput}
-        aria-label="Search FAQ questions"
-      />
-      {value && (
-        <button type="button" className={styles.searchClear} onClick={onClear} aria-label="Clear search">
-          <X size={18} />
-        </button>
-      )}
-    </div>
   );
 }
 
@@ -196,12 +163,6 @@ export default function FAQPage() {
     });
   };
 
-  const handleSearchChange = (value: string) => {
-    setSearchQuery(value);
-    setOpenFaqId(null);
-    updateUrl(activeCategory, value);
-  };
-
   const toggleItem = (id: string) => {
     setOpenFaqId(prev => (prev === id ? null : id));
   };
@@ -272,37 +233,24 @@ export default function FAQPage() {
             FAQ Knowledge Center
           </motion.span>
 
-          <motion.div
-            className={styles.heroTitleRow}
+          <motion.h1
+            id="faq-hero-heading"
+            className={styles.heroTitle}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.06 }}
           >
-            <h1 id="faq-hero-heading" className={styles.heroTitle}>
-              Frequently Asked Questions
-            </h1>
-            <span className={styles.heroDivider} aria-hidden="true">
-              |
-            </span>
-            <p className={styles.heroDesc}>
-              Everything you need to know about Saukhyam reusable pads—from usage and washing instructions to banana fiber technology, sustainability, and community impact.
-            </p>
-          </motion.div>
+            Frequently Asked Questions
+          </motion.h1>
 
-          <motion.div
+          <motion.p
+            className={styles.heroDesc}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className={styles.heroSearchWrap}
           >
-            <SearchBar
-              value={searchQuery}
-              onChange={handleSearchChange}
-              onClear={() => handleSearchChange('')}
-              placeholder="Search FAQs..."
-              className={styles.heroSearchWrap}
-            />
-          </motion.div>
+            Everything you need to know about Saukhyam reusable pads from usage and washing instructions to banana fiber technology, sustainability, and community impact.
+          </motion.p>
         </div>
       </section>
 
