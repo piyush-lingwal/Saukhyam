@@ -9,13 +9,11 @@ import {
   Award,
   Globe,
   Heart,
-  Leaf,
   Play,
   Quote,
   Sparkles,
   Target,
   Trophy,
-  Users,
 } from 'lucide-react';
 import { pressMentions } from '@/data/newsroom/pressMediaContent';
 import styles from './page.module.css';
@@ -28,13 +26,37 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 const STORY_VIDEO_ID = '6nFDpxCS4PA';
 
-const heroHighlights = [
-  { emoji: '🌱', label: 'Sustainable Menstrual Care' },
-  { emoji: '🤝', label: 'Community-Led Impact' },
-  { emoji: '💚', label: 'Health & Dignity First' },
-  { emoji: '♻️', label: 'Reusable Solutions' },
-  { emoji: '🏡', label: 'Rural Livelihood Creation' },
-  { emoji: '🌍', label: 'Climate-Conscious Innovation' },
+const storyMilestones = [
+  {
+    step: '01',
+    title: 'Inspired by Compassion',
+    desc: "Guided by Amma's vision, Saukhyam was founded on the belief that health, dignity, and care should be accessible to all.",
+  },
+  {
+    step: '02',
+    title: 'Building Awareness',
+    desc: 'Through education and community engagement, conversations around menstrual health began reaching more homes, schools, and communities.',
+  },
+  {
+    step: '03',
+    title: 'Creating Sustainable Choices',
+    desc: 'The initiative expanded reusable menstrual solutions that support both personal wellbeing and environmental responsibility.',
+  },
+  {
+    step: '04',
+    title: 'Strengthening Communities',
+    desc: 'Training, outreach, and local participation created opportunities for shared learning and collective action.',
+  },
+  {
+    step: '05',
+    title: 'Growing a Movement',
+    desc: 'What began as a small initiative evolved into a wider movement supported by volunteers, educators, healthcare professionals, and communities.',
+  },
+  {
+    step: '06',
+    title: 'Looking Ahead',
+    desc: 'Saukhyam continues to work toward a future where sustainable menstrual care becomes a natural and accessible choice for everyone.',
+  },
 ];
 
 const coreValues = [
@@ -162,44 +184,21 @@ export default function AboutPage() {
         <div className={`container ${styles.heroContainer}`}>
           <motion.div className={styles.heroInner} initial="hidden" animate="visible" variants={stagger}>
             <motion.span variants={fadeUp} className={styles.heroEyebrow}>
-              🌿 Our Story
+              Our Story
             </motion.span>
-
             <motion.h1 variants={fadeUp} className={styles.heroTitle}>
-              <span className={styles.heroTitleLine}>Healing Periods.</span>
-              <span className={styles.heroTitleGradient}>Healing the Planet.</span>
+              <span className={styles.heroTitleLine}>A Movement for</span>
+              <span className={styles.heroTitleGradient}>Dignity &amp; Care</span>
             </motion.h1>
-
             <motion.p variants={fadeUp} className={styles.heroSubtitle}>
-              Saukhyam began with a simple belief: menstrual care should be safe for people, gentle on the planet,
-              and accessible to everyone.
+              Discover how compassion, community, and sustainable choices are shaping a healthier future for people
+              and the planet.
             </motion.p>
-
-            <motion.p variants={fadeUp} className={styles.heroSubtitleSecondary}>
-              What started as a compassionate initiative has grown into a movement that brings together communities,
-              makers, educators, healthcare workers, and volunteers to reimagine menstrual health through sustainable
-              solutions.
-            </motion.p>
-
-            <motion.div variants={fadeUp} className={styles.heroCtas}>
-              <button type="button" className={styles.heroBtnPrimary} onClick={scrollToJourney}>
-                Explore Our Journey
-                <ArrowRight size={17} aria-hidden />
-              </button>
-              <Link href="/programs" className={styles.heroBtnSecondary}>
-                Discover Our Programs
-              </Link>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className={styles.heroHighlights}>
-              {heroHighlights.map(item => (
-                <div key={item.label} className={styles.heroHighlight}>
-                  <span className={styles.heroHighlightEmoji} aria-hidden="true">{item.emoji}</span>
-                  <span className={styles.heroHighlightLabel}>{item.label}</span>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
+        </div>
+
+        <div className={styles.heroScroll} aria-hidden="true">
+          <div className={styles.heroScrollDot} />
         </div>
       </section>
 
@@ -259,137 +258,154 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Story Video */}
-      <section className={styles.videoSection}>
-        <div className={styles.videoSectionOverlay} aria-hidden="true" />
-        <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeUp} className={styles.sectionBadgeLightOnDark}>
-              Experience the Saukhyam Story
-            </motion.span>
-            <motion.h2 variants={fadeUp} className={styles.sectionTitleLight}>
-              See How a Simple Idea Became a Movement
-            </motion.h2>
-            <motion.p variants={fadeUp} className={styles.videoDesc}>
-              See how a simple idea evolved into a movement for menstrual health, sustainability, and social change.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className={styles.videoShell}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className={styles.videoCard}>
-              {!videoPlaying ? (
-                <>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={`https://img.youtube.com/vi/${STORY_VIDEO_ID}/maxresdefault.jpg`}
-                    alt="Saukhyam story video preview"
-                    className={styles.videoThumb}
+      {/* 3. Split-screen Story + Video */}
+      <section className={styles.splitStorySection}>
+        <div className={styles.splitStoryBg} aria-hidden="true" />
+        <div className={`container ${styles.splitStoryContainer}`}>
+          <div className={styles.splitStoryGrid}>
+            <motion.div
+              className={styles.splitStoryVideoCol}
+              initial={{ opacity: 0, x: -28 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <motion.div className={styles.splitVideoCard} whileHover={{ y: -4 }} transition={{ duration: 0.35 }}>
+                {!videoPlaying ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`https://img.youtube.com/vi/${STORY_VIDEO_ID}/maxresdefault.jpg`}
+                      alt="Saukhyam story video preview"
+                      className={styles.splitVideoThumb}
+                    />
+                    <button
+                      type="button"
+                      className={styles.splitVideoPlayBtn}
+                      onClick={() => setVideoPlaying(true)}
+                      aria-label="Play Saukhyam story video"
+                    >
+                      <span className={styles.splitVideoPlayRing} aria-hidden="true" />
+                      <span className={styles.splitVideoPlayInner}>
+                        <Play size={26} fill="currentColor" aria-hidden="true" />
+                      </span>
+                    </button>
+                  </>
+                ) : (
+                  <iframe
+                    className={styles.splitVideoIframe}
+                    src={`https://www.youtube.com/embed/${STORY_VIDEO_ID}?autoplay=1&rel=0`}
+                    title="Experience the Saukhyam Story"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
-                  <button
-                    type="button"
-                    className={styles.videoPlayBtn}
-                    onClick={() => setVideoPlaying(true)}
-                    aria-label="Play Saukhyam story video"
-                  >
-                    <span className={styles.videoPlayRing} aria-hidden="true" />
-                    <span className={styles.videoPlayInner}>
-                      <Play size={28} fill="currentColor" aria-hidden="true" />
-                    </span>
-                  </button>
-                </>
-              ) : (
-                <iframe
-                  className={styles.videoIframe}
-                  src={`https://www.youtube.com/embed/${STORY_VIDEO_ID}?autoplay=1&rel=0`}
-                  title="Experience the Saukhyam Story"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+                )}
+              </motion.div>
 
-      {/* 4. Who We Are */}
-      <section className={styles.whoSection}>
-        <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeUp} className={styles.sectionBadge}>
-              <Globe size={14} />
-              Who We Are
-            </motion.span>
-            <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-              More Than A Product.
-              <br />
-              <span className={styles.titleAccentGreen}>A Movement For Change.</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className={styles.sectionDesc}>
-              Ayurarogya Saukhyam Foundation is an initiative of the Mata Amritanandamayi Math and works across
-              communities through awareness, education, sustainable menstrual solutions, and livelihood opportunities.
-            </motion.p>
-            <motion.p variants={fadeUp} className={styles.bodyText}>
-              Through collaborations with schools, healthcare institutions, volunteers, self-help groups, and rural
-              communities, Saukhyam seeks to create lasting change in menstrual health practices while reducing
-              environmental impact.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
+              <p className={styles.splitVideoCaption}>
+                See how a simple idea grew into a movement for sustainable menstrual care.
+              </p>
 
-      {/* 5. Team Saukhyam */}
-      <section className={styles.teamSection}>
-        <div className="container">
-          <div className={styles.teamGrid}>
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.span variants={fadeUp} className={styles.sectionBadgeAlt}>
-                <Users size={14} />
-                The People Behind the Mission
-              </motion.span>
-              <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-                Team Saukhyam
-              </motion.h2>
-              <motion.p variants={fadeUp} className={styles.bodyText}>
-                Behind every awareness workshop, training session, reusable solution, and community initiative is a
-                dedicated team working toward a shared vision.
-              </motion.p>
-              <motion.p variants={fadeUp} className={styles.bodyText}>
-                Researchers, artisans, educators, healthcare professionals, volunteers, and community leaders come
-                together to make menstrual health safer, more sustainable, and more accessible.
-              </motion.p>
-              <motion.p variants={fadeUp} className={styles.bodyText}>
-                This journey has never belonged to one individual. It has always been a collective effort driven by
-                compassion, innovation, and service.
-              </motion.p>
+              <div className={styles.splitStoryCtas}>
+                <button type="button" className={styles.splitBtnPrimary} onClick={scrollToJourney}>
+                  Explore Our Journey
+                  <ArrowRight size={16} aria-hidden />
+                </button>
+                <Link href="/programs" className={styles.splitBtnSecondary}>
+                  Discover Our Programs
+                </Link>
+              </div>
             </motion.div>
 
             <motion.div
-              className={styles.teamVisual}
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              className={styles.splitStoryContentCol}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={stagger}
             >
-              <Image
-                src="/bentogrid_photo.jpeg"
-                alt="Saukhyam team and community members working together"
-                width={640}
-                height={480}
-                className={styles.teamImage}
-                loading="lazy"
-              />
+              <motion.span variants={fadeUp} className={styles.splitStoryLabel}>
+                Our Story
+              </motion.span>
+              <motion.h2 variants={fadeUp} className={styles.splitStoryTitle}>
+                Healing Periods.
+                <br />
+                Healing the Planet.
+              </motion.h2>
+              <motion.p variants={fadeUp} className={styles.splitStoryDesc}>
+                Saukhyam began with a simple belief: menstrual care should be safe for people, gentle on the planet,
+                and accessible to everyone.
+              </motion.p>
+              <motion.p variants={fadeUp} className={styles.splitStoryDesc}>
+                What started as a compassionate initiative has grown into a movement that brings together communities,
+                educators, healthcare workers, makers, volunteers, and supporters to reimagine menstrual health through
+                sustainable solutions.
+              </motion.p>
+
+              <div className={styles.storyMilestoneList}>
+                {storyMilestones.map((item, index) => (
+                  <motion.div
+                    key={item.step}
+                    className={styles.storyMilestoneItem}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.55, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <div className={styles.storyMilestoneMarker}>
+                      <span className={styles.storyMilestoneStep}>{item.step}</span>
+                      {index < storyMilestones.length - 1 && (
+                        <span className={styles.storyMilestoneLine} aria-hidden="true" />
+                      )}
+                    </div>
+                    <div className={styles.storyMilestoneBody}>
+                      <h3 className={styles.storyMilestoneTitle}>{item.title}</h3>
+                      <p className={styles.storyMilestoneDesc}>{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.blockquote variants={fadeUp} className={styles.storyQuoteCard}>
+                <Quote size={22} className={styles.storyQuoteIcon} aria-hidden="true" />
+                <p>
+                  Every sustainable choice begins with care—for ourselves, for others, and for the planet.
+                </p>
+              </motion.blockquote>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* 6. Vision & Mission */}
+      {/* 4. Our Purpose */}
+      <section className={styles.purposeSection}>
+        <div className={styles.purposeGlowA} aria-hidden="true" />
+        <div className={styles.purposeGlowB} aria-hidden="true" />
+        <div className={styles.purposeTexture} aria-hidden="true" />
+        <div className="container">
+          <motion.div
+            className={styles.purposeInner}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            <motion.span variants={fadeUp} className={styles.purposeLabel}>
+              Our Purpose
+            </motion.span>
+            <motion.p variants={fadeUp} className={styles.purposeLead}>
+              Saukhyam exists to create a future where menstrual health is approached with dignity, sustainability,
+              awareness, and compassion.
+            </motion.p>
+            <motion.p variants={fadeUp} className={styles.purposeSub}>
+              Through community engagement, education, sustainable practices, and collaborative action, the foundation
+              continues to support healthier lives and a healthier planet.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 5. Vision & Mission */}
       <section className={styles.visionSection}>
         <div className={styles.visionBlobA} aria-hidden="true" />
         <div className={styles.visionBlobB} aria-hidden="true" />
@@ -432,7 +448,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 7. Core Values */}
+      {/* 6. Core Values */}
       <section className={styles.valuesSection}>
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
@@ -457,7 +473,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 8. Journey Timeline */}
+      {/* 7. Journey Timeline */}
       <section id="our-journey" className={styles.timelineSection}>
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
@@ -471,10 +487,6 @@ export default function AboutPage() {
             <motion.p variants={fadeUp} className={styles.sectionDesc}>
               Every meaningful movement begins with a simple question: How can menstrual care become healthier, more
               sustainable, and more accessible for everyone?
-            </motion.p>
-            <motion.p variants={fadeUp} className={styles.bodyText}>
-              What followed became a shared journey of communities, educators, makers, healthcare professionals,
-              volunteers, and supporters working together to create lasting change.
             </motion.p>
           </motion.div>
 
@@ -510,7 +522,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 9. Recognition */}
+      {/* 8. Recognition */}
       <section className={styles.awardsSection}>
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
@@ -556,7 +568,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 10. Media & Press */}
+      {/* 9. Media & Press */}
       <section className={styles.pressSection}>
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
@@ -611,7 +623,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 11. Join the Movement CTA */}
+      {/* 10. Join the Movement CTA */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaBlobA} aria-hidden="true" />
         <div className={styles.ctaBlobB} aria-hidden="true" />
