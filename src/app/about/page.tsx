@@ -8,12 +8,16 @@ import {
   ArrowRight,
   Award,
   Globe,
+  HandHelping,
   Heart,
+  Leaf,
+  Lightbulb,
   Play,
   Quote,
   Sparkles,
   Target,
   Trophy,
+  Users,
 } from 'lucide-react';
 import { pressMentions } from '@/data/newsroom/pressMediaContent';
 import styles from './page.module.css';
@@ -25,6 +29,39 @@ const fadeUp = {
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 const STORY_VIDEO_ID = '6nFDpxCS4PA';
+
+const heroImpactCards = [
+  {
+    icon: Heart,
+    title: 'Menstrual Health & Dignity',
+    desc: 'Supporting safe, comfortable, and informed menstrual care.',
+  },
+  {
+    icon: Leaf,
+    title: 'Sustainable Living',
+    desc: 'Encouraging reusable choices that reduce environmental impact.',
+  },
+  {
+    icon: Users,
+    title: 'Community Outreach',
+    desc: 'Building awareness through education and grassroots engagement.',
+  },
+  {
+    icon: HandHelping,
+    title: 'Rural Livelihoods',
+    desc: 'Creating meaningful livelihood opportunities through local production.',
+  },
+  {
+    icon: Globe,
+    title: 'Climate Responsibility',
+    desc: 'Promoting practices that help reduce menstrual waste.',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Social Innovation',
+    desc: 'Developing practical solutions that combine health, sustainability, and accessibility.',
+  },
+];
 
 const storyMilestones = [
   {
@@ -60,12 +97,42 @@ const storyMilestones = [
 ];
 
 const coreValues = [
-  { emoji: '🌿', title: 'Sustainable Living', desc: 'Thoughtful choices that reduce waste and protect natural resources.' },
-  { emoji: '💚', title: 'Health & Wellbeing', desc: 'Menstrual care that prioritizes comfort, safety, and confidence.' },
-  { emoji: '🤝', title: 'Community Impact', desc: 'Building stronger communities through education and participation.' },
-  { emoji: '♻️', title: 'Circular Thinking', desc: 'Creating solutions that are designed to be reused, repaired, and valued.' },
-  { emoji: '🌍', title: 'Climate Responsibility', desc: 'Reducing environmental burden through conscious consumption.' },
-  { emoji: '✨', title: 'Dignity For All', desc: 'Ensuring menstrual health is approached with respect, empathy, and inclusivity.' },
+  {
+    icon: Leaf,
+    title: 'Sustainable Living',
+    desc: 'Encouraging responsible choices that help protect natural resources and reduce environmental impact.',
+    color: '#16a34a',
+  },
+  {
+    icon: Heart,
+    title: 'Health & Wellbeing',
+    desc: 'Supporting menstrual care solutions that prioritize comfort, safety, and confidence.',
+    color: '#0d9488',
+  },
+  {
+    icon: Users,
+    title: 'Community Engagement',
+    desc: 'Creating opportunities for awareness, learning, and meaningful participation.',
+    color: '#2563eb',
+  },
+  {
+    icon: Sparkles,
+    title: 'Circular Innovation',
+    desc: 'Promoting reusable and sustainable practices that encourage long-term positive change.',
+    color: '#7c3aed',
+  },
+  {
+    icon: Globe,
+    title: 'Environmental Responsibility',
+    desc: 'Working toward a future where everyday choices contribute to a healthier planet.',
+    color: '#0284c7',
+  },
+  {
+    icon: HandHelping,
+    title: 'Dignity & Inclusion',
+    desc: 'Ensuring menstrual health is approached with respect, empathy, accessibility, and understanding.',
+    color: '#b45309',
+  },
 ];
 
 const timelineEvents = [
@@ -183,17 +250,39 @@ export default function AboutPage() {
 
         <div className={`container ${styles.heroContainer}`}>
           <motion.div className={styles.heroInner} initial="hidden" animate="visible" variants={stagger}>
-            <motion.span variants={fadeUp} className={styles.heroEyebrow}>
+            <motion.span variants={fadeUp} className={styles.heroBadge}>
               Our Story
             </motion.span>
+
             <motion.h1 variants={fadeUp} className={styles.heroTitle}>
-              <span className={styles.heroTitleLine}>A Movement for</span>
-              <span className={styles.heroTitleGradient}>Dignity &amp; Care</span>
+              <span className={styles.heroTitleLine}>Healing Periods.</span>
+              <span className={styles.heroTitleGradient}>Healing the Planet.</span>
             </motion.h1>
+
             <motion.p variants={fadeUp} className={styles.heroSubtitle}>
-              Discover how compassion, community, and sustainable choices are shaping a healthier future for people
-              and the planet.
+              Born from a vision to make menstrual hygiene safe, sustainable, and empowering, Saukhyam creates
+              reusable menstrual solutions that support healthier lives, stronger communities, and a cleaner planet.
             </motion.p>
+
+            <motion.p variants={fadeUp} className={styles.heroSubtitleSecondary}>
+              Guided by compassion and driven by purpose, Saukhyam works at the intersection of menstrual health,
+              sustainability, education, and community wellbeing.
+            </motion.p>
+
+            <motion.div variants={fadeUp} className={styles.heroImpactGrid}>
+              {heroImpactCards.map(card => {
+                const Icon = card.icon;
+                return (
+                  <div key={card.title} className={styles.heroImpactCard}>
+                    <div className={styles.heroImpactIcon}>
+                      <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
+                    </div>
+                    <h3 className={styles.heroImpactTitle}>{card.title}</h3>
+                    <p className={styles.heroImpactDesc}>{card.desc}</p>
+                  </div>
+                );
+              })}
+            </motion.div>
           </motion.div>
         </div>
 
@@ -325,22 +414,11 @@ export default function AboutPage() {
               variants={stagger}
             >
               <motion.span variants={fadeUp} className={styles.splitStoryLabel}>
-                Our Story
+                The Journey
               </motion.span>
               <motion.h2 variants={fadeUp} className={styles.splitStoryTitle}>
-                Healing Periods.
-                <br />
-                Healing the Planet.
+                Milestones Along the Way
               </motion.h2>
-              <motion.p variants={fadeUp} className={styles.splitStoryDesc}>
-                Saukhyam began with a simple belief: menstrual care should be safe for people, gentle on the planet,
-                and accessible to everyone.
-              </motion.p>
-              <motion.p variants={fadeUp} className={styles.splitStoryDesc}>
-                What started as a compassionate initiative has grown into a movement that brings together communities,
-                educators, healthcare workers, makers, volunteers, and supporters to reimagine menstrual health through
-                sustainable solutions.
-              </motion.p>
 
               <div className={styles.storyMilestoneList}>
                 {storyMilestones.map((item, index) => (
@@ -377,35 +455,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. Our Purpose */}
-      <section className={styles.purposeSection}>
-        <div className={styles.purposeGlowA} aria-hidden="true" />
-        <div className={styles.purposeGlowB} aria-hidden="true" />
-        <div className={styles.purposeTexture} aria-hidden="true" />
-        <div className="container">
-          <motion.div
-            className={styles.purposeInner}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            <motion.span variants={fadeUp} className={styles.purposeLabel}>
-              Our Purpose
-            </motion.span>
-            <motion.p variants={fadeUp} className={styles.purposeLead}>
-              Saukhyam exists to create a future where menstrual health is approached with dignity, sustainability,
-              awareness, and compassion.
-            </motion.p>
-            <motion.p variants={fadeUp} className={styles.purposeSub}>
-              Through community engagement, education, sustainable practices, and collaborative action, the foundation
-              continues to support healthier lives and a healthier planet.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
+      <div className={styles.sectionBridge} aria-hidden="true" />
 
-      {/* 5. Vision & Mission */}
+      {/* 4. Vision & Mission */}
       <section className={styles.visionSection}>
         <div className={styles.visionBlobA} aria-hidden="true" />
         <div className={styles.visionBlobB} aria-hidden="true" />
@@ -448,27 +500,34 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6. Core Values */}
+      {/* 5. Core Values */}
       <section className={styles.valuesSection}>
         <div className="container">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeUp} className={styles.sectionBadge}>
-              <Heart size={14} />
-              What We Stand For
+            <motion.span variants={fadeUp} className={styles.valuesLabel}>
+              Our Values
             </motion.span>
-            <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-              Core Values
+            <motion.h2 variants={fadeUp} className={styles.valuesTitle}>
+              What We Stand For
             </motion.h2>
+            <motion.p variants={fadeUp} className={styles.valuesSubheading}>
+              The principles that guide every initiative, partnership, and action at Saukhyam.
+            </motion.p>
           </motion.div>
 
           <motion.div className={styles.valuesGrid} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            {coreValues.map(value => (
-              <motion.div key={value.title} variants={fadeUp} className={styles.valueCard}>
-                <span className={styles.valueEmoji} aria-hidden="true">{value.emoji}</span>
-                <h3 className={styles.valueTitle}>{value.title}</h3>
-                <p className={styles.valueDesc}>{value.desc}</p>
-              </motion.div>
-            ))}
+            {coreValues.map(value => {
+              const Icon = value.icon;
+              return (
+                <motion.div key={value.title} variants={fadeUp} className={styles.valueCard}>
+                  <div className={styles.valueIconWrap} style={{ color: value.color, borderColor: `${value.color}30`, background: `${value.color}12` }}>
+                    <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
+                  </div>
+                  <h3 className={styles.valueTitle}>{value.title}</h3>
+                  <p className={styles.valueDesc}>{value.desc}</p>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
