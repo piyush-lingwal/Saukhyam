@@ -263,24 +263,31 @@ export default function FAQPage() {
         </div>
 
         <div className={styles.heroInner}>
-          <motion.h1
-            id="faq-hero-heading"
-            className={styles.heroTitle}
-            initial={{ opacity: 0, y: 16 }}
+          <motion.span
+            className={styles.heroBadge}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.45 }}
           >
-            Frequently Asked Questions
-          </motion.h1>
+            FAQ Knowledge Center
+          </motion.span>
 
-          <motion.p
-            className={styles.heroDesc}
+          <motion.div
+            className={styles.heroTitleRow}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.06 }}
           >
-            Find answers to common questions about Saukhyam reusable pads, menstrual health, washing and care, banana fiber technology, sustainability, products, and community initiatives.
-          </motion.p>
+            <h1 id="faq-hero-heading" className={styles.heroTitle}>
+              Frequently Asked Questions
+            </h1>
+            <span className={styles.heroDivider} aria-hidden="true">
+              |
+            </span>
+            <p className={styles.heroDesc}>
+              Everything you need to know about Saukhyam reusable pads—from usage and washing instructions to banana fiber technology, sustainability, and community impact.
+            </p>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -292,7 +299,7 @@ export default function FAQPage() {
               value={searchQuery}
               onChange={handleSearchChange}
               onClear={() => handleSearchChange('')}
-              placeholder="Search questions..."
+              placeholder="Search FAQs..."
               className={styles.heroSearchWrap}
             />
           </motion.div>
