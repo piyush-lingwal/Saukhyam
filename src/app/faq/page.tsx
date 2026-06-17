@@ -210,7 +210,7 @@ export default function FAQPage() {
         }
       },
       {
-        rootMargin: '-120px 0px -55% 0px',
+        rootMargin: '-180px 0px -50% 0px',
         threshold: [0.08, 0.2, 0.4],
       },
     );
@@ -349,7 +349,17 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <div className={styles.mainShell}>
+      <div className={`${styles.mainShell} ${isSearching ? styles.mainShellSearch : ''}`}>
+        <div className={styles.mainSearchArea}>
+          <SearchBar
+            value={searchQuery}
+            onChange={handleSearchChange}
+            onClear={() => handleSearchChange('')}
+            placeholder="Search questions about periods, reusable pads, washing, banana fiber, HEAL, products, and more..."
+            className={styles.contentSearchWrap}
+          />
+        </div>
+
         {!isSearching && (
           <nav className={styles.mobileCategoryNav} aria-label="FAQ categories">
             <div className={styles.mobileCategoryScroll}>
@@ -368,92 +378,78 @@ export default function FAQPage() {
           </nav>
         )}
 
-        <div className={`${styles.kbLayout} ${isSearching ? styles.kbLayoutSearch : ''}`}>
-          <div className={styles.kbTwoColumn}>
-            <section className={styles.questionsArea} aria-label="FAQ questions and answers">
-              <div className={styles.contentSearchSticky}>
-                <SearchBar
-                  value={searchQuery}
-                  onChange={handleSearchChange}
-                  onClear={() => handleSearchChange('')}
-                  placeholder="Search questions about periods, reusable pads, washing, banana fiber, HEAL, products, and more..."
-                  className={styles.contentSearchWrap}
-                />
-              </div>
-
-              {isSearching ? (
-                <motion.div
-                  key={`search-${searchQuery}`}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <p className={styles.searchMeta}>
-                    {searchResults.length} result{searchResults.length === 1 ? '' : 's'} for &ldquo;
-                    {searchQuery.trim()}&rdquo;
-                  </p>
-                  {searchResults.length === 0 ? (
-                    <div className={styles.emptyState}>
-                      No questions matched your search. Try a different keyword.
-                    </div>
-                  ) : (
-                    <div className={styles.faqList}>
-                      {searchResults.map(item => (
-                        <FaqAccordionItem
-                          key={item.id}
-                          item={item}
-                          isOpen={openFaqId === item.id}
-                          onToggle={() => toggleItem(item.id)}
-                          searchQuery={searchQuery}
-                          showCategory
-                        />
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              ) : (
-                faqsByCategory.map(cat => (
-                  <section
-                    key={cat.id}
-                    id={`faq-section-${cat.id}`}
-                    className={styles.categoryBlock}
-                    aria-labelledby={`faq-heading-${cat.id}`}
-                  >
-                    <div className={styles.categorySectionHeader}>
-                      <h2 id={`faq-heading-${cat.id}`} className={styles.categorySectionTitle}>
-                        {cat.label}
-                      </h2>
-                    </div>
-                    {renderCategoryItems(cat.id, cat.items)}
-                  </section>
-                ))
-              )}
-            </section>
-
-            {!isSearching && (
-              <aside className={styles.categoriesSidebar} aria-labelledby="faq-sidebar-heading">
-                <div className={styles.sidebarCard}>
-                  <h2 id="faq-sidebar-heading" className={styles.sidebarHeading}>
-                    Browse Categories
-                  </h2>
-                  <nav className={styles.sidebarNav}>
-                    {siteFaqCategories.map(cat => (
-                      <button
-                        key={cat.id}
-                        type="button"
-                        className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
-                        onClick={() => scrollToCategory(cat.id)}
-                        aria-current={activeCategory === cat.id ? 'true' : undefined}
-                      >
-                        {cat.label}
-                      </button>
-                    ))}
-                  </nav>
+        <section className={styles.questionsArea} aria-label="FAQ questions and answers">
+          {isSearching ? (
+            <motion.div
+              key={`search-${searchQuery}`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <p className={styles.searchMeta}>
+                {searchResults.length} result{searchResults.length === 1 ? '' : 's'} for &ldquo;
+                {searchQuery.trim()}&rdquo;
+              </p>
+              {searchResults.length === 0 ? (
+                <div className={styles.emptyState}>
+                  No questions matched your search. Try a different keyword.
                 </div>
-              </aside>
-            )}
-          </div>
-        </div>
+              ) : (
+                <div className={styles.faqList}>
+                  {searchResults.map(item => (
+                    <FaqAccordionItem
+                      key={item.id}
+                      item={item}
+                      isOpen={openFaqId === item.id}
+                      onToggle={() => toggleItem(item.id)}
+                      searchQuery={searchQuery}
+                      showCategory
+                    />
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          ) : (
+            faqsByCategory.map(cat => (
+              <section
+                key={cat.id}
+                id={`faq-section-${cat.id}`}
+                className={styles.categoryBlock}
+                aria-labelledby={`faq-heading-${cat.id}`}
+              >
+                <div className={styles.categorySectionHeader}>
+                  <h2 id={`faq-heading-${cat.id}`} className={styles.categorySectionTitle}>
+                    {cat.label}
+                  </h2>
+                </div>
+                {renderCategoryItems(cat.id, cat.items)}
+              </section>
+            ))
+          )}
+        </section>
+
+        {!isSearching && (
+          <aside className={styles.categoriesSidebar} aria-labelledby="faq-sidebar-heading">
+            <div className={styles.sidebarCard}>
+              <h2 id="faq-sidebar-heading" className={styles.sidebarHeading}>
+                Browse Categories
+              </h2>
+              <nav className={styles.sidebarNav}>
+                {siteFaqCategories.map(cat => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
+                    onClick={() => scrollToCategory(cat.id)}
+                    aria-current={activeCategory === cat.id ? 'true' : undefined}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+        )}
 
         <section className={styles.contactCta} aria-labelledby="faq-cta-heading">
           <div className={styles.contactCtaDecor} aria-hidden="true">
