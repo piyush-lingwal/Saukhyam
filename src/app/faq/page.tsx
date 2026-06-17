@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Search, X } from 'lucide-react';
@@ -146,8 +146,6 @@ export default function FAQPage() {
   const [activeCategory, setActiveCategory] = useState<SiteFAQCategory>('usage-guide');
   const [searchQuery, setSearchQuery] = useState('');
   const [openFaqId, setOpenFaqId] = useState<string | null>(null);
-  const isScrollingRef = useRef(false);
-  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isSearching = searchQuery.trim().length > 0;
 
@@ -165,6 +163,11 @@ export default function FAQPage() {
     [],
   );
 
+  const activeCategoryData = useMemo(
+    () => faqsByCategory.find(cat => cat.id === activeCategory),
+    [faqsByCategory, activeCategory],
+  );
+
   const updateUrl = useCallback((category: SiteFAQCategory, query: string) => {
     const params = new URLSearchParams();
     params.set('category', category);
@@ -177,47 +180,10 @@ export default function FAQPage() {
     const category = params.get('category');
     if (category && isValidSiteFaqCategory(category)) {
       setActiveCategory(category);
-      requestAnimationFrame(() => {
-        document.getElementById(`faq-section-${category}`)?.scrollIntoView({ behavior: 'auto', block: 'start' });
-      });
     }
     const q = params.get('q');
     if (q) setSearchQuery(q);
   }, []);
-
-  useEffect(() => {
-    if (isSearching) return;
-
-    const sectionElements = siteFaqCategories
-      .map(cat => document.getElementById(`faq-section-${cat.id}`))
-      .filter((el): el is HTMLElement => Boolean(el));
-
-    if (sectionElements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      entries => {
-        if (isScrollingRef.current) return;
-
-        const visible = entries
-          .filter(entry => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible.length === 0) return;
-
-        const id = visible[0].target.id.replace('faq-section-', '');
-        if (isValidSiteFaqCategory(id)) {
-          setActiveCategory(id);
-        }
-      },
-      {
-        rootMargin: '-180px 0px -50% 0px',
-        threshold: [0.08, 0.2, 0.4],
-      },
-    );
-
-    sectionElements.forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, [isSearching]);
 
   const scrollToCategory = (category: SiteFAQCategory) => {
     setActiveCategory(category);
@@ -225,16 +191,9 @@ export default function FAQPage() {
     setSearchQuery('');
     updateUrl(category, '');
 
-    const el = document.getElementById(`faq-section-${category}`);
-    if (!el) return;
-
-    isScrollingRef.current = true;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
-    scrollTimeoutRef.current = setTimeout(() => {
-      isScrollingRef.current = false;
-    }, 800);
+    requestAnimationFrame(() => {
+      document.getElementById('faq-questions-area')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   };
 
   const handleSearchChange = (value: string) => {
@@ -304,21 +263,12 @@ export default function FAQPage() {
         </div>
 
         <div className={styles.heroInner}>
-          <motion.span
-            className={styles.heroBadge}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-          >
-            FAQ Knowledge Center
-          </motion.span>
-
           <motion.h1
             id="faq-hero-heading"
             className={styles.heroTitle}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.06 }}
+            transition={{ duration: 0.5 }}
           >
             Frequently Asked Questions
           </motion.h1>
@@ -327,22 +277,22 @@ export default function FAQPage() {
             className={styles.heroDesc}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.06 }}
           >
-            Everything you need to know about Saukhyam reusable pads—from usage and washing instructions to
-            banana fiber technology, sustainability, and community impact.
+            Find answers to common questions about Saukhyam reusable pads, menstrual health, washing and care, banana fiber technology, sustainability, products, and community initiatives.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.16 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className={styles.heroSearchWrap}
           >
             <SearchBar
               value={searchQuery}
               onChange={handleSearchChange}
               onClear={() => handleSearchChange('')}
-              placeholder="Search questions, products, washing instructions, banana fiber technology..."
+              placeholder="Search questions..."
               className={styles.heroSearchWrap}
             />
           </motion.div>
@@ -350,15 +300,28 @@ export default function FAQPage() {
       </section>
 
       <div className={`${styles.mainShell} ${isSearching ? styles.mainShellSearch : ''}`}>
-        <div className={styles.mainSearchArea}>
-          <SearchBar
-            value={searchQuery}
-            onChange={handleSearchChange}
-            onClear={() => handleSearchChange('')}
-            placeholder="Search questions about periods, reusable pads, washing, banana fiber, HEAL, products, and more..."
-            className={styles.contentSearchWrap}
-          />
-        </div>
+        {!isSearching && (
+          <aside className={styles.categoriesSidebar} aria-labelledby="faq-sidebar-heading">
+            <div className={styles.sidebarCard}>
+              <h2 id="faq-sidebar-heading" className={styles.sidebarHeading}>
+                Browse Categories
+              </h2>
+              <nav className={styles.sidebarNav}>
+                {siteFaqCategories.map(cat => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
+                    onClick={() => scrollToCategory(cat.id)}
+                    aria-current={activeCategory === cat.id ? 'true' : undefined}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+        )}
 
         {!isSearching && (
           <nav className={styles.mobileCategoryNav} aria-label="FAQ categories">
@@ -378,7 +341,7 @@ export default function FAQPage() {
           </nav>
         )}
 
-        <section className={styles.questionsArea} aria-label="FAQ questions and answers">
+        <section id="faq-questions-area" className={styles.questionsArea} aria-label="FAQ questions and answers">
           {isSearching ? (
             <motion.div
               key={`search-${searchQuery}`}
@@ -410,48 +373,21 @@ export default function FAQPage() {
               )}
             </motion.div>
           ) : (
-            faqsByCategory.map(cat => (
-              <section
-                key={cat.id}
-                id={`faq-section-${cat.id}`}
+            activeCategoryData && (
+              <div
+                key={activeCategoryData.id}
+                id={`faq-section-${activeCategoryData.id}`}
                 className={styles.categoryBlock}
-                aria-labelledby={`faq-heading-${cat.id}`}
+                aria-label={activeCategoryData.label}
               >
-                <div className={styles.categorySectionHeader}>
-                  <h2 id={`faq-heading-${cat.id}`} className={styles.categorySectionTitle}>
-                    {cat.label}
-                  </h2>
-                </div>
-                {renderCategoryItems(cat.id, cat.items)}
-              </section>
-            ))
+                {renderCategoryItems(activeCategoryData.id, activeCategoryData.items)}
+              </div>
+            )
           )}
         </section>
+      </div>
 
-        {!isSearching && (
-          <aside className={styles.categoriesSidebar} aria-labelledby="faq-sidebar-heading">
-            <div className={styles.sidebarCard}>
-              <h2 id="faq-sidebar-heading" className={styles.sidebarHeading}>
-                Browse Categories
-              </h2>
-              <nav className={styles.sidebarNav}>
-                {siteFaqCategories.map(cat => (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
-                    onClick={() => scrollToCategory(cat.id)}
-                    aria-current={activeCategory === cat.id ? 'true' : undefined}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
-              </nav>
-            </div>
-          </aside>
-        )}
-
-        <section className={styles.contactCta} aria-labelledby="faq-cta-heading">
+      <section className={styles.contactCta} aria-labelledby="faq-cta-heading">
           <div className={styles.contactCtaDecor} aria-hidden="true">
             <span className={styles.contactCtaGlowTop} />
             <span className={styles.contactCtaGlowBottom} />
@@ -468,7 +404,6 @@ export default function FAQPage() {
             </Link>
           </div>
         </section>
-      </div>
     </div>
   );
 }
