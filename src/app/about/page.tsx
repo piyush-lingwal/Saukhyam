@@ -245,9 +245,6 @@ export default function AboutPage() {
         <div className={styles.heroBgImage} aria-hidden="true" />
         <div className={styles.heroOverlay} aria-hidden="true" />
         <div className={styles.heroGlow} aria-hidden="true" />
-        <div className={styles.heroCornerPattern} aria-hidden="true" />
-        <div className={styles.heroLeafFloat1} aria-hidden="true" />
-        <div className={styles.heroLeafFloat2} aria-hidden="true" />
 
         <div className={`container ${styles.heroContainer}`}>
           <motion.div className={styles.heroInner} initial="hidden" animate="visible" variants={stagger}>
@@ -312,8 +309,6 @@ export default function AboutPage() {
                 loading="lazy"
               />
               <div className={styles.ammaImageGlow} aria-hidden="true" />
-              <span className={styles.ammaFloatLeaf1} aria-hidden="true" />
-              <span className={styles.ammaFloatLeaf2} aria-hidden="true" />
             </motion.div>
 
             <motion.div className={styles.ammaText} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>

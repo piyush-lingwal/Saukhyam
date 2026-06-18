@@ -183,52 +183,6 @@
   filter: blur(8px);
 }
 
-.heroCornerPattern {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 64 64' fill='%23ffffff'%3E%3Cpath d='M32 4C20 20 8 28 8 40c0 8 6 14 14 14 6 0 12-4 16-10 4 6 10 10 16 10 8 0 14-6 14-14 0-12-12-20-24-36z'/%3E%3C/svg%3E");
-  background-size: 140px 140px;
-  mask-image: radial-gradient(circle at top left, black 0%, transparent 55%);
-}
-
-.heroLeafFloat1,
-.heroLeafFloat2 {
-  position: absolute;
-  width: 64px;
-  height: 64px;
-  pointer-events: none;
-  opacity: 0.12;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='%2386efac'%3E%3Cpath d='M32 4C20 20 8 28 8 40c0 8 6 14 14 14 6 0 12-4 16-10 4 6 10 10 16 10 8 0 14-6 14-14 0-12-12-20-24-36z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.heroLeafFloat1 {
-  top: 14%;
-  right: 12%;
-  animation: heroLeafDrift1 9s ease-in-out infinite;
-}
-
-.heroLeafFloat2 {
-  bottom: 22%;
-  right: 28%;
-  width: 48px;
-  height: 48px;
-  animation: heroLeafDrift2 11s ease-in-out infinite;
-}
-
-@keyframes heroLeafDrift1 {
-  0%, 100% { transform: translateY(0) rotate(12deg); }
-  50% { transform: translateY(-14px) rotate(18deg); }
-}
-
-@keyframes heroLeafDrift2 {
-  0%, 100% { transform: translateY(0) rotate(-8deg); }
-  50% { transform: translateY(10px) rotate(-2deg); }
-}
-
 .heroContainer {
   position: relative;
   z-index: 2;
@@ -573,32 +527,6 @@
   background: radial-gradient(circle at 60% 30%, rgba(34, 197, 94, 0.12), transparent 60%);
   z-index: -1;
   pointer-events: none;
-}
-
-.ammaFloatLeaf1,
-.ammaFloatLeaf2 {
-  position: absolute;
-  width: 56px;
-  height: 56px;
-  pointer-events: none;
-  opacity: 0.35;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' fill='%2322c55e'%3E%3Cpath d='M32 4C20 20 8 28 8 40c0 8 6 14 14 14 6 0 12-4 16-10 4 6 10 10 16 10 8 0 14-6 14-14 0-12-12-20-24-36z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.ammaFloatLeaf1 {
-  top: -12px;
-  right: -8px;
-  animation: heroLeafDrift1 8s ease-in-out infinite;
-}
-
-.ammaFloatLeaf2 {
-  bottom: 12%;
-  left: -18px;
-  width: 44px;
-  height: 44px;
-  animation: heroLeafDrift2 10s ease-in-out infinite;
 }
 
 .ammaQuoteBlock {
