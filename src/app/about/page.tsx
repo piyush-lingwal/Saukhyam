@@ -15,6 +15,7 @@ import {
   Play,
   Quote,
   Sparkles,
+  ShoppingBag,
   Target,
   Trophy,
   Users,
@@ -682,37 +683,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 10. Join the Movement CTA */}
+      {/* 10. CTA */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaBlobA} aria-hidden="true" />
         <div className={styles.ctaBlobB} aria-hidden="true" />
         <div className="container">
           <motion.div className={styles.ctaContent} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.span variants={fadeUp} className={styles.ctaEyebrow}>
-              Join the Movement
-            </motion.span>
             <motion.h2 variants={fadeUp} className={styles.ctaTitle}>
-              Small Choices.
-              <br />
-              Lasting Change.
+              Join the Reusable Revolution
             </motion.h2>
-            <motion.div variants={fadeUp} className={styles.ctaLines}>
-              <p>Menstrual health is not just about products.</p>
-              <p>It is about dignity.</p>
-              <p>It is about education.</p>
-              <p>It is about sustainability.</p>
-              <p>It is about collective responsibility.</p>
-            </motion.div>
             <motion.p variants={fadeUp} className={styles.ctaDesc}>
-              Together, we can create healthier communities, reduce waste, and build a future where sustainable
-              menstrual care is accessible to all.
+              Every pad you buy creates a wave of change, for your health, for rural women, and for the planet.
+              Be part of something bigger.
             </motion.p>
             <motion.div variants={fadeUp} className={styles.ctaButtons}>
-              <Link href="/programs" className={styles.ctaBtnPrimary}>
-                Explore Our Programs
+              <Link href="/products" className={styles.ctaBtnPrimary}>
+                <ShoppingBag size={18} aria-hidden />
+                Shop Now
               </Link>
-              <Link href="/contact" className={styles.ctaBtnSecondary}>
-                Get Involved
+              <Link href="/programs" className={styles.ctaBtnSecondary}>
+                Our Programs
                 <ArrowRight size={16} />
               </Link>
             </motion.div>
