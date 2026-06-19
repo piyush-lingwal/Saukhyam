@@ -1,14 +1,26 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
-  Heart, Leaf, Users, Trophy, ShoppingBag,
-  Target, Globe, Award, Sparkles, ArrowRight,
-  Recycle, Shield, CheckCircle2, Quote,
+  ArrowRight,
+  Award,
+  Globe,
+  HandHelping,
+  Heart,
+  Leaf,
+  Lightbulb,
+  Play,
+  Quote,
+  Sparkles,
+  ShoppingBag,
+  Target,
+  Trophy,
+  Users,
 } from 'lucide-react';
-import { teamMembers, awards, pressItems } from '@/data/content';
+import { pressMentions } from '@/data/newsroom/pressMediaContent';
 import styles from './page.module.css';
 
 const fadeUp = {
@@ -17,124 +29,267 @@ const fadeUp = {
 };
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
-const impactStats = [
-  { value: '30L+', label: 'Women & Girls Empowered', icon: Users },
-  { value: '4,137', label: 'Villages Reached', icon: Globe },
-  { value: '280+', label: 'Rural Livelihoods Created', icon: Heart },
-  { value: '20+', label: 'National & Global Awards', icon: Trophy },
+const STORY_VIDEO_ID = '6nFDpxCS4PA';
+
+const heroImpactCards = [
+  {
+    icon: Heart,
+    title: 'Menstrual Health & Dignity',
+    desc: 'Supporting safe, comfortable, and informed menstrual care.',
+  },
+  {
+    icon: Leaf,
+    title: 'Sustainable Living',
+    desc: 'Encouraging reusable choices that reduce environmental impact.',
+  },
+  {
+    icon: Users,
+    title: 'Community Outreach',
+    desc: 'Building awareness through education and grassroots engagement.',
+  },
+  {
+    icon: HandHelping,
+    title: 'Rural Livelihoods',
+    desc: 'Creating meaningful livelihood opportunities through local production.',
+  },
+  {
+    icon: Globe,
+    title: 'Climate Responsibility',
+    desc: 'Promoting practices that help reduce menstrual waste.',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Social Innovation',
+    desc: 'Developing practical solutions that combine health, sustainability, and accessibility.',
+  },
+];
+
+const storyMilestones = [
+  {
+    step: '01',
+    title: 'Inspired by Compassion',
+    desc: "Guided by Amma's vision, Saukhyam was founded on the belief that health, dignity, and care should be accessible to all.",
+  },
+  {
+    step: '02',
+    title: 'Building Awareness',
+    desc: 'Through education and community engagement, conversations around menstrual health began reaching more homes, schools, and communities.',
+  },
+  {
+    step: '03',
+    title: 'Creating Sustainable Choices',
+    desc: 'The initiative expanded reusable menstrual solutions that support both personal wellbeing and environmental responsibility.',
+  },
+  {
+    step: '04',
+    title: 'Strengthening Communities',
+    desc: 'Training, outreach, and local participation created opportunities for shared learning and collective action.',
+  },
+  {
+    step: '05',
+    title: 'Growing a Movement',
+    desc: 'What began as a small initiative evolved into a wider movement supported by volunteers, educators, healthcare professionals, and communities.',
+  },
+  {
+    step: '06',
+    title: 'Looking Ahead',
+    desc: 'Saukhyam continues to work toward a future where sustainable menstrual care becomes a natural and accessible choice for everyone.',
+  },
+];
+
+const coreValues = [
+  {
+    icon: Leaf,
+    title: 'Sustainable Living',
+    desc: 'Encouraging responsible choices that help protect natural resources and reduce environmental impact.',
+    color: '#16a34a',
+  },
+  {
+    icon: Heart,
+    title: 'Health & Wellbeing',
+    desc: 'Supporting menstrual care solutions that prioritize comfort, safety, and confidence.',
+    color: '#0d9488',
+  },
+  {
+    icon: Users,
+    title: 'Community Engagement',
+    desc: 'Creating opportunities for awareness, learning, and meaningful participation.',
+    color: '#2563eb',
+  },
+  {
+    icon: Sparkles,
+    title: 'Circular Innovation',
+    desc: 'Promoting reusable and sustainable practices that encourage long-term positive change.',
+    color: '#7c3aed',
+  },
+  {
+    icon: Globe,
+    title: 'Environmental Responsibility',
+    desc: 'Working toward a future where everyday choices contribute to a healthier planet.',
+    color: '#0284c7',
+  },
+  {
+    icon: HandHelping,
+    title: 'Dignity & Inclusion',
+    desc: 'Ensuring menstrual health is approached with respect, empathy, accessibility, and understanding.',
+    color: '#b45309',
+  },
 ];
 
 const timelineEvents = [
+  { year: '2016', title: 'The Beginning', desc: 'A vision for sustainable menstrual health begins to take shape.' },
+  { year: '2017', title: 'Research & Learning', desc: 'Exploring solutions that combine health, dignity, and sustainability.' },
+  { year: '2018', title: 'Building Communities', desc: 'Training programs and community engagement initiatives expand.' },
+  { year: '2019', title: 'Growing Awareness', desc: 'More institutions and communities join the movement.' },
+  { year: '2020', title: 'Resilience Through Change', desc: 'Continued outreach and support during challenging times.' },
+  { year: '2021', title: 'Recognition & Reach', desc: 'National and international platforms acknowledge the initiative.' },
+  { year: '2023', title: 'Expanding Impact', desc: 'Programs reach more communities and partnerships strengthen.' },
+  { year: 'Today', title: 'A Continuing Journey', desc: 'The mission continues through education, awareness, and sustainable practices.' },
+];
+
+const featuredAwards = [
   {
-    year: '2016',
-    title: 'The Seed Was Planted',
-    desc: 'Anju Bist, inspired by Amma\'s vision, began researching sustainable menstrual hygiene solutions at Amritapuri Ashram, Kerala.',
-    image: 'https://saukhyampads.org/cdn/shop/files/6_d1942f75-768a-4d32-bb23-666a71990a71_2048x2048.png?v=1746945194',
+    id: 'fa-1',
+    title: 'Women Transforming India Award',
+    organization: 'NITI Aayog',
+    description: 'Honoured among transformative women leaders driving social innovation across India.',
+    image: '/images/awards/niti-aayog-2021-award.png',
+    href: '/media/awards',
   },
   {
-    year: '2017',
-    title: 'Banana Fiber Discovery',
-    desc: 'After extensive R&D, the team developed India\'s first banana fiber absorbent core: 100% chemical free, biodegradable, and antimicrobial.',
-    image: null,
+    id: 'fa-2',
+    title: 'Best Social Initiative on Menstrual Hygiene',
+    organization: 'Annual MHM Conference',
+    description: 'Recognized for scalable, community-led menstrual health programs and sustainable solutions.',
+    image: '/images/awards/mhm-2022-award.png',
+    href: '/media/awards',
   },
   {
-    year: '2018',
-    title: 'First Production Unit',
-    desc: 'Established the first manufacturing centre in Amritapuri, training rural women to handcraft reusable pads with dignity and skill.',
-    image: '/Blog_Images/IMG_8023_1024x1024.webp',
+    id: 'fa-3',
+    title: 'Red Shakti Award',
+    organization: 'Club FM 93.5 Malayalam',
+    description: 'Celebrated for empowering women through awareness, dignity, and grassroots impact.',
+    image: '/images/awards/red-shakti-2023.png',
+    href: '/media/awards',
   },
   {
-    year: '2019',
-    title: 'National Recognition',
-    desc: 'Recognized by NITI Aayog as a Women Transforming India initiative. Expanded to multiple satellite centres across states.',
-    image: null,
+    id: 'fa-4',
+    title: 'Best CSR Initiative on MHM Award',
+    organization: 'MHM India Summit',
+    description: 'Acknowledged for partnerships that advance menstrual hygiene through responsible corporate action.',
+    image: '/images/awards/mhm-2024-award-ceremony.png',
+    href: '/media/awards',
   },
   {
-    year: '2020',
-    title: 'Scaling Impact',
-    desc: 'Reached 1 Lakh women during the pandemic. Launched online outreach and distributed starter packs to tribal communities.',
-    image: '/Blog_Images/1.webp',
+    id: 'fa-5',
+    title: 'Sheroes Recognition',
+    organization: "Kerala Women's Commission",
+    description: 'Honoured for leadership in women\'s health, dignity, and community transformation.',
+    image: '/images/awards/sheroes-2024-ceremony.png',
+    href: '/media/awards',
   },
   {
-    year: '2021',
-    title: 'International Stage',
-    desc: 'Featured at the UN Climate Change Conference (UNFCCC) in Poland. ISO standards for reusable pads notified in India.',
-    image: null,
-  },
-  {
-    year: '2023',
-    title: 'Mission Goes Global',
-    desc: 'Crossed 5 Lakh users. Featured at COP28. Expanded HEAL, CARE & REACH programs to 11 states, 4,137 villages.',
-    image: '/bentogrid_photo.jpeg',
-  },
-  {
-    year: '2026',
-    title: '30 Lakh Lives Changed',
-    desc: 'Today, Saukhyam stands as India\'s most impactful menstrual health movement, built by women, for women, healing the planet.',
-    image: null,
+    id: 'fa-6',
+    title: 'Lokmata Ahilyabai Holkar Samman',
+    organization: 'Kamala Power Women Awards',
+    description: 'National recognition for meaningful contribution to menstrual health and social impact.',
+    image: '/images/awards/ahilyabai-2025-stage.jpg',
+    href: '/media/awards',
   },
 ];
 
-const pillars = [
-  { icon: Leaf, label: 'Zero Waste', desc: '100% biodegradable banana fiber & cotton', color: '#16a34a' },
-  { icon: Heart, label: "Women's Health", desc: 'Chemical-free, healing periods for all', color: '#dc1464' },
-  { icon: Users, label: 'Empower Makers', desc: 'Rural women earning dignified livelihoods', color: '#0d9488' },
-  { icon: Globe, label: 'Climate Action', desc: 'Eliminating 125+ kg of pad waste per woman', color: '#7c3aed' },
-  { icon: Shield, label: 'Toxin-Free', desc: 'No dioxins, phthalates, or bleach, ever', color: '#b45309' },
-  { icon: Recycle, label: 'Circular Economy', desc: 'From agricultural waste to healing product', color: '#0284c7' },
+const featuredPress = [
+  {
+    publication: 'YourStory',
+    logo: '1..webp',
+    mention: pressMentions.find(item => item.href.includes('yourstory.com'))!,
+  },
+  {
+    publication: 'The New Indian Express',
+    logo: '7..webp',
+    mention: pressMentions.find(item => item.href.includes('newindianexpress.com'))!,
+  },
+  {
+    publication: 'BBC Hindi',
+    logo: '12..webp',
+    mention: pressMentions.find(item => item.href.includes('bbc.com'))!,
+  },
+  {
+    publication: "People's Samachar",
+    logo: '23..webp',
+    mention: pressMentions.find(item => item.href.includes('peoplessamachar'))!,
+  },
+  {
+    publication: 'The CSR Journal',
+    logo: '32..webp',
+    mention: pressMentions.find(item => item.href.includes('thecsrjournal'))!,
+  },
+  {
+    publication: 'EdexLive',
+    logo: '35..webp',
+    mention: pressMentions.find(item => item.href.includes('edexlive.com'))!,
+  },
 ];
-
-const featuredPressItems = pressItems.slice(0, 6);
 
 export default function AboutPage() {
+  const [videoPlaying, setVideoPlaying] = useState(false);
+
+  const scrollToJourney = () => {
+    document.getElementById('our-journey')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className={styles.aboutPage}>
-
-      {/* ── CINEMATIC HERO ── */}
+      {/* 1. Hero */}
       <section className={styles.hero}>
         <div className={styles.heroBgImage} aria-hidden="true" />
         <div className={styles.heroOverlay} aria-hidden="true" />
+        <div className={styles.heroGlow} aria-hidden="true" />
+
         <div className={`container ${styles.heroContainer}`}>
-          <motion.div
-            className={styles.heroContent}
-            initial="hidden"
-            animate="visible"
-            variants={stagger}
-          >
-            <motion.div variants={fadeUp} className={styles.heroBadge}>
-              <Heart size={14} />
+          <motion.div className={styles.heroInner} initial="hidden" animate="visible" variants={stagger}>
+            <motion.span variants={fadeUp} className={styles.heroBadge}>
               Our Story
-            </motion.div>
+            </motion.span>
+
             <motion.h1 variants={fadeUp} className={styles.heroTitle}>
-              Healing Periods.
-              <br />
-              <span className={styles.heroTitleGreen}>Healing the Planet.</span>
+              <span className={styles.heroTitleLine}>Healing Periods.</span>
+              <span className={styles.heroTitleGradient}>Healing the Planet.</span>
             </motion.h1>
+
             <motion.p variants={fadeUp} className={styles.heroSubtitle}>
-              Born from a vision to make menstrual hygiene safe, sustainable, and empowering , 
-              Saukhyam is India&apos;s first reusable pad made from banana fiber, handcrafted by rural women.
+              Born from a vision to make menstrual hygiene safe, sustainable, and empowering, Saukhyam creates
+              reusable menstrual solutions that support healthier lives, stronger communities, and a cleaner planet.
             </motion.p>
-            <motion.div variants={fadeUp} className={styles.heroStats}>
-              {impactStats.map((s) => {
-                const Icon = s.icon;
+
+            <motion.p variants={fadeUp} className={styles.heroSubtitleSecondary}>
+              Guided by compassion and driven by purpose, Saukhyam works at the intersection of menstrual health,
+              sustainability, education, and community wellbeing.
+            </motion.p>
+
+            <motion.div variants={fadeUp} className={styles.heroImpactGrid}>
+              {heroImpactCards.map(card => {
+                const Icon = card.icon;
                 return (
-                  <div key={s.label} className={styles.heroStat}>
-                    <div className={styles.heroStatIcon}><Icon size={16} /></div>
-                    <div className={styles.heroStatValue}>{s.value}</div>
-                    <div className={styles.heroStatLabel}>{s.label}</div>
+                  <div key={card.title} className={styles.heroImpactCard}>
+                    <div className={styles.heroImpactIcon}>
+                      <Icon size={20} strokeWidth={1.75} aria-hidden="true" />
+                    </div>
+                    <h3 className={styles.heroImpactTitle}>{card.title}</h3>
+                    <p className={styles.heroImpactDesc}>{card.desc}</p>
                   </div>
                 );
               })}
             </motion.div>
           </motion.div>
         </div>
-        {/* Scroll nudge */}
+
         <div className={styles.heroScroll} aria-hidden="true">
           <div className={styles.heroScrollDot} />
         </div>
       </section>
 
-      {/* ── AMMA'S INSPIRATION ── */}
+      {/* 2. Inspired by Amma */}
       <section className={styles.ammaSection}>
         <div className="container">
           <div className={styles.ammaGrid}>
@@ -156,19 +311,13 @@ export default function AboutPage() {
               <div className={styles.ammaImageGlow} aria-hidden="true" />
             </motion.div>
 
-            <motion.div
-              className={styles.ammaText}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={stagger}
-            >
+            <motion.div className={styles.ammaText} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
               <motion.span variants={fadeUp} className={styles.sectionBadge}>
                 <Sparkles size={14} />
                 Inspired By
               </motion.span>
               <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-                Mata Amritanandamayi
+                Mata Amritanandamayi (Amma)
                 <span className={styles.titleUnderline} aria-hidden="true" />
               </motion.h2>
               <motion.div variants={fadeUp} className={styles.ammaQuoteBlock}>
@@ -176,191 +325,158 @@ export default function AboutPage() {
                 <p className={styles.ammaQuoteText}>
                   When we take care of nature, nature takes care of us.
                 </p>
-                <span className={styles.ammaQuoteAuthor}>,  Amma</span>
               </motion.div>
               <motion.p variants={fadeUp} className={styles.bodyText}>
-                Saukhyam was born from <strong>Amma&apos;s compassionate vision</strong>, a world where every woman
-                has access to safe, non-polluting menstrual care. Under her guidance, Anju Bist
-                embarked on a journey that would transform the lives of millions.
+                Saukhyam was inspired by Amma&apos;s vision of a world where health, dignity, compassion, and
+                environmental responsibility go hand in hand.
               </motion.p>
               <motion.p variants={fadeUp} className={styles.bodyText}>
-                Ayurarogya Saukhyam Foundation is an initiative of the{' '}
-                <strong>Mata Amritanandamayi Math</strong>, part of the Amrita SeRVe project
-                covering 101 model villages across 22+ states.
+                Her guidance encouraged the creation of practical solutions that address everyday challenges while
+                caring for both people and the planet.
               </motion.p>
-              <motion.div variants={fadeUp}>
-                <Link href="/programs" className={styles.linkBtn}>
-                  Explore Our Programs <ArrowRight size={16} />
-                </Link>
-              </motion.div>
+              <motion.p variants={fadeUp} className={styles.bodyText}>
+                Today, Saukhyam continues to carry that spirit forward through menstrual health initiatives,
+                community outreach, education programs, and sustainable living practices.
+              </motion.p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── FOUNDER STORY ── */}
-      <section className={styles.founderSection}>
-        <div className="container">
-          <motion.div
-            className={styles.founderGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            <motion.div variants={fadeUp} className={styles.founderTextCol}>
-              <span className={styles.sectionBadgeAlt}>
-                <Heart size={14} />
-                The Founder
-              </span>
-              <h2 className={styles.sectionTitle}>
-                Anju Bist,<br />
-                <span className={styles.titleAccentGreen}>The Padwoman of India</span>
-              </h2>
-              <p className={styles.bodyText}>
-                <strong>Anju Bist</strong> began as a researcher with a single question: why do the
-                women she met in rural India suffer so silently every month? Disposable pads were
-                too expensive, too toxic, and ending up in rivers and fields.
+      {/* 3. Split-screen Story + Video */}
+      <section className={styles.splitStorySection}>
+        <div className={styles.splitStoryBg} aria-hidden="true" />
+        <div className={`container ${styles.splitStoryContainer}`}>
+          <div className={styles.splitStoryGrid}>
+            <motion.div
+              className={styles.splitStoryVideoCol}
+              initial={{ opacity: 0, x: -28 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <motion.div className={styles.splitVideoCard} whileHover={{ y: -4 }} transition={{ duration: 0.35 }}>
+                {!videoPlaying ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`https://img.youtube.com/vi/${STORY_VIDEO_ID}/maxresdefault.jpg`}
+                      alt="Saukhyam story video preview"
+                      className={styles.splitVideoThumb}
+                    />
+                    <button
+                      type="button"
+                      className={styles.splitVideoPlayBtn}
+                      onClick={() => setVideoPlaying(true)}
+                      aria-label="Play Saukhyam story video"
+                    >
+                      <span className={styles.splitVideoPlayRing} aria-hidden="true" />
+                      <span className={styles.splitVideoPlayInner}>
+                        <Play size={26} fill="currentColor" aria-hidden="true" />
+                      </span>
+                    </button>
+                  </>
+                ) : (
+                  <iframe
+                    className={styles.splitVideoIframe}
+                    src={`https://www.youtube.com/embed/${STORY_VIDEO_ID}?autoplay=1&rel=0`}
+                    title="Experience the Saukhyam Story"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                )}
+              </motion.div>
+
+              <p className={styles.splitVideoCaption}>
+                See how a simple idea grew into a movement for sustainable menstrual care.
               </p>
-              <p className={styles.bodyText}>
-                After years of R&amp;D at Amritapuri Ashram, she discovered the extraordinary
-                potential of <strong>banana fiber</strong>, the agricultural waste of a tree that
-                bears fruit once and is then discarded. From that waste she created India&apos;s
-                first banana fiber reusable sanitary napkin.
-              </p>
-              <p className={styles.bodyText}>
-                Recognized by <strong>NITI Aayog</strong> among 75 Women Transforming India,
-                Anju has turned a single pad into a movement touching 30 lakh lives.
-              </p>
-              <div className={styles.founderBadges}>
-                <div className={styles.founderBadge}>
-                  <CheckCircle2 size={16} className={styles.founderBadgeIcon} />
-                  NITI Aayog: Women Transforming India
-                </div>
-                <div className={styles.founderBadge}>
-                  <CheckCircle2 size={16} className={styles.founderBadgeIcon} />
-                  Featured at UN Climate Conference
-                </div>
-                <div className={styles.founderBadge}>
-                  <CheckCircle2 size={16} className={styles.founderBadgeIcon} />
-                  Rural Healthcare Innovator of the Year 2025
-                </div>
+
+              <div className={styles.splitStoryCtas}>
+                <button type="button" className={styles.splitBtnPrimary} onClick={scrollToJourney}>
+                  Explore Our Journey
+                  <ArrowRight size={16} aria-hidden />
+                </button>
+                <Link href="/programs" className={styles.splitBtnSecondary}>
+                  Discover Our Programs
+                </Link>
               </div>
             </motion.div>
 
             <motion.div
-              variants={fadeUp}
-              className={styles.founderImageCol}
+              className={styles.splitStoryContentCol}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={stagger}
             >
-              <div className={styles.founderPhotoFrame}>
-                <Image
-                  src="/anju-bist.png"
-                  alt="Anju Bist, Founder & Managing Director, Saukhyam"
-                  width={400}
-                  height={500}
-                  className={styles.founderPhoto}
-                  loading="lazy"
-                />
-                <div className={styles.founderPhotoCard}>
-                  <div className={styles.founderPhotoCardName}>Anju Bist</div>
-                  <div className={styles.founderPhotoCardRole}>Founder &amp; Managing Director</div>
-                </div>
+              <motion.span variants={fadeUp} className={styles.splitStoryLabel}>
+                The Journey
+              </motion.span>
+              <motion.h2 variants={fadeUp} className={styles.splitStoryTitle}>
+                Milestones Along the Way
+              </motion.h2>
+
+              <div className={styles.storyMilestoneList}>
+                {storyMilestones.map((item, index) => (
+                  <motion.div
+                    key={item.step}
+                    className={styles.storyMilestoneItem}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.55, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <div className={styles.storyMilestoneMarker}>
+                      <span className={styles.storyMilestoneStep}>{item.step}</span>
+                      {index < storyMilestones.length - 1 && (
+                        <span className={styles.storyMilestoneLine} aria-hidden="true" />
+                      )}
+                    </div>
+                    <div className={styles.storyMilestoneBody}>
+                      <h3 className={styles.storyMilestoneTitle}>{item.title}</h3>
+                      <p className={styles.storyMilestoneDesc}>{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
+
+              <motion.blockquote variants={fadeUp} className={styles.storyQuoteCard}>
+                <Quote size={22} className={styles.storyQuoteIcon} aria-hidden="true" />
+                <p>
+                  Every sustainable choice begins with care—for ourselves, for others, and for the planet.
+                </p>
+              </motion.blockquote>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* ── HOW IT'S MADE ── */}
-      <section className={styles.howMadeSection}>
-        <div className="container">
-          <motion.div
-            className="section-header"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            <motion.span variants={fadeUp} className={styles.sectionBadge}>
-              <Leaf size={14} />
-              The Innovation
-            </motion.span>
-            <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-              From Banana Farm to Healing Pad
-            </motion.h2>
-            <motion.p variants={fadeUp} className={styles.sectionDesc}>
-              A zero-waste journey that transforms agricultural residue into the world&apos;s most
-              natural menstrual care product.
-            </motion.p>
-          </motion.div>
+      <div className={styles.sectionBridge} aria-hidden="true" />
 
-          <motion.div
-            className={styles.howMadeGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {[
-              { step: '01', title: 'Banana Harvest', desc: 'Banana trees bear fruit once, then are cut down. Their fibrous trunk, normally agricultural waste, which is our raw material.', img: 'https://saukhyampads.org/cdn/shop/files/6_d1942f75-768a-4d32-bb23-666a71990a71_2048x2048.png?v=1746945194' },
-              { step: '02', title: 'Fiber Extraction', desc: 'The pseudostem is processed to extract long, strong fibers with natural antimicrobial pathogenesis-related proteins.', img: '/Blog_Images/IMG_8023_1024x1024.webp' },
-              { step: '03', title: 'Handcrafted by Women', desc: 'Trained rural women in our satellite centres layer cotton, banana fiber, and PU to handcraft each pad with care.', img: '/Blog_Images/1.webp' },
-              { step: '04', title: 'Reaches You', desc: 'Each pad lasts 2–3 years, replaces 200+ disposables, and arrives ready to heal your periods and the planet.', img: '/bentogrid_photo.jpeg' },
-            ].map((item) => (
-              <motion.div key={item.step} variants={fadeUp} className={styles.howMadeCard}>
-                <div className={styles.howMadeImageWrap}>
-                  <Image src={item.img} alt={item.title} width={400} height={300} className={styles.howMadeImage} loading="lazy" />
-                  <div className={styles.howMadeStepBadge}>{item.step}</div>
-                </div>
-                <div className={styles.howMadeCardBody}>
-                  <h3 className={styles.howMadeTitle}>{item.title}</h3>
-                  <p className={styles.howMadeDesc}>{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── VISION & MISSION (dark section) ── */}
+      {/* 4. Vision & Mission */}
       <section className={styles.visionSection}>
         <div className={styles.visionBlobA} aria-hidden="true" />
         <div className={styles.visionBlobB} aria-hidden="true" />
         <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeUp} className={styles.sectionBadgeLight}>
               <Target size={14} />
-              Purpose &amp; Direction
+              What Drives Us Every Day
             </motion.span>
             <motion.h2 variants={fadeUp} className={styles.sectionTitleLight}>
-              What Drives Us Every Day
+              Our Vision &amp; Mission
             </motion.h2>
           </motion.div>
 
-          <motion.div
-            className={styles.vmCards}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
+          <motion.div className={styles.vmCards} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp} className={styles.vmCard}>
               <div className={`${styles.vmIcon} ${styles.vmIconVision}`}>
                 <Sparkles size={24} />
               </div>
               <div className={styles.vmLabel}>Our Vision</div>
-              <h3 className={styles.vmHeadline}>
-                Reusables providing a wholesome period experience become the first choice
-                for every menstruator, everywhere.
-              </h3>
-              <p className={styles.vmDesc}>
-                A world where no woman compromises her health due to harmful chemicals, and where
-                sustainable choices are the natural, affordable default.
+              <p className={styles.vmHeadline}>
+                A world where sustainable menstrual care becomes the natural first choice, enabling healthier lives,
+                cleaner communities, and a more responsible future.
               </p>
               <div className={styles.vmAccent} />
             </motion.div>
@@ -370,35 +486,41 @@ export default function AboutPage() {
                 <Globe size={24} />
               </div>
               <div className={styles.vmLabel}>Our Mission</div>
-              <h3 className={styles.vmHeadline}>
-                Combat climate change, empower women, and transform lives, through
-                beautiful reusable menstrual pads.
-              </h3>
-              <p className={styles.vmDesc}>
-                All handcrafted by rural women using India&apos;s first banana fiber absorbent
-                technology, at the intersection of health, ecology, and livelihood.
+              <p className={styles.vmHeadline}>
+                To create accessible reusable menstrual solutions while fostering awareness, dignity, environmental
+                responsibility, and community participation.
               </p>
               <div className={`${styles.vmAccent} ${styles.vmAccentBlue}`} />
             </motion.div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Pillars */}
-          <motion.div
-            className={styles.pillarsGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {pillars.map((p) => {
-              const Icon = p.icon;
+      {/* 5. Core Values */}
+      <section className={styles.valuesSection}>
+        <div className="container">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            <motion.span variants={fadeUp} className={styles.valuesLabel}>
+              Our Values
+            </motion.span>
+            <motion.h2 variants={fadeUp} className={styles.valuesTitle}>
+              What We Stand For
+            </motion.h2>
+            <motion.p variants={fadeUp} className={styles.valuesSubheading}>
+              The principles that guide every initiative, partnership, and action at Saukhyam.
+            </motion.p>
+          </motion.div>
+
+          <motion.div className={styles.valuesGrid} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            {coreValues.map(value => {
+              const Icon = value.icon;
               return (
-                <motion.div key={p.label} variants={fadeUp} className={styles.pillarCard}>
-                  <div className={styles.pillarIcon} style={{ background: `${p.color}20`, color: p.color }}>
-                    <Icon size={20} />
+                <motion.div key={value.title} variants={fadeUp} className={styles.valueCard}>
+                  <div className={styles.valueIconWrap} style={{ color: value.color, borderColor: `${value.color}30`, background: `${value.color}12` }}>
+                    <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
                   </div>
-                  <strong className={styles.pillarLabel}>{p.label}</strong>
-                  <span className={styles.pillarDesc}>{p.desc}</span>
+                  <h3 className={styles.valueTitle}>{value.title}</h3>
+                  <p className={styles.valueDesc}>{value.desc}</p>
                 </motion.div>
               );
             })}
@@ -406,31 +528,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── JOURNEY TIMELINE ── */}
-      <section className={styles.timelineSection}>
+      {/* 7. Journey Timeline */}
+      <section id="our-journey" className={styles.timelineSection}>
         <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeUp} className={styles.sectionBadge}>
               <Globe size={14} />
               Our Journey
             </motion.span>
             <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-              Milestones Along the Way
+              From Compassion To Collective Change
             </motion.h2>
             <motion.p variants={fadeUp} className={styles.sectionDesc}>
-              From a single ashram in Kerala to 30 lakh lives across India: a decade of
-              compassion in action.
+              Every meaningful movement begins with a simple question: How can menstrual care become healthier, more
+              sustainable, and more accessible for everyone?
             </motion.p>
           </motion.div>
 
           <div className={styles.timeline}>
             <div className={styles.timelineLine} aria-hidden="true" />
-
             {timelineEvents.map((event, idx) => {
               const isLeft = idx % 2 === 0;
               return (
@@ -442,27 +558,17 @@ export default function AboutPage() {
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  {/* Card */}
                   <div className={styles.timelineCard}>
-                    {event.image && (
-                      <div className={styles.timelineCardImage}>
-                        <Image src={event.image} alt={event.title} width={400} height={250} loading="lazy" />
-                      </div>
-                    )}
                     <div className={styles.timelineCardBody}>
                       <span className={styles.timelineYear}>{event.year}</span>
                       <h3 className={styles.timelineTitle}>{event.title}</h3>
                       <p className={styles.timelineDesc}>{event.desc}</p>
                     </div>
                   </div>
-
-                  {/* Centre dot */}
                   <div className={styles.timelineDot} aria-hidden="true">
                     <div className={styles.timelineDotRing} />
                     <div className={styles.timelineDotCore} />
                   </div>
-
-                  {/* Empty spacer opposite side */}
                   <div className={styles.timelineSpacer} aria-hidden="true" />
                 </motion.div>
               );
@@ -471,116 +577,123 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── AWARDS ── */}
+      {/* 8. Recognition */}
       <section className={styles.awardsSection}>
         <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeUp} className={styles.sectionBadge}>
               <Award size={14} />
               Recognition
             </motion.span>
             <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-              Awards &amp; Accolades
+              Honoured For Meaningful Impact
             </motion.h2>
             <motion.p variants={fadeUp} className={styles.sectionDesc}>
-              Nationally and internationally recognized for impact in women&apos;s health,
-              sustainability, and rural empowerment.
+              Over the years, Saukhyam&apos;s work has been recognised by leading institutions, government bodies,
+              healthcare organisations, and social impact platforms.
             </motion.p>
           </motion.div>
 
-          <motion.div
-            className={styles.awardsGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {awards.map((award) => (
+          <motion.div className={styles.awardsGrid} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            {featuredAwards.map(award => (
               <motion.div key={award.id} variants={fadeUp} className={styles.awardCard}>
-                <div className={styles.awardYearBadge}>{award.year}</div>
-                <div className={styles.awardIconWrap}>
-                  <Trophy size={20} />
+                <div className={styles.awardImageWrap}>
+                  <Image src={award.image} alt={award.title} width={400} height={240} className={styles.awardImage} loading="lazy" />
                 </div>
-                <h4 className={styles.awardTitle}>{award.title}</h4>
-                <p className={styles.awardOrg}>{award.organization}</p>
+                <div className={styles.awardCardBody}>
+                  <div className={styles.awardIconWrap}>
+                    <Trophy size={18} />
+                  </div>
+                  <h4 className={styles.awardTitle}>{award.title}</h4>
+                  <p className={styles.awardOrg}>{award.organization}</p>
+                  <p className={styles.awardDesc}>{award.description}</p>
+                  <Link href={award.href} className={styles.awardLink}>
+                    View Details <ArrowRight size={14} />
+                  </Link>
+                </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={styles.sectionCtaWrap}>
+            <Link href="/media/awards" className={styles.sectionCtaLink}>
+              View All Awards &amp; Recognitions <ArrowRight size={16} />
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* ── PRESS COVERAGE ── */}
+      {/* 9. Media & Press */}
       <section className={styles.pressSection}>
         <div className="container">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.span variants={fadeUp} className={styles.sectionBadge}>
               <Globe size={14} />
-              Media
+              Media &amp; Press
             </motion.span>
             <motion.h2 variants={fadeUp} className={styles.sectionTitle}>
-              As Featured In
+              Stories That Inspire Conversations
             </motion.h2>
+            <motion.p variants={fadeUp} className={styles.sectionDesc}>
+              Saukhyam&apos;s journey has been featured across leading national and international media platforms
+              highlighting sustainability, menstrual health awareness, community-driven impact, and social innovation.
+            </motion.p>
           </motion.div>
 
-          <motion.div
-            className={styles.pressGrid}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {featuredPressItems.map((item) => (
+          <motion.div className={styles.pressGrid} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+            {featuredPress.map(item => (
               <motion.a
-                key={item.id}
-                href={item.url}
+                key={item.publication}
+                href={item.mention.href}
                 variants={fadeUp}
                 className={styles.pressCard}
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <div className={styles.pressLogoWrap}>
+                  <Image
+                    src={`/Press_And_Media/${item.logo}`}
+                    alt={`${item.publication} logo`}
+                    width={120}
+                    height={48}
+                    className={styles.pressLogo}
+                    loading="lazy"
+                  />
+                </div>
                 <div className={styles.pressCardPub}>{item.publication}</div>
-                <p className={styles.pressCardTitle}>{item.title}</p>
+                <p className={styles.pressCardTitle}>{item.mention.title}</p>
+                <p className={styles.pressCardSummary}>{item.mention.excerpt}</p>
                 <span className={styles.pressCardLink}>
-                  Read Article <ArrowRight size={14} />
+                  Read Story <ArrowRight size={14} />
                 </span>
               </motion.a>
             ))}
           </motion.div>
+
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={styles.sectionCtaWrap}>
+            <Link href="/media" className={styles.sectionCtaLink}>
+              Explore Media &amp; Press Coverage <ArrowRight size={16} />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* 10. CTA */}
       <section className={styles.ctaSection}>
         <div className={styles.ctaBlobA} aria-hidden="true" />
         <div className={styles.ctaBlobB} aria-hidden="true" />
         <div className="container">
-          <motion.div
-            className={styles.ctaContent}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
+          <motion.div className={styles.ctaContent} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
             <motion.h2 variants={fadeUp} className={styles.ctaTitle}>
               Join the Reusable Revolution
             </motion.h2>
             <motion.p variants={fadeUp} className={styles.ctaDesc}>
-              Every pad you buy creates a wave of change, for your health, for rural women, and for
-              the planet. Be part of something bigger.
+              Every pad you buy creates a wave of change, for your health, for rural women, and for the planet.
+              Be part of something bigger.
             </motion.p>
             <motion.div variants={fadeUp} className={styles.ctaButtons}>
               <Link href="/products" className={styles.ctaBtnPrimary}>
-                <ShoppingBag size={18} />
+                <ShoppingBag size={18} aria-hidden />
                 Shop Now
               </Link>
               <Link href="/programs" className={styles.ctaBtnSecondary}>

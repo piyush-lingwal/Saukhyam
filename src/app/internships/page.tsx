@@ -31,6 +31,7 @@ import {
   ClipboardList,
 } from 'lucide-react';
 import styles from './page.module.css';
+import { internshipFaqItems } from '@/data/internshipFaq';
 
 /* ─────────────────────────────────────────────
    ANIMATION VARIANTS
@@ -279,33 +280,6 @@ const internsData: InternProfile[] = [
       },
     ],
     testimonial: 'My internship journey at Saukhyam has been both insightful and rewarding. The organisation fosters a collaborative environment where creativity, innovation, and social impact come together. Through this experience, I have strengthened my technical knowledge, improved my problem-solving approach, and gained a deeper understanding of how technology can be used to support meaningful change. Working with the Saukhyam team has been a motivating experience that has contributed greatly to both my personal and professional development.',
-  },
-];
-
-const faqs = [
-  {
-    q: 'Is the internship fully online?',
-    a: 'The internship is primarily conducted online, allowing interns to work remotely and collaborate digitally. However, interns may occasionally be expected to contribute to Saukhyam programs or initiatives taking place in their city or state. While travel requirements are limited, some involvement in local activities may be part of the experience.',
-  },
-  {
-    q: 'What is the duration of the internship?',
-    a: 'The standard internship duration is six months, designed to provide meaningful hands-on learning, professional growth, and deeper engagement with Saukhyam\'s work. Shorter-duration internships may also be available depending on project requirements.',
-  },
-  {
-    q: 'Is the internship paid?',
-    a: 'The six-month internship generally includes a stipend after the initial period. The first month is usually unpaid, serving as an orientation and learning phase. Shorter-duration internships are typically unpaid.',
-  },
-  {
-    q: 'Who can apply for the internship?',
-    a: 'The six-month internship is generally intended for students currently enrolled in an undergraduate or graduate degree program who are interested in contributing through technology, creativity, research, or social impact initiatives.',
-  },
-  {
-    q: 'What is the expected time commitment?',
-    a: 'Interns are expected to contribute approximately 40 to 50 hours per month. This flexible structure allows students to balance academic responsibilities while gaining meaningful practical experience.',
-  },
-  {
-    q: 'Will interns receive a certificate?',
-    a: 'Yes. Interns who successfully complete their internship receive an official internship certificate from Saukhyam in recognition of their contribution and learning experience.',
   },
 ];
 
@@ -795,11 +769,11 @@ export default function InternshipsPage() {
             </motion.div>
 
             <motion.div className={styles.faqRight} variants={fadeRight}>
-              {faqs.map((faq, i) => (
+              {internshipFaqItems.map((faq, i) => (
                 <FAQItem
-                  key={i}
-                  q={faq.q}
-                  a={faq.a}
+                  key={faq.id}
+                  q={faq.question}
+                  a={faq.answer}
                   open={openFaq === i}
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 />

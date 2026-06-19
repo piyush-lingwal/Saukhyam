@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Frequently Asked Questions',
   description:
-    'Get answers to common questions about Saukhyam reusable pads — how to use, wash, dry, durability, sizing, ordering, and more.',
+    'Your central Saukhyam knowledge hub — menstrual health, reusable pads, HEAL Challenge, products, internships, platform, and more.',
   openGraph: {
-    title: 'FAQ — Saukhyam Reusable Pads',
+    title: 'FAQ — Saukhyam Knowledge Hub',
     description:
-      'Everything you need to know about switching to reusable banana fiber pads.',
+      'Browse categorized FAQs on reusable pads, menstrual health, HEAL, products, internships, and more.',
   },
 };
 

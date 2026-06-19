@@ -1,141 +1,364 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import {
-  ChevronDown, HelpCircle, Droplets, Sparkles, RefreshCw,
-  Building2, Mail, Phone,
-} from 'lucide-react';
-import { faqItems, type FAQItem } from '@/data/content';
+  siteFaqItems,
+  siteFaqCategories,
+  getSiteFaqCategoryLabel,
+  getSiteFaqSubsections,
+  isValidSiteFaqCategory,
+  searchSiteFaqQuestions,
+  type SiteFAQCategory,
+  type SiteFAQItem,
+} from '@/data/siteFaq';
 import styles from './page.module.css';
 
-type Category = FAQItem['category'] | 'all';
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
-const categoryConfig: Record<Category, { label: string; icon: typeof HelpCircle }> = {
-  all: { label: 'All Questions', icon: HelpCircle },
-  general: { label: 'General', icon: Sparkles },
-  using: { label: 'How to Use', icon: Droplets },
-  washing: { label: 'Washing & Care', icon: RefreshCw },
-  compare: { label: 'Science & Fiber', icon: Sparkles },
-  organization: { label: 'About Saukhyam', icon: Building2 },
-};
+function HighlightText({ text, query }: { text: string; query: string }) {
+  const trimmed = query.trim();
+  if (!trimmed) return <>{text}</>;
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as const } },
-};
+  const parts = text.split(new RegExp(`(${escapeRegExp(trimmed)})`, 'gi'));
+
+  return (
+    <>
+      {parts.map((part, index) =>
+        part.toLowerCase() === trimmed.toLowerCase() ? (
+          <mark key={index} className={styles.searchHighlight}>
+            {part}
+          </mark>
+        ) : (
+          <Fragment key={index}>{part}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
+
+function FaqAnswer({ item }: { item: SiteFAQItem }) {
+  return (
+    <div className={styles.faqAnswerContent}>
+      {item.paragraphs[0] && <p>{item.paragraphs[0]}</p>}
+      {item.bullets && item.bullets.length > 0 && (
+        <ul className={styles.faqBulletList}>
+          {item.bullets.map((bullet, i) => (
+            <li key={i}>{bullet}</li>
+          ))}
+        </ul>
+      )}
+      {item.paragraphs.slice(1).map((para, i) => (
+        <p key={i + 1}>{para}</p>
+      ))}
+    </div>
+  );
+}
+
+function FaqAccordionItem({
+  item,
+  isOpen,
+  onToggle,
+  searchQuery = '',
+  showCategory = false,
+}: {
+  item: SiteFAQItem;
+  isOpen: boolean;
+  onToggle: () => void;
+  searchQuery?: string;
+  showCategory?: boolean;
+}) {
+  return (
+    <div className={`${styles.faqItem} ${isOpen ? styles.open : ''}`}>
+      <button
+        type="button"
+        className={styles.faqQuestion}
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={`faq-answer-${item.id}`}
+      >
+        <span className={styles.faqQuestionCopy}>
+          {showCategory && (
+            <span className={styles.faqItemCategory}>{getSiteFaqCategoryLabel(item.category)}</span>
+          )}
+          <span className={styles.faqQuestionText}>
+            <HighlightText text={item.question} query={searchQuery} />
+          </span>
+        </span>
+        <ChevronDown size={18} className={styles.faqIcon} aria-hidden="true" />
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            id={`faq-answer-${item.id}`}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            style={{ overflow: 'hidden' }}
+          >
+            <FaqAnswer item={item} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function FAQPage() {
-  const [activeCategory, setActiveCategory] = useState<Category>('all');
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+  const [activeCategory, setActiveCategory] = useState<SiteFAQCategory>('usage-guide');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [openFaqId, setOpenFaqId] = useState<string | null>(null);
 
-  const filteredFaqs = useMemo(() => {
-    return activeCategory === 'all'
-      ? faqItems
-      : faqItems.filter(f => f.category === activeCategory);
-  }, [activeCategory]);
+  const isSearching = searchQuery.trim().length > 0;
+
+  const searchResults = useMemo(
+    () => searchSiteFaqQuestions(searchQuery),
+    [searchQuery],
+  );
+
+  const faqsByCategory = useMemo(
+    () =>
+      siteFaqCategories.map(cat => ({
+        ...cat,
+        items: siteFaqItems.filter(item => item.category === cat.id),
+      })),
+    [],
+  );
+
+  const activeCategoryData = useMemo(
+    () => faqsByCategory.find(cat => cat.id === activeCategory),
+    [faqsByCategory, activeCategory],
+  );
+
+  const updateUrl = useCallback((category: SiteFAQCategory, query: string) => {
+    const params = new URLSearchParams();
+    params.set('category', category);
+    if (query.trim()) params.set('q', query.trim());
+    window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`);
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category');
+    if (category && isValidSiteFaqCategory(category)) {
+      setActiveCategory(category);
+    }
+    const q = params.get('q');
+    if (q) setSearchQuery(q);
+  }, []);
+
+  const scrollToCategory = (category: SiteFAQCategory) => {
+    setActiveCategory(category);
+    setOpenFaqId(null);
+    setSearchQuery('');
+    updateUrl(category, '');
+
+    requestAnimationFrame(() => {
+      document.getElementById('faq-questions-area')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
 
   const toggleItem = (id: string) => {
-    setOpenItems(prev => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
+    setOpenFaqId(prev => (prev === id ? null : id));
+  };
+
+  const renderCategoryItems = (categoryId: SiteFAQCategory, items: SiteFAQItem[]) => {
+    const subsections = getSiteFaqSubsections(categoryId);
+
+    if (items.length === 0) {
+      return <div className={styles.emptyState}>No FAQs in this category yet.</div>;
+    }
+
+    if (subsections.length === 0) {
+      return (
+        <div className={styles.faqList}>
+          {items.map(item => (
+            <FaqAccordionItem
+              key={item.id}
+              item={item}
+              isOpen={openFaqId === item.id}
+              onToggle={() => toggleItem(item.id)}
+            />
+          ))}
+        </div>
+      );
+    }
+
+    return subsections
+      .map(section => ({
+        ...section,
+        items: items.filter(item => item.subsection === section.id),
+      }))
+      .filter(group => group.items.length > 0)
+      .map(group => (
+        <div key={group.id} className={styles.faqSubsection}>
+          <h3 className={styles.subsectionTitle}>{group.label}</h3>
+          <div className={styles.faqList}>
+            {group.items.map(item => (
+              <FaqAccordionItem
+                key={item.id}
+                item={item}
+                isOpen={openFaqId === item.id}
+                onToggle={() => toggleItem(item.id)}
+              />
+            ))}
+          </div>
+        </div>
+      ));
   };
 
   return (
     <div className={styles.faqPage}>
-      {/* ── Hero ── */}
-      <section className={styles.hero}>
-        <div className="container">
-          <motion.h1
-            className={styles.heroTitle}
-            initial={{ opacity: 0, y: 20 }}
+      <section className={styles.hero} aria-labelledby="faq-hero-heading">
+        <div className={styles.heroBg} aria-hidden="true" />
+        <div className={styles.heroOverlay} aria-hidden="true" />
+        <div className={styles.heroDecor} aria-hidden="true">
+          <span className={styles.heroFiberTexture} />
+          <span className={styles.heroLeaf1} />
+          <span className={styles.heroLeaf2} />
+        </div>
+
+        <div className={styles.heroInner}>
+          <motion.span
+            className={styles.heroBadge}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.45 }}
+          >
+            FAQ Knowledge Center
+          </motion.span>
+
+          <motion.h1
+            id="faq-hero-heading"
+            className={styles.heroTitle}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.06 }}
           >
             Frequently Asked Questions
           </motion.h1>
+
           <motion.p
             className={styles.heroDesc}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Everything you need to know about Saukhyam reusable pads, covering usage and washing to science and impact.
+            Everything you need to know about Saukhyam reusable pads from usage and washing instructions to banana fiber technology, sustainability, and community impact.
           </motion.p>
         </div>
       </section>
 
-      <div className="container">
-        <div className={styles.faqLayout}>
-          {/* ── Category Sidebar ── */}
-          <nav className={styles.categoryNav}>
-            {(Object.keys(categoryConfig) as Category[]).map(cat => {
-              const config = categoryConfig[cat];
-              const Icon = config.icon;
-              return (
+      <div className={`${styles.mainShell} ${isSearching ? styles.mainShellSearch : ''}`}>
+        {!isSearching && (
+          <aside className={styles.categoriesSidebar} aria-labelledby="faq-sidebar-heading">
+            <div className={styles.sidebarCard}>
+              <h2 id="faq-sidebar-heading" className={styles.sidebarHeading}>
+                Browse Categories
+              </h2>
+              <nav className={styles.sidebarNav}>
+                {siteFaqCategories.map(cat => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
+                    onClick={() => scrollToCategory(cat.id)}
+                    aria-current={activeCategory === cat.id ? 'true' : undefined}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+          </aside>
+        )}
+
+        {!isSearching && (
+          <nav className={styles.mobileCategoryNav} aria-label="FAQ categories">
+            <div className={styles.mobileCategoryScroll}>
+              {siteFaqCategories.map(cat => (
                 <button
-                  key={cat}
-                  className={`${styles.categoryBtn} ${activeCategory === cat ? styles.active : ''}`}
-                  onClick={() => setActiveCategory(cat)}
+                  key={cat.id}
+                  type="button"
+                  className={`${styles.categoryPill} ${activeCategory === cat.id ? styles.categoryPillActive : ''}`}
+                  onClick={() => scrollToCategory(cat.id)}
+                  aria-current={activeCategory === cat.id ? 'true' : undefined}
                 >
-                  <Icon size={16} className={styles.categoryIcon} />
-                  {config.label}
+                  {cat.label}
                 </button>
-              );
-            })}
+              ))}
+            </div>
           </nav>
+        )}
 
-          {/* ── FAQ List ── */}
-          <motion.div
-            className={styles.faqList}
-            key={activeCategory}
-            initial="hidden"
-            animate="visible"
-            variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
-          >
-            {filteredFaqs.map(faq => (
-              <motion.div
-                key={faq.id}
-                variants={fadeInUp}
-                className={`${styles.faqItem} ${openItems.has(faq.id) ? styles.open : ''}`}
-              >
-                <button
-                  className={styles.faqQuestion}
-                  onClick={() => toggleItem(faq.id)}
-                  aria-expanded={openItems.has(faq.id)}
-                >
-                  {faq.question}
-                  <ChevronDown size={18} className={styles.faqIcon} />
-                </button>
-                <div className={styles.faqAnswer}>
-                  <div className={styles.faqAnswerContent}>
-                    {faq.answer}
-                  </div>
+        <section id="faq-questions-area" className={styles.questionsArea} aria-label="FAQ questions and answers">
+          {isSearching ? (
+            <motion.div
+              key={`search-${searchQuery}`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              <p className={styles.searchMeta}>
+                {searchResults.length} result{searchResults.length === 1 ? '' : 's'} for &ldquo;
+                {searchQuery.trim()}&rdquo;
+              </p>
+              {searchResults.length === 0 ? (
+                <div className={styles.emptyState}>
+                  No questions matched your search. Try a different keyword.
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* ── Contact CTA ── */}
-        <div className={styles.contactCta}>
-          <h3>Still have questions?</h3>
-          <p>We&apos;re happy to help! Reach out to us and we&apos;ll respond within 24 hours.</p>
-          <div className={styles.contactBtns}>
-            <a href="mailto:contact@saukhyampads.org" className={`${styles.contactBtn} ${styles.contactBtnPrimary}`}>
-              <Mail size={18} />
-              Email Us
-            </a>
-            <a href="tel:+919876543210" className={`${styles.contactBtn} ${styles.contactBtnOutline}`}>
-              <Phone size={18} />
-              Call Us
-            </a>
-          </div>
-        </div>
+              ) : (
+                <div className={styles.faqList}>
+                  {searchResults.map(item => (
+                    <FaqAccordionItem
+                      key={item.id}
+                      item={item}
+                      isOpen={openFaqId === item.id}
+                      onToggle={() => toggleItem(item.id)}
+                      searchQuery={searchQuery}
+                      showCategory
+                    />
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          ) : (
+            activeCategoryData && (
+              <div
+                key={activeCategoryData.id}
+                id={`faq-section-${activeCategoryData.id}`}
+                className={styles.categoryBlock}
+                aria-label={activeCategoryData.label}
+              >
+                {renderCategoryItems(activeCategoryData.id, activeCategoryData.items)}
+              </div>
+            )
+          )}
+        </section>
       </div>
+
+      <section className={styles.contactCta} aria-labelledby="faq-cta-heading">
+          <div className={styles.contactCtaDecor} aria-hidden="true">
+            <span className={styles.contactCtaGlowTop} />
+            <span className={styles.contactCtaGlowBottom} />
+          </div>
+          <div className={styles.contactCtaInner}>
+            <h2 id="faq-cta-heading" className={styles.contactCtaTitle}>
+              Still Have Questions?
+            </h2>
+            <p className={styles.contactCtaText}>
+              We&apos;re here to help. Connect with our team and get the guidance you need on reusable menstrual care.
+            </p>
+            <Link href="/contact" className={styles.contactCtaBtn}>
+              Contact Us
+            </Link>
+          </div>
+        </section>
     </div>
   );
 }

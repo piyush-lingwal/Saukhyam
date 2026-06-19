@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import {
   TbHeartbeat,
   TbCalendarStats,
@@ -25,9 +25,16 @@ import {
   TbCheck,
   TbArrowRight,
   TbPlus,
+  TbMinus,
 } from 'react-icons/tb';
 import styles from '../program.module.css';
 import heal from './heal.module.css';
+import {
+  healFaqItems,
+  healFaqCategories,
+  getHealFaqCount,
+  type HealFAQCategory,
+} from '@/data/healFaq';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -165,42 +172,22 @@ const refundCards = [
   },
 ];
 
-const faqItems = [
-  {
-    q: 'Will the HEAL Challenge work with any reusable pad, or only Saukhyam?',
-    a: 'The core principle - removing chemical exposure - will work with any high-quality reusable pad that is cotton-cloth based and has natural, toxin-free materials. In fact, it should work with any reusable period product. However, Saukhyam is the only product we have 2+ years of documented case studies with. We can only guarantee refunds for our own product.',
-  },
-  {
-    q: 'What if I have a structural condition like endometriosis or fibroids?',
-    a: 'Structural conditions will not completely resolve from a pad switch alone - and we are honest about this. However, your overall period experience (pain levels, regularity, discomfort) is very likely to improve. The experience gets better even if the underlying condition needs separate medical attention.',
-  },
-  {
-    q: 'What role do environmental toxins play in PCOS/PMOS?',
-    a: 'Nobody knows the exact cause of PCOS/PMOS. What science does confirm is that endocrine-disrupting chemicals (dioxins, phthalates, VOCs) interfere with the hormonal systems that regulate the menstrual cycle. The vaginal route of absorption is especially significant because these chemicals bypass the liver and enter the bloodstream directly. Even small trace amounts can have a disproportionate hormonal effect.',
-  },
-  {
-    q: 'Do I need to make a 100% shift from day one?',
-    a: 'Ideally yes - healing depends on completely removing the chemical source. But if you cannot switch all at once, use the 2-3-4 formula: 2 days in Month 1, 3 in Month 2, 4+ in Month 3. Allow 3 months for transition + 3 months of complete usage = the full 6-month challenge.',
-  },
-  {
-    q: 'What if my periods are very irregular and I skip months?',
-    a: 'The HEAL Challenge works even for highly irregular cycles. Whenever your period arrives, use reusable pads. The goal is to accumulate at least 2–3 full cycles of reusable use within 6 months. Even if periods come every 2–3 months, the window is designed to give you enough opportunity to see results.',
-  },
-  {
-    q: 'What about nutrition, exercise, and sleep?',
-    a: 'All lifestyle factors contribute to hormonal balance, and we encourage healthy habits. But we are not nutrition or exercise experts, and we do not prescribe these as part of the HEAL Challenge. Our focus is the one intervention that is most overlooked and most impactful: removing the primary environmental toxin source from your period routine.',
-  },
-  {
-    q: 'How do I officially enroll, and how does the refund process work?',
-    a: 'Before you purchase Saukhyam pads for the HEAL Challenge, fill in the enrollment form describing your period problems. If after 6 months you wish to claim a refund, fill in the return form and mail your used pads back to us. We process a full refund. These forms can be accessed from the Enroll in HEAL Challenge section above.',
-  },
-];
-
 /* ── Component ───────────────────────────────────────────────── */
 
 export default function HealPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const toggleFaq = (idx: number) => setOpenFaq(openFaq === idx ? null : idx);
+  const [openFaqId, setOpenFaqId] = useState<string | null>(null);
+  const [faqCategory, setFaqCategory] = useState<HealFAQCategory>('heal-challenge');
+
+  const filteredFaqItems = healFaqItems.filter(item => item.category === faqCategory);
+
+  const toggleFaq = (id: string) => {
+    setOpenFaqId(prev => (prev === id ? null : id));
+  };
+
+  const selectFaqCategory = (category: HealFAQCategory) => {
+    setFaqCategory(category);
+    setOpenFaqId(null);
+  };
 
   // Activate HEAL brand theme on <html> so Navbar & Footer update automatically.
   // Cleaned up when user navigates away.
@@ -836,53 +823,118 @@ export default function HealPage() {
 
       {/* ── 8. FAQ ── */}
       <section id="faq" className={heal.faqSection}>
-        <div className="container">
+        <div className={heal.faqBgDecor} aria-hidden="true">
+          <span className={heal.faqBgBlob1} />
+          <span className={heal.faqBgBlob2} />
+          <span className={heal.faqBgBlob3} />
+        </div>
+
+        <div className={`container ${heal.faqContainer}`}>
           <motion.div
-            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }} variants={stagger}
           >
-            <motion.div variants={fadeInUp} className="section-header">
-              <div className={heal.sectionBadge}><TbQuestionMark size={14} /> Questions</div>
-              <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
-              <p className={styles.sectionDesc}>
-                Everything you need to know before taking the HEAL Challenge.
+            <motion.div variants={fadeInUp} className={heal.faqHeader}>
+              <div className={heal.faqBadge}>HEAL FAQ</div>
+              <h2 className={heal.faqTitle}>Frequently Asked Questions</h2>
+              <p className={heal.faqSubtitle}>
+                Browse by topic to find answers about the HEAL Challenge, reusable pads, menstrual health, and more.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className={heal.faqList}>
-              {faqItems.map((item, idx) => (
-                <div
-                  key={idx}
-                  className={`${heal.faqItem} ${openFaq === idx ? heal.open : ''}`}
-                >
+            <motion.div variants={fadeInUp} className={heal.faqCategoryTabs} role="tablist" aria-label="FAQ categories">
+              {healFaqCategories.map(cat => {
+                const isActive = faqCategory === cat.id;
+                const count = getHealFaqCount(cat.id);
+                return (
                   <button
-                    className={heal.faqQuestion}
-                    onClick={() => toggleFaq(idx)}
-                    aria-expanded={openFaq === idx}
-                    aria-controls={`faq-answer-${idx}`}
+                    key={cat.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`${heal.faqCategoryTab} ${isActive ? heal.faqCategoryTabActive : ''}`}
+                    onClick={() => selectFaqCategory(cat.id)}
                   >
-                    {item.q}
-                    <ChevronDown size={18} className={heal.faqChevron} />
+                    {cat.label}
+                    <span className={heal.faqCategoryCount}>{count}</span>
                   </button>
-                  <AnimatePresence initial={false}>
-                    {openFaq === idx && (
-                      <motion.div
-                        id={`faq-answer-${idx}`}
-                        key="answer"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ overflow: 'hidden' }}
-                      >
-                        <div className={heal.faqAnswer}>
-                          <p>{item.a}</p>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ))}
+                );
+              })}
             </motion.div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={faqCategory}
+                className={heal.faqList}
+                role="tabpanel"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {filteredFaqItems.length === 0 ? (
+                  <p className={heal.faqEmpty}>Internship FAQs coming soon.</p>
+                ) : (
+                  filteredFaqItems.map((item, index) => {
+                    const isOpen = openFaqId === item.id;
+                    return (
+                      <motion.div
+                        key={item.id}
+                        className={`${heal.faqItem} ${isOpen ? heal.faqItemOpen : ''}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.35, delay: index * 0.04, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <button
+                          type="button"
+                          className={heal.faqQuestion}
+                          onClick={() => toggleFaq(item.id)}
+                          aria-expanded={isOpen}
+                          aria-controls={`faq-answer-${item.id}`}
+                        >
+                          <span className={heal.faqQuestionText}>{item.question}</span>
+                          <span className={`${heal.faqToggleIcon} ${isOpen ? heal.faqToggleIconOpen : ''}`} aria-hidden="true">
+                            {isOpen ? <TbMinus size={18} /> : <TbPlus size={18} />}
+                          </span>
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {isOpen && (
+                            <motion.div
+                              id={`faq-answer-${item.id}`}
+                              key="answer"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                              style={{ overflow: 'hidden' }}
+                            >
+                              <motion.div
+                                className={heal.faqAnswer}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 6 }}
+                                transition={{ duration: 0.3, delay: 0.05 }}
+                              >
+                                {item.paragraphs[0] && <p>{item.paragraphs[0]}</p>}
+                                {item.bullets && item.bullets.length > 0 && (
+                                  <ul className={heal.faqBulletList}>
+                                    {item.bullets.map((bullet, i) => (
+                                      <li key={i}>{bullet}</li>
+                                    ))}
+                                  </ul>
+                                )}
+                                {item.paragraphs.slice(1).map((para, i) => (
+                                  <p key={i + 1}>{para}</p>
+                                ))}
+                              </motion.div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
+                    );
+                  })
+                )}
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
         </div>
       </section>
