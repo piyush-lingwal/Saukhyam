@@ -397,6 +397,11 @@
 
 @media (max-width: 640px) {
   .statsRow { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
-  .stepsGrid { grid-template-columns: 1fr; }
-  .sportsGrid { grid-template-columns: 1fr 1fr; }
+  .stepsGrid { grid-template-columns: 1fr; margin-top: var(--space-6); }
+  .section { padding: var(--space-10) 0; }
+  .sectionTitle { font-size: clamp(1.35rem, 6vw, 1.75rem); }
+  .sectionDesc { font-size: 0.9rem; }
+  .hero { padding: var(--space-10) 0; }
+  .heroTitle { font-size: clamp(1.65rem, 7vw, 2.2rem); }
+  .heroDesc { font-size: 0.95rem; }
 }

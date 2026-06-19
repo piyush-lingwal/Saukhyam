@@ -726,3 +726,61 @@
 @media (prefers-reduced-motion: reduce) {
   .statePath { transition: none !important; }
 }
+
+/* ── phone ── */
+@media (max-width: 640px) {
+  .section {
+    padding: clamp(2.25rem, 6vw, 3rem) 0;
+  }
+  .header {
+    margin-bottom: 1.25rem;
+    padding: 0 0.25rem;
+  }
+  .title { font-size: clamp(1.45rem, 6vw, 1.85rem); }
+  .subtitle { font-size: 0.88rem; }
+  .mapHints { gap: 0.35rem; }
+  .mapHint { font-size: 0.68rem; padding: 3px 9px; }
+  .headerActions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+  .headerBtnPrimary, .headerBtnGhost {
+    justify-content: center;
+    width: 100%;
+  }
+  .layout { gap: 1.1rem; }
+  .mapWrap { padding: 0.65rem; border-radius: var(--radius-xl); }
+  .mapSvg { max-height: 280px; }
+  .legend {
+    gap: 0.35rem 0.65rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+  }
+  .legendItem { flex-shrink: 0; font-size: 0.66rem; }
+  .chips {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+    margin: 0 -0.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  .chip { flex-shrink: 0; font-size: 0.7rem; padding: 0.32rem 0.7rem; }
+  .dashCol { min-height: auto; }
+  .dash { gap: 0.85rem; }
+  .dashTitle { font-size: 1.15rem; }
+  .scoreGrid { gap: 0.45rem; }
+  .scoreTile { padding: 0.65rem 0.55rem; }
+  .scoreValue { font-size: 0.95rem; }
+  .scoreLabel { font-size: 0.62rem; }
+  .ecoGrid { gap: 0.45rem; }
+  .storyBlock { padding: 0.85rem; }
+  .csrCard { padding: 0.85rem; }
+  .tooltip { display: none; }
+}

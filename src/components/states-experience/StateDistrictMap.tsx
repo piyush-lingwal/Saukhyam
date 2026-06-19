@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef, useLayoutEffect, useState, useMemo, useCallback, type CSSProperties } from 'react';
+import { useRef, useLayoutEffect, useState, useMemo, useCallback, useEffect, type CSSProperties } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin } from 'lucide-react';
 import { INDIA_LOCATIONS } from '@/data/states/indiaMapGeometry';
 import {
   districtToSvg,
@@ -43,6 +44,15 @@ export default function StateDistrictMap({
   const [stateViewBox, setStateViewBox] = useState<ViewBoxRect | null>(null);
   const [district, setDistrict] = useState<DistrictNode | null>(null);
   const [popupPos, setPopupPos] = useState<{ left: number; top: number } | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)');
+    const sync = () => setIsMobile(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
 
   const location = INDIA_LOCATIONS.find(l => l.id === svgId);
 
@@ -71,25 +81,25 @@ export default function StateDistrictMap({
     }));
   }, [districts, stateViewBox]);
 
-  const updatePopup = useCallback((d: DistrictNode, x: number, y: number) => {
+  const selectDistrict = useCallback((d: DistrictNode, x: number, y: number) => {
     setDistrict(d);
-    if (svgRef.current) {
+    if (!isMobile && svgRef.current) {
       setPopupPos(svgPointToCanvasPercent(svgRef.current, x, y));
     }
-  }, []);
+  }, [isMobile]);
 
   const viewBoxStr = stateViewBox ? viewBoxToString(stateViewBox) : '0 0 612 696';
 
   return (
     <div className={s.districtMap}>
       <div
-        className={`${s.districtCanvas} ${MARKER_SCALE_CLASS[markerScale]}`}
+        className={`${s.districtCanvas} ${MARKER_SCALE_CLASS[markerScale]} ${isMobile ? s.districtCanvasMobile : ''}`}
         style={markerStyle}
       >
         {location ? (
           <svg
             ref={svgRef}
-            className={s.districtStateSvg}
+            className={`${s.districtStateSvg} ${isMobile ? s.districtStateSvgMobile : ''}`}
             viewBox={viewBoxStr}
             preserveAspectRatio="xMidYMid meet"
             role="img"
@@ -107,9 +117,9 @@ export default function StateDistrictMap({
                   key={d.name}
                   className={`${s.districtMarker} ${active ? s.districtMarkerActive : ''}`}
                   transform={`translate(${x}, ${y})`}
-                  onMouseEnter={() => updatePopup(d, x, y)}
-                  onFocus={() => updatePopup(d, x, y)}
-                  onClick={() => updatePopup(d, x, y)}
+                  onMouseEnter={isMobile ? undefined : () => selectDistrict(d, x, y)}
+                  onFocus={() => selectDistrict(d, x, y)}
+                  onClick={() => selectDistrict(d, x, y)}
                   role="button"
                   tabIndex={0}
                   aria-label={d.note ?? d.name}
@@ -134,6 +144,7 @@ export default function StateDistrictMap({
           <div className={s.districtAura} aria-hidden />
         )}
 
+        {!isMobile && (
         <AnimatePresence>
           {district && popupPos && (
             <motion.div
@@ -156,7 +167,51 @@ export default function StateDistrictMap({
             </motion.div>
           )}
         </AnimatePresence>
+        )}
       </div>
+
+      {isMobile && (
+        <div className={s.districtMobilePanel}>
+          <div className={s.districtMobileList} role="tablist" aria-label="Districts">
+            {districts.map(d => (
+              <button
+                key={d.name}
+                type="button"
+                role="tab"
+                aria-selected={district?.name === d.name}
+                className={`${s.districtMobileChip} ${district?.name === d.name ? s.districtMobileChipActive : ''}`}
+                onClick={() => {
+                  const pt = markerPoints.find(m => m.district.name === d.name);
+                  if (pt) selectDistrict(d, pt.x, pt.y);
+                  else setDistrict(d);
+                }}
+              >
+                {d.name}
+              </button>
+            ))}
+          </div>
+          <AnimatePresence mode="wait">
+            {district ? (
+              <motion.div
+                key={district.name}
+                className={s.districtMobileDetail}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.2 }}
+              >
+                <MapPin size={14} aria-hidden />
+                <div>
+                  <strong>{district.name}</strong>
+                  {district.note && <p>{district.note}</p>}
+                </div>
+              </motion.div>
+            ) : (
+              <p className={s.districtMobileHint}>Tap a district on the map or choose one above.</p>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
     </div>
   );
 }
