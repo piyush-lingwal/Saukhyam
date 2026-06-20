@@ -458,41 +458,89 @@ export default function AboutPage() {
         <div className={styles.visionBlobA} aria-hidden="true" />
         <div className={styles.visionBlobB} aria-hidden="true" />
         <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <motion.div
+            className={styles.visionSectionHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
             <motion.span variants={fadeUp} className={styles.sectionBadgeLight}>
               <Target size={14} />
-              What Drives Us Every Day
+              Purpose &amp; Direction
             </motion.span>
-            <motion.h2 variants={fadeUp} className={styles.sectionTitleLight}>
-              Our Vision &amp; Mission
+            <motion.h2 variants={fadeUp} className={styles.visionSectionTitle}>
+              What Drives Us Every Day
             </motion.h2>
           </motion.div>
 
-          <motion.div className={styles.vmCards} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className={styles.vmCard}>
-              <div className={`${styles.vmIcon} ${styles.vmIconVision}`}>
-                <Sparkles size={24} />
+          <div className={styles.vmBlocks}>
+            <motion.article
+              className={styles.vmBlock}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className={styles.vmBlockContent}>
+                <h3 className={styles.vmBlockHeading}>
+                  <Sparkles size={22} className={styles.vmBlockHeadingIcon} aria-hidden="true" />
+                  Our Vision
+                </h3>
+                <p className={styles.vmBlockText}>
+                  A world where sustainable menstrual care becomes the natural first choice, enabling healthier lives,
+                  cleaner communities, and a more responsible future.
+                </p>
+                <p className={styles.vmBlockHighlight}>
+                  Reusables providing a much more wholesome period experience become the first choice for menstruators
+                  everywhere.
+                </p>
               </div>
-              <div className={styles.vmLabel}>Our Vision</div>
-              <p className={styles.vmHeadline}>
-                A world where sustainable menstrual care becomes the natural first choice, enabling healthier lives,
-                cleaner communities, and a more responsible future.
-              </p>
-              <div className={styles.vmAccent} />
-            </motion.div>
+              <div className={styles.vmBlockImageWrap}>
+                <Image
+                  src="/images/about/vision-community.png"
+                  alt="Women learning about sustainable reusable menstrual care together outdoors"
+                  width={640}
+                  height={480}
+                  className={styles.vmBlockImage}
+                  loading="lazy"
+                />
+              </div>
+            </motion.article>
 
-            <motion.div variants={fadeUp} className={`${styles.vmCard} ${styles.vmCardMission}`}>
-              <div className={`${styles.vmIcon} ${styles.vmIconMission}`}>
-                <Globe size={24} />
+            <motion.article
+              className={`${styles.vmBlock} ${styles.vmBlockMission}`}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.65, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className={styles.vmBlockContent}>
+                <h3 className={styles.vmBlockHeading}>
+                  <Globe size={22} className={styles.vmBlockHeadingIcon} aria-hidden="true" />
+                  Our Mission
+                </h3>
+                <p className={styles.vmBlockText}>
+                  To create accessible reusable menstrual solutions while fostering awareness, dignity, environmental
+                  responsibility, and community participation.
+                </p>
+                <p className={styles.vmBlockHighlight}>
+                  Combat climate change, support zero-waste, empower women, and transform lives — all through our
+                  beautiful reusable menstrual pads.
+                </p>
               </div>
-              <div className={styles.vmLabel}>Our Mission</div>
-              <p className={styles.vmHeadline}>
-                To create accessible reusable menstrual solutions while fostering awareness, dignity, environmental
-                responsibility, and community participation.
-              </p>
-              <div className={`${styles.vmAccent} ${styles.vmAccentBlue}`} />
-            </motion.div>
-          </motion.div>
+              <div className={styles.vmBlockImageWrap}>
+                <Image
+                  src="/images/about/mission-pads.png"
+                  alt="Handcrafted reusable menstrual pads made with natural materials and care"
+                  width={640}
+                  height={480}
+                  className={styles.vmBlockImage}
+                  loading="lazy"
+                />
+              </div>
+            </motion.article>
+          </div>
         </div>
       </section>
 
