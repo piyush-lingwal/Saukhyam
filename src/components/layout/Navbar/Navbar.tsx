@@ -94,8 +94,7 @@ export default function Navbar() {
               width={180}
               height={42}
               className={styles.logoImg}
-              style={{ width: 'auto', height: 'auto' }}
-              priority
+              style={{ width: 'auto' }}
             />
           </Link>
 
