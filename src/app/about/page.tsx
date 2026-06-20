@@ -7,16 +7,25 @@ import { motion } from 'framer-motion';
 import {
   ArrowRight,
   Award,
+  Check,
+  Factory,
+  FlaskConical,
   Globe,
+  GraduationCap,
   HandHelping,
+  Handshake,
   Heart,
   Leaf,
   Lightbulb,
+  Megaphone,
   Play,
   Quote,
+  Recycle,
+  Shield,
   Sparkles,
   ShoppingBag,
   Target,
+  TrendingUp,
   Trophy,
   Users,
 } from 'lucide-react';
@@ -137,14 +146,133 @@ const coreValues = [
 ];
 
 const timelineEvents = [
-  { year: '2016', title: 'The Beginning', desc: 'A vision for sustainable menstrual health begins to take shape.' },
-  { year: '2017', title: 'Research & Learning', desc: 'Exploring solutions that combine health, dignity, and sustainability.' },
-  { year: '2018', title: 'Building Communities', desc: 'Training programs and community engagement initiatives expand.' },
-  { year: '2019', title: 'Growing Awareness', desc: 'More institutions and communities join the movement.' },
-  { year: '2020', title: 'Resilience Through Change', desc: 'Continued outreach and support during challenging times.' },
-  { year: '2021', title: 'Recognition & Reach', desc: 'National and international platforms acknowledge the initiative.' },
-  { year: '2023', title: 'Expanding Impact', desc: 'Programs reach more communities and partnerships strengthen.' },
-  { year: 'Today', title: 'A Continuing Journey', desc: 'The mission continues through education, awareness, and sustainable practices.' },
+  {
+    year: '2014',
+    title: 'The Beginning of Research & Innovation',
+    desc: 'Saukhyam began as a research project at Amrita University, supported by the Department of Science and Technology, Government of India. The mission was to discover an eco-friendly absorbent material that could replace tree-based cellulose used in sanitary products.',
+    highlights: [
+      'Research on sustainable menstrual materials began',
+      'Banana fiber identified as a natural absorbent solution',
+      'Focus on health, environment, and dignity',
+    ],
+    icon: FlaskConical,
+    image: {
+      src: '/images/factory/step-01-fiber-cleaning.png',
+      alt: 'Research and banana fiber innovation in the laboratory',
+    },
+  },
+  {
+    year: '2016',
+    title: 'Launching Sustainable Reusable Pads',
+    desc: 'The first reusable menstrual pads were launched, creating a healthier and more sustainable alternative for menstruators.',
+    highlights: [
+      'Introduction of reusable cloth-based pads',
+      'Focus on affordable and eco-conscious menstrual care',
+    ],
+    icon: Recycle,
+    image: {
+      src: '/images/about/mission-pads.png',
+      alt: 'Reusable menstrual pads promoting sustainable lifestyle choices',
+    },
+  },
+  {
+    year: '2017',
+    title: "World's First Banana Fiber Reusable Pads",
+    desc: 'Saukhyam introduced reusable pads made using banana fiber, an agro-waste material, creating a revolutionary approach to sustainable menstrual health.',
+    highlights: [
+      'First reusable menstrual pads using banana fiber',
+      'SHG groups trained in Uttar Pradesh and Telangana',
+      'Women empowered through sustainable livelihoods',
+    ],
+    icon: Factory,
+    image: {
+      src: '/images/factory/manufacturing-hub-team.png',
+      alt: 'Rural women working on banana fiber processing and handmade production',
+    },
+  },
+  {
+    year: '2018',
+    title: 'Building Community Networks',
+    desc: 'Community training, awareness programs, and production networks expanded to make sustainable menstrual care accessible.',
+    highlights: ['Awareness workshops', 'Community participation', 'Women-led production'],
+    icon: Users,
+  },
+  {
+    year: '2019',
+    title: 'Growing Awareness & Outreach',
+    desc: 'More communities, institutions, and partners joined the movement to promote reusable menstrual solutions.',
+    highlights: ['Expanding reach', 'Increasing menstrual health awareness'],
+    icon: Megaphone,
+  },
+  {
+    year: '2020',
+    title: 'Resilience During COVID-19',
+    desc: 'During the pandemic, production centers faced temporary challenges. The journey continued by rebuilding systems and strengthening local production models.',
+    highlights: ['Production restarted in Kerala', 'Development of hub-and-spoke production model'],
+    icon: Shield,
+    image: {
+      src: '/images/blog/musaharCommunity.jpg',
+      alt: 'Community support and women groups rebuilding together',
+    },
+  },
+  {
+    year: '2021',
+    title: 'Scaling Impact Through Partnerships',
+    desc: 'Saukhyam Foundation was established and began collaborations with state governments and rural livelihood missions to expand production and distribution.',
+    highlights: [
+      'Partnerships with Madhya Pradesh, Uttarakhand, Karnataka, Telangana, and Kerala',
+      'Larger production facilities developed',
+      'Reusable pad standards introduced',
+    ],
+    icon: Handshake,
+    image: {
+      src: '/images/awards/niti-aayog-2021-stage.png',
+      alt: 'Government partnerships and expanded production facilities',
+    },
+    counters: [{ value: '___+', label: 'women and girls reached' }],
+  },
+  {
+    year: '2022 – 2023',
+    title: 'Expanding Sustainable Menstrual Care',
+    desc: 'Production networks expanded, reaching more rural communities through government partnerships and local initiatives.',
+    highlights: [
+      'Rural distribution and awareness programs',
+      'Subsidized access for communities where affordability remained a challenge',
+    ],
+    icon: TrendingUp,
+    image: {
+      src: '/images/blog/li-23-reach-distribution.png',
+      alt: 'Rural distribution and community outreach programs',
+    },
+    counters: [
+      { value: '***+', label: 'pads distributed' },
+      { value: '***+', label: 'communities reached' },
+    ],
+  },
+  {
+    year: '2024',
+    title: 'New Initiatives: REACH, CARE & HEAL',
+    desc: 'New initiatives focused on adolescent health, period education, and solving menstrual health challenges.',
+    highlights: ['REACH', 'CARE', 'HEAL Challenge', 'Period awareness programs'],
+    icon: GraduationCap,
+    image: {
+      src: '/images/blog/li-17-reach-hall.png',
+      alt: 'Students participating in education and awareness workshops',
+    },
+  },
+  {
+    year: '2025 – Today',
+    title: 'A Continuing Journey',
+    desc: 'From research to a global movement, Saukhyam continues working towards sustainable menstrual care, women\'s empowerment, and a zero-waste future.',
+    highlights: ['Sustainable menstrual solutions', 'Community empowerment', 'Climate responsibility'],
+    icon: Globe,
+    image: {
+      src: '/images/about/vision-community.png',
+      alt: 'Community members united in the sustainable menstrual care movement',
+    },
+    closingMessage:
+      'Together, we continue creating healthier lives, cleaner communities, and a more responsible future.',
+  },
 ];
 
 const featuredAwards = [
@@ -597,20 +725,64 @@ export default function AboutPage() {
             <div className={styles.timelineLine} aria-hidden="true" />
             {timelineEvents.map((event, idx) => {
               const isLeft = idx % 2 === 0;
+              const Icon = event.icon;
               return (
                 <motion.div
                   key={event.year}
                   className={`${styles.timelineRow} ${isLeft ? styles.timelineRowLeft : styles.timelineRowRight}`}
-                  initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: isLeft ? -50 : 50, y: 24 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.65, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className={styles.timelineCard}>
+                    {event.image ? (
+                      <div className={styles.timelineCardImage}>
+                        <Image
+                          src={event.image.src}
+                          alt={event.image.alt}
+                          width={640}
+                          height={280}
+                          loading="lazy"
+                        />
+                        {Icon && (
+                          <div className={styles.timelineCardImageBadge} aria-hidden="true">
+                            <Icon size={18} strokeWidth={1.75} />
+                          </div>
+                        )}
+                      </div>
+                    ) : Icon ? (
+                      <div className={styles.timelineIconVisual} aria-hidden="true">
+                        <Icon size={36} strokeWidth={1.5} />
+                      </div>
+                    ) : null}
                     <div className={styles.timelineCardBody}>
                       <span className={styles.timelineYear}>{event.year}</span>
                       <h3 className={styles.timelineTitle}>{event.title}</h3>
                       <p className={styles.timelineDesc}>{event.desc}</p>
+                      {event.highlights.length > 0 && (
+                        <ul className={styles.timelineHighlights}>
+                          {event.highlights.map(highlight => (
+                            <li key={highlight} className={styles.timelineHighlightItem}>
+                              <Check size={14} className={styles.timelineHighlightIcon} aria-hidden="true" />
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {event.counters && event.counters.length > 0 && (
+                        <div className={styles.timelineCounters}>
+                          {event.counters.map(counter => (
+                            <div key={counter.label} className={styles.timelineCounter}>
+                              <span className={styles.timelineCounterValue}>{counter.value}</span>
+                              <span className={styles.timelineCounterLabel}>{counter.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {event.closingMessage && (
+                        <p className={styles.timelineClosing}>{event.closingMessage}</p>
+                      )}
                     </div>
                   </div>
                   <div className={styles.timelineDot} aria-hidden="true">
