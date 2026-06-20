@@ -135,22 +135,34 @@
 /* ── Hero ── */
 .hero {
   position: relative;
-  min-height: 85vh;
+  min-height: min(85vh, 800px);
+  max-height: 900px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
-/* Static background image */
+/* Background image — now a Next.js <Image fill> */
 .heroBgImage {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+/* Readability overlay gradient */
+.heroOverlay {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  background-image: url('/Main_page-HeroImages/123.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.45) 40%,
+    rgba(255, 255, 255, 0.6) 70%,
+    rgba(255, 255, 255, 0.75) 100%
+  );
+  pointer-events: none;
 }
 
 .heroContainer {
@@ -2572,6 +2584,15 @@
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
+  .hero {
+    min-height: min(75vh, 680px);
+    max-height: 780px;
+  }
+
+  .heroBgImage {
+    object-position: center 35%;
+  }
+
   .trustGrid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2606,7 +2627,12 @@
 
 @media (max-width: 768px) {
   .hero {
-    min-height: 75vh;
+    min-height: min(70vh, 600px);
+    max-height: 680px;
+  }
+
+  .heroBgImage {
+    object-position: center 30%;
   }
 
   .heroContainer {
@@ -2625,11 +2651,22 @@
 }
 @media (max-width: 640px) {
   .hero {
-    min-height: 70vh;
+    min-height: min(65vh, 520px);
+    max-height: 600px;
   }
 
   .heroBgImage {
-    background-position: center top;
+    object-position: center 25%;
+  }
+
+  .heroOverlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.55) 35%,
+      rgba(255, 255, 255, 0.7) 65%,
+      rgba(255, 255, 255, 0.85) 100%
+    );
   }
 
   .heroContainer {

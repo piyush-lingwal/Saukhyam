@@ -48,6 +48,7 @@ export default function Footer() {
                 width={160}
                 height={38}
                 className={styles.footerLogoImg}
+                style={{ width: 'auto', height: 'auto' }}
               />
             </Link>
             <p className={styles.brandTagline}>Healing Periods. Healing the Planet.</p>

@@ -112,8 +112,17 @@ export default function HomePage() {
 
       {/* ── Hero Section ── */}
       <section className={styles.hero}>
-        {/* Static background image */}
-        <div className={styles.heroBgImage} aria-hidden="true" />
+        {/* Background image — Next.js Image for auto WebP/AVIF, srcset, LCP preload */}
+        <Image
+          src="/Main_page-HeroImages/123.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className={styles.heroBgImage}
+        />
+        {/* Gradient overlay for guaranteed text readability */}
+        <div className={styles.heroOverlay} aria-hidden="true" />
 
         <div className={`container ${styles.heroContainer}`}>
           {/* Headline */}
