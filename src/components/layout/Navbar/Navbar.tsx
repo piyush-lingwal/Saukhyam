@@ -226,7 +226,7 @@ export default function Navbar() {
               width={150}
               height={35}
               className={styles.logoImg}
-              style={{ width: 'auto', height: 'auto' }}
+              style={{ width: 'auto' }}
             />
           </Link>
           <button
