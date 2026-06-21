@@ -157,8 +157,8 @@ const timelineEvents = [
     ],
     icon: FlaskConical,
     image: {
-      src: '/images/factory/step-01-fiber-cleaning.png',
-      alt: 'Research and banana fiber innovation in the laboratory',
+      src: '/images/about/amrita-university-research.png',
+      alt: 'Amrita Vishwa Vidyapeetham, where Saukhyam began as a research project on sustainable menstrual materials',
     },
   },
   {
@@ -914,7 +914,7 @@ export default function AboutPage() {
             <motion.div variants={fadeUp} className={styles.ctaButtons}>
               <Link href="/products" className={styles.ctaBtnPrimary}>
                 <ShoppingBag size={18} aria-hidden />
-                Shop Now
+                Switch Now
               </Link>
               <Link href="/programs" className={styles.ctaBtnSecondary}>
                 Our Programs
