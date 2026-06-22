@@ -229,7 +229,6 @@ const timelineEvents = [
       src: '/images/awards/niti-aayog-2021-stage.png',
       alt: 'Government partnerships and expanded production facilities',
     },
-    counters: [{ value: '___+', label: 'women and girls reached' }],
   },
   {
     year: '2022 – 2023',
@@ -244,10 +243,6 @@ const timelineEvents = [
       src: '/images/blog/li-23-reach-distribution.png',
       alt: 'Rural distribution and community outreach programs',
     },
-    counters: [
-      { value: '***+', label: 'pads distributed' },
-      { value: '***+', label: 'communities reached' },
-    ],
   },
   {
     year: '2024',
