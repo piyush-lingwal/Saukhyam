@@ -182,7 +182,7 @@ const timelineEvents = [
     highlights: [
       'First reusable menstrual pads using banana fiber',
       'SHG groups trained in Uttar Pradesh and Telangana',
-      'Women empowered through sustainable livelihoods',
+      'Promoting sustainable production practices through eco-friendly innovation',
     ],
     icon: Factory,
     image: {
@@ -194,7 +194,7 @@ const timelineEvents = [
     year: '2018',
     title: 'Building Community Networks',
     desc: 'Community training, awareness programs, and production networks expanded to make sustainable menstrual care accessible.',
-    highlights: ['Awareness workshops', 'Community participation', 'Women-led production'],
+    highlights: ['Awareness workshops', 'Community participation'],
     icon: Users,
   },
   {
@@ -203,6 +203,10 @@ const timelineEvents = [
     desc: 'More communities, institutions, and partners joined the movement to promote reusable menstrual solutions.',
     highlights: ['Expanding reach', 'Increasing menstrual health awareness'],
     icon: Megaphone,
+    image: {
+      src: '/images/about/growing-awareness-outreach-2019.png',
+      alt: 'Communities, institutions, and partners promoting reusable menstrual solutions through awareness outreach',
+    },
   },
   {
     year: '2020',
@@ -226,8 +230,8 @@ const timelineEvents = [
     ],
     icon: Handshake,
     image: {
-      src: '/images/awards/niti-aayog-2021-stage.png',
-      alt: 'Government partnerships and expanded production facilities',
+      src: '/images/about/scaling-impact-partnerships-2021.png',
+      alt: 'Saukhyam partnerships expanding production and distribution through government and community collaborations',
     },
   },
   {
@@ -240,8 +244,8 @@ const timelineEvents = [
     ],
     icon: TrendingUp,
     image: {
-      src: '/images/blog/li-23-reach-distribution.png',
-      alt: 'Rural distribution and community outreach programs',
+      src: '/images/about/expanding-sustainable-care-2022-2023.png',
+      alt: 'Community distribution and awareness programs expanding sustainable menstrual care in rural areas',
     },
   },
   {
