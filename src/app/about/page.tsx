@@ -171,8 +171,8 @@ const timelineEvents = [
     ],
     icon: Recycle,
     image: {
-      src: '/images/about/mission-pads.png',
-      alt: 'Reusable menstrual pads promoting sustainable lifestyle choices',
+      src: '/images/about/launching-reusable-pads-2016.png',
+      alt: 'Reusable cloth menstrual pads launched as a sustainable and eco-conscious alternative',
     },
   },
   {
@@ -186,8 +186,8 @@ const timelineEvents = [
     ],
     icon: Factory,
     image: {
-      src: '/images/factory/manufacturing-hub-team.png',
-      alt: 'Rural women working on banana fiber processing and handmade production',
+      src: '/images/about/banana-fiber-reusable-pads-2017.png',
+      alt: 'Banana fiber being processed for reusable menstrual pads through sustainable production',
     },
   },
   {
@@ -196,6 +196,10 @@ const timelineEvents = [
     desc: 'Community training, awareness programs, and production networks expanded to make sustainable menstrual care accessible.',
     highlights: ['Awareness workshops', 'Community participation'],
     icon: Users,
+    image: {
+      src: '/images/about/building-community-networks-2018.png',
+      alt: 'Community training and awareness workshops expanding access to sustainable menstrual care',
+    },
   },
   {
     year: '2019',
@@ -475,7 +479,7 @@ export default function AboutPage() {
         <div className={styles.splitStoryBg} aria-hidden="true" />
         <div className={`container ${styles.splitStoryContainer}`}>
           <div className={styles.splitStoryGrid}>
-            <motion.div
+          <motion.div
               className={styles.splitStoryVideoCol}
               initial={{ opacity: 0, x: -28 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -500,7 +504,7 @@ export default function AboutPage() {
                       <span className={styles.splitVideoPlayRing} aria-hidden="true" />
                       <span className={styles.splitVideoPlayInner}>
                         <Play size={26} fill="currentColor" aria-hidden="true" />
-                      </span>
+              </span>
                     </button>
                   </>
                 ) : (
@@ -562,7 +566,7 @@ export default function AboutPage() {
                     <div className={styles.storyMilestoneBody}>
                       <h3 className={styles.storyMilestoneTitle}>{item.title}</h3>
                       <p className={styles.storyMilestoneDesc}>{item.desc}</p>
-                    </div>
+                </div>
                   </motion.div>
                 ))}
               </div>
@@ -646,7 +650,7 @@ export default function AboutPage() {
                 <h3 className={styles.vmBlockHeading}>
                   <Globe size={22} className={styles.vmBlockHeadingIcon} aria-hidden="true" />
                   Our Mission
-                </h3>
+              </h3>
                 <p className={styles.vmBlockText}>
                   To create accessible reusable menstrual solutions while fostering awareness, dignity, environmental
                   responsibility, and community participation.
@@ -822,9 +826,9 @@ export default function AboutPage() {
                 <div className={styles.awardCardBody}>
                   <div className={styles.awardIconWrap}>
                     <Trophy size={18} />
-                  </div>
-                  <h4 className={styles.awardTitle}>{award.title}</h4>
-                  <p className={styles.awardOrg}>{award.organization}</p>
+                </div>
+                <h4 className={styles.awardTitle}>{award.title}</h4>
+                <p className={styles.awardOrg}>{award.organization}</p>
                   <p className={styles.awardDesc}>{award.description}</p>
                   <Link href={award.href} className={styles.awardLink}>
                     View Details <ArrowRight size={14} />
