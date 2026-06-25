@@ -145,7 +145,7 @@ const coreValues = [
   },
 ];
 
-const timelineEvents = [
+const timelineEventsChronological = [
   {
     year: '2014',
     title: 'The Beginning of Research & Innovation',
@@ -264,8 +264,8 @@ const timelineEvents = [
     },
   },
   {
-    year: '2025 – Today',
-    title: 'A Continuing Journey',
+    year: '2026 – Today',
+    title: 'Latest Journey',
     desc: 'From research to a global movement, Saukhyam continues working towards sustainable menstrual care, women\'s empowerment, and a zero-waste future.',
     highlights: ['Sustainable menstrual solutions', 'Community empowerment', 'Climate responsibility'],
     icon: Globe,
@@ -277,6 +277,8 @@ const timelineEvents = [
       'Together, we continue creating healthier lives, cleaner communities, and a more responsible future.',
   },
 ];
+
+const timelineEvents = [...timelineEventsChronological].reverse();
 
 const featuredAwards = [
   {
@@ -895,7 +897,7 @@ export default function AboutPage() {
 
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={styles.sectionCtaWrap}>
             <Link href="/media" className={styles.sectionCtaLink}>
-              Explore Media &amp; Press Coverage <ArrowRight size={16} />
+              Explore Media &amp; Press Coverages <ArrowRight size={16} />
             </Link>
           </motion.div>
         </div>
