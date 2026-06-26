@@ -131,10 +131,10 @@ const gains = [
 
 const journeySteps = [
   { icon: ClipboardList, step: '01', title: 'Fill the Form', desc: 'Share your background, domain interest, and availability via our short application.' },
-  { icon: FileText,     step: '02', title: 'Application Review', desc: 'Our team reviews every application carefully and thoughtfully.' },
+  { icon: FileText, step: '02', title: 'Application Review', desc: 'Our team reviews every application carefully and thoughtfully.' },
   { icon: MessageSquare, step: '03', title: 'Interview / Discussion', desc: 'A 15 to 20 minute conversation to understand how you can contribute best.' },
-  { icon: UserCheck,    step: '04', title: 'Onboarding',  desc: 'Receive your welcome pack, get introduced to the team, and start your journey.' },
-  { icon: Rocket,       step: '05', title: 'Impact Projects', desc: 'Dive into real work that shapes communities, products, and programs.' },
+  { icon: UserCheck, step: '04', title: 'Onboarding', desc: 'Receive your welcome pack, get introduced to the team, and start your journey.' },
+  { icon: Rocket, step: '05', title: 'Impact Projects', desc: 'Dive into real work that shapes communities, products, and programs.' },
 ];
 
 type InternSection = { label: string; preview: string; full: string };
@@ -174,9 +174,9 @@ const internsData: InternProfile[] = [
     testimonial: 'My internship at Saukhyam has been an enriching learning journey. The organization provides a supportive environment where innovation, creativity, and social impact go hand in hand. I have gained valuable technical skills, improved my problem-solving abilities, and learned how technology can be used to create meaningful change in society. Working with the Saukhyam team has been both inspiring and professionally rewarding.',
   },
   {
-    name: 'Piyush Singh Lingwal',
+    name: 'Piyush Lingwal',
     role: 'Tech Intern',
-    institution: 'Veer Madho Singh Bhandari UTU, Uttarakhand',
+    institution: 'Uttarakhand Technical University, Dehradun',
     degree: 'B.Tech, Computer Science and Engineering',
     image: '/images/interns/piyush-lingwal.png',
     initials: 'PL',
@@ -482,7 +482,7 @@ export default function InternshipsPage() {
 
         <div className={styles.heroWave} aria-hidden="true">
           <svg viewBox="0 0 1440 80" fill="none" preserveAspectRatio="none">
-            <path d="M0 80L1440 80L1440 24C1200 70 960 4 720 34C480 64 240 14 0 44L0 80Z" fill="#fafcf9"/>
+            <path d="M0 80L1440 80L1440 24C1200 70 960 4 720 34C480 64 240 14 0 44L0 80Z" fill="#fafcf9" />
           </svg>
         </div>
       </section>
@@ -752,7 +752,7 @@ export default function InternshipsPage() {
                 Frequently Asked <span className={styles.accent}>Questions</span>
               </h2>
               <p className={styles.sectionSubtitle}>
-                Everything you need to know before applying. Still have questions? 
+                Everything you need to know before applying. Still have questions?
                 Write to us at{' '}
                 <a href="mailto:info@saukhyampads.org" className={styles.faqEmail}>
                   info@saukhyampads.org

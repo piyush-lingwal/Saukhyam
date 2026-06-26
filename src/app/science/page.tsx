@@ -696,7 +696,7 @@ export default function SciencePage() {
             <motion.div variants={fadeInUp} className={styles.ctaActions}>
               <Link href="/products" className={styles.ctaPrimary}>
                 <ShoppingBag size={20} aria-hidden="true" />
-                Shop Now
+                Switch Now
               </Link>
               <Link href="/faq" className={styles.ctaSecondary}>
                 Learn More

@@ -94,7 +94,7 @@ export default function Navbar() {
               width={180}
               height={42}
               className={styles.logoImg}
-              priority
+              style={{ width: 'auto' }}
             />
           </Link>
 
@@ -226,6 +226,7 @@ export default function Navbar() {
               width={150}
               height={35}
               className={styles.logoImg}
+              style={{ width: 'auto' }}
             />
           </Link>
           <button

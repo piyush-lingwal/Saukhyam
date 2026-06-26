@@ -15,8 +15,10 @@ import {
 import { products } from '@/data/products';
 import { testimonials } from '@/data/content';
 import { useCart } from '@/context/CartContext';
-import IndiaImpactMap from '@/components/home/IndiaImpactMap/IndiaImpactMap';
+
 import styles from './page.module.css';
+
+
 
 const tickerMessages = [
   '5 Lakh+ women have switched to Saukhyam',
@@ -82,6 +84,7 @@ export default function HomePage() {
   const [recentlyAdded, setRecentlyAdded] = useState<Record<string, boolean>>({});
   const [wishlist, setWishlist] = useState<Record<string, boolean>>({});
 
+
   const scrollTestimonials = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollWidth = window.innerWidth > 768 ? 400 : 300;
@@ -109,19 +112,17 @@ export default function HomePage() {
 
       {/* ── Hero Section ── */}
       <section className={styles.hero}>
-        {/* Background glows */}
-        <div className={styles.heroBg}>
-          <div className={`${styles.heroGlow} ${styles.heroGlow1}`} />
-          <div className={`${styles.heroGlow} ${styles.heroGlow2}`} />
-        </div>
-
-        {/* Side women images, visible on wide screens only */}
-        <div className={styles.heroSideLeft} aria-hidden="true">
-          <Image src="/hero-woman-left.png" alt="" width={520} height={800} quality={75} priority />
-        </div>
-        <div className={styles.heroSideRight} aria-hidden="true">
-          <Image src="/hero-woman-right.png" alt="" width={520} height={800} quality={75} priority />
-        </div>
+        {/* Background image — Next.js Image for auto WebP/AVIF, srcset, LCP preload */}
+        <Image
+          src="/Main_page-HeroImages/123.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className={styles.heroBgImage}
+        />
+        {/* Gradient overlay for guaranteed text readability */}
+        <div className={styles.heroOverlay} aria-hidden="true" />
 
         <div className={`container ${styles.heroContainer}`}>
           {/* Headline */}
@@ -523,10 +524,10 @@ export default function HomePage() {
                 aria-label="Leave a review on Google"
               >
                 <svg className={styles.googleReviewIcon} viewBox="0 0 48 48" aria-hidden="true">
-                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
                 </svg>
                 Leave a Google Review
               </a>
@@ -536,14 +537,14 @@ export default function HomePage() {
 
         {/* Simple Testimonial Slider */}
         <div className={styles.testimonialSliderWrap}>
-          <button 
+          <button
             className={`${styles.sliderBtn} ${styles.sliderBtnLeft}`}
             onClick={() => scrollTestimonials('left')}
             aria-label="Previous testimonials"
           >
             <ChevronLeft size={24} />
           </button>
-          
+
           <div className={styles.testimonialSliderContainer} ref={scrollRef}>
             <div className={styles.testimonialTrack}>
               {testimonials.map((t, i) => (
@@ -577,7 +578,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <button 
+          <button
             className={`${styles.sliderBtn} ${styles.sliderBtnRight}`}
             onClick={() => scrollTestimonials('right')}
             aria-label="Next testimonials"
@@ -624,8 +625,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Interactive India Impact Map ── */}
-      <IndiaImpactMap />
+
 
       {/* ── Donate Section ── */}
       <section className={styles.donateSection}>
@@ -646,9 +646,16 @@ export default function HomePage() {
                 Every Rupee Reaches a Real Woman
               </h2>
               <p className={styles.donateSubtitle}>
-                Saukhyam Foundation runs menstrual health programs HEAL, CARE and REACH,
-                distributes reusable pads to girls and women in low-income communities and
-                trains community health workers across India. Your donation makes it possible.
+                We subsidize reusable pad sets for low-income communities and provide them free to those who cannot afford them.
+              </p>
+              <p className={styles.donateSubtitle}>
+                Through HEAL, CARE and REACH, we support girls and women with menstrual health education and sustainable menstrual products.
+              </p>
+              <p className={styles.donateSubtitle}>
+                We also train community health workers across India.
+              </p>
+              <p className={styles.donateSubtitle}>
+                Your donation helps make all of this possible.
               </p>
             </motion.div>
 
