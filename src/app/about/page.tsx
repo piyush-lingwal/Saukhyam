@@ -631,8 +631,8 @@ export default function AboutPage() {
               </div>
               <div className={styles.vmBlockImageWrap}>
                 <Image
-                  src="/images/about/vision-community.png"
-                  alt="Women learning about sustainable reusable menstrual care together outdoors"
+                  src="/images/about/our-vision.jpg"
+                  alt="Women holding reusable menstrual products with a green eco-friendly Earth background"
                   width={640}
                   height={480}
                   className={styles.vmBlockImage}
