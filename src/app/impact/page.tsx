@@ -432,8 +432,8 @@ const awardsTimeline: AwardsTimeline = {
   ],
 };
 
-const timelineYears = ['2016', '2017', '2018', '2020', '2021', '2022', '2023', '2024', '2025', '2026'];
-const DEFAULT_YEAR = '2021';
+const timelineYears = ['2026', '2025', '2024', '2023', '2022', '2021', '2020', '2018', '2017', '2016'];
+const DEFAULT_YEAR = '2026';
 
 /* ── animation variants ── */
 const fadeInUp = {

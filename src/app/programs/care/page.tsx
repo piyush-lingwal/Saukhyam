@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
@@ -228,7 +228,7 @@ export default function CarePage() {
         {/* Background campus photo, sits behind purple gradient overlay */}
         <div className={care.heroBgImageWrap} aria-hidden="true">
           <Image
-            src="/CARE Page Photos/hero image.png"
+            src="/CARE Page Photos/hero image.jpg"
             alt=""
             fill
             className={care.heroBgImage}

@@ -7,16 +7,25 @@ import { motion } from 'framer-motion';
 import {
   ArrowRight,
   Award,
+  Check,
+  Factory,
+  FlaskConical,
   Globe,
+  GraduationCap,
   HandHelping,
+  Handshake,
   Heart,
   Leaf,
   Lightbulb,
+  Megaphone,
   Play,
   Quote,
+  Recycle,
+  Shield,
   Sparkles,
   ShoppingBag,
   Target,
+  TrendingUp,
   Trophy,
   Users,
 } from 'lucide-react';
@@ -136,16 +145,140 @@ const coreValues = [
   },
 ];
 
-const timelineEvents = [
-  { year: '2016', title: 'The Beginning', desc: 'A vision for sustainable menstrual health begins to take shape.' },
-  { year: '2017', title: 'Research & Learning', desc: 'Exploring solutions that combine health, dignity, and sustainability.' },
-  { year: '2018', title: 'Building Communities', desc: 'Training programs and community engagement initiatives expand.' },
-  { year: '2019', title: 'Growing Awareness', desc: 'More institutions and communities join the movement.' },
-  { year: '2020', title: 'Resilience Through Change', desc: 'Continued outreach and support during challenging times.' },
-  { year: '2021', title: 'Recognition & Reach', desc: 'National and international platforms acknowledge the initiative.' },
-  { year: '2023', title: 'Expanding Impact', desc: 'Programs reach more communities and partnerships strengthen.' },
-  { year: 'Today', title: 'A Continuing Journey', desc: 'The mission continues through education, awareness, and sustainable practices.' },
+const timelineEventsChronological = [
+  {
+    year: '2014',
+    title: 'The Beginning of Research & Innovation',
+    desc: 'Saukhyam began as a research project at Amrita University, supported by the Department of Science and Technology, Government of India. The mission was to discover an eco-friendly absorbent material that could replace tree-based cellulose used in sanitary products.',
+    highlights: [
+      'Research on sustainable menstrual materials began',
+      'Banana fiber identified as a natural absorbent solution',
+      'Focus on health, environment, and dignity',
+    ],
+    icon: FlaskConical,
+    image: {
+      src: '/images/about/amrita-university-research.png',
+      alt: 'Amrita Vishwa Vidyapeetham, where Saukhyam began as a research project on sustainable menstrual materials',
+    },
+  },
+  {
+    year: '2016',
+    title: 'Launching Sustainable Reusable Pads',
+    desc: 'The first reusable menstrual pads were launched, creating a healthier and more sustainable alternative for menstruators.',
+    highlights: [
+      'Introduction of reusable cloth-based pads',
+      'Focus on affordable and eco-conscious menstrual care',
+    ],
+    icon: Recycle,
+    image: {
+      src: '/images/about/launching-reusable-pads-2016.png',
+      alt: 'Reusable cloth menstrual pads launched as a sustainable and eco-conscious alternative',
+    },
+  },
+  {
+    year: '2017',
+    title: "World's First Banana Fiber Reusable Pads",
+    desc: 'Saukhyam introduced reusable pads made using banana fiber, an agro-waste material, creating a revolutionary approach to sustainable menstrual health.',
+    highlights: [
+      'First reusable menstrual pads using banana fiber',
+      'SHG groups trained in Uttar Pradesh and Telangana',
+      'Promoting sustainable production practices through eco-friendly innovation',
+    ],
+    icon: Factory,
+    image: {
+      src: '/images/about/banana-fiber-reusable-pads-2017.png',
+      alt: 'Banana fiber being processed for reusable menstrual pads through sustainable production',
+    },
+  },
+  {
+    year: '2018',
+    title: 'Building Community Networks',
+    desc: 'Community training, awareness programs, and production networks expanded to make sustainable menstrual care accessible.',
+    highlights: ['Awareness workshops', 'Community participation'],
+    icon: Users,
+    image: {
+      src: '/images/about/building-community-networks-2018.png',
+      alt: 'Community training and awareness workshops expanding access to sustainable menstrual care',
+    },
+  },
+  {
+    year: '2019',
+    title: 'Growing Awareness & Outreach',
+    desc: 'More communities, institutions, and partners joined the movement to promote reusable menstrual solutions.',
+    highlights: ['Expanding reach', 'Increasing menstrual health awareness'],
+    icon: Megaphone,
+    image: {
+      src: '/images/about/growing-awareness-outreach-2019.png',
+      alt: 'Communities, institutions, and partners promoting reusable menstrual solutions through awareness outreach',
+    },
+  },
+  {
+    year: '2020',
+    title: 'Resilience During COVID-19',
+    desc: 'During the pandemic, production centers faced temporary challenges. The journey continued by rebuilding systems and strengthening local production models.',
+    highlights: ['Production restarted in Kerala', 'Development of hub-and-spoke production model'],
+    icon: Shield,
+    image: {
+      src: '/images/blog/musaharCommunity.jpg',
+      alt: 'Community support and women groups rebuilding together',
+    },
+  },
+  {
+    year: '2021',
+    title: 'Scaling Impact Through Partnerships',
+    desc: 'Saukhyam Foundation was established and began collaborations with state governments and rural livelihood missions to expand production and distribution.',
+    highlights: [
+      'Partnerships with Madhya Pradesh, Uttarakhand, Karnataka, Telangana, and Kerala',
+      'Larger production facilities developed',
+      'Reusable pad standards introduced',
+    ],
+    icon: Handshake,
+    image: {
+      src: '/images/about/scaling-impact-partnerships-2021.png',
+      alt: 'Saukhyam partnerships expanding production and distribution through government and community collaborations',
+    },
+  },
+  {
+    year: '2022 – 2023',
+    title: 'Expanding Sustainable Menstrual Care',
+    desc: 'Production networks expanded, reaching more rural communities through government partnerships and local initiatives.',
+    highlights: [
+      'Rural distribution and awareness programs',
+      'Subsidized access for communities where affordability remained a challenge',
+    ],
+    icon: TrendingUp,
+    image: {
+      src: '/images/about/expanding-sustainable-care-2022-2023.png',
+      alt: 'Community distribution and awareness programs expanding sustainable menstrual care in rural areas',
+    },
+  },
+  {
+    year: '2024',
+    title: 'New Initiatives: REACH, CARE & HEAL',
+    desc: 'New initiatives focused on adolescent health, period education, and solving menstrual health challenges.',
+    highlights: ['REACH', 'CARE', 'HEAL Challenge', 'Period awareness programs'],
+    icon: GraduationCap,
+    image: {
+      src: '/images/blog/li-17-reach-hall.png',
+      alt: 'Students participating in education and awareness workshops',
+    },
+  },
+  {
+    year: '2026 – Today',
+    title: 'Latest Journey',
+    desc: 'From research to a global movement, Saukhyam continues working towards sustainable menstrual care, women\'s empowerment, and a zero-waste future.',
+    highlights: ['Sustainable menstrual solutions', 'Community empowerment', 'Climate responsibility'],
+    icon: Globe,
+    image: {
+      src: '/images/about/vision-community.png',
+      alt: 'Community members united in the sustainable menstrual care movement',
+    },
+    closingMessage:
+      'Together, we continue creating healthier lives, cleaner communities, and a more responsible future.',
+  },
 ];
+
+const timelineEvents = [...timelineEventsChronological].reverse();
 
 const featuredAwards = [
   {
@@ -348,7 +481,7 @@ export default function AboutPage() {
         <div className={styles.splitStoryBg} aria-hidden="true" />
         <div className={`container ${styles.splitStoryContainer}`}>
           <div className={styles.splitStoryGrid}>
-            <motion.div
+          <motion.div
               className={styles.splitStoryVideoCol}
               initial={{ opacity: 0, x: -28 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -373,7 +506,7 @@ export default function AboutPage() {
                       <span className={styles.splitVideoPlayRing} aria-hidden="true" />
                       <span className={styles.splitVideoPlayInner}>
                         <Play size={26} fill="currentColor" aria-hidden="true" />
-                      </span>
+              </span>
                     </button>
                   </>
                 ) : (
@@ -435,7 +568,7 @@ export default function AboutPage() {
                     <div className={styles.storyMilestoneBody}>
                       <h3 className={styles.storyMilestoneTitle}>{item.title}</h3>
                       <p className={styles.storyMilestoneDesc}>{item.desc}</p>
-                    </div>
+                </div>
                   </motion.div>
                 ))}
               </div>
@@ -458,41 +591,89 @@ export default function AboutPage() {
         <div className={styles.visionBlobA} aria-hidden="true" />
         <div className={styles.visionBlobB} aria-hidden="true" />
         <div className="container">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <motion.div
+            className={styles.visionSectionHeader}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
             <motion.span variants={fadeUp} className={styles.sectionBadgeLight}>
               <Target size={14} />
-              What Drives Us Every Day
+              Purpose &amp; Direction
             </motion.span>
-            <motion.h2 variants={fadeUp} className={styles.sectionTitleLight}>
-              Our Vision &amp; Mission
+            <motion.h2 variants={fadeUp} className={styles.visionSectionTitle}>
+              What Drives Us Every Day
             </motion.h2>
           </motion.div>
 
-          <motion.div className={styles.vmCards} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className={styles.vmCard}>
-              <div className={`${styles.vmIcon} ${styles.vmIconVision}`}>
-                <Sparkles size={24} />
+          <div className={styles.vmBlocks}>
+            <motion.article
+              className={styles.vmBlock}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className={styles.vmBlockContent}>
+                <h3 className={styles.vmBlockHeading}>
+                  <Sparkles size={22} className={styles.vmBlockHeadingIcon} aria-hidden="true" />
+                  Our Vision
+                </h3>
+                <p className={styles.vmBlockText}>
+                  A world where sustainable menstrual care becomes the natural first choice, enabling healthier lives,
+                  cleaner communities, and a more responsible future.
+                </p>
+                <p className={styles.vmBlockHighlight}>
+                  Reusables providing a much more wholesome period experience become the first choice for menstruators
+                  everywhere.
+                </p>
               </div>
-              <div className={styles.vmLabel}>Our Vision</div>
-              <p className={styles.vmHeadline}>
-                A world where sustainable menstrual care becomes the natural first choice, enabling healthier lives,
-                cleaner communities, and a more responsible future.
-              </p>
-              <div className={styles.vmAccent} />
-            </motion.div>
+              <div className={styles.vmBlockImageWrap}>
+                <Image
+                  src="/images/about/our-vision.jpg"
+                  alt="Women holding reusable menstrual products with a green eco-friendly Earth background"
+                  width={640}
+                  height={480}
+                  className={styles.vmBlockImage}
+                  loading="lazy"
+                />
+              </div>
+            </motion.article>
 
-            <motion.div variants={fadeUp} className={`${styles.vmCard} ${styles.vmCardMission}`}>
-              <div className={`${styles.vmIcon} ${styles.vmIconMission}`}>
-                <Globe size={24} />
+            <motion.article
+              className={`${styles.vmBlock} ${styles.vmBlockMission}`}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.65, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <div className={styles.vmBlockContent}>
+                <h3 className={styles.vmBlockHeading}>
+                  <Globe size={22} className={styles.vmBlockHeadingIcon} aria-hidden="true" />
+                  Our Mission
+              </h3>
+                <p className={styles.vmBlockText}>
+                  To create accessible reusable menstrual solutions while fostering awareness, dignity, environmental
+                  responsibility, and community participation.
+                </p>
+                <p className={styles.vmBlockHighlight}>
+                  Combat climate change, support zero-waste, empower women, and transform lives — all through our
+                  beautiful reusable menstrual pads.
+                </p>
               </div>
-              <div className={styles.vmLabel}>Our Mission</div>
-              <p className={styles.vmHeadline}>
-                To create accessible reusable menstrual solutions while fostering awareness, dignity, environmental
-                responsibility, and community participation.
-              </p>
-              <div className={`${styles.vmAccent} ${styles.vmAccentBlue}`} />
-            </motion.div>
-          </motion.div>
+              <div className={styles.vmBlockImageWrap}>
+                <Image
+                  src="/images/about/mission-pads.png"
+                  alt="Handcrafted reusable menstrual pads made with natural materials and care"
+                  width={640}
+                  height={480}
+                  className={styles.vmBlockImage}
+                  loading="lazy"
+                />
+              </div>
+            </motion.article>
+          </div>
         </div>
       </section>
 
@@ -549,20 +730,55 @@ export default function AboutPage() {
             <div className={styles.timelineLine} aria-hidden="true" />
             {timelineEvents.map((event, idx) => {
               const isLeft = idx % 2 === 0;
+              const Icon = event.icon;
               return (
                 <motion.div
                   key={event.year}
                   className={`${styles.timelineRow} ${isLeft ? styles.timelineRowLeft : styles.timelineRowRight}`}
-                  initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: isLeft ? -50 : 50, y: 24 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.65, delay: idx * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className={styles.timelineCard}>
+                    {event.image ? (
+                      <div className={styles.timelineCardImage}>
+                        <Image
+                          src={event.image.src}
+                          alt={event.image.alt}
+                          width={640}
+                          height={280}
+                          loading="lazy"
+                        />
+                        {Icon && (
+                          <div className={styles.timelineCardImageBadge} aria-hidden="true">
+                            <Icon size={18} strokeWidth={1.75} />
+                          </div>
+                        )}
+                      </div>
+                    ) : Icon ? (
+                      <div className={styles.timelineIconVisual} aria-hidden="true">
+                        <Icon size={36} strokeWidth={1.5} />
+                      </div>
+                    ) : null}
                     <div className={styles.timelineCardBody}>
                       <span className={styles.timelineYear}>{event.year}</span>
                       <h3 className={styles.timelineTitle}>{event.title}</h3>
                       <p className={styles.timelineDesc}>{event.desc}</p>
+                      {event.highlights.length > 0 && (
+                        <ul className={styles.timelineHighlights}>
+                          {event.highlights.map(highlight => (
+                            <li key={highlight} className={styles.timelineHighlightItem}>
+                              <Check size={14} className={styles.timelineHighlightIcon} aria-hidden="true" />
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {event.closingMessage && (
+                        <p className={styles.timelineClosing}>{event.closingMessage}</p>
+                      )}
                     </div>
                   </div>
                   <div className={styles.timelineDot} aria-hidden="true">
@@ -603,9 +819,9 @@ export default function AboutPage() {
                 <div className={styles.awardCardBody}>
                   <div className={styles.awardIconWrap}>
                     <Trophy size={18} />
-                  </div>
-                  <h4 className={styles.awardTitle}>{award.title}</h4>
-                  <p className={styles.awardOrg}>{award.organization}</p>
+                </div>
+                <h4 className={styles.awardTitle}>{award.title}</h4>
+                <p className={styles.awardOrg}>{award.organization}</p>
                   <p className={styles.awardDesc}>{award.description}</p>
                   <Link href={award.href} className={styles.awardLink}>
                     View Details <ArrowRight size={14} />
@@ -672,7 +888,7 @@ export default function AboutPage() {
 
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className={styles.sectionCtaWrap}>
             <Link href="/media" className={styles.sectionCtaLink}>
-              Explore Media &amp; Press Coverage <ArrowRight size={16} />
+              Explore Media &amp; Press Coverages <ArrowRight size={16} />
             </Link>
           </motion.div>
         </div>
@@ -694,7 +910,7 @@ export default function AboutPage() {
             <motion.div variants={fadeUp} className={styles.ctaButtons}>
               <Link href="/products" className={styles.ctaBtnPrimary}>
                 <ShoppingBag size={18} aria-hidden />
-                Shop Now
+                Switch Now
               </Link>
               <Link href="/programs" className={styles.ctaBtnSecondary}>
                 Our Programs
