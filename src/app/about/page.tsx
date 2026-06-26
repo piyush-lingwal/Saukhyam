@@ -775,16 +775,7 @@ export default function AboutPage() {
                           ))}
                         </ul>
                       )}
-                      {event.counters && event.counters.length > 0 && (
-                        <div className={styles.timelineCounters}>
-                          {event.counters.map(counter => (
-                            <div key={counter.label} className={styles.timelineCounter}>
-                              <span className={styles.timelineCounterValue}>{counter.value}</span>
-                              <span className={styles.timelineCounterLabel}>{counter.label}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
+
                       {event.closingMessage && (
                         <p className={styles.timelineClosing}>{event.closingMessage}</p>
                       )}
