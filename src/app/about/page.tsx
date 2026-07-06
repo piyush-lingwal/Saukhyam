@@ -236,8 +236,8 @@ const timelineEventsChronological: TimelineEvent[] = [
     highlights: ['Production restarted in Kerala', 'Development of hub-and-spoke production model'],
     icon: Shield,
     image: {
-      src: '/images/blog/musaharCommunity.jpg',
-      alt: 'Community support and women groups rebuilding together',
+      src: '/images/about/resilience-covid-2020.jpg',
+      alt: 'A compilation of photos showing school children receiving pads, stacks of Saukhyam product boxes, and women speaking at menstrual health awareness events',
     },
   },
   {
