@@ -32,6 +32,23 @@ import {
 import { pressMentions } from '@/data/newsroom/pressMediaContent';
 import styles from './page.module.css';
 
+interface TimelineEvent {
+  year: string;
+  title: string;
+  desc: string;
+  highlights: string[];
+  icon?: any;
+  image?: {
+    src: string;
+    alt: string;
+  };
+  counters?: {
+    label: string;
+    value: string;
+  }[];
+  closingMessage?: string;
+}
+
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const } },
@@ -145,7 +162,7 @@ const coreValues = [
   },
 ];
 
-const timelineEventsChronological = [
+const timelineEventsChronological: TimelineEvent[] = [
   {
     year: '2014',
     title: 'The Beginning of Research & Innovation',
@@ -172,7 +189,7 @@ const timelineEventsChronological = [
     icon: Recycle,
     image: {
       src: '/images/about/launching-reusable-pads-2016.png',
-      alt: 'Reusable cloth menstrual pads launched as a sustainable and eco-conscious alternative',
+      alt: 'A group of smiling women standing outdoors holding reusable cloth menstrual pads and a Saukhyam cotton bag',
     },
   },
   {
@@ -270,8 +287,8 @@ const timelineEventsChronological = [
     highlights: ['Sustainable menstrual solutions', 'Community empowerment', 'Climate responsibility'],
     icon: Globe,
     image: {
-      src: '/images/about/vision-community.png',
-      alt: 'Community members united in the sustainable menstrual care movement',
+      src: '/images/about/vision-community.jpg',
+      alt: 'Close-up of hands holding a red reusable cloth menstrual pad with Saukhyam branding and flowers nearby',
     },
     closingMessage:
       'Together, we continue creating healthier lives, cleaner communities, and a more responsible future.',
@@ -632,7 +649,7 @@ export default function AboutPage() {
               <div className={styles.vmBlockImageWrap}>
                 <Image
                   src="/images/about/our-vision.jpg"
-                  alt="Women holding reusable menstrual products with a green eco-friendly Earth background"
+                  alt="Five smiling women holding reusable cloth menstrual pads in an outdoor garden setting with Saukhyam products in the foreground"
                   width={640}
                   height={480}
                   className={styles.vmBlockImage}
