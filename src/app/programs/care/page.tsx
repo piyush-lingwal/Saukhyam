@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Leaf, Users, TrendingUp, Calendar, GraduationCap } from 'lucide-react';
 import {
   TbSchool,
   TbUsers,
@@ -33,10 +33,10 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 /* ── Data ─────────────────────────────────────────────────────── */
 
 const heroStats = [
-  { icon: TbLeaf, value: '5.8 kg', label: 'CO\u2082 prevented per menstruator, per year' },
-  { icon: TbUsers, value: '200', label: 'Menstruators to prevent 1 ton CO\u2082' },
-  { icon: TbChartLine, value: '16%', label: 'Campus tipping point' },
-  { icon: TbCalendarEvent, value: '2 semesters', label: 'To sustained impact' },
+  { value: '5.8 kg', label: 'CO₂ prevented per menstruator, per year', icon: Leaf },
+  { value: '200', label: 'Menstruators to prevent 1 ton CO₂', icon: Users },
+  { value: '16%', label: 'Campus tipping point', icon: TrendingUp },
+  { value: '2 Semesters', label: 'To sustained impact', icon: Calendar },
 ];
 
 
@@ -223,78 +223,84 @@ export default function CarePage() {
 
       {/* ── 1. Hero ── */}
       <section className={care.heroSection}>
-        <div className={care.heroTopBar} aria-hidden="true" />
-
-        {/* Background campus photo, sits behind purple gradient overlay */}
-        <div className={care.heroBgImageWrap} aria-hidden="true">
-          <Image
-            src="/CARE Page Photos/hero image.jpg"
-            alt=""
-            fill
-            className={care.heroBgImage}
-            priority
-            quality={85}
-          />
+        {/* CARE logo in the top-left corner */}
+        <div className={care.heroLogoContainer}>
+          <Link href="/">
+            <Image
+              src="/CareLogo/CARE logo_Horizontal.png"
+              alt="CARE Logo"
+              width={200}
+              height={50}
+              className={care.heroLogo}
+              priority
+            />
+          </Link>
         </div>
 
+        {/* Center Content Area */}
+        <div className={care.heroCenterWrapper}>
+          <motion.div
+            className={care.heroCenterContent}
+            initial="hidden"
+            animate="visible"
+            variants={stagger}
+          >
+            <motion.p variants={fadeInUp} className={care.heroCenterSubtitle}>
+              CAMPUS ACTION FOR REUSABLE ESSENTIALS
+            </motion.p>
 
-        {/* CARE Logo, absolute top-left */}
-        <div className={care.heroLogoWrap}>
-          <Image
-            src="/CareLogo/CARE logo_Horizontal with tag line.png"
-            alt="CARE - Campus Action for Reusable Essentials"
-            width={200}
-            height={56}
-            className={care.heroLogo}
-            priority
-          />
+            <motion.h1 variants={fadeInUp} className={care.heroCenterTitle}>
+              India&apos;s largest student-led<br />menstrual health movement
+            </motion.h1>
+
+            <motion.p variants={fadeInUp} className={care.heroCenterBody}>
+              CARE transforms college campuses—building student ambassadors, breaking taboos, and shifting an entire generation toward reusable menstrual products. No cost to the college.
+              <br /><br />
+              Real, measurable climate impact.
+            </motion.p>
+
+            <motion.div variants={fadeInUp} className={care.heroCtaWrapper}>
+              <Link href="/programs/care/register" className={care.heroCtaButton}>
+                <GraduationCap size={18} className={care.heroCtaIconLeft} />
+                <span className={care.heroCtaText}>Bring CARE to Your Campus</span>
+                <span className={care.heroCtaArrow}>&rarr;</span>
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
 
-        {/* Centered content */}
+        {/* BOTTOM IMPACT BAR */}
         <motion.div
-          className={care.heroInner}
+          className={care.heroStatsBar}
           initial="hidden"
           animate="visible"
           variants={stagger}
         >
-          <motion.div variants={fadeInUp} className={care.heroEyebrow}>
-            Campus Action for Reusable Essentials
-          </motion.div>
-
-          <motion.h1 variants={fadeInUp} className={care.heroHeadline}>
-            India&apos;s largest student-led
-            <span className={care.heroHeadlineAccent}>menstrual health movement</span>
-          </motion.h1>
-
-          <motion.p variants={fadeInUp} className={care.heroSubcopy}>
-            CARE transforms college campuses - building student ambassadors, breaking taboos,
-            and shifting an entire generation toward reusable menstrual products.
-            No cost to the college.<br />Real, measurable climate impact.
-          </motion.p>
-
-          <motion.div variants={fadeInUp}>
-            <Link href="/programs/care/register" className={care.heroCta}>
-              <TbSchool size={18} />
-              Bring CARE to Your Campus
-              <TbArrowRight size={18} />
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* Stats shelf */}
-        <motion.div
-          className={care.heroStatsShelf}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          {heroStats.map((stat) => (
-            <div key={stat.label} className={care.heroStatItem}>
-              <stat.icon size={18} className={care.heroStatIcon} />
-              <span className={care.heroStatNum}>{stat.value}</span>
-              <span className={care.heroStatLabel}>{stat.label}</span>
-            </div>
-          ))}
+          <div className={care.heroStatsGrid}>
+            {heroStats.map((stat, index) => {
+              const StatIcon = stat.icon;
+              return (
+                <motion.div
+                  key={stat.label}
+                  variants={fadeInUp}
+                  className={care.heroStatsCol}
+                >
+                  {index > 0 && <div className={care.heroStatsDivider} />}
+                  <div className={care.heroStatsMetricItem}>
+                    <div className={care.heroStatsIconCircle}>
+                      <StatIcon size={20} />
+                    </div>
+                    <span className={care.heroStatsNumber}>
+                      {stat.value}
+                    </span>
+                    <span className={care.heroStatsLabel}>
+                      {stat.label}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </motion.div>
       </section>
 

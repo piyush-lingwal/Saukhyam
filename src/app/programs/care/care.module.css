@@ -52,249 +52,317 @@
 }
 
 /* ─────────────────────────────────────────────────────────
-   HERO: Full-bleed Purple Gradient
+   HERO: Split collage + content
 ───────────────────────────────────────────────────────── */
 .heroSection {
   position: relative;
   overflow: hidden;
-  color: white;
-  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Primary green gradient background, brand identity */
 .heroSection::before {
   content: '';
   position: absolute;
   inset: 0;
+  background-image: 
+    linear-gradient(
+      rgba(10, 45, 25, 0.28),
+      rgba(10, 45, 25, 0.32)
+    ),
+    url('/images/programs/care-hero-collage.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: brightness(1.08) contrast(1.05);
   z-index: 1;
-  background:
-    linear-gradient(150deg, rgba(26,58,40,0.84) 0%, rgba(45,103,72,0.74) 50%, rgba(56,142,60,0.64) 100%),
-    radial-gradient(ellipse 70% 55% at 20% 40%, rgba(102,187,106,0.07) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 45% at 80% 70%, rgba(26,58,40,0.15) 0%, transparent 60%);
-  pointer-events: none;
 }
 
-/* Geometric dot texture */
-.heroSection::after {
-  content: '';
+.heroLogoContainer {
   position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 28px 28px;
-  pointer-events: none;
-}
-
-/* Top accent bar, pale green → forest → pale green */
-.heroTopBar {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  z-index: 4;
-  background: linear-gradient(90deg, transparent 0%, var(--g-bright) 25%, var(--g-forest) 50%, var(--g-bright) 75%, transparent 100%);
-  pointer-events: none;
-}
-
-/* Background campus photo */
-.heroBgImageWrap {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.heroBgImage {
-  object-fit: cover;
-  object-position: center 35%;
-  filter: saturate(0.85);
-}
-
-/* ─────────────────────────────────────────────────────────
-   HERO, Section comments updated
-───────────────────────────────────────────────────────── */
-/* ── CARE logo, absolute top-left ── */
-.heroLogoWrap {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 5;
-  background: linear-gradient(135deg, rgba(26,58,40,0.72) 0%, rgba(45,103,72,0.58) 100%);
-  border-radius: 0 0 0 var(--radius-2xl);
-  padding: var(--space-3) var(--space-5) var(--space-4) var(--space-8);
-  display: inline-flex;
-  align-items: center;
-  backdrop-filter: blur(12px);
-  border-left: 1px solid rgba(102,187,106,0.22);
-  border-bottom: 1px solid rgba(102,187,106,0.22);
-  box-shadow: -4px 4px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(224,242,234,0.08);
+  top: 24px;
+  left: 24px;
+  z-index: 10;
+  animation: fadeIn 1.2s ease-out;
 }
 
 .heroLogo {
-  height: 60px;
-  width: auto;
-  display: block;
+  width: 190px;
+  height: auto;
   object-fit: contain;
-  filter: brightness(1.08) drop-shadow(0 1px 6px rgba(102,187,106,0.35));
+  display: block;
 }
 
-/* ── Inner content ── */
-.heroInner {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.heroCenterWrapper {
   position: relative;
   z-index: 2;
-  max-width: 860px;
-  margin: 0 auto;
-  padding: clamp(3rem, 6vw, 5rem) var(--container-padding) clamp(2rem, 4vw, 3.5rem);
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.heroCenterContent {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: clamp(420px, 58vh, 540px);
-  justify-content: center;
+  background: none;
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  padding-inline: 24px;
+  padding-bottom: 230px; /* 170px stats bar + 60px gap */
+}
+
+.heroCenterSubtitle {
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.heroCenterTitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.08;
+  color: #FFFFFF;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+  max-width: 820px;
+}
+
+.heroCenterBody {
+  font-family: var(--font-body), sans-serif;
+  font-size: 20px;
+  color: #FFFFFF;
+  line-height: 1.7;
+  max-width: 650px;
+  margin-bottom: 38px;
   text-align: center;
 }
 
-.heroEyebrow {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--g-pale);
-  margin-bottom: var(--space-5);
+.heroCtaWrapper {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: 0;
+  width: 100%;
 }
 
-.heroEyebrow::before,
-.heroEyebrow::after {
-  content: '';
-  flex: 1;
-  max-width: 40px;
-  height: 1px;
-  background: rgba(224,242,234,0.4);
-}
-
-.heroHeadline {
-  font-family: var(--font-heading);
-  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-  font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  color: var(--g-pale);
-  margin-bottom: var(--space-5);
-  text-shadow: 0 2px 20px rgba(0,0,0,0.50);
-}
-
-.heroHeadlineAccent {
-  color: var(--g-pale);
-  display: block;
-  margin-top: 0.1em;
-  text-shadow: 0 0 32px rgba(224,242,234,0.40), 0 2px 16px rgba(0,0,0,0.40);
-}
-
-.heroSubcopy {
-  font-size: var(--text-lg);
-  color: var(--g-pale);
-  line-height: 1.75;
-  max-width: 560px;
-  margin: 0 auto var(--space-6);
-  text-shadow: 0 1px 12px rgba(0,0,0,0.60), 0 2px 28px rgba(0,0,0,0.40);
-}
-
-.heroCta {
+.heroCtaButton {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-4) var(--space-10);
-  background: var(--g-forest);
-  color: white;
-  font-family: var(--font-heading);
-  font-size: var(--text-base);
-  font-weight: 700;
-  border-radius: var(--radius-full);
+  justify-content: center;
+  gap: 12px;
+  background-color: #2E8B57;
+  color: #FFFFFF !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  height: 54px;
+  padding: 0 30px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(46, 139, 87, 0.25);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
-  border: 1.5px solid var(--g-bright);
-  box-shadow: 0 6px 24px rgba(56,142,60,0.35);
-  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
-.heroCta:hover {
-  background: var(--g-deep);
-  color: var(--g-pale);
+.heroCtaButton:hover {
+  background-color: #1e5c39;
   transform: translateY(-2px);
-  box-shadow: 0 10px 32px rgba(56,142,60,0.45);
+  box-shadow: 0 8px 24px rgba(46, 139, 87, 0.45);
 }
 
-/* ── Stats shelf ── */
-.heroStatsShelf {
+.heroCtaIconLeft {
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+}
+
+.heroCtaText {
+  white-space: nowrap;
+}
+
+.heroCtaArrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.heroCtaButton:hover .heroCtaArrow {
+  transform: translateX(4px);
+}
+
+.heroStatsBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
+  min-height: 170px;
+  background: rgba(18, 53, 36, 0.45);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+.heroStatsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid rgba(255,255,255,0.1);
-  position: relative;
-  z-index: 2;
-  background: rgba(0,0,0,0.18);
-  backdrop-filter: blur(6px);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 0;
 }
 
-.heroStatItem {
-  padding: var(--space-5) var(--space-4);
+.heroStatsCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.heroStatsDivider {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.heroStatsMetricItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-1);
-  border-right: 1px solid rgba(255,255,255,0.08);
-  transition: background var(--duration-normal) var(--ease-out);
-  --stat-color: var(--p-mint);
-}
-
-/* Each stat uses a step from the primary green scale */
-.heroStatsShelf .heroStatItem:nth-child(1) { --stat-color: var(--g-pale); }
-.heroStatsShelf .heroStatItem:nth-child(2) { --stat-color: var(--g-bright); }
-.heroStatsShelf .heroStatItem:nth-child(3) { --stat-color: var(--g-pale); }
-.heroStatsShelf .heroStatItem:nth-child(4) { --stat-color: var(--g-bright); }
-
-.heroStatItem:last-child { border-right: none; }
-.heroStatItem:hover { background: rgba(255,255,255,0.05); }
-
-.heroStatIcon {
-  color: var(--stat-color);
-  opacity: 0.9;
-  margin-bottom: 2px;
-  flex-shrink: 0;
-}
-
-.heroStatNum {
-  font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 2.8vw, 2rem);
-  font-weight: 800;
-  color: var(--stat-color);
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.heroStatLabel {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.55);
-  font-weight: 500;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
   text-align: center;
-  line-height: 1.4;
+  transition: transform .35s ease, background .35s ease, box-shadow .35s ease;
 }
 
-@media (max-width: 640px) {
-  .heroStatsShelf { grid-template-columns: repeat(2, 1fr); }
-  .heroStatItem:nth-child(2) { border-right: none; }
-  .heroStatItem:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.08); }
-  .heroStatItem:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.08); }
+.heroStatsMetricItem:hover {
+  transform: translateY(-4px);
+}
 
-  /* Fix 4, prevent logo badge overlapping hero headline on mobile */
-  .heroLogoWrap {
-    padding: var(--space-2) var(--space-4) var(--space-2) var(--space-3);
-  }
+.heroStatsIconCircle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  transition: transform .35s ease, background-color .35s ease, border-color .35s ease;
+}
+
+.heroStatsMetricItem:hover .heroStatsIconCircle {
+  transform: scale(1.1);
+}
+
+.heroStatsNumber {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #D7F4D0;
+  display: inline-block;
+  margin-bottom: 10px;
+  transition: color .35s ease;
+}
+
+.heroStatsMetricItem:hover .heroStatsNumber {
+  color: #ffffff;
+}
+
+.heroStatsLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #ffffff;
+  opacity: 0.8;
+  max-width: 180px;
+  text-align: center;
+}
+
+@media (max-width: 992px) {
   .heroLogo {
-    height: 38px;
+    width: 170px;
   }
-  .heroInner {
-    padding-top: clamp(5.5rem, 14vw, 7rem);
+  .heroCenterContent {
+    padding-bottom: 60px; /* gap between CTA and relative stats bar */
+  }
+  .heroCenterTitle {
+    font-size: 50px;
+  }
+  .heroCenterBody {
+    font-size: 18px;
+  }
+  .heroStatsBar {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    padding: 28px 24px;
+  }
+  .heroStatsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 28px;
+    column-gap: 20px;
+  }
+  .heroStatsDivider {
+    display: none !important;
+  }
+  .heroStatsNumber {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroLogo {
+    width: 140px;
+  }
+  .heroCenterTitle {
+    font-size: 38px;
+  }
+  .heroCenterBody {
+    font-size: 17px;
+  }
+  .heroCtaButton {
+    width: 100%;
+    display: flex;
+  }
+  .heroStatsGrid {
+    grid-template-columns: 1fr;
+    row-gap: 28px;
+  }
+  .heroStatsNumber {
+    font-size: 34px;
   }
 }
 
@@ -2705,8 +2773,86 @@
    CAMPUS BENEFITS
 ───────────────────────────────────────────────────────── */
 .benefitsSection {
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
-  background: linear-gradient(160deg, #F0FAF4 0%, #E0F2EA 50%, #F0FAF4 100%);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(5rem, 8vw, 8rem) 0;
+  background: transparent;
+}
+
+.benefitsSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.42)),
+    url('/images/programs/campus-gains-bg.jpg') no-repeat center center / cover;
+  filter: blur(2px);
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+.benefitsSection > div {
+  position: relative;
+  z-index: 1;
+}
+
+.benefitsSection .sectionBadge {
+  background: rgba(255, 255, 255, 0.12);
+  color: #FCE4EC;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(8px);
+  margin-bottom: var(--space-4);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.benefitsSection .structureTitle {
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAF5FF 50%, #FCE4EC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.benefitsSection .structureTitle::after {
+  background: linear-gradient(90deg, var(--care-hero-accent), var(--care-purple-light));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.benefitsSection .structureSubtitle {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  font-weight: 500;
+  max-width: 620px;
+}
+
+.benefitsSection .benefitCard {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.benefitsSection .benefitCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border-color: var(--care-purple);
+}
+
+.benefitsSection .benefitCard::after {
+  background: linear-gradient(90deg, var(--care-purple), var(--care-pink));
+}
+
+.benefitsSection .benefitIconCircle {
+  background: rgba(139, 47, 201, 0.08);
+  border-color: rgba(139, 47, 201, 0.2);
+  color: var(--care-purple);
+  box-shadow: inset 0 2px 4px rgba(139, 47, 201, 0.04);
 }
 
 .benefitsGrid {
