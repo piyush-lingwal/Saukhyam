@@ -1,5 +1,11 @@
 import { STATE_IMAGES, CITY_COORDS } from './constants';
+import { getStateGallery, getStateHeroImage } from './stateGalleryImages';
+import { VERIFIED_STATE_CONTENT } from './verifiedStateContent';
 import { uttarPradeshExperience } from './uttarPradeshExperience';
+import {
+  FULL_VERIFIED_STATE_EXPERIENCES,
+  FULL_VERIFIED_STATE_SLUGS,
+} from './buildVerifiedExperience';
 
 /* ════════════════════════════════════════════════════════════
    SAUKHYAM ACROSS INDIA — State Experience dataset
@@ -234,6 +240,10 @@ function buildBeneficiaries(c: StateConfig): Beneficiary[] {
 }
 
 function buildState(c: StateConfig): StateExperience {
+  if (FULL_VERIFIED_STATE_SLUGS.has(c.slug)) {
+    throw new Error(`buildState called for full verified state: ${c.slug}`);
+  }
+  const verified = VERIFIED_STATE_CONTENT[c.slug];
   const womenReached = c.womenReached;
   const villages = Math.round(womenReached / 240);
   const schools = Math.round(villages * 1.2);
@@ -243,14 +253,37 @@ function buildState(c: StateConfig): StateExperience {
   const carbonTonnes = Math.round((womenReached * 5.8) / 1000);
   const treesSaved = Math.round(womenReached / 250);
   const wasteReducedTonnes = Math.round(plasticKg / 1000);
-  const img = STATE_IMAGES[c.imageIndex % STATE_IMAGES.length];
+  const customGallery = getStateGallery(c.slug, c.name);
+  const img = getStateHeroImage(c.slug) ?? STATE_IMAGES[c.imageIndex % STATE_IMAGES.length];
 
-  const gallery: GalleryItem[] = Array.from({ length: 10 }).map((_, i) => ({
+  const gallery: GalleryItem[] = customGallery ?? Array.from({ length: 10 }).map((_, i) => ({
     id: `${c.slug}-g${i}`,
     src: STATE_IMAGES[(c.imageIndex + i) % STATE_IMAGES.length],
     alt: `Saukhyam ${GALLERY_CATEGORIES[i % GALLERY_CATEGORIES.length]} in ${c.name}`,
     category: GALLERY_CATEGORIES[i % GALLERY_CATEGORIES.length],
   }));
+
+  const defaultStats: ExpStat[] = [
+    { key: 'women', label: 'Women Reached', value: womenReached, suffix: '+' },
+    { key: 'schools', label: 'Schools Covered', value: schools, suffix: '+' },
+    { key: 'villages', label: 'Villages Impacted', value: villages, suffix: '+' },
+    { key: 'pads', label: 'Reusable Pads Distributed', value: padsDistributed, suffix: '+' },
+    { key: 'workshops', label: 'Workshops Conducted', value: workshops, suffix: '+' },
+    { key: 'waste', label: 'Waste Reduced', value: wasteReducedTonnes, suffix: ' T' },
+  ];
+
+  const defaultAbout = {
+    intro: c.aboutOverride?.intro ??
+      `Across ${c.name}, Saukhyam works hand-in-hand with communities to make menstruation safe, sustainable and stigma-free — combining awareness, women's empowerment and environmental responsibility.`,
+    challenge: c.aboutOverride?.challenge ??
+      `Many women and girls in ${c.name} faced limited menstrual-health awareness, costly or unsafe products, and the silent burden of disposable waste piling up in their communities.`,
+    action: c.aboutOverride?.action ??
+      `Saukhyam runs awareness workshops, distributes chemical-free reusable pads, trains local women as community health ambassadors, and partners with schools, panchayats and self-help groups.`,
+    impact: c.aboutOverride?.impact ??
+      `Today, ${womenReached.toLocaleString('en-IN')}+ women and girls across ${villages}+ villages have healthier periods, girls stay in school, and tonnes of plastic waste are prevented every year.`,
+  };
+
+  const about = verified?.about ? { ...defaultAbout, ...verified.about } : defaultAbout;
 
   return {
     slug: c.slug,
@@ -260,41 +293,33 @@ function buildState(c: StateConfig): StateExperience {
     capital: c.capital,
     theme: c.theme,
     enteredYear: c.enteredYear,
+    heroBadge: verified?.heroBadge,
+    sourceBlogSlug: verified?.sourceBlogSlug,
     hero: {
-      title: `Saukhyam in ${c.name}`,
-      subtitle: `Empowering Women. Creating Sustainable Futures. Transforming Menstrual Health Across ${c.name}.`,
+      title: verified?.hero?.title ?? `Saukhyam in ${c.name}`,
+      subtitle: verified?.hero?.subtitle ??
+        `Empowering Women. Creating Sustainable Futures. Transforming Menstrual Health Across ${c.name}.`,
       image: img,
     },
-    stats: [
-      { key: 'women', label: 'Women Reached', value: womenReached, suffix: '+' },
-      { key: 'schools', label: 'Schools Covered', value: schools, suffix: '+' },
-      { key: 'villages', label: 'Villages Impacted', value: villages, suffix: '+' },
-      { key: 'pads', label: 'Reusable Pads Distributed', value: padsDistributed, suffix: '+' },
-      { key: 'workshops', label: 'Workshops Conducted', value: workshops, suffix: '+' },
-      { key: 'waste', label: 'Waste Reduced', value: wasteReducedTonnes, suffix: ' T' },
-    ],
-    about: {
-      intro: c.aboutOverride?.intro ??
-        `Across ${c.name}, Saukhyam works hand-in-hand with communities to make menstruation safe, sustainable and stigma-free — combining awareness, women's empowerment and environmental responsibility.`,
-      challenge: c.aboutOverride?.challenge ??
-        `Many women and girls in ${c.name} faced limited menstrual-health awareness, costly or unsafe products, and the silent burden of disposable waste piling up in their communities.`,
-      action: c.aboutOverride?.action ??
-        `Saukhyam runs awareness workshops, distributes chemical-free reusable pads, trains local women as community health ambassadors, and partners with schools, panchayats and self-help groups.`,
-      impact: c.aboutOverride?.impact ??
-        `Today, ${womenReached.toLocaleString('en-IN')}+ women and girls across ${villages}+ villages have healthier periods, girls stay in school, and tonnes of plastic waste are prevented every year.`,
-    },
+    stats: verified?.stats ?? defaultStats,
+    about,
     heal: HEAL_CARDS,
-    districts: buildDistricts(c),
-    beneficiaries: buildBeneficiaries(c),
-    environment: { padsDistributed, plasticKg, carbonTonnes, treesSaved },
-    timeline: [
+    districts: verified?.districts ?? buildDistricts(c),
+    beneficiaries: verified?.beneficiaries ?? buildBeneficiaries(c),
+    environment: verified?.omitEnvironment ? undefined : {
+      padsDistributed,
+      plasticKg,
+      carbonTonnes,
+      treesSaved,
+    },
+    timeline: verified?.timeline ?? [
       { phase: `${c.enteredYear}`, title: 'Awareness Programs', description: `First menstrual-health workshops and pad demonstrations launched across ${c.capital} and nearby blocks.` },
       { phase: `${c.enteredYear + 1}`, title: 'District Expansion', description: `Programs scaled to ${Math.min(6, c.majorCities.length)} districts with local ambassador networks.` },
       { phase: `${c.enteredYear + 2}`, title: 'Community Outreach', description: 'Panchayat sessions, school menstrual-health days and SHG partnerships deepened grassroots reach.' },
       { phase: `${c.enteredYear + 3}`, title: 'Women Empowerment', description: `Satellite production and Saukhyam Sakhi training turned beneficiaries into earners and leaders.` },
     ],
     gallery,
-    csr: buildDistricts(c).slice(0, 3).map((d, i) => {
+    csr: verified?.csr ?? buildDistricts(c).slice(0, 3).map((d, i) => {
       const goal = [1200000, 950000, 800000][i] ?? 800000;
       return {
         name: d.name,
@@ -310,7 +335,7 @@ function buildState(c: StateConfig): StateExperience {
    STATE CONFIGS  (20 states)
    ════════════════════════════════════════════════════════════ */
 const CONFIGS: StateConfig[] = [
-  { slug: 'maharashtra', svgId: 'mh', name: 'Maharashtra', shortName: 'MH', capital: 'Mumbai', enteredYear: 2020, womenReached: 42000, theme: 'teal', majorCities: ['Mumbai', 'Pune', 'Nagpur', 'Nashik', 'Aurangabad', 'Kolhapur'], imageIndex: 0 },
+  { slug: 'maharashtra', svgId: 'mh', name: 'Maharashtra', shortName: 'MH', capital: 'Mumbai', enteredYear: 2023, womenReached: 42000, theme: 'teal', majorCities: ['Mumbai', 'Nerul', 'Kharghar', 'Belapur', 'Jawahar', 'Nandurbar'], imageIndex: 0 },
   { slug: 'kerala', svgId: 'kl', name: 'Kerala', shortName: 'KL', capital: 'Thiruvananthapuram', enteredYear: 2017, womenReached: 52000, theme: 'green', majorCities: ['Kollam', 'Kochi', 'Thrissur', 'Kozhikode', 'Kannur'], imageIndex: 4 },
   { slug: 'tamil-nadu', svgId: 'tn', name: 'Tamil Nadu', shortName: 'TN', capital: 'Chennai', enteredYear: 2018, womenReached: 38000, theme: 'teal', majorCities: ['Chennai', 'Madurai', 'Coimbatore', 'Trichy', 'Salem'], imageIndex: 3 },
   { slug: 'karnataka', svgId: 'ka', name: 'Karnataka', shortName: 'KA', capital: 'Bengaluru', enteredYear: 2019, womenReached: 35000, theme: 'green', majorCities: ['Bengaluru', 'Mysuru', 'Belagavi', 'Hubballi', 'Kalaburagi'], imageIndex: 1 },
@@ -318,21 +343,17 @@ const CONFIGS: StateConfig[] = [
   { slug: 'gujarat', svgId: 'gj', name: 'Gujarat', shortName: 'GJ', capital: 'Gandhinagar', enteredYear: 2020, womenReached: 28000, theme: 'teal', majorCities: ['Ahmedabad', 'Surat', 'Kutch', 'Dahod', 'Rajkot'], imageIndex: 2 },
   { slug: 'punjab', svgId: 'pb', name: 'Punjab', shortName: 'PB', capital: 'Chandigarh', enteredYear: 2022, womenReached: 16000, theme: 'green', majorCities: ['Amritsar', 'Ludhiana', 'Patiala', 'Bathinda', 'Jalandhar'], imageIndex: 3 },
   { slug: 'haryana', svgId: 'hr', name: 'Haryana', shortName: 'HR', capital: 'Chandigarh', enteredYear: 2022, womenReached: 14000, theme: 'amber', majorCities: ['Gurugram', 'Faridabad', 'Hisar', 'Rohtak', 'Karnal'], imageIndex: 5 },
-  { slug: 'bihar', svgId: 'br', name: 'Bihar', shortName: 'BR', capital: 'Patna', enteredYear: 2021, womenReached: 33000, theme: 'teal', majorCities: ['Patna', 'Gaya', 'Muzaffarpur', 'Bhagalpur', 'Darbhanga'], imageIndex: 2 },
-  { slug: 'assam', svgId: 'as', name: 'Assam', shortName: 'AS', capital: 'Dispur', enteredYear: 2022, womenReached: 19000, theme: 'green', majorCities: ['Guwahati', 'Dibrugarh', 'Silchar', 'Jorhat', 'Tezpur'], imageIndex: 4 },
   { slug: 'west-bengal', svgId: 'wb', name: 'West Bengal', shortName: 'WB', capital: 'Kolkata', enteredYear: 2021, womenReached: 31000, theme: 'green', majorCities: ['Kolkata', 'Howrah', 'Siliguri', 'Durgapur', 'Sundarbans'], imageIndex: 2 },
   { slug: 'odisha', svgId: 'or', name: 'Odisha', shortName: 'OD', capital: 'Bhubaneswar', enteredYear: 2021, womenReached: 24000, theme: 'teal', majorCities: ['Bhubaneswar', 'Cuttack', 'Rourkela', 'Berhampur', 'Sambalpur'], imageIndex: 3 },
-  { slug: 'madhya-pradesh', svgId: 'mp', name: 'Madhya Pradesh', shortName: 'MP', capital: 'Bhopal', enteredYear: 2021, womenReached: 30000, theme: 'amber', majorCities: ['Bhopal', 'Indore', 'Jabalpur', 'Gwalior', 'Ujjain'], imageIndex: 0 },
   { slug: 'chhattisgarh', svgId: 'ct', name: 'Chhattisgarh', shortName: 'CG', capital: 'Raipur', enteredYear: 2022, womenReached: 17000, theme: 'green', majorCities: ['Raipur', 'Bilaspur', 'Bastar', 'Korba', 'Durg'], imageIndex: 1 },
   { slug: 'jharkhand', svgId: 'jh', name: 'Jharkhand', shortName: 'JH', capital: 'Ranchi', enteredYear: 2022, womenReached: 15000, theme: 'teal', majorCities: ['Ranchi', 'Jamshedpur', 'Dhanbad', 'Bokaro', 'Hazaribagh'], imageIndex: 2 },
-  { slug: 'uttarakhand', svgId: 'ut', name: 'Uttarakhand', shortName: 'UK', capital: 'Dehradun', enteredYear: 2023, womenReached: 12000, theme: 'green', majorCities: ['Dehradun', 'Haridwar', 'Nainital', 'Almora', 'Pithoragarh'], imageIndex: 4 },
   { slug: 'himachal-pradesh', svgId: 'hp', name: 'Himachal Pradesh', shortName: 'HP', capital: 'Shimla', enteredYear: 2023, womenReached: 9000, theme: 'green', majorCities: ['Shimla', 'Mandi', 'Kangra', 'Solan', 'Kullu'], imageIndex: 5 },
-  { slug: 'telangana', svgId: 'tg', name: 'Telangana', shortName: 'TG', capital: 'Hyderabad', enteredYear: 2021, womenReached: 21000, theme: 'teal', majorCities: ['Hyderabad', 'Warangal', 'Nizamabad', 'Karimnagar', 'Khammam'], imageIndex: 3 },
   { slug: 'andhra-pradesh', svgId: 'ap', name: 'Andhra Pradesh', shortName: 'AP', capital: 'Amaravati', enteredYear: 2021, womenReached: 26000, theme: 'green', majorCities: ['Visakhapatnam', 'Vijayawada', 'Guntur', 'Anantapur', 'Tirupati'], imageIndex: 3 },
 ];
 
 export const stateExperiences: StateExperience[] = [
   uttarPradeshExperience,
+  ...FULL_VERIFIED_STATE_EXPERIENCES,
   ...CONFIGS.map(buildState),
 ];
 

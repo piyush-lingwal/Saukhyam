@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "blog:images": "node scripts/sync-blog-images.mjs"
+    "blog:images": "node scripts/sync-blog-images.mjs",
+    "state:gallery": "node scripts/sync-state-gallery.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.0",

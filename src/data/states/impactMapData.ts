@@ -1,7 +1,8 @@
 import type { StateSlug, StateTheme, ProgramFocus } from '@/types/statePage';
 import { getStateBySlug } from './states';
-import { getExperience } from './experienceData';
+import { getExperience, type StateExperience } from './experienceData';
 import { uttarPradeshExperience } from './uttarPradeshExperience';
+import { FULL_VERIFIED_STATE_EXPERIENCES } from './buildVerifiedExperience';
 
 /* ════════════════════════════════════════════════════════════
    Saukhyam — India Impact Map dataset
@@ -263,28 +264,35 @@ function deriveImpact(c: Curated): StateImpact {
   };
 }
 
-/** Uttar Pradesh — verified content, standard dashboard layout (/states/uttar-pradesh) */
-function buildUpImpact(): StateImpact {
-  const exp = uttarPradeshExperience;
+/** Verified state pages — qualitative map metrics (no invented headcounts). */
+function buildVerifiedMapImpact(
+  exp: StateExperience,
+  heat: HeatTier,
+  tagline: string,
+  programFocus: ProgramFocus = 'reach',
+): StateImpact {
   const voice = exp.beneficiaries[0];
+  const qs = exp.mapQuickStats ?? [];
+  const statDisplay = (i: number) => exp.stats[i]?.display ?? qs[i]?.value;
+
   return {
-    slug: 'uttar-pradesh',
+    slug: exp.slug as StateSlug,
     svgId: exp.svgId,
     name: exp.name,
     shortName: exp.shortName,
     capital: exp.capital,
-    tagline: 'From Kumbh outreach to a statewide UPSRLM MoU — reusable pads and MHM education across UP.',
-    theme: 'green',
-    programFocus: 'reach',
+    tagline,
+    theme: exp.theme as StateTheme,
+    programFocus,
     heroImage: exp.hero.image,
     enteredYear: String(exp.enteredYear),
-    heat: 'high',
+    heat,
     womenReached: 0,
-    villages: 75,
-    schools: exp.initiatives?.length ?? 4,
-    centres: 4,
+    villages: exp.districts.length,
+    schools: exp.initiatives?.length ?? exp.timeline.length,
+    centres: exp.initiatives?.length ?? 0,
     campuses: 0,
-    livelihoods: 7,
+    livelihoods: 0,
     padsPrevented: 0,
     co2Tonnes: 0,
     plasticKg: 0,
@@ -295,28 +303,85 @@ function buildUpImpact(): StateImpact {
       after: [exp.about.action, exp.about.impact],
       quote: voice?.quote ?? '',
       author: voice?.name ?? '',
-      authorRole: voice?.district ?? '',
+      authorRole: voice?.source ?? voice?.district ?? '',
     },
     sdgs: SDGS,
+    csr: {
+      need: exp.csr[0]?.narrative ?? exp.about.impact,
+      fundingGoal: 0,
+      supports: exp.csr[0]?.name ?? 'Partner with Saukhyam — info@saukhyampads.org',
+    },
+    statePageHref: `/states/${exp.slug}`,
+    scoreDisplays: {
+      womenReached: statDisplay(0) ?? qs[0]?.value ?? 'REACH active',
+      schools: statDisplay(1) ?? `${exp.initiatives?.length ?? 0} initiatives`,
+      villages: statDisplay(2) ?? `${exp.districts.length} focus areas`,
+      livelihoods: statDisplay(3) ?? exp.heroBadge ?? 'Verified outreach',
+    },
+    hideEnvironmental: true,
+  };
+}
+
+/** Uttar Pradesh — verified content, standard dashboard layout (/states/uttar-pradesh) */
+function buildUpImpact(): StateImpact {
+  const exp = uttarPradeshExperience;
+  const base = buildVerifiedMapImpact(
+    exp,
+    'high',
+    'From Kumbh outreach to a statewide UPSRLM MoU — reusable pads and MHM education across UP.',
+  );
+  return {
+    ...base,
+    villages: 75,
+    schools: exp.initiatives?.length ?? 4,
+    centres: 4,
+    livelihoods: 7,
     csr: {
       need: 'Scale the UPSRLM MoU — seed rural production centres and SHG training across Uttar Pradesh.',
       fundingGoal: 0,
       supports: 'Five-year partnership with UPSRLM (Prerna) takes reusable pads to self-help groups statewide, starting from Lucknow and Barabanki.',
     },
-    statePageHref: `/states/${exp.slug}`,
     scoreDisplays: {
       womenReached: 'State-wide rollout',
       schools: '4 MHM programmes',
       villages: '75+ districts',
       livelihoods: '7–10 centres',
     },
-    hideEnvironmental: true,
   };
 }
+
+const VERIFIED_MAP_IMPACTS: StateImpact[] = [
+  buildVerifiedMapImpact(
+    FULL_VERIFIED_STATE_EXPERIENCES.find(s => s.slug === 'bihar')!,
+    'high',
+    'SBI Foundation Musahar outreach — reusable pads where dignity starts with one conversation.',
+  ),
+  buildVerifiedMapImpact(
+    FULL_VERIFIED_STATE_EXPERIENCES.find(s => s.slug === 'telangana')!,
+    'high',
+    'Telangana government partnership and SRLM satellite centres — REACH at state scale.',
+  ),
+  buildVerifiedMapImpact(
+    FULL_VERIFIED_STATE_EXPERIENCES.find(s => s.slug === 'madhya-pradesh')!,
+    'medium',
+    'MP SRLM satellite production and HEAL stories from Indore and across the state.',
+  ),
+  buildVerifiedMapImpact(
+    FULL_VERIFIED_STATE_EXPERIENCES.find(s => s.slug === 'uttarakhand')!,
+    'medium',
+    'SRLM satellite centres and Shreyas Award recognition at Rotary District 3080, Haridwar.',
+  ),
+  buildVerifiedMapImpact(
+    FULL_VERIFIED_STATE_EXPERIENCES.find(s => s.slug === 'assam')!,
+    'emerging',
+    'Northeast REACH and CARE campus changemakers — Assam on Saukhyam\'s national network.',
+  ),
+];
 
 export const stateImpacts: StateImpact[] = [
   ...CURATED.map(deriveImpact),
   buildUpImpact(),
+  ...VERIFIED_MAP_IMPACTS,
 ];
 
 /** Lookup by India-map svg id (e.g. 'mh'). */

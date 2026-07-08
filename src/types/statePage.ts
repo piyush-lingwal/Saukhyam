@@ -9,6 +9,11 @@ export type StateSlug =
   | 'uttar-pradesh'
   | 'west-bengal'
   | 'andhra-pradesh'
+  | 'bihar'
+  | 'telangana'
+  | 'assam'
+  | 'madhya-pradesh'
+  | 'uttarakhand'
   | 'national';
 
 export type StateTheme = 'green' | 'teal' | 'purple' | 'amber';
