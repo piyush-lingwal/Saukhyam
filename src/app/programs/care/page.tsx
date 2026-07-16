@@ -225,7 +225,7 @@ export default function CarePage() {
       <section className={care.heroSection}>
         {/* CARE logo in the top-left corner */}
         <div className={care.heroLogoContainer}>
-          <Link href="/">
+          <Link href="/" className={care.heroLogoLink}>
             <Image
               src="/CareLogo/CARE logo_Horizontal.png"
               alt="CARE Logo"
@@ -234,6 +234,9 @@ export default function CarePage() {
               className={care.heroLogo}
               priority
             />
+            <span className={care.heroLogoSubtitle}>
+              CAMPUS ACTION FOR REUSABLE PADS
+            </span>
           </Link>
         </div>
 
