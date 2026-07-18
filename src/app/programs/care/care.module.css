@@ -3064,8 +3064,6 @@
   background:
     linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.42)),
     url('/images/programs/campus-gains-bg.jpg') no-repeat center center / cover;
-  filter: blur(2px);
-  transform: scale(1.02);
   pointer-events: none;
 }
 
