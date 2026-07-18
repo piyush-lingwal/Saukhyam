@@ -224,7 +224,7 @@ export default function TestimonialsPage() {
           <p>Join thousands of women who have made the switch to Saukhyam.</p>
           <Link href="/products" className={styles.ctaBtn}>
             <Heart size={20} />
-            Shop Now
+            Switch Now
           </Link>
         </motion.div>
       </div>
