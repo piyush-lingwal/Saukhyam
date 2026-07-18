@@ -102,11 +102,29 @@
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.12);
 }
 
+.heroLogoLink {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+}
+
 .heroLogo {
   width: 190px;
   height: auto;
   object-fit: contain;
   display: block;
+}
+
+.heroLogoSubtitle {
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #FFFFFF;
+  margin-top: 6px;
+  display: block;
+  text-align: left;
 }
 
 @keyframes fadeIn {
