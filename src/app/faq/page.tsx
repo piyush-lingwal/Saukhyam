@@ -109,8 +109,24 @@ function FaqAccordionItem({
   );
 }
 
+const categoryRedirects: Record<SiteFAQCategory, string | null> = {
+  'products': '/products',
+  'usage-guide': '/saukhyam-pads',
+  'washing-care': '/saukhyam-pads',
+  'banana-fiber': '/why-banana-fiber',
+  'internship': '/internships',
+  'heal-platform': '/programs/heal',
+  'heal-challenge': '/programs/heal#challenge',
+  'pcos-pmos': '/programs/heal',
+  'period-problems': '/programs/heal',
+  'results-medical': '/programs/heal',
+  'sustainability': '/why-banana-fiber',
+  'community': '/programs/reach',
+  'about': null,
+};
+
 export default function FAQPage() {
-  const [activeCategory, setActiveCategory] = useState<SiteFAQCategory>('usage-guide');
+  const [activeCategory, setActiveCategory] = useState<SiteFAQCategory>('about');
   const [searchQuery, setSearchQuery] = useState('');
   const [openFaqId, setOpenFaqId] = useState<string | null>(null);
 
@@ -146,7 +162,12 @@ export default function FAQPage() {
     const params = new URLSearchParams(window.location.search);
     const category = params.get('category');
     if (category && isValidSiteFaqCategory(category)) {
-      setActiveCategory(category);
+      const redirectUrl = categoryRedirects[category];
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      } else {
+        setActiveCategory(category);
+      }
     }
     const q = params.get('q');
     if (q) setSearchQuery(q);
@@ -262,17 +283,31 @@ export default function FAQPage() {
                 Browse Categories
               </h2>
               <nav className={styles.sidebarNav}>
-                {siteFaqCategories.map(cat => (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
-                    onClick={() => scrollToCategory(cat.id)}
-                    aria-current={activeCategory === cat.id ? 'true' : undefined}
-                  >
-                    {cat.label}
-                  </button>
-                ))}
+                {siteFaqCategories.map(cat => {
+                  const redirectUrl = categoryRedirects[cat.id];
+                  if (redirectUrl) {
+                    return (
+                      <Link
+                        key={cat.id}
+                        href={redirectUrl}
+                        className={styles.sidebarItem}
+                      >
+                        {cat.label}
+                      </Link>
+                    );
+                  }
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      className={`${styles.sidebarItem} ${activeCategory === cat.id ? styles.sidebarItemActive : ''}`}
+                      onClick={() => scrollToCategory(cat.id)}
+                      aria-current={activeCategory === cat.id ? 'true' : undefined}
+                    >
+                      {cat.label}
+                    </button>
+                  );
+                })}
               </nav>
             </div>
           </aside>
@@ -281,17 +316,31 @@ export default function FAQPage() {
         {!isSearching && (
           <nav className={styles.mobileCategoryNav} aria-label="FAQ categories">
             <div className={styles.mobileCategoryScroll}>
-              {siteFaqCategories.map(cat => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  className={`${styles.categoryPill} ${activeCategory === cat.id ? styles.categoryPillActive : ''}`}
-                  onClick={() => scrollToCategory(cat.id)}
-                  aria-current={activeCategory === cat.id ? 'true' : undefined}
-                >
-                  {cat.label}
-                </button>
-              ))}
+              {siteFaqCategories.map(cat => {
+                const redirectUrl = categoryRedirects[cat.id];
+                if (redirectUrl) {
+                  return (
+                    <Link
+                      key={cat.id}
+                      href={redirectUrl}
+                      className={styles.categoryPill}
+                    >
+                      {cat.label}
+                    </Link>
+                  );
+                }
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    className={`${styles.categoryPill} ${activeCategory === cat.id ? styles.categoryPillActive : ''}`}
+                    onClick={() => scrollToCategory(cat.id)}
+                    aria-current={activeCategory === cat.id ? 'true' : undefined}
+                  >
+                    {cat.label}
+                  </button>
+                );
+              })}
             </div>
           </nav>
         )}
