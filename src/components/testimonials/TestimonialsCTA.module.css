@@ -1,0 +1,171 @@
+.ctaSection {
+  width: 100%;
+  min-height: 380px;
+  background-image: url('/images/testimonials-footer-banner.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.45); /* Subtle semi-transparent light overlay */
+  z-index: 1;
+}
+
+.ctaContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Heading */
+.heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 700;
+  color: #07130F;
+  margin: 0;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+/* Description */
+.description {
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: #42566A;
+  margin: 20px auto 0;
+  line-height: 1.4;
+  max-width: 900px;
+}
+
+/* Button Wrapper & Button */
+.buttonWrapper {
+  margin-top: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 244px;
+  height: 77px;
+  background: #158A43;
+  color: #ffffff;
+  border-radius: 40px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(21, 138, 67, 0.15);
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 250ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.ctaButton:hover {
+  background: #0F7234;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(21, 138, 67, 0.25);
+}
+
+.heartIcon {
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.buttonText {
+  font-family: 'Inter', sans-serif;
+  font-size: 23px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Responsive Design */
+
+/* Tablet Breakpoint */
+@media (max-width: 1024px) {
+  .ctaSection {
+    min-height: 320px;
+    padding: 60px 20px;
+  }
+
+  .heading {
+    font-size: 42px;
+    white-space: normal;
+  }
+
+  .description {
+    font-size: 21px;
+    margin-top: 16px;
+  }
+
+  .ctaButton {
+    width: 230px;
+    height: 70px;
+  }
+
+  .buttonText {
+    font-size: 21px;
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  .ctaSection {
+    min-height: 280px;
+    padding: 48px 16px;
+  }
+
+  .heading {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  .description {
+    font-size: 18px;
+    margin-top: 12px;
+    line-height: 1.45;
+  }
+
+  .buttonWrapper {
+    margin-top: 28px;
+  }
+
+  .ctaButton {
+    width: 215px;
+    height: 64px;
+    border-radius: 32px;
+    gap: 8px;
+  }
+
+  .heartIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .buttonText {
+    font-size: 19px;
+  }
+}

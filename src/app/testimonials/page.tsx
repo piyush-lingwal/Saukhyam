@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   BookOpen,
@@ -9,15 +9,16 @@ import {
   Droplets,
   Layers,
   Brain,
-  CheckCircle2,
   ShieldAlert,
-  Users,
-  Clock,
   Sparkles,
   FileText,
-  ShieldCheck,
+  X,
+  Quote,
+  Star,
 } from 'lucide-react';
 import { testimonialsData, type TestimonialItem } from '@/data/testimonialsData';
+import TestimonialsHero from '@/components/testimonials/TestimonialsHero';
+import TestimonialsCTA from '@/components/testimonials/TestimonialsCTA';
 import styles from './page.module.css';
 
 // Exact animations matching Research Database
@@ -30,31 +31,25 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.08 } }
 };
 
-const staggerFast = {
-  visible: { transition: { staggerChildren: 0.05 } }
-};
-
 const filterItems = [
   { id: 'All Conditions', label: 'All Conditions', desc: 'Explore All Stories', icon: BookOpen },
   { id: 'Irregular Periods', label: 'Irregular Periods', desc: 'Cycle Regularity', icon: Calendar },
-  { id: 'Period Cramps', label: 'Period Cramps', desc: 'Pain Relief', icon: Heart },
-  { id: 'Heavy Flow', label: 'Heavy Flow', desc: 'Reduced Bleeding', icon: Droplets },
+  { id: 'Severe Period Pain', label: 'Severe Period Pain', desc: 'Pain Relief', icon: Heart },
+  { id: 'Heavy Flow & Cramps', label: 'Heavy Flow & Cramps', desc: 'Reduced Bleeding', icon: Droplets },
   { id: 'Endometriosis', label: 'Endometriosis', desc: 'Symptom Relief', icon: Layers },
-  { id: 'PCOS / PMOS', label: 'PCOS / PMOS', desc: 'Hormonal Balance', icon: Brain },
-  { id: 'General Health', label: 'General Health', desc: 'Overall Wellness', icon: CheckCircle2 },
-  { id: 'Rashes & Irritation', label: 'Rashes & Irritation', desc: 'Skin Comfort', icon: ShieldAlert },
-  { id: 'All Users', label: 'All Users', desc: 'All Cohorts', icon: Users },
-  { id: 'Long-term (2+ years)', label: 'Long-term', desc: '2+ Years', icon: Clock },
-  { id: 'Recent (<2 years)', label: 'Recent', desc: 'Less than 2 Years', icon: Sparkles }
+  { id: 'Cramps & Rashes', label: 'Cramps & Rashes', desc: 'Skin & Pain Comfort', icon: ShieldAlert },
+  { id: 'PCOS', label: 'PCOS', desc: 'Hormonal Balance', icon: Brain },
+  { id: 'Headaches & Itching', label: 'Headaches & Itching', desc: 'Systemic Relief', icon: Sparkles },
+  { id: 'Heavy Bleeding', label: 'Heavy Bleeding', desc: 'Flow Regulation', icon: Droplets },
+  { id: 'Rashes', label: 'Rashes', desc: 'Skin Comfort', icon: ShieldAlert }
 ];
 
 interface TestimonialCardProps {
   testimonial: TestimonialItem;
-  isExpanded: boolean;
-  onToggleSummary: () => void;
+  onOpenModal: () => void;
 }
 
-function TestimonialCard({ testimonial, isExpanded, onToggleSummary }: TestimonialCardProps) {
+function TestimonialCard({ testimonial, onOpenModal }: TestimonialCardProps) {
   return (
     <motion.article
       layout="position"
@@ -62,124 +57,92 @@ function TestimonialCard({ testimonial, isExpanded, onToggleSummary }: Testimoni
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      className={`${styles.testimonialCard} ${isExpanded ? styles.cardExpanded : ''}`}
+      className={styles.testimonialCard}
     >
-      <div className={styles.cardHeaderRow}>
-        <span className={styles.conditionBadge}>{testimonial.primaryCondition}</span>
-        <span className={styles.durationBadge}>{testimonial.duration}</span>
+      {/* Coral top accent line */}
+      <div className={styles.cardAccentLine} />
+
+      {/* Small minimalist quote icon container */}
+      <div className={styles.iconContainer}>
+        <Quote size={13} className={styles.quoteIcon} aria-hidden="true" />
       </div>
 
-      <div className={styles.cardMetaBlock}>
-        <h4 className={styles.personName}>{testimonial.name}</h4>
-        <span className={styles.personMeta}>
-          {testimonial.occupation} • Age {testimonial.age}
-        </span>
+      <h4 className={styles.personName}>{testimonial.name}</h4>
+      <div className={styles.personMeta}>
+        {testimonial.occupation} • Age {testimonial.age}
+      </div>
+
+      {/* Star Rating */}
+      <div className={styles.ratingStars} aria-label="5 stars rating">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star key={i} size={13} fill="#D6A85C" color="#D6A85C" aria-hidden="true" />
+        ))}
+      </div>
+
+      {/* Condition Pills */}
+      <div className={styles.conditionPills}>
+        {testimonial.tags.map(tag => (
+          <span key={tag} className={styles.conditionPill}>
+            {tag}
+          </span>
+        ))}
       </div>
 
       <h5 className={styles.cardTitle}>{testimonial.headline}</h5>
 
-      {/* Summary with layout-aware height transition */}
-      <div className={styles.summaryWrapper}>
-        <p className={`${styles.cardSummary} ${isExpanded ? '' : styles.cardSummaryClamped}`}>
-          {testimonial.summary}
-        </p>
-      </div>
+      <p className={`${styles.cardSummary} ${styles.cardSummaryClamped}`}>
+        {testimonial.summary}
+      </p>
 
-      <div className={styles.cardFooter}>
-        <span className={styles.verifiedText}>✔ Verified User Story</span>
-      </div>
-
-      <div className={styles.cardActions}>
-        <button
-          type="button"
-          onClick={onToggleSummary}
-          className={styles.btnSummary}
-          aria-expanded={isExpanded}
-        >
-          {isExpanded ? 'Collapse' : 'Summary'}
-        </button>
-        <a
-          href={testimonial.pdfUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.btnReadMore}
-        >
-          <FileText size={14} aria-hidden="true" />
-          Read More
-        </a>
-      </div>
+      <button
+        type="button"
+        onClick={onOpenModal}
+        className={styles.btnReadFullStory}
+      >
+        Read Full Story →
+      </button>
     </motion.article>
   );
 }
 
 export default function TestimonialsPage() {
   const [selectedFilter, setSelectedFilter] = useState<string>('All Conditions');
-  const [expandedTestimonials, setExpandedTestimonials] = useState<Record<string, boolean>>({});
+  const [selectedTestimonial, setSelectedTestimonial] = useState<TestimonialItem | null>(null);
 
-  // Reset expanded states when filter changes to prevent visual issues
+  // Scroll lock and Escape listener for Modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedTestimonial(null);
+      }
+    };
+    if (selectedTestimonial) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedTestimonial]);
+
   const handleFilterChange = (filterId: string) => {
     setSelectedFilter(filterId);
-    setExpandedTestimonials({});
   };
-
-  const toggleSummary = (id: string) => {
-    setExpandedTestimonials(prev => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  // Determine if any card in the grid is expanded
-  const hasExpanded = useMemo(() => {
-    return Object.values(expandedTestimonials).some(Boolean);
-  }, [expandedTestimonials]);
 
   const filteredTestimonials = useMemo(() => {
-    if (selectedFilter === 'All Conditions' || selectedFilter === 'All Users') {
+    if (selectedFilter === 'All Conditions') {
       return testimonialsData;
     }
-    return testimonialsData.filter(t => {
-      if (selectedFilter === 'PCOS / PMOS') {
-        return (
-          t.tags.includes('PCOS / PMOS') ||
-          t.tags.includes('PCOS / Ovarian Cysts') ||
-          t.tags.includes('PCOS')
-        );
-      }
-      if (selectedFilter === 'Long-term (2+ years)') {
-        return t.tags.includes('Long-term');
-      }
-      if (selectedFilter === 'Recent (<2 years)') {
-        return t.tags.includes('Recent');
-      }
-      return t.tags.includes(selectedFilter);
-    });
+    return testimonialsData.filter(t => t.tags.includes(selectedFilter));
   }, [selectedFilter]);
 
   return (
     <div className={styles.testimonialsPage}>
-      <div className={styles.libraryContainer}>
-        {/* Luxury Header */}
-        <motion.header
-          className={styles.headerWrapper}
-          initial="hidden"
-          animate="visible"
-          variants={stagger}
-        >
-          <motion.span variants={fadeInUp} className={styles.eyebrow}>
-            FILTER TESTIMONIALS
-          </motion.span>
-          <motion.h1 id="testimonials-heading" variants={fadeInUp} className={styles.heading}>
-            Filter by Condition
-          </motion.h1>
-          <motion.p variants={fadeInUp} className={styles.subtitle}>
-            Explore verified stories from women who experienced improvements in menstrual health after
-            switching to Saukhyam reusable banana-fiber pads. Filter by symptoms, health conditions, and
-            duration of use.
-          </motion.p>
-          <motion.div variants={fadeInUp} className={styles.statsPill} role="status">
-            <ShieldCheck size={14} className={styles.statsIcon} aria-hidden="true" />
-            <span>{testimonialsData.length} Verified Stories</span>
-          </motion.div>
-        </motion.header>
+      {/* Premium Header/Hero */}
+      <TestimonialsHero />
 
+      <div className={styles.libraryContainer}>
         {/* Filter Navigation */}
         <motion.section
           className={styles.filterGrid}
@@ -215,7 +178,7 @@ export default function TestimonialsPage() {
 
         {/* Testimonials Grid */}
         <motion.section
-          className={`${styles.testimonialGrid} ${hasExpanded ? styles.gridHasExpandedCard : ''}`}
+          className={styles.testimonialGrid}
           layout="position"
           aria-label="User testimonials"
         >
@@ -224,8 +187,7 @@ export default function TestimonialsPage() {
               <TestimonialCard
                 key={testimonial.id}
                 testimonial={testimonial}
-                isExpanded={!!expandedTestimonials[testimonial.id]}
-                onToggleSummary={() => toggleSummary(testimonial.id)}
+                onOpenModal={() => setSelectedTestimonial(testimonial)}
               />
             ))}
           </AnimatePresence>
@@ -240,6 +202,93 @@ export default function TestimonialsPage() {
           </div>
         )}
       </div>
+
+      {/* Bottom CTA section */}
+      <TestimonialsCTA />
+
+      {/* Premium Modal Overlay */}
+      <AnimatePresence>
+        {selectedTestimonial && (
+          <motion.div
+            className={styles.modalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedTestimonial(null)}
+          >
+            <motion.div
+              className={styles.modalContent}
+              initial={{ opacity: 0, scale: 0.95, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 15 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+            >
+              {/* Close Button */}
+              <button
+                type="button"
+                className={styles.modalCloseBtn}
+                onClick={() => setSelectedTestimonial(null)}
+                aria-label="Close story modal"
+              >
+                <X size={15} aria-hidden="true" />
+              </button>
+
+              {/* Minimalist Quote Icon */}
+              <div className={styles.modalIconWrap}>
+                <Quote size={15} className={styles.quoteIcon} aria-hidden="true" />
+              </div>
+
+              {/* Person Meta */}
+              <h3 className={styles.modalPersonName}>{selectedTestimonial.name}</h3>
+              <div className={styles.modalPersonMeta}>
+                {selectedTestimonial.occupation} • Age {selectedTestimonial.age}
+              </div>
+
+              {/* Stars */}
+              <div className={styles.modalRatingStars} aria-label="5 stars rating">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={13} fill="#D6A85C" color="#D6A85C" aria-hidden="true" />
+                ))}
+              </div>
+
+              {/* Condition Tags */}
+              <div className={styles.modalConditionPills}>
+                {selectedTestimonial.tags.map(tag => (
+                  <span key={tag} className={styles.modalConditionPill}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Headline */}
+              <h4 className={styles.modalTitle}>{selectedTestimonial.headline}</h4>
+
+              {/* Story Description */}
+              <div className={styles.modalStoryContent}>
+                <p>{selectedTestimonial.summary}</p>
+              </div>
+
+              {/* PDF Link inside modal if they want to view full PDF */}
+              {selectedTestimonial.pdfUrl && (
+                <div className={styles.modalFooterActions}>
+                  <a
+                    href={selectedTestimonial.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.modalPdfLink}
+                  >
+                    <FileText size={13} aria-hidden="true" />
+                    View Original Verification PDF
+                  </a>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

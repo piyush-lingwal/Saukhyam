@@ -1,0 +1,276 @@
+.heroSection {
+  width: 100%;
+  min-height: 620px;
+  background: radial-gradient(circle at 50% 20%, #ffffff 0%, #E8F8EE 60%, #E3F7EA 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.heroBgContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.heroBgImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.heroBgOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(232, 248, 238, 0.5) 100%);
+  z-index: 2;
+}
+
+.heroContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 48px;
+}
+
+.breadcrumbLinkHome {
+  color: #16A05D;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 200ms ease;
+}
+
+.breadcrumbLinkHome:hover {
+  color: #117C47;
+  text-decoration: underline;
+}
+
+.breadcrumbSeparator {
+  color: #8CA190;
+  user-select: none;
+}
+
+.breadcrumbCurrent {
+  color: #42556A;
+  font-weight: 400;
+}
+
+/* Main Heading */
+.mainHeading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 82px;
+  font-weight: 700;
+  line-height: 1.02;
+  margin: 0 0 22px 0;
+  letter-spacing: -0.02em;
+}
+
+.headingPart1 {
+  color: #0B9B5B;
+  white-space: pre-wrap;
+}
+
+.headingPart2 {
+  color: #155D32;
+}
+
+/* Description */
+.description {
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #42556A;
+  max-width: 820px;
+  margin: 0 auto 52px;
+  word-wrap: break-word;
+}
+
+/* Statistics Cards Row */
+.statsRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  width: 100%;
+}
+
+.statCard {
+  width: 220px;
+  height: 153px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(22, 160, 93, 0.2);
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(22, 160, 93, 0.03), 0 2px 8px rgba(0, 0, 0, 0.01);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(22, 160, 93, 0.06);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.statIcon {
+  color: #16A05D;
+}
+
+.statNumber {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: #155D32;
+  line-height: 1.1;
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+
+.statLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #42556A;
+  line-height: 1.2;
+}
+
+/* Responsive Design */
+
+/* Tablet Breakpoint */
+@media (max-width: 1024px) {
+  .heroSection {
+    min-height: auto;
+    padding: 50px 24px;
+  }
+
+  .heroBgOverlay {
+    background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(232, 248, 238, 0.6) 100%);
+  }
+
+  .mainHeading {
+    font-size: 60px;
+  }
+
+  .description {
+    font-size: 22px;
+    max-width: 700px;
+    margin-bottom: 40px;
+  }
+
+  .breadcrumb {
+    margin-bottom: 36px;
+    font-size: 16px;
+  }
+
+  .statsRow {
+    gap: 20px;
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  .heroSection {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 0 40px 0;
+    min-height: auto;
+  }
+
+  .heroBgContainer {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    z-index: 1;
+    order: -1;
+  }
+
+  .heroBgOverlay {
+    background: linear-gradient(180deg, rgba(0,0,0,0) 85%, rgba(232, 248, 238, 0.2) 100%);
+  }
+
+  .heroContainer {
+    padding: 24px 16px 0;
+  }
+
+  .mainHeading {
+    font-size: 44px;
+    line-height: 1.1;
+  }
+
+  .description {
+    font-size: 18px;
+    line-height: 1.45;
+    margin-bottom: 32px;
+  }
+
+  .breadcrumb {
+    margin-bottom: 28px;
+    font-size: 15px;
+  }
+
+  .statsRow {
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .statCard {
+    width: 100%;
+    height: 135px;
+    border-radius: 20px;
+    padding: 12px;
+  }
+
+  .statNumber {
+    font-size: 28px;
+  }
+
+  .statLabel {
+    font-size: 13px;
+  }
+}
