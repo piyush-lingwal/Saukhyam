@@ -7,9 +7,14 @@ import styles from './TestimonialsCTA.module.css';
 export default function TestimonialsCTA() {
   return (
     <section className={styles.ctaSection}>
-      {/* Background Overlay for readability */}
-      <div className={styles.overlay} />
+      {/* Background Banner Image - No filters/overlays */}
+      <img
+        src="/images/testimonials-footer-banner.jpg"
+        alt="Saukhyam Reusable Pads Banner"
+        className={styles.bannerImage}
+      />
 
+      {/* Overlay Content */}
       <div className={styles.ctaContainer}>
         {/* Heading */}
         <h2 className={styles.heading}>
@@ -24,11 +29,11 @@ export default function TestimonialsCTA() {
         {/* Button */}
         <div className={styles.buttonWrapper}>
           <a
-            href="https://master.d3ox30sljz8y1j.amplifyapp.com/products"
+            href="/products"
             className={styles.ctaButton}
             aria-label="Switch Now to Saukhyam reusable pads"
           >
-            <Heart className={styles.heartIcon} size={27} aria-hidden="true" />
+            <Heart className={styles.heartIcon} size={24} aria-hidden="true" />
             <span className={styles.buttonText}>Switch Now</span>
           </a>
         </div>

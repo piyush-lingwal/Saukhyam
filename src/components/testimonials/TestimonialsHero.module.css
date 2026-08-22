@@ -85,10 +85,10 @@
 /* Main Heading */
 .mainHeading {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 64px;
+  font-size: 60px;
   font-weight: 700;
   line-height: 1.05;
-  margin: 0 0 22px 0;
+  margin: 0 0 24px 0;
   letter-spacing: -0.02em;
   text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
 }
@@ -104,12 +104,13 @@
 
 /* Description */
 .description {
+  --testimonial-subtitle-size: 20px;
   font-family: 'Inter', sans-serif;
-  font-size: 26px;
+  font-size: clamp(15px, 0.85rem + 0.5vw, var(--testimonial-subtitle-size));
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.5;
   color: #42556A;
-  max-width: 820px;
+  max-width: 700px;
   margin: 0 auto 52px;
   word-wrap: break-word;
 }
@@ -197,9 +198,9 @@
   }
 
   .description {
-    font-size: 22px;
-    max-width: 700px;
+    max-width: 540px;
     margin-bottom: 40px;
+    padding: 0 20px;
   }
 
   .breadcrumb {
@@ -244,9 +245,9 @@
   }
 
   .description {
-    font-size: 18px;
-    line-height: 1.45;
+    line-height: 1.5;
     margin-bottom: 32px;
+    padding: 0 20px;
   }
 
   .breadcrumb {

@@ -1,66 +1,65 @@
 .ctaSection {
+  position: relative;
   width: 100%;
-  min-height: 380px;
-  background-image: url('/images/testimonials-footer-banner.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  min-height: 400px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 24px;
   box-sizing: border-box;
-  position: relative;
+  padding: 40px 24px;
   z-index: 10;
 }
 
-.overlay {
+.bannerImage {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.45); /* Subtle semi-transparent light overlay */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   z-index: 1;
 }
 
 .ctaContainer {
+  position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 750px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: relative;
   z-index: 2;
 }
 
 /* Heading */
 .heading {
+  --cta-heading-size: 42px;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 52px;
+  font-size: clamp(28px, 3.5vw, var(--cta-heading-size));
   font-weight: 700;
   color: #07130F;
   margin: 0;
-  line-height: 1.1;
-  white-space: nowrap;
+  line-height: 1.2;
 }
 
 /* Description */
 .description {
+  --cta-subtitle-size: 19px;
   font-family: 'Inter', sans-serif;
-  font-size: 26px;
+  font-size: clamp(15px, 1.5vw, var(--cta-subtitle-size));
   font-weight: 400;
   color: #42566A;
-  margin: 20px auto 0;
-  line-height: 1.4;
-  max-width: 900px;
+  margin: 16px auto 0;
+  line-height: 1.5;
+  max-width: 650px;
 }
 
 /* Button Wrapper & Button */
 .buttonWrapper {
-  margin-top: 38px;
+  margin-top: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,8 +70,8 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  width: 244px;
-  height: 77px;
+  width: 230px;
+  height: 68px;
   background: #158A43;
   color: #ffffff;
   border-radius: 40px;
@@ -97,7 +96,7 @@
 
 .buttonText {
   font-family: 'Inter', sans-serif;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 600;
   color: #ffffff;
 }
@@ -107,27 +106,21 @@
 /* Tablet Breakpoint */
 @media (max-width: 1024px) {
   .ctaSection {
-    min-height: 320px;
-    padding: 60px 20px;
+    min-height: 340px;
+    padding: 30px 20px;
   }
 
-  .heading {
-    font-size: 42px;
-    white-space: normal;
-  }
-
-  .description {
-    font-size: 21px;
-    margin-top: 16px;
+  .ctaContainer {
+    max-width: 600px;
   }
 
   .ctaButton {
-    width: 230px;
-    height: 70px;
+    width: 210px;
+    height: 62px;
   }
 
   .buttonText {
-    font-size: 21px;
+    font-size: 18px;
   }
 }
 
@@ -135,37 +128,34 @@
 @media (max-width: 768px) {
   .ctaSection {
     min-height: 280px;
-    padding: 48px 16px;
+    padding: 24px 16px;
   }
 
-  .heading {
-    font-size: 34px;
-    line-height: 1.2;
+  .ctaContainer {
+    width: 90%;
   }
 
   .description {
-    font-size: 18px;
     margin-top: 12px;
-    line-height: 1.45;
   }
 
   .buttonWrapper {
-    margin-top: 28px;
+    margin-top: 20px;
   }
 
   .ctaButton {
-    width: 215px;
-    height: 64px;
+    width: 190px;
+    height: 54px;
     border-radius: 32px;
     gap: 8px;
   }
 
   .heartIcon {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 
   .buttonText {
-    font-size: 19px;
+    font-size: 17px;
   }
 }
