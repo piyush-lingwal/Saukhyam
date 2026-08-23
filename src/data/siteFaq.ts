@@ -241,6 +241,7 @@ function buildSiteFaqItems(): SiteFAQItem[] {
   };
 
   for (const item of healFaqItems) {
+    if (item.category === 'heal-platform' || item.category === 'heal-challenge') continue;
     addItem(toSiteItem(item));
   }
 
