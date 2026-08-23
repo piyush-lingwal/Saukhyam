@@ -34,8 +34,7 @@ export default function TestimonialsHero() {
 
         {/* Heading */}
         <h1 className={styles.mainHeading}>
-          <span className={styles.headingPart1}>Real Stories, </span>
-          <span className={styles.headingPart2}>Real Healing</span>
+          Real Stories, Real Healing
         </h1>
 
         {/* Description */}
@@ -50,7 +49,7 @@ export default function TestimonialsHero() {
             <div className={styles.iconWrapper}>
               <Users className={styles.statIcon} size={26} aria-hidden="true" />
             </div>
-            <div className={styles.statNumber}>14</div>
+            <div className={styles.statNumber}>20</div>
             <div className={styles.statLabel}>VERIFIED STORIES</div>
           </div>
 

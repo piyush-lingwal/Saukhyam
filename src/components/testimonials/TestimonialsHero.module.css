@@ -1,6 +1,8 @@
 .heroSection {
   width: 100%;
-  min-height: 620px;
+  aspect-ratio: 16 / 6;
+  min-height: 520px;
+  max-height: 720px;
   background: #E8F8EE;
   display: flex;
   align-items: center;
@@ -57,7 +59,8 @@
   font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: 400;
-  margin-bottom: 48px;
+  margin-top: 24px;
+  margin-bottom: 28px;
 }
 
 .breadcrumbLinkHome {
@@ -84,22 +87,15 @@
 
 /* Main Heading */
 .mainHeading {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 60px;
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif;
+  font-size: 48px;
   font-weight: 700;
   line-height: 1.05;
-  margin: 0 0 24px 0;
+  margin: 0 auto 24px;
+  max-width: 680px;
   letter-spacing: -0.02em;
+  color: var(--green-900);
   text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
-}
-
-.headingPart1 {
-  color: #0B9B5B;
-  white-space: pre-wrap;
-}
-
-.headingPart2 {
-  color: #155D32;
 }
 
 /* Description */
@@ -109,8 +105,8 @@
   font-size: clamp(15px, 0.85rem + 0.5vw, var(--testimonial-subtitle-size));
   font-weight: 400;
   line-height: 1.5;
-  color: #42556A;
-  max-width: 700px;
+  color: var(--color-text-secondary);
+  max-width: 520px;
   margin: 0 auto 52px;
   word-wrap: break-word;
 }
@@ -121,19 +117,19 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
   width: 100%;
 }
 
 .statCard {
   width: 220px;
   height: 153px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(22, 160, 93, 0.2);
+  background: rgba(254, 252, 248, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 28px;
-  box-shadow: 0 8px 32px rgba(22, 160, 93, 0.03), 0 2px 8px rgba(0, 0, 0, 0.01);
+  box-shadow: 0 8px 32px rgba(11, 155, 91, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -144,8 +140,9 @@
 }
 
 .statCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(22, 160, 93, 0.06);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(11, 155, 91, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .iconWrapper {
@@ -156,14 +153,14 @@
 }
 
 .statIcon {
-  color: #16A05D;
+  color: var(--green-600);
 }
 
 .statNumber {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', 'Cormorant Garamond', serif;
   font-size: 34px;
   font-weight: 700;
-  color: #155D32;
+  color: var(--green-800);
   line-height: 1.1;
   margin-bottom: 4px;
   white-space: nowrap;
@@ -171,10 +168,10 @@
 
 .statLabel {
   font-family: 'Inter', sans-serif;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
   color: #42556A;
   line-height: 1.2;
 }
